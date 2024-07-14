@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react';
 import '@/styles/main.css';
 import { Header } from '@/components/layout';
+import '@fontsource/poppins/400-italic.css';
+import '@fontsource/poppins/700-italic.css';
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
