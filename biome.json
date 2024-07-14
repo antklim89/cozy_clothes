@@ -1,0 +1,71 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "all": true,
+      "style": {
+        "useBlockStatements": "off",
+        "noDefaultExport": "off",
+        "useNamingConvention": {
+          "level": "warn",
+          "options": {
+            "strictCase": false,
+            "conventions": [
+              {
+                "selector": { "kind": "objectLiteralProperty" },
+                "formats": ["camelCase", "PascalCase", "CONSTANT_CASE", "snake_case"]
+              }
+            ]
+          }
+        },
+        "noImplicitBoolean": "off",
+        "useFilenamingConvention": {
+          "level": "warn",
+          "options": {
+            "strictCase": false,
+            "filenameCases": ["camelCase", "PascalCase"]
+          }
+        }
+      },
+      "performance": {
+        "noBarrelFile": "off"
+      },
+      "correctness": {
+        "noNodejsModules": "off"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentWidth": 2,
+    "attributePosition": "auto",
+    "indentStyle": "space",
+    "lineWidth": 120
+  },
+  "javascript": {
+    "formatter": {
+      "enabled": true,
+      "arrowParentheses": "always",
+      "semicolons": "always",
+      "attributePosition": "auto",
+      "lineWidth": 120,
+      "indentWidth": 2,
+      "quoteProperties": "preserve",
+      "quoteStyle": "single",
+      "trailingCommas": "all",
+      "bracketSpacing": true,
+      "bracketSameLine": false,
+      "jsxQuoteStyle": "double",
+      "indentStyle": "space"
+    }
+  },
+  "json": {
+    "formatter": {
+      "indentWidth": 2
+    }
+  }
+}

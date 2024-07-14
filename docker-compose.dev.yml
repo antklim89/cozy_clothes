@@ -1,0 +1,10 @@
+services:
+  client:
+    build:
+      target: base
+    command: ["yarn", "dev"]
+    ports:
+      - ${PORT:-3000}:3000
+    volumes:
+      - ./:/app
+    user: "1000:1000"

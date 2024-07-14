@@ -1,0 +1,44 @@
+{
+  "name": "cozy_clothes",
+  "description": "Template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "run-p dev:**",
+    "dev:next": "next dev -H 0.0.0.0",
+    "dev:cms-proxy": "decap-server",
+    "dev:typecheck": "yarn typecheck",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit -w --preserveWatchOutput",
+    "lint": "biome check --write",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up",
+    "docker:prod": "docker compose up",
+    "docker:build": "docker compose build",
+    "docker:start": "docker compose start"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "decap-cms": "^3.1.11",
+    "decap-cms-app": "^3.1.11",
+    "lucide-react": "^0.406.0",
+    "next": "14.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "autoprefixer": "^10.4.19",
+    "decap-server": "^3.0.4",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.39",
+    "sass": "^1.77.6",
+    "tailwindcss": "^3.4.4",
+    "typescript": "5.5.3"
+  }
+}

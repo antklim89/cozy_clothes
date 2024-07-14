@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    container_name: cozy_clothes
+    ports:
+      - "${PORT:-3000}:3000"
