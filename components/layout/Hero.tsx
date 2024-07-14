@@ -1,12 +1,10 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
 import { Button } from '@/components/ui';
+import { heroLoader } from '@/lib';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
 
 async function Hero() {
-  const heroStr = await fs.readFile(path.resolve('./public/content/hero.json'), 'utf8');
-  const { text, imagePreview } = JSON.parse(heroStr) as typeof import('@/public/content/hero.json');
+  const { imagePreview, text } = await heroLoader();
 
   return (
     <section className="relative flex flex-col py-16 lg:pt-0 lg:flex-col lg:pb-0">
