@@ -8,20 +8,7 @@ const nextConfig = {
   output: 'standalone',
 };
 
-const decamCmsJs = await fs.promises.readFile(path.resolve('./node_modules/decap-cms/dist/decap-cms.js'), 'utf8');
-await fs.promises.writeFile(
-  path.resolve('./public/admin/index.html'),
-  `<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager</title>
-</head>
-<body>
-  <script>${decamCmsJs}</script>
-</body>
-</html>`,
-);
+const decapCmsJs = await fs.promises.readFile(path.resolve('./node_modules/decap-cms/dist/decap-cms.js'), 'utf8');
+await fs.promises.writeFile(path.resolve('./public/admin/decap-cms.js'), decapCmsJs);
 
 export default nextConfig;
