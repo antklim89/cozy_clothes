@@ -5,9 +5,6 @@ import path from 'node:path';
 const nextConfig = {
   reactStrictMode: true,
   compress: true,
-  images: {
-    domains: [new URL(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000').hostname],
-  },
   output: 'standalone',
 };
 
