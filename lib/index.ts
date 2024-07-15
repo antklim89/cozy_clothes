@@ -1,5 +1,4 @@
-
-
 // @ index generate start
+export { baseLoader, heroLoader } from './contentLoaders';
 export { cn } from './utils';
-export { heroLoader } from './contentLoaders';
+export { heroSchema, type HeroType as AboutType } from './schemas';
