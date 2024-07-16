@@ -1,4 +1,5 @@
 // @ index generate start
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './card';
 export {
   DropdownMenu,
   DropdownMenuTrigger,
