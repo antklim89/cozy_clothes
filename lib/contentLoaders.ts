@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { type ZodObject, type ZodRawShape, z } from 'zod';
-import { heroSchema } from './schemas';
+import type { ZodObject, ZodRawShape } from 'zod';
+import { heroSchema, productSchema } from './schemas';
 
 const BASE_PATH = './public/content';
 
@@ -26,6 +26,7 @@ async function baseManyFilesLoader<T extends ZodRawShape>(
     fileNames.slice(start, start + skip).map(async (fileName) => {
       const contentString = await fs.readFile(path.resolve(BASE_PATH, filesPath, fileName), 'utf8');
       const contentJson = JSON.parse(contentString);
+      contentJson.id = path.parse(fileName).name;
       return schema.parseAsync(contentJson);
     }),
   );
@@ -36,5 +37,5 @@ export function heroLoader() {
 }
 
 export function productsLoader(opts: Options = {}) {
-  return baseManyFilesLoader('products', z.object({ title: z.string() }), opts);
+  return baseManyFilesLoader('products', productSchema, opts);
 }
