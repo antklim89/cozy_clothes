@@ -1,4 +1,4 @@
-import { Hero } from '@/components/layout';
+import { Hero, ProductsList } from '@/components/layout';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -12,6 +12,7 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
+      <ProductsList />
     </div>
   );
 };
