@@ -19,7 +19,7 @@ collections:
     folder: public/content/products
     media_folder: '{{media_folder}}/products'
     public_folder: '{{public_folder}}/products'
-    slug: '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}-{{slug}}/index.json'
+    slug: '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}-{{slug}}'
     fields:
       - { label: 'Hidden', name: 'hidden', widget: 'boolean', default: false, required: false }
       - { label: 'Discount', name: 'discount', widget: 'number', min: 0, max: 100 }
@@ -46,7 +46,7 @@ collections:
         widget: object
         fields:
           - label: Sizes
-            name: Sizes
+            name: sizes
             widget: list
             summary: '{{fields.size}}'
             field: { label: Size, name: size, widget: select, options: ['sx', 's', 'm',  'l',  'xl',  'xxl', xxxl] }
