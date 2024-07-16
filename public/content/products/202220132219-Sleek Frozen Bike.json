@@ -1,0 +1,30 @@
+{
+  "discount": 77,
+  "price": 25363,
+  "hidden": false,
+  "imagePreview": "/images/products/product-9.jpg",
+  "title": "Sleek Frozen Bike",
+  "images": [
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-03-13T10:22:19.113Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "discount": 21,
+  "price": 31383,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Electronic Cotton Bike",
+  "images": [
+    "/images/products/product-3.jpg"
+  ],
+  "createdAt": "2022-04-16T18:18:24.035Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Blazer",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

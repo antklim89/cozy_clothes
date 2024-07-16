@@ -1,0 +1,30 @@
+{
+  "discount": 40,
+  "price": 14591,
+  "hidden": false,
+  "imagePreview": "/images/products/product-1.jpg",
+  "title": "Elegant Granite Computer",
+  "images": [
+    "/images/products/product-1.jpg"
+  ],
+  "createdAt": "2023-06-23T21:31:33.813Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Hoodie",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

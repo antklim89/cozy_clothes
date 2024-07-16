@@ -1,0 +1,30 @@
+{
+  "discount": 14,
+  "price": 44908,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Fantastic Metal Tuna",
+  "images": [
+    "/images/products/product-2.jpg"
+  ],
+  "createdAt": "2023-10-17T14:15:16.509Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

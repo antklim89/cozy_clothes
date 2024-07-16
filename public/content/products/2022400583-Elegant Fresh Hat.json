@@ -1,0 +1,30 @@
+{
+  "discount": 59,
+  "price": 28380,
+  "hidden": false,
+  "imagePreview": "/images/products/product-5.jpg",
+  "title": "Elegant Fresh Hat",
+  "images": [
+    "/images/products/product-5.jpg"
+  ],
+  "createdAt": "2022-05-21T21:58:03.370Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Hoodie",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

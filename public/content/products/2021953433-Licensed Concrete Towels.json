@@ -1,0 +1,30 @@
+{
+  "discount": 79,
+  "price": 4108,
+  "hidden": false,
+  "imagePreview": "/images/products/product-8.jpg",
+  "title": "Licensed Concrete Towels",
+  "images": [
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2021-10-01T00:04:33.305Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

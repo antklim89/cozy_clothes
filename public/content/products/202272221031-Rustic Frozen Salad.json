@@ -1,0 +1,30 @@
+{
+  "discount": 20,
+  "price": 26105,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Rustic Frozen Salad",
+  "images": [
+    "/images/products/product-3.jpg"
+  ],
+  "createdAt": "2022-08-30T19:10:31.542Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Suit",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}
