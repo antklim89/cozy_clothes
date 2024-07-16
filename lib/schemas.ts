@@ -23,3 +23,4 @@ export const productSchema = z.object({
 });
 
 export type HeroType = z.infer<typeof heroSchema>;
+export type ProductType = z.infer<typeof productSchema>;
