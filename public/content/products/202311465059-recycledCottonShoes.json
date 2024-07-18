@@ -1,15 +1,15 @@
 {
-  "discount": 52,
-  "price": 38346,
+  "discount": 49,
+  "price": 78605,
   "hidden": false,
   "imagePreview": "/images/products/product-2.jpg",
-  "title": "Sleek Rubber Towels",
+  "title": "Recycled Cotton Shoes",
   "images": [
     "/images/products/product-2.jpg"
   ],
-  "createdAt": "2023-04-06T09:45:04.618Z",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "category": "Jeans",
+  "createdAt": "2023-12-07T03:50:59.953Z",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "category": "Joggers",
   "options": {
     "sizes": [
       "sx",

@@ -45,7 +45,15 @@ async function generateProducts() {
       },
     };
 
-    const fileName = `${createdAt.getFullYear()}${createdAt.getMonth()}${createdAt.getDay()}${createdAt.getHours()}${createdAt.getMinutes()}${createdAt.getSeconds()}-${title}`;
+    const year = createdAt.getFullYear();
+    const month = createdAt.getMonth();
+    const day = createdAt.getDay();
+    const hours = createdAt.getHours();
+    const minutes = createdAt.getMinutes();
+    const seconds = createdAt.getSeconds();
+    const slug = title.toLocaleLowerCase().replace(/([^\w\d]|_)+(.)/gi, (_m, _g1, g) => g.toUpperCase());
+
+    const fileName = `${year}${month}${day}${hours}${minutes}${seconds}-${slug}`;
     await fs.writeFile(path.resolve('./public/content/products', `${fileName}.json`), JSON.stringify(product, null, 2));
   });
   await Promise.all(products);

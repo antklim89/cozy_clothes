@@ -1,15 +1,15 @@
 {
-  "discount": 77,
-  "price": 25363,
+  "discount": 38,
+  "price": 64548,
   "hidden": false,
   "imagePreview": "/images/products/product-9.jpg",
-  "title": "Sleek Frozen Bike",
+  "title": "Generic Frozen Chicken",
   "images": [
     "/images/products/product-9.jpg"
   ],
-  "createdAt": "2022-03-13T10:22:19.113Z",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "category": "Joggers",
+  "createdAt": "2023-10-31T02:43:30.210Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Coat",
   "options": {
     "sizes": [
       "sx",

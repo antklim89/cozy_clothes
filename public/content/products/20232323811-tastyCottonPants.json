@@ -1,15 +1,15 @@
 {
-  "discount": 9,
-  "price": 20551,
+  "discount": 44,
+  "price": 88248,
   "hidden": false,
   "imagePreview": "/images/products/product-9.jpg",
-  "title": "Small Cotton Table",
+  "title": "Tasty Cotton Pants",
   "images": [
     "/images/products/product-9.jpg"
   ],
-  "createdAt": "2023-04-05T07:28:10.289Z",
-  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-  "category": "Hoodie",
+  "createdAt": "2023-02-28T23:38:11.038Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "T-shirt",
   "options": {
     "sizes": [
       "sx",

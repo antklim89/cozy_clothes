@@ -1,0 +1,30 @@
+{
+  "discount": 73,
+  "price": 25507,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Fantastic Concrete Pizza",
+  "images": [
+    "/images/products/product-4.jpg"
+  ],
+  "createdAt": "2020-02-08T20:40:06.197Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

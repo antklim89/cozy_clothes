@@ -1,15 +1,15 @@
 {
-  "discount": 35,
-  "price": 87340,
+  "discount": 5,
+  "price": 37184,
   "hidden": false,
   "imagePreview": "/images/products/product-6.jpg",
-  "title": "Awesome Cotton Car",
+  "title": "Handmade Frozen Car",
   "images": [
-    "/images/products/product-4.jpg"
+    "/images/products/product-6.jpg"
   ],
-  "createdAt": "2021-01-16T09:40:39.205Z",
+  "createdAt": "2023-05-19T03:19:26.024Z",
   "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "category": "Hoodie",
+  "category": "Jeans",
   "options": {
     "sizes": [
       "sx",
