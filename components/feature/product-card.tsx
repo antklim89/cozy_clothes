@@ -1,6 +1,7 @@
 import { Button, Card, CardFooter, CardHeader, CardTitle, Price } from '@/components/ui';
 import type { ProductType } from '@/lib';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
   product: ProductType;
@@ -21,7 +22,9 @@ function ProductCard({ product }: Props) {
       </CardHeader>
       <CardFooter className="flex flex-col justify-end items-end">
         <Price price={product.price} discount={product.discount} />
-        <Button>Show</Button>
+        <Button asChild>
+          <Link href={`/product/${product.id}`}>Show</Link>
+        </Button>
       </CardFooter>
     </Card>
   );
