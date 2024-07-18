@@ -23,7 +23,9 @@ function ProductCard({ product }: Props) {
       <CardFooter className="flex flex-col justify-end items-end">
         <Price price={product.price} discount={product.discount} />
         <Button asChild>
-          <Link href={`/product/${product.id}`}>Show</Link>
+          <Link className="no-underline" href={`/product/${product.id}`}>
+            Show
+          </Link>
         </Button>
       </CardFooter>
     </Card>
