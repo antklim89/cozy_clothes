@@ -6,21 +6,38 @@ import { heroSchema, productSchema } from './schemas';
 const BASE_PATH = './public/content';
 
 async function baseOneFileLoader<T extends ZodRawShape>(filePath: string, schema: ZodObject<T>) {
-  const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
-  const contentJson = JSON.parse(contentString);
-  return schema.parseAsync(contentJson);
+  try {
+    const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
+    const contentJson = JSON.parse(contentString);
+    contentJson.id = path.parse(filePath).name;
+    return schema.parseAsync(contentJson);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
 
 async function baseManyFilesLoader<T extends ZodRawShape>(filesPath: string, schema: ZodObject<T>) {
-  const fileNames = await fs.readdir(path.resolve(BASE_PATH, filesPath));
-  return Promise.all(
-    fileNames.map(async (fileName) => {
-      const contentString = await fs.readFile(path.resolve(BASE_PATH, filesPath, fileName), 'utf8');
-      const contentJson = JSON.parse(contentString);
-      contentJson.id = path.parse(fileName).name;
-      return schema.parseAsync(contentJson);
-    }),
-  );
+  try {
+    const fileNames = await fs.readdir(path.resolve(BASE_PATH, filesPath));
+    const results = await Promise.all(
+      fileNames.map(async (fileName) => {
+        try {
+          const contentString = await fs.readFile(path.resolve(BASE_PATH, filesPath, fileName), 'utf8');
+          const contentJson = JSON.parse(contentString);
+          contentJson.id = path.parse(fileName).name;
+          return contentJson;
+        } catch (error) {
+          console.error(error);
+          return null;
+        }
+      }),
+    );
+    return schema.array().parseAsync(results);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 
 export function heroLoader() {
@@ -29,4 +46,8 @@ export function heroLoader() {
 
 export function productsLoader() {
   return baseManyFilesLoader('products', productSchema);
+}
+
+export function productLoader(id: string) {
+  return baseOneFileLoader(`products/${id}`, productSchema);
 }
