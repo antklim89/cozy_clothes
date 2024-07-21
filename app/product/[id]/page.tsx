@@ -6,7 +6,7 @@ async function ProductPage({ params }: { params: { id: string } }) {
   const product = await productLoader(params.id);
   if (!product) return notFound();
 
-  return <Product product={product} />;
+  return <Product className="my-8" product={product} />;
 }
 
 export default ProductPage;
