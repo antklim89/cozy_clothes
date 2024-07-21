@@ -1,15 +1,17 @@
 import { ProductOptions } from '@/components/form';
 import { Button, Carousel, Price } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
+import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import type { ComponentProps } from 'react';
 
-interface Props {
+interface Props extends ComponentProps<'div'> {
   product: ProductType;
 }
 
-function Product({ product }: Props) {
+function Product({ product, className, ...props }: Props) {
   return (
-    <div className="container flex flex-col md:flex-row">
+    <div {...props} className={cn('container flex flex-col md:flex-row', className)}>
       <section className="border px-4 flex-[2_1_0]">
         <Carousel key={product.id} autoplay={false} scrollDistance="slide" showArrows swiping keyboard>
           {product.images.map((image) => (
