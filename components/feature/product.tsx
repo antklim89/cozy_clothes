@@ -1,5 +1,5 @@
-import { ProductOptions } from '@/components/form';
-import { Button, Carousel, Price } from '@/components/ui';
+import { CardButton, ProductOptions } from '@/components/form';
+import { Carousel, Price } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -32,7 +32,7 @@ function Product({ product, className, ...props }: Props) {
         <p>{product.description}</p>
         <ProductOptions options={product.options} />
         <Price price={product.price} discount={product.discount} />
-        <Button>Add to cart</Button>
+        <CardButton product={product} />
       </aside>
     </div>
   );
