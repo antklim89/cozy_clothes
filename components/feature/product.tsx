@@ -1,7 +1,6 @@
 import { ProductOptions } from '@/components/form';
-import { Button, Price } from '@/components/ui';
-import Carousel from '@/components/ui/carousel';
-import type { ProductType } from '@/lib';
+import { Button, Carousel, Price } from '@/components/ui';
+import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
 
 interface Props {

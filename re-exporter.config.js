@@ -7,8 +7,5 @@ module.exports = {
       ignoreExports: [],
       ignoreKinds: ['types', 'named'],
     },
-    {
-      path: 'lib',
-    },
   ],
 };

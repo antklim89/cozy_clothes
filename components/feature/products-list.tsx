@@ -1,4 +1,5 @@
-import { cn, productsLoader } from '@/lib';
+import { productsLoader } from '@/lib/contentLoaders';
+import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 import ProductCard from './product-card';
 

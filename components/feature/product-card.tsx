@@ -1,5 +1,5 @@
 import { Button, Card, CardFooter, CardHeader, CardTitle, Price } from '@/components/ui';
-import type { ProductType } from '@/lib';
+import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
 import Link from 'next/link';
 

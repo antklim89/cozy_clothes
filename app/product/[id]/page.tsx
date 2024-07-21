@@ -1,5 +1,5 @@
 import { Product } from '@/components/feature';
-import { productLoader } from '@/lib';
+import { productLoader } from '@/lib/contentLoaders';
 import { notFound } from 'next/navigation';
 
 async function ProductPage({ params }: { params: { id: string } }) {

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui';
-import { heroLoader } from '@/lib';
+import { heroLoader } from '@/lib/contentLoaders';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
 
