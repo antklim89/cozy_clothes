@@ -27,7 +27,7 @@ function Product({ product, className, ...props }: Props) {
         </Carousel>
       </section>
       <aside className="border prose px-4 flex-[1_1_0] flex flex-col">
-        <h2>{product.title}</h2>
+        <h1>{product.title}</h1>
         <h3>{product.category}</h3>
         <p>{product.description}</p>
         <ProductOptions options={product.options} />
