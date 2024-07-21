@@ -12,8 +12,8 @@ async function baseOneFileLoader<T extends ZodRawShape>(filePath: string, schema
     contentJson.id = path.parse(filePath).name;
     return schema.parseAsync(contentJson);
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(`Load Error ${filePath}:\n`, error);
+    throw error;
   }
 }
 
@@ -29,14 +29,14 @@ async function baseManyFilesLoader<T extends ZodRawShape>(filesPath: string, sch
           return contentJson;
         } catch (error) {
           console.error(error);
-          return null;
+          throw new Error(`Load Error ${fileName}/${filesPath}.`);
         }
       }),
     );
-    return schema.array().parseAsync(results);
+    return await schema.array().parseAsync(results);
   } catch (error) {
     console.error(error);
-    return [];
+    throw Error(`Load Error ${filesPath}.`);
   }
 }
 
