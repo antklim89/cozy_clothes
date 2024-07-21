@@ -50,7 +50,7 @@ function ProductOptions({ options, className, ...props }: Props) {
           <SelectContent>
             {options.colors.map((color) => (
               <SelectItem className="uppercase" key={color} value={color}>
-                {color}
+                <span style={{ backgroundColor: color }}>&emsp;&emsp;</span>&emsp;{color}
               </SelectItem>
             ))}
           </SelectContent>
