@@ -33,4 +33,5 @@ export {
   SelectScrollDownButton,
 } from './select';
 export { type ButtonProps, Button, buttonVariants } from './button';
+export { type InputProps, Input } from './input';
 export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField } from './form';
