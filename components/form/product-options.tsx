@@ -1,9 +1,9 @@
 'use client';
-import { FormItem, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import { FormItem, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import type { ComponentProps } from 'react';
+import type { ChangeEvent, ComponentProps } from 'react';
 
 type Props = ComponentProps<'form'> & {
   options: ProductType['options'];
@@ -20,11 +20,18 @@ function ProductOptions({ options, className, ...props }: Props) {
     replace(`${pathname}?${newSearchParams}`);
   };
 
+  const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const qty = Math.max(0, e.target.valueAsNumber);
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.set('qty', Number.isNaN(qty) ? '0' : qty.toString());
+    replace(`${pathname}?${newSearchParams}`);
+  };
+
   return (
     <form {...props} className={cn('flex flex-col gap-4', className)}>
       <FormItem>
         <Label htmlFor="size">Size:</Label>
-        <Select onValueChange={handleValueChange('size')} defaultValue={searchParams.get('size') ?? options.sizes[0]}>
+        <Select onValueChange={handleValueChange('size')} value={searchParams.get('size') ?? options.sizes[0]}>
           <SelectTrigger className="uppercase" id="size">
             <SelectValue placeholder="Select a size..." />
           </SelectTrigger>
@@ -40,10 +47,7 @@ function ProductOptions({ options, className, ...props }: Props) {
 
       <FormItem>
         <Label htmlFor="color">Color:</Label>
-        <Select
-          onValueChange={handleValueChange('color')}
-          defaultValue={searchParams.get('color') ?? options.colors[0]}
-        >
+        <Select onValueChange={handleValueChange('color')} value={searchParams.get('color') ?? options.colors[0]}>
           <SelectTrigger className="uppercase" id="color">
             <SelectValue placeholder="Select a color..." />
           </SelectTrigger>
@@ -55,6 +59,11 @@ function ProductOptions({ options, className, ...props }: Props) {
             ))}
           </SelectContent>
         </Select>
+      </FormItem>
+
+      <FormItem>
+        <Label htmlFor="color">Color:</Label>
+        <Input type="number" min={1} onChange={handleQtyChange} value={searchParams.get('qty') ?? '1'} />
       </FormItem>
     </form>
   );
