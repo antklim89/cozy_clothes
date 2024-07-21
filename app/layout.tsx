@@ -3,6 +3,14 @@ import '@/styles/main.css';
 import { Header } from '@/components/layout';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Cozy Clothes',
+    template: '%s | Cozy Clothes',
+  },
+};
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
