@@ -12,6 +12,7 @@ export interface CartStore {
   cartItems: CartItem[];
   addToCart: (newCartItem: CartItem) => void;
   removeFromCart: (productId: ProductType['id']) => void;
+  updateCart: (productId: ProductType['id'], updatedCartItem: Partial<CartItem>) => void;
 }
 
 export const useCartStore = create<CartStore>((set) => ({
@@ -25,6 +26,14 @@ export const useCartStore = create<CartStore>((set) => ({
   removeFromCart: (productId: string) => {
     set((state) => ({
       cartItems: state.cartItems.filter((cartItem) => cartItem.product.id !== productId),
+    }));
+  },
+
+  updateCart: (productId: ProductType['id'], updatedCartItem: Partial<CartItem>) => {
+    set((state) => ({
+      cartItems: state.cartItems.map((cartItem) =>
+        cartItem.product.id === productId ? { ...cartItem, ...updatedCartItem } : cartItem,
+      ),
     }));
   },
 }));
