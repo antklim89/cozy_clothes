@@ -1,6 +1,7 @@
 'use client';
 import {
   Content,
+  Group,
   Icon,
   Item,
   ItemIndicator,
@@ -15,7 +16,7 @@ import {
   Value,
   Viewport,
 } from '@radix-ui/react-select';
-import { Check, ChevronDown, ChevronUp, Group } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
