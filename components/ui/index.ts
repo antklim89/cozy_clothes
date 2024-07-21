@@ -19,6 +19,7 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 } from './dropdown-menu';
+export { Label } from './label';
 export {
   Select,
   SelectGroup,
@@ -32,3 +33,4 @@ export {
   SelectScrollDownButton,
 } from './select';
 export { type ButtonProps, Button, buttonVariants } from './button';
+export { useFormField, Form, FormItem, FormLabel, FormControl, FormDescription, FormMessage, FormField } from './form';
