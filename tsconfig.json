@@ -25,6 +25,6 @@
       }
     ]
   },
-  "include": [".eslintrc.js", "next.config.mjs", "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "cms/index.mjs", "cms/about.mjs", "cms/projects.mjs"],
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
