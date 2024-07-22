@@ -9,6 +9,9 @@ type Props = ComponentProps<'form'> & {
   options: ProductType['options'];
 };
 
+const MAX_QTY = 100;
+const MIN_QTY = 1;
+
 function ProductOptions({ options, className, ...props }: Props) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -21,9 +24,9 @@ function ProductOptions({ options, className, ...props }: Props) {
   };
 
   const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const qty = Math.max(0, e.target.valueAsNumber);
+    const qty = Math.max(MIN_QTY, Math.min(MAX_QTY, e.target.valueAsNumber));
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('qty', Number.isNaN(qty) ? '0' : qty.toString());
+    newSearchParams.set('qty', Number.isNaN(qty) ? '1' : qty.toString());
     replace(`${pathname}?${newSearchParams}`);
   };
 
@@ -62,8 +65,14 @@ function ProductOptions({ options, className, ...props }: Props) {
       </FormItem>
 
       <FormItem>
-        <Label htmlFor="color">Color:</Label>
-        <Input type="number" min={1} onChange={handleQtyChange} value={searchParams.get('qty') ?? '1'} />
+        <Label htmlFor="color">Quantity:</Label>
+        <Input
+          type="number"
+          min={MIN_QTY}
+          max={MAX_QTY}
+          onChange={handleQtyChange}
+          value={searchParams.get('qty') ?? '1'}
+        />
       </FormItem>
     </form>
   );
