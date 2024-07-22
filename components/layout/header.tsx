@@ -1,3 +1,4 @@
+import { CartButton } from '@/components/feature';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui';
 import logo from '@/public/logo.svg';
 import { Menu } from 'lucide-react';
@@ -43,7 +44,7 @@ function Header() {
         </nav>
 
         <nav className="md:block hidden">
-          <ul className="flex gap-4">
+          <ul className="flex gap-4 items-center">
             {links.map(({ href, label }) => (
               <li key={label} className="py-4">
                 <Link className="py-4" href={href}>
@@ -51,6 +52,9 @@ function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <CartButton />
+            </li>
           </ul>
         </nav>
       </div>
