@@ -27,4 +27,6 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
+export const dynamic = 'force-static';
+
 export default RootLayout;
