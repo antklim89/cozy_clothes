@@ -13,8 +13,8 @@ interface Props {
 function AddToCartButton({ product }: Props) {
   const searchParams = useSearchParams();
   const qty = Number(searchParams.get('qty') ?? 1);
-  const size = searchParams.get('size') ?? product.options.sizes[0] ?? null;
-  const color = searchParams.get('color') ?? product.options.colors[0] ?? null;
+  const size = searchParams.get('size') ?? product.options.sizes?.[0] ?? null;
+  const color = searchParams.get('color') ?? product.options.colors?.[0] ?? null;
   const cartId = `${product.id}-${size}-${color}`;
 
   const addToCart = useCartStore((store) => store.addToCart);
