@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import type { ProductType } from './schemas';
 
 export interface CartItem {
+  id: string;
   product: ProductType;
   qty: number;
   size?: string | null;
@@ -11,8 +12,8 @@ export interface CartItem {
 export interface CartStore {
   cartItems: CartItem[];
   addToCart: (newCartItem: CartItem) => void;
-  removeFromCart: (productId: ProductType['id']) => void;
-  updateCart: (productId: ProductType['id'], updatedCartItem: Partial<CartItem>) => void;
+  removeFromCart: (cartId: CartItem['id']) => void;
+  updateCart: (cartId: CartItem['id'], updatedCartItem: Partial<CartItem>) => void;
 }
 
 export const useCartStore = create<CartStore>((set) => ({
@@ -29,7 +30,7 @@ export const useCartStore = create<CartStore>((set) => ({
     }));
   },
 
-  updateCart: (productId: ProductType['id'], updatedCartItem: Partial<CartItem>) => {
+  updateCart: (productId: CartItem['id'], updatedCartItem: Partial<CartItem>) => {
     set((state) => ({
       cartItems: state.cartItems.map((cartItem) =>
         cartItem.product.id === productId ? { ...cartItem, ...updatedCartItem } : cartItem,

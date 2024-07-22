@@ -12,34 +12,42 @@ interface Props {
 
 function AddToCartButton({ product }: Props) {
   const searchParams = useSearchParams();
+  const qty = Number(searchParams.get('qty') ?? 1);
+  const size = searchParams.get('size');
+  const color = searchParams.get('color');
+  const cartId = `${product.id}-${size}-${color}`;
 
   const addToCart = useCartStore((store) => store.addToCart);
   const removeFromCart = useCartStore((store) => store.removeFromCart);
   const updateCart = useCartStore((store) => store.updateCart);
-  const hasCartItem = useCartStore((store) => store.cartItems.findIndex((i) => i.product.id === product.id) >= 0);
+  const hasCartItem = useCartStore((store) => store.cartItems.findIndex((i) => i.id === cartId) >= 0);
 
   const handleAddToCart = () => {
+    const size = searchParams.get('size');
+    const color = searchParams.get('color');
+
     const newCartItem: CartItem = {
+      id: cartId,
       product,
       qty: Number(searchParams.get('qty') ?? 1),
-      size: searchParams.get('size'),
-      color: searchParams.get('color'),
+      size,
+      color,
     };
     addToCart(newCartItem);
   };
 
   const handleRemoveFromCart = () => {
-    removeFromCart(product.id);
+    removeFromCart(cartId);
   };
 
   useEffect(() => {
     if (!hasCartItem) return;
-    updateCart(product.id, {
-      qty: Number(searchParams.get('qty') ?? 1),
-      size: searchParams.get('size'),
-      color: searchParams.get('color'),
+    updateCart(cartId, {
+      qty,
+      size,
+      color,
     });
-  }, [product.id, searchParams, updateCart, hasCartItem]);
+  }, [cartId, qty, size, color, updateCart, hasCartItem]);
 
   if (hasCartItem) return <Button onClick={handleRemoveFromCart}>Remove From Cart</Button>;
   return <Button onClick={handleAddToCart}>Add To Cart</Button>;
