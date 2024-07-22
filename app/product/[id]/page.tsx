@@ -1,5 +1,5 @@
 import { Product } from '@/components/feature';
-import { productLoader } from '@/lib/contentLoaders';
+import { productLoader, productsLoader } from '@/lib/contentLoaders';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -15,6 +15,12 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     keywords: [product.title, product.category],
     description: product.description,
   };
+};
+
+export const dynamicParams = false;
+export const generateStaticParams = async () => {
+  const products = await productsLoader();
+  return products.map(({ id }) => ({ id }));
 };
 
 async function ProductPage({ params }: Props) {
