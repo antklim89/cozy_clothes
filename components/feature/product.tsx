@@ -1,9 +1,10 @@
-import { CartButton, ProductOptions } from '@/components/form';
+import { ProductOptions } from '@/components/form';
 import { Carousel, Price } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import type { ComponentProps } from 'react';
+import CartButton from './cart-button';
 
 interface Props extends ComponentProps<'div'> {
   product: ProductType;
