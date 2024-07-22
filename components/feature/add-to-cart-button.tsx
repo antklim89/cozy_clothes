@@ -10,7 +10,7 @@ interface Props {
   product: ProductType;
 }
 
-function CartButton({ product }: Props) {
+function AddToCartButton({ product }: Props) {
   const searchParams = useSearchParams();
 
   const addToCart = useCartStore((store) => store.addToCart);
@@ -45,4 +45,4 @@ function CartButton({ product }: Props) {
   return <Button onClick={handleAddToCart}>Add To Cart</Button>;
 }
 
-export default CartButton;
+export default AddToCartButton;

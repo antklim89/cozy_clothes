@@ -4,7 +4,7 @@ import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import type { ComponentProps } from 'react';
-import CartButton from './cart-button';
+import AddToCartButton from './add-to-cart-button';
 
 interface Props extends ComponentProps<'div'> {
   product: ProductType;
@@ -33,7 +33,7 @@ function Product({ product, className, ...props }: Props) {
         <p>{product.description}</p>
         <ProductOptions options={product.options} />
         <Price price={product.price} discount={product.discount} />
-        <CartButton product={product} />
+        <AddToCartButton product={product} />
       </aside>
     </div>
   );
