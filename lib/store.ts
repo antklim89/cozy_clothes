@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import type { ProductType } from './schemas';
 
 export interface CartItem {
@@ -16,25 +17,30 @@ export interface CartStore {
   updateCart: (cartId: CartItem['id'], updatedCartItem: Partial<CartItem>) => void;
 }
 
-export const useCartStore = create<CartStore>((set) => ({
-  cartItems: [],
-  addToCart: (newCartItem: CartItem) => {
-    set((state) => ({
-      cartItems: [...state.cartItems, newCartItem],
-    }));
-  },
+export const useCartStore = create(
+  persist<CartStore>(
+    (set) => ({
+      cartItems: [],
+      addToCart: (newCartItem: CartItem) => {
+        set((state) => ({
+          cartItems: [...state.cartItems, newCartItem],
+        }));
+      },
 
-  removeFromCart: (productId: string) => {
-    set((state) => ({
-      cartItems: state.cartItems.filter((cartItem) => cartItem.product.id !== productId),
-    }));
-  },
+      removeFromCart: (cartId: string) => {
+        set((state) => ({
+          cartItems: state.cartItems.filter((cartItem) => cartItem.id !== cartId),
+        }));
+      },
 
-  updateCart: (productId: CartItem['id'], updatedCartItem: Partial<CartItem>) => {
-    set((state) => ({
-      cartItems: state.cartItems.map((cartItem) =>
-        cartItem.product.id === productId ? { ...cartItem, ...updatedCartItem } : cartItem,
-      ),
-    }));
-  },
-}));
+      updateCart: (cartId: CartItem['id'], updatedCartItem: Partial<CartItem>) => {
+        set((state) => ({
+          cartItems: state.cartItems.map((cartItem) =>
+            cartItem.id === cartId ? { ...cartItem, ...updatedCartItem } : cartItem,
+          ),
+        }));
+      },
+    }),
+    { name: 'cozy_clothes_cart' },
+  ),
+);
