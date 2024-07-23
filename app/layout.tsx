@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import '@/styles/main.css';
-import { Header } from '@/components/layout';
+import { Footer, Header } from '@/components/layout';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
 import type { Metadata } from 'next';
@@ -21,7 +21,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           <Header />
         </header>
         <main className="grow">{children}</main>
-        <footer className="shrink-0">FOOTER</footer>
+        <Footer />
       </body>
     </html>
   );
