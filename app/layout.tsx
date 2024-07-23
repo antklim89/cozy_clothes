@@ -16,10 +16,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <head />
-      <body className="flex flex-col h-screen">
-        <header className="shrink-0">
-          <Header />
-        </header>
+      <body className="grid grid-rows-[auto_1fr_auto] h-screen">
+        <Header />
         <main className="grow">{children}</main>
         <Footer />
       </body>
