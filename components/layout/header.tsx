@@ -34,7 +34,7 @@ function Header() {
               <ul>
                 {links.map(({ href, label }) => (
                   <li key={label}>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem className="flex justify-center">
                       <Link href={href}>{label}</Link>
                     </DropdownMenuItem>
                   </li>
@@ -55,7 +55,7 @@ function Header() {
             ))}
           </ul>
         </nav>
-        <CartButton />
+        <CartButton className="ml-4" />
       </div>
     </header>
   );

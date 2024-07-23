@@ -1,19 +1,18 @@
 'use client';
-import { Button } from '@/components/ui';
 import { useCartStore } from '@/lib/store';
+import { cn } from '@/lib/utils';
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import type { ComponentProps } from 'react';
 
-function CartButton() {
+function CartButton({ className, ...props }: ComponentProps<'a'>) {
   const cartItemsLength = useCartStore((state) => state.cartItems.length);
 
   return (
-    <Button asChild>
-      <Link href="/cart" className="flex flex-nowrap">
-        <ShoppingCart />
-        <p className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">{cartItemsLength}</p>
-      </Link>
-    </Button>
+    <Link href="/cart" {...props} className={cn('flex flex-nowrap', className)}>
+      <ShoppingCart />
+      <p className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">{cartItemsLength}</p>
+    </Link>
   );
 }
 
