@@ -18,7 +18,7 @@ const links = [
 
 function Header() {
   return (
-    <div className="bg-primary text-primary-foreground">
+    <header className="bg-primary text-primary-foreground">
       <div className="container flex items-center px-4 sm:px-6">
         <Link className="mr-auto" href="/">
           <Image src={logo} width={240} height={40} alt="logo" />
@@ -58,7 +58,7 @@ function Header() {
           </ul>
         </nav>
       </div>
-    </div>
+    </header>
   );
 }
 
