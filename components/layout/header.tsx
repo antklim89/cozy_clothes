@@ -20,11 +20,12 @@ function Header() {
   return (
     <header className="bg-primary text-primary-foreground">
       <div className="container flex items-center px-4 sm:px-6">
-        <Link className="mr-auto" href="/">
-          <Image src={logo} width={240} height={40} alt="logo" />
+        <Link className="flex items-center mr-auto" href="/">
+          <Image src={logo} className="h-12 mr-4 w-full" width={48} height={48} alt="logo" />
+          <span className="text-nowrap text-2xl sm:block hidden">Cozy Clothes</span>
         </Link>
 
-        <nav className="md:hidden">
+        <nav className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger>
               <Menu />
@@ -43,7 +44,7 @@ function Header() {
           </DropdownMenu>
         </nav>
 
-        <nav className="md:block hidden">
+        <nav className="sm:block hidden">
           <ul className="flex gap-4 items-center">
             {links.map(({ href, label }) => (
               <li key={label} className="py-4">
@@ -52,11 +53,9 @@ function Header() {
                 </Link>
               </li>
             ))}
-            <li>
-              <CartButton />
-            </li>
           </ul>
         </nav>
+        <CartButton />
       </div>
     </header>
   );
