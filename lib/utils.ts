@@ -1,11 +1,12 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { qtySchema } from './schemas';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const priceFormat = Intl.NumberFormat(undefined, {
+const priceFormat = Intl.NumberFormat('en-Us', {
   maximumFractionDigits: 2,
   minimumFractionDigits: 2,
   currency: 'USD',
@@ -14,7 +15,15 @@ const priceFormat = Intl.NumberFormat(undefined, {
   useGrouping: false,
 });
 
-export function getPrice(price: number, discount = 0): string {
-  if (discount <= 0) return priceFormat.format(price);
-  return priceFormat.format(price - price * (discount / 100));
+export function getPrice(args: { price: number; discount?: number; qty?: number }): string {
+  return priceFormat.format(calculatePrice(args));
+}
+
+export function calculatePrice({
+  price = 0,
+  discount = 0,
+  qty = 1,
+}: { price: number; discount?: number; qty?: number }): number {
+  const q = qtySchema.parse(qty);
+  return (price - price * (discount / 100)) * q;
 }
