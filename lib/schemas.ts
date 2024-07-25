@@ -22,5 +22,12 @@ export const productSchema = z.object({
   }),
 });
 
+export const qtySchema = z.coerce
+  .number()
+  .min(1)
+  .max(100)
+  .catch(({ input }) => (input > 100 ? 100 : 1))
+  .default(1);
+
 export type HeroType = z.infer<typeof heroSchema>;
 export type ProductType = z.infer<typeof productSchema>;
