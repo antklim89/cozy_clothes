@@ -67,5 +67,8 @@
     "formatter": {
       "indentWidth": 2
     }
+  },
+  "files": {
+    "ignore": ["**/index.*"]
   }
 }
