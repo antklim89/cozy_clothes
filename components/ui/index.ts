@@ -1,6 +1,6 @@
 // @ index generate start
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './card';
-export { default as Carousel } from './carousel';
+export { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './carousel';
 export { default as Price } from './price';
 export {
   DropdownMenu,
