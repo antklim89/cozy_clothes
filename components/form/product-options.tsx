@@ -20,14 +20,14 @@ function ProductOptions({ options, className, ...props }: Props) {
   const handleValueChange = (field: string) => (value: string) => {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set(field, value);
-    replace(`${pathname}?${newSearchParams}`);
+    replace(`${pathname}?${newSearchParams}`, { scroll: false });
   };
 
   const handleQtyChange = (e: ChangeEvent<HTMLInputElement>) => {
     const qty = Math.max(MIN_QTY, Math.min(MAX_QTY, e.target.valueAsNumber));
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set('qty', Number.isNaN(qty) ? '1' : qty.toString());
-    replace(`${pathname}?${newSearchParams}`);
+    replace(`${pathname}?${newSearchParams}`, { scroll: false });
   };
 
   return (
