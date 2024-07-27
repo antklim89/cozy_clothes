@@ -1,5 +1,5 @@
 'use client';
-import { FormItem, Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui';
+import { FormItem, Input, Label, ToggleGroup, ToggleGroupItem } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -30,41 +30,40 @@ function ProductOptions({ options, className, ...props }: Props) {
     replace(`${pathname}?${newSearchParams}`, { scroll: false });
   };
 
+  const selectedColor = searchParams.get('color') ?? options.colors?.[0];
   return (
     <form {...props} className={cn('flex flex-col gap-4', className)}>
       {options.sizes && (
         <FormItem>
           <Label htmlFor="size">Size:</Label>
-          <Select onValueChange={handleValueChange('size')} value={searchParams.get('size') ?? options.sizes[0]}>
-            <SelectTrigger className="uppercase" id="size">
-              <SelectValue placeholder="Select a size..." />
-            </SelectTrigger>
-            <SelectContent>
-              {options.sizes.map((size) => (
-                <SelectItem className="uppercase" key={size} value={size}>
-                  {size}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <ToggleGroup
+            type="single"
+            value={searchParams.get('size') ?? options.sizes[0]}
+            onValueChange={handleValueChange('size')}
+          >
+            {options.sizes.map((size) => (
+              <ToggleGroupItem key={size} value={size}>
+                {size}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
         </FormItem>
       )}
 
       {options.colors && (
         <FormItem>
           <Label htmlFor="color">Color:</Label>
-          <Select onValueChange={handleValueChange('color')} value={searchParams.get('color') ?? options.colors[0]}>
-            <SelectTrigger className="uppercase" id="color">
-              <SelectValue placeholder="Select a color..." />
-            </SelectTrigger>
-            <SelectContent>
-              {options.colors.map((color) => (
-                <SelectItem className="uppercase" key={color} value={color}>
-                  <span style={{ backgroundColor: color }}>&emsp;&emsp;</span>&emsp;{color}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <ToggleGroup type="single" value={selectedColor} onValueChange={handleValueChange('color')}>
+            {options.colors.map((color) => (
+              <ToggleGroupItem key={color} value={color} className="flex items-center relative overflow-hidden">
+                <div
+                  className="absolute left-0 right-0 bottom-0 top-[calc(100%-10px)] opacity-80"
+                  style={{ backgroundColor: color }}
+                />
+                {color}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
         </FormItem>
       )}
 
