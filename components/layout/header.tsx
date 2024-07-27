@@ -1,5 +1,5 @@
 import { CartButton } from '@/components/feature';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui';
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui';
 import logo from '@/public/logo.svg';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
@@ -25,32 +25,32 @@ function Header() {
           <span className="text-nowrap text-2xl sm:block hidden">Cozy Clothes</span>
         </Link>
 
-        <nav className="sm:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Menu />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
+        <DropdownMenu>
+          <DropdownMenuTrigger className="sm:hidden">
+            <Menu />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <nav>
               <ul>
                 {links.map(({ href, label }) => (
-                  <li key={label}>
-                    <DropdownMenuItem className="flex justify-center">
+                  <DropdownMenuItem asChild key={label} className="flex justify-center">
+                    <li>
                       <Link href={href}>{label}</Link>
-                    </DropdownMenuItem>
-                  </li>
+                    </li>
+                  </DropdownMenuItem>
                 ))}
               </ul>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </nav>
+            </nav>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
         <nav className="sm:block hidden">
           <ul className="flex gap-4 items-center">
             {links.map(({ href, label }) => (
-              <li key={label} className="py-4">
-                <Link className="py-4" href={href}>
-                  {label}
-                </Link>
+              <li key={label}>
+                <Button asChild>
+                  <Link href={href}>{label}</Link>
+                </Button>
               </li>
             ))}
           </ul>
