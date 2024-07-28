@@ -1,5 +1,14 @@
 import { CartButton } from '@/components/feature';
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui';
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui';
+import { productsLoader } from '@/lib/contentLoaders';
 import logo from '@/public/logo.svg';
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
@@ -16,7 +25,10 @@ const links = [
   },
 ] as const;
 
-function Header() {
+async function Header() {
+  const products = await productsLoader();
+  const categories = products.reduce((acc, i) => acc.add(i.category), new Set<string>()).values();
+
   return (
     <header className="bg-primary text-primary-foreground">
       <div className="container flex items-center px-4 sm:px-6">
@@ -25,27 +37,8 @@ function Header() {
           <span className="text-nowrap text-2xl sm:block hidden">Cozy Clothes</span>
         </Link>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger className="sm:hidden">
-            <Menu />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <nav>
-              <ul>
-                {links.map(({ href, label }) => (
-                  <DropdownMenuItem asChild key={label} className="flex justify-center">
-                    <li>
-                      <Link href={href}>{label}</Link>
-                    </li>
-                  </DropdownMenuItem>
-                ))}
-              </ul>
-            </nav>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
         <nav className="sm:block hidden">
-          <ul className="flex gap-4 items-center">
+          <ul className="flex items-center">
             {links.map(({ href, label }) => (
               <li key={label}>
                 <Button asChild>
@@ -55,7 +48,36 @@ function Header() {
             ))}
           </ul>
         </nav>
+
         <CartButton className="ml-4" />
+
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Menu />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <nav>
+              <ul>
+                {links.map(({ href, label }) => (
+                  <li key={label}>
+                    <DropdownMenuItem asChild className="flex justify-center sm:hidden">
+                      <Link href={href}>{label}</Link>
+                    </DropdownMenuItem>
+                  </li>
+                ))}
+                <DropdownMenuSeparator className="sm:hidden" />
+                <DropdownMenuLabel className="text-center">Categories</DropdownMenuLabel>
+                {Array.from(categories, (category) => (
+                  <li key={category}>
+                    <DropdownMenuItem asChild className="flex justify-center">
+                      <Link href={`/products/${category}`}>{category}</Link>
+                    </DropdownMenuItem>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
