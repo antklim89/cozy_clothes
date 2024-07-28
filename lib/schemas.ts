@@ -22,6 +22,14 @@ export const productSchema = z.object({
   }),
 });
 
+export const testimonialSchema = z.object({
+  id: z.string(),
+  hidden: z.coerce.boolean(),
+  image: z.string(),
+  text: z.string(),
+  name: z.string(),
+});
+
 export const qtySchema = z.coerce
   .number()
   .min(1)
@@ -31,3 +39,4 @@ export const qtySchema = z.coerce
 
 export type HeroType = z.infer<typeof heroSchema>;
 export type ProductType = z.infer<typeof productSchema>;
+export type TestimonialType = z.infer<typeof testimonialSchema>;
