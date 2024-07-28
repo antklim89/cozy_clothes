@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { ZodObject, ZodRawShape } from 'zod';
-import { heroSchema, productSchema } from './schemas';
+import { heroSchema, productSchema, testimonialSchema } from './schemas';
 
 const BASE_PATH = './public/content';
 
@@ -46,6 +46,10 @@ export function heroLoader() {
 
 export function productsLoader() {
   return baseManyFilesLoader('products', productSchema);
+}
+
+export function testimonialsLoader() {
+  return baseManyFilesLoader('testimonials', testimonialSchema);
 }
 
 export function productLoader(id: string) {
