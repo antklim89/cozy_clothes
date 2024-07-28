@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui';
 import { heroLoader } from '@/lib/contentLoaders';
 import Image from 'next/image';
+import Link from 'next/link';
 import Markdown from 'react-markdown';
 
 async function Hero() {
@@ -15,7 +16,9 @@ async function Hero() {
               <Markdown className="prose md:p-1">{text}</Markdown>
             </div>
             <div className="flex flex-col items-center md:flex-row">
-              <Button>Show more</Button>
+              <Button asChild>
+                <Link href="/products">Show more</Link>
+              </Button>
             </div>
           </div>
         </div>
