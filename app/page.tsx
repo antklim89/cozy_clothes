@@ -1,4 +1,4 @@
-import { ProductsList } from '@/components/feature';
+import { ProductsList, Testimonials } from '@/components/feature';
 import { Hero } from '@/components/layout';
 
 const HomePage = () => {
@@ -6,6 +6,7 @@ const HomePage = () => {
     <div>
       <Hero />
       <ProductsList className="my-8" limit={8} />
+      <Testimonials />
     </div>
   );
 };

@@ -11,3 +11,5 @@ export { default as ProductCard } from './product-card';
 export { default as Product } from './product';
 // biome-ignore format: <generated>
 export { default as ProductsList } from './products-list';
+// biome-ignore format: <generated>
+export { Testimonials } from './testimonials';
