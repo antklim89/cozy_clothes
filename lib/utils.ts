@@ -27,3 +27,17 @@ export function calculatePrice({
   const q = qtySchema.parse(qty);
   return (price - price * (discount / 100)) * q;
 }
+
+export function groupBy<T, K extends keyof T>(array: T[], key: K): Record<string, T[]> {
+  return array.reduce(
+    (acc, item) => {
+      const groupKey = item[key] as string;
+      if (!acc[groupKey]) {
+        acc[groupKey] = [];
+      }
+      acc[groupKey].push(item);
+      return acc;
+    },
+    {} as Record<string, T[]>,
+  );
+}
