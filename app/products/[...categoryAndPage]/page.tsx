@@ -43,7 +43,7 @@ function ProductPage({
     categoryAndPage: [category, page],
   },
 }: Props) {
-  return <ProductsList category={category} page={Number(page)} />;
+  return <ProductsList className="my-8" category={category} page={Number(page)} />;
 }
 
 export default ProductPage;
