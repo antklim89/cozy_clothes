@@ -70,7 +70,7 @@ async function Header() {
                 {Array.from(categories, (category) => (
                   <li key={category}>
                     <DropdownMenuItem asChild className="flex justify-center">
-                      <Link href={`/products/${category}`}>{category}</Link>
+                      <Link href={`/products/${category}/1`}>{category}</Link>
                     </DropdownMenuItem>
                   </li>
                 ))}

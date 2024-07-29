@@ -17,7 +17,7 @@ async function Hero() {
             </div>
             <div className="flex flex-col items-center md:flex-row">
               <Button asChild>
-                <Link href="/products">Show more</Link>
+                <Link href="/products/all/1">Show more</Link>
               </Button>
             </div>
           </div>
