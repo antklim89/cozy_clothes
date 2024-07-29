@@ -1,0 +1,30 @@
+{
+  "discount": 13,
+  "price": 4762,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Handcrafted Plastic Chips",
+  "images": [
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-11-12T19:55:30.639Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

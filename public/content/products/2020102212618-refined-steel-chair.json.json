@@ -1,0 +1,30 @@
+{
+  "discount": 42,
+  "price": 1697,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Refined Steel Chair",
+  "images": [
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2020-11-17T18:26:18.379Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

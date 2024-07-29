@@ -1,0 +1,30 @@
+{
+  "discount": 39,
+  "price": 36612,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Tasty Granite Chicken",
+  "images": [
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2022-08-04T06:01:04.754Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}

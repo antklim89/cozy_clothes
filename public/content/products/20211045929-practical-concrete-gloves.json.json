@@ -1,0 +1,30 @@
+{
+  "discount": 61,
+  "price": 58820,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Practical Concrete Gloves",
+  "images": [
+    "/images/products/product-2.jpg"
+  ],
+  "createdAt": "2021-11-04T02:09:29.875Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      "red",
+      "blue",
+      "yellow",
+      "pink"
+    ]
+  }
+}
