@@ -16,6 +16,8 @@ export { type InputProps, Input } from './input';
 // biome-ignore format: <generated>
 export { Label } from './label';
 // biome-ignore format: <generated>
+export { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from './pagination';
+// biome-ignore format: <generated>
 export { default as Price } from './price';
 // biome-ignore format: <generated>
 export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectLabel, SelectItem, SelectSeparator, SelectScrollUpButton, SelectScrollDownButton } from './select';
