@@ -1,27 +1,13 @@
-import { productsLoader } from '@/lib/contentLoaders';
+import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 import ProductCard from './product-card';
 
 interface Props extends ComponentProps<'div'> {
-  page?: number;
-  category?: string;
-  limit?: number;
+  products: ProductType[];
 }
 
-const ALL_CATEGORIES = 'all';
-
-async function ProductsList({ limit = 8, page = 1, category = ALL_CATEGORIES, className, ...props }: Props) {
-  let products = await productsLoader();
-
-  if (category !== ALL_CATEGORIES) {
-    products = products.filter((i) => i.category === category);
-  }
-
-  const start = limit * page - limit;
-  const end = start + limit;
-  products = products.slice(start, end);
-
+async function ProductsList({ products, className, ...props }: Props) {
   return (
     <div
       {...props}
