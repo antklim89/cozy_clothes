@@ -42,16 +42,19 @@ const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> })
     categoryAndPage: [category, page],
   } = await paramsSchema.parseAsync(params);
 
-  const start = PRODUCTS_PER_PAGE * page - PRODUCTS_PER_PAGE;
-  const end = start + PRODUCTS_PER_PAGE;
+  let products = await productsLoader();
 
-  const productsLoaded = await productsLoader();
+  if (category !== ALL_CATEGORIES) {
+    products = products.filter((i) => i.category === category);
+  }
 
-  const products = productsLoaded
-    .filter((i) => (category === ALL_CATEGORIES ? true : i.category === category))
-    .slice(start, end);
+  const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
 
-  const totalPages = Math.ceil(productsLoaded.length / PRODUCTS_PER_PAGE);
+  if (totalPages > 1) {
+    const start = PRODUCTS_PER_PAGE * page - PRODUCTS_PER_PAGE;
+    const end = start + PRODUCTS_PER_PAGE;
+    products = products.slice(start, end);
+  }
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] h-full">
