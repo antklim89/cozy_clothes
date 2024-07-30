@@ -1,4 +1,4 @@
-function Footer() {
+export const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container min-h-12 flex items-center justify-between px-4 sm:px-6">
@@ -6,6 +6,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

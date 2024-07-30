@@ -7,7 +7,7 @@ import { Trash } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
 
-function Cart({ className, ...props }: ComponentProps<'section'>) {
+export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
   const cartItems = useCartStore((store) => store.cartItems);
   const updateCart = useCartStore((store) => store.updateCart);
   const removeFromCart = useCartStore((store) => store.removeFromCart);
@@ -85,5 +85,5 @@ function Cart({ className, ...props }: ComponentProps<'section'>) {
       </aside>
     </section>
   );
-}
+};
 export default Cart;

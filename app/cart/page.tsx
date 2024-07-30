@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: 'Cart',
 };
 
-function ProductPage() {
+const ProductPage = () => {
   return <Cart />;
-}
+};
 
 export default ProductPage;

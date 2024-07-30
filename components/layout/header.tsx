@@ -25,7 +25,7 @@ const links = [
   },
 ] as const;
 
-async function Header() {
+export const Header = async () => {
   const products = await productsLoader();
   const categories = products.reduce((acc, i) => acc.add(i.category), new Set<string>()).values();
 
@@ -81,6 +81,6 @@ async function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

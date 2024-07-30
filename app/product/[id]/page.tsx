@@ -23,11 +23,11 @@ export const generateStaticParams = async () => {
   return products.map(({ id }) => ({ id }));
 };
 
-async function ProductPage({ params }: Props) {
+const ProductPage = async ({ params }: Props) => {
   const product = await productLoader(params.id);
   if (!product) return notFound();
 
   return <Product className="my-8" product={product} />;
-}
+};
 
 export default ProductPage;

@@ -9,7 +9,7 @@ type Props = ComponentProps<'form'> & {
   options: ProductType['options'];
 };
 
-function ProductOptions({ options, className, ...props }: Props) {
+export const ProductOptions = ({ options, className, ...props }: Props) => {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -73,6 +73,6 @@ function ProductOptions({ options, className, ...props }: Props) {
       </FormItem>
     </form>
   );
-}
+};
 
 export default ProductOptions;

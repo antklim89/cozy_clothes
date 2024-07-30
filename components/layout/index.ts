@@ -1,7 +1,7 @@
 // @ index generate start
 // biome-ignore format: <generated>
-export { default as Footer } from './footer';
+export { Footer } from './footer';
 // biome-ignore format: <generated>
-export { default as Header } from './header';
+export { Header } from './header';
 // biome-ignore format: <generated>
-export { default as Hero } from './hero';
+export { Hero } from './hero';

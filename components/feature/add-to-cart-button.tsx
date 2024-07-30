@@ -10,7 +10,7 @@ interface Props {
   product: ProductType;
 }
 
-function AddToCartButton({ product }: Props) {
+export const AddToCartButton = ({ product }: Props) => {
   const searchParams = useSearchParams();
   const qty = Number(searchParams.get('qty') ?? 1);
   const size = searchParams.get('size') ?? product.options.sizes?.[0] ?? null;
@@ -48,6 +48,4 @@ function AddToCartButton({ product }: Props) {
 
   if (hasCartItem) return <Button onClick={handleRemoveFromCart}>Remove From Cart</Button>;
   return <Button onClick={handleAddToCart}>Add To Cart</Button>;
-}
-
-export default AddToCartButton;
+};

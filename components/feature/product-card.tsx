@@ -6,7 +6,7 @@ interface Props {
   product: ProductType;
 }
 
-function ProductCard({ product }: Props) {
+export const ProductCard = ({ product }: Props) => {
   return (
     <div key={product.id} className="group relative">
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -32,6 +32,6 @@ function ProductCard({ product }: Props) {
       </div>
     </div>
   );
-}
+};
 
 export default ProductCard;

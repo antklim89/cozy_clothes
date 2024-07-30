@@ -7,7 +7,7 @@ interface Props extends ComponentProps<'div'> {
   products: ProductType[];
 }
 
-async function ProductsList({ products, className, ...props }: Props) {
+export const ProductsList = async ({ products, className, ...props }: Props) => {
   return (
     <div
       {...props}
@@ -18,6 +18,6 @@ async function ProductsList({ products, className, ...props }: Props) {
       ))}
     </div>
   );
-}
+};
 
 export default ProductsList;

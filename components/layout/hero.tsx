@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 
-async function Hero() {
+export const Hero = async () => {
   const { imagePreview, text } = await heroLoader();
 
   return (
@@ -34,6 +34,6 @@ async function Hero() {
       </div>
     </section>
   );
-}
+};
 
 export default Hero;

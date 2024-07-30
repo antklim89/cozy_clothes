@@ -37,7 +37,7 @@ const paramsSchema = z.object({
   categoryAndPage: z.tuple([z.string(), z.coerce.number().positive()]),
 });
 
-async function ProductPage({ params }: { params: z.infer<typeof paramsSchema> }) {
+const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> }) => {
   const {
     categoryAndPage: [category, page],
   } = await paramsSchema.parseAsync(params);
@@ -60,6 +60,6 @@ async function ProductPage({ params }: { params: z.infer<typeof paramsSchema> })
       <ProductsPagination className="mb-8" category={category} page={page} totalPages={totalPages} />
     </div>
   );
-}
+};
 
 export default ProductPage;
