@@ -1,4 +1,5 @@
 import { ProductsList, ProductsPagination } from '@/components/feature';
+import { CategoriesNavBar } from '@/components/layout';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import { z } from 'zod';
@@ -57,10 +58,11 @@ const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> })
   }
 
   return (
-    <div className="grid grid-rows-[auto_1fr_auto] h-full">
-      <ProductsPagination className="mt-8" category={category} page={page} totalPages={totalPages} />
-      <ProductsList className="my-4" products={products} />
-      <ProductsPagination className="mb-8" category={category} page={page} totalPages={totalPages} />
+    <div className="flex flex-col gap-4 my-8">
+      <CategoriesNavBar selectedCategory={category} />
+      <ProductsPagination category={category} page={page} totalPages={totalPages} />
+      <ProductsList products={products} />
+      <ProductsPagination category={category} page={page} totalPages={totalPages} />
     </div>
   );
 };

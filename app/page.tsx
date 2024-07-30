@@ -1,5 +1,5 @@
 import { ProductsList, Testimonials } from '@/components/feature';
-import { Hero } from '@/components/layout';
+import { CategoriesNavBar, Hero } from '@/components/layout';
 import { productsLoader } from '@/lib/contentLoaders';
 
 const HomePage = async () => {
@@ -8,6 +8,7 @@ const HomePage = async () => {
   return (
     <div>
       <Hero />
+      <CategoriesNavBar className="my-4" />
       <h2 className="prose text-center text-2xl mt-4 font-bold">New products</h2>
       <ProductsList products={products} className="my-8" />
       <Testimonials />
