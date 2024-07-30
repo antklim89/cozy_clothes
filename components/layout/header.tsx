@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui';
+import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import logo from '@/public/logo.svg';
 import { Menu } from 'lucide-react';
@@ -65,8 +66,16 @@ export const Header = async () => {
                     </DropdownMenuItem>
                   </li>
                 ))}
+
                 <DropdownMenuSeparator className="sm:hidden" />
                 <DropdownMenuLabel className="text-center">Categories</DropdownMenuLabel>
+
+                <li>
+                  <DropdownMenuItem asChild className="flex justify-center">
+                    <Link href={`/products/${ALL_CATEGORIES}/1`}>ALL</Link>
+                  </DropdownMenuItem>
+                </li>
+
                 {Array.from(categories, (category) => (
                   <li key={category}>
                     <DropdownMenuItem asChild className="flex justify-center">
