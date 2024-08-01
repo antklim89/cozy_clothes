@@ -9,7 +9,7 @@ interface Props {
 
 export const ProductCard = ({ product }: Props) => {
   return (
-    <div key={product.id} className="group relative">
+    <section key={product.id} className="group relative">
       <InCartIcon productId={product.id} />
       <div className="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
         <Image
@@ -32,7 +32,7 @@ export const ProductCard = ({ product }: Props) => {
         </div>
         <Price price={product.price} discount={product.discount} />
       </div>
-    </div>
+    </section>
   );
 };
 
