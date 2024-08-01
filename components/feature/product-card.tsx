@@ -1,6 +1,7 @@
+import { Price } from '@/components/ui';
 import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
-import { Price } from '../ui';
+import { InCartIcon } from './in-cart-icon';
 
 interface Props {
   product: ProductType;
@@ -9,7 +10,8 @@ interface Props {
 export const ProductCard = ({ product }: Props) => {
   return (
     <div key={product.id} className="group relative">
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+      <InCartIcon productId={product.id} />
+      <div className="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
         <Image
           width={400}
           height={400}
