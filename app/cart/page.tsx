@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const ProductPage = () => {
-  return <Cart />;
+  return <Cart className="my-8" />;
 };
 
 export default ProductPage;
