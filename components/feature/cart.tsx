@@ -16,9 +16,17 @@ export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
     (total, { qty, product: { price, discount } }) => total + calculatePrice({ qty, price, discount }),
     0,
   );
+
   return (
     <section {...props} className={cn('container grid gap-4 grid-cols-1 md:grid-cols-[2fr_1fr]', className)}>
       <div className="flex flex-col gap-4">
+        {cartItems.length === 0 && (
+          <Card>
+            <CardHeader>
+              <h3 className="text-xl">Your shopping cart is empty</h3>
+            </CardHeader>
+          </Card>
+        )}
         {cartItems.map(({ id, qty, color, size, product }) => (
           <Card key={id}>
             <CardHeader>
@@ -79,7 +87,9 @@ export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
             </p>
           </CardContent>
           <CardFooter>
-            <Button className="w-full">Checkout</Button>
+            <Button className="w-full" disabled={cartItems.length === 0}>
+              Checkout
+            </Button>
           </CardFooter>
         </Card>
       </aside>
