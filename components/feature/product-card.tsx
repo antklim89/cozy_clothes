@@ -1,4 +1,4 @@
-import { Price } from '@/components/ui';
+import Price from '@/components/ui/price';
 import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
 import { InCartIcon } from './in-cart-icon';

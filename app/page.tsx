@@ -1,5 +1,7 @@
-import { ProductsList, Testimonials } from '@/components/feature';
-import { CategoriesNavBar, Hero } from '@/components/layout';
+import ProductsList from '@/components/feature/products-list';
+import { Testimonials } from '@/components/feature/testimonials';
+import { CategoriesNavBar } from '@/components/layout/categories-nav-bar';
+import Hero from '@/components/layout/hero';
 import { productsLoader } from '@/lib/contentLoaders';
 
 const HomePage = async () => {

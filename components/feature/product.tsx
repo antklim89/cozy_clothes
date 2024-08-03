@@ -1,5 +1,6 @@
-import { ProductOptions } from '@/components/form';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, Price } from '@/components/ui';
+import ProductOptions from '@/components/form/product-options';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Price from '@/components/ui/price';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';

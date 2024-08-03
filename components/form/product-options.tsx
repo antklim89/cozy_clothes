@@ -1,5 +1,8 @@
 'use client';
-import { FormItem, Input, Label, ToggleGroup, ToggleGroupItem } from '@/components/ui';
+import { FormItem } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { type ProductType, qtySchema } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';

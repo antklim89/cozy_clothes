@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import { cn } from '@/lib/utils';

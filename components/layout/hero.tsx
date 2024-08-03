@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui';
+import { Button } from '@/components/ui/button';
 import { heroLoader } from '@/lib/contentLoaders';
 import Image from 'next/image';
 import Link from 'next/link';

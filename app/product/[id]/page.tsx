@@ -1,4 +1,4 @@
-import { Product } from '@/components/feature';
+import { Product } from '@/components/feature/product';
 import { productLoader, productsLoader } from '@/lib/contentLoaders';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';

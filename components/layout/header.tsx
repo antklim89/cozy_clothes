@@ -1,13 +1,13 @@
-import { CartButton } from '@/components/feature';
+import CartButton from '@/components/feature/cart-button';
+import { Button } from '@/components/ui/button';
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui';
+} from '@/components/ui/dropdown-menu';
 import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import logo from '@/public/logo.svg';

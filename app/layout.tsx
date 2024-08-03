@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 import '@/styles/main.css';
-import { Footer, Header } from '@/components/layout';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
+import Footer from '@/components/layout/footer';
+import Header from '@/components/layout/header';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

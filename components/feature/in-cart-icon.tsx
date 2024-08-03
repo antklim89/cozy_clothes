@@ -1,7 +1,7 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/store';
 import { ShoppingCart } from 'lucide-react';
-import { Button } from '../ui';
 
 export const InCartIcon = ({ productId }: { productId: string }) => {
   const isInCart = useCartStore((state) => state.cartItems.findIndex((i) => i.product.id === productId) >= 0);

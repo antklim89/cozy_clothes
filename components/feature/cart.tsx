@@ -1,5 +1,8 @@
 'use client';
-import { Button, Card, CardContent, CardFooter, CardHeader, Input, Label } from '@/components/ui';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { qtySchema } from '@/lib/schemas';
 import { useCartStore } from '@/lib/store';
 import { calculatePrice, cn, getPrice } from '@/lib/utils';
