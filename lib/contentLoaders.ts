@@ -1,11 +1,12 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { cache } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
 import { heroSchema, productSchema, testimonialSchema } from './schemas';
 
 const BASE_PATH = './public/content';
 
-async function baseOneFileLoader<T extends ZodRawShape>(filePath: string, schema: ZodObject<T>) {
+const baseOneFileLoader = cache(async <T extends ZodRawShape>(filePath: string, schema: ZodObject<T>) => {
   try {
     const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
     const contentJson = JSON.parse(contentString);
@@ -15,9 +16,9 @@ async function baseOneFileLoader<T extends ZodRawShape>(filePath: string, schema
     console.error(`Load Error ${filePath}:\n`, error);
     throw error;
   }
-}
+});
 
-async function baseManyFilesLoader<T extends ZodRawShape>(filesPath: string, schema: ZodObject<T>) {
+const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: string, schema: ZodObject<T>) => {
   try {
     const fileNames = await fs.readdir(path.resolve(BASE_PATH, filesPath));
     const results = await Promise.all(
@@ -38,20 +39,20 @@ async function baseManyFilesLoader<T extends ZodRawShape>(filesPath: string, sch
     console.error(error);
     throw Error(`Load Error ${filesPath}.`);
   }
-}
+});
 
-export function heroLoader() {
+export const heroLoader = cache(() => {
   return baseOneFileLoader('hero', heroSchema);
-}
+});
 
-export function productsLoader() {
+export const productsLoader = cache(() => {
   return baseManyFilesLoader('products', productSchema);
-}
+});
 
-export function testimonialsLoader() {
+export const testimonialsLoader = cache(() => {
   return baseManyFilesLoader('testimonials', testimonialSchema);
-}
+});
 
-export function productLoader(id: string) {
+export const productLoader = cache((id: string) => {
   return baseOneFileLoader(`products/${id}`, productSchema);
-}
+});
