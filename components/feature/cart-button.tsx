@@ -9,7 +9,7 @@ export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
   const cartItemsLength = useCartStore((state) => state.cartItems.length);
 
   return (
-    <Link href="/cart" {...props} className={cn('flex flex-nowrap', className)}>
+    <Link href="/checkout" {...props} className={cn('flex flex-nowrap', className)}>
       <ShoppingCart />
       <p className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">{cartItemsLength}</p>
     </Link>
