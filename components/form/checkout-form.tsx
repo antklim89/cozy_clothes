@@ -1,70 +1,205 @@
 'use client';
-import { FormItem } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import type { ComponentProps, MutableRefObject } from 'react';
-import { useIMask } from 'react-imask';
+import { zodResolver } from '@hookform/resolvers/zod';
+import IMask from 'imask';
+import type { ComponentProps } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Button } from '../ui/button';
 
 type Props = ComponentProps<'form'>;
 
+const minMsg = (name: string, numb: number) => `${name} must be at least ${numb} characters.`;
+const maxMsg = (name: string, numb: number) => `${name} must be less than ${numb} characters.`;
+
+const formSchema = z.object({
+  firstName: z
+    .string()
+    .min(2, { message: minMsg('First name', 2) })
+    .max(100, { message: maxMsg('First name', 100) }),
+  lastName: z
+    .string()
+    .min(2, { message: minMsg('Last name', 2) })
+    .max(100, { message: maxMsg('Last name', 100) }),
+  email: z
+    .string()
+    .email()
+    .min(2, { message: minMsg('E-mail', 2) })
+    .max(100, { message: maxMsg('E-mail', 100) }),
+  phone: z
+    .string()
+    .min(2, { message: minMsg('Phone number', 2) })
+    .max(100, { message: maxMsg('Phone number', 100) }),
+  country: z
+    .string()
+    .min(2, { message: minMsg('Country', 2) })
+    .max(100, { message: maxMsg('Country', 100) }),
+  city: z
+    .string()
+    .min(2, { message: minMsg('City', 2) })
+    .max(100, { message: maxMsg('City', 100) }),
+  postCode: z
+    .string()
+    .min(6, { message: minMsg('Post code', 6) })
+    .max(6, { message: maxMsg('Post code', 6) }),
+  address: z
+    .string()
+    .min(5, { message: minMsg('Address', 5) })
+    .max(500, { message: maxMsg('Address', 500) }),
+});
+
 export const CheckoutForm = ({ className, ...props }: Props) => {
-  const { ref, value, setValue } = useIMask({ mask: '+{55} (000) 000-00-00' });
+  const cartItemsLength = useCartStore((store) => store.cartItems.length);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      country: '',
+      address: '',
+      city: '',
+      postCode: '',
+    },
+  });
+
+  const handleCartSubmit = form.handleSubmit((_values) => {
+    // TODO: process
+  });
 
   return (
-    <form {...props} className={cn('flex flex-col gap-4', className)}>
-      <h3 className="text-xl font-bold text-center">Personal info</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <FormItem>
-          <Label htmlFor="color">First Name</Label>
-          <Input placeholder="First Name" type="text" minLength={2} maxLength={100} />
-        </FormItem>
-
-        <FormItem>
-          <Label htmlFor="color">Last Name</Label>
-          <Input placeholder="Last Name" type="text" minLength={2} maxLength={100} />
-        </FormItem>
-
-        <FormItem>
-          <Label htmlFor="color">Email Address</Label>
-          <Input placeholder="example@mail.ru" type="email" maxLength={100} />
-        </FormItem>
-
-        <FormItem>
-          <Label htmlFor="color">Phone number</Label>
-          <Input
-            ref={ref as MutableRefObject<HTMLInputElement>}
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-            placeholder="+55 (555) 555-55-55"
-            type="tel"
+    <Form {...form}>
+      <form {...props} className={cn('flex flex-col gap-4', className)}>
+        <h3 className="text-xl font-bold text-center">Personal info</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="First Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </FormItem>
-      </div>
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Last Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email Address</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email Address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    onChange={(e) => field.onChange(IMask.pipe(e.currentTarget.value, { mask: '(000) 000-00-00' }))}
+                    placeholder="(555) 555-55-55"
+                    type="tel"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-      <h3 className="text-xl font-bold text-center">Shipping info</h3>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
-        <FormItem>
-          <Label htmlFor="color">Country</Label>
-          <Input placeholder="England" type="text" minLength={2} maxLength={100} />
-        </FormItem>
+        <h3 className="text-xl font-bold text-center">Shipping info</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+          <FormField
+            control={form.control}
+            name="country"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Country</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="England" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormItem>
-          <Label htmlFor="color">City</Label>
-          <Input placeholder="London" type="text" minLength={2} maxLength={100} />
-        </FormItem>
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>City</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="London" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormItem>
-          <Label htmlFor="color">Post Code</Label>
-          <Input placeholder="555555" type="number" minLength={6} maxLength={6} />
-        </FormItem>
+          <FormField
+            control={form.control}
+            name="postCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Post Code</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="555555" type="number" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormItem className="col-auto lg:col-span-3">
-          <Label htmlFor="color">Address</Label>
-          <Input placeholder="1234 Avenue" type="text" minLength={5} maxLength={1000} />
-        </FormItem>
-      </div>
-    </form>
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="col-auto lg:col-span-3">
+                <FormLabel>Address</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="1234 Avenue" type="text" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <Button onClick={handleCartSubmit} className="w-full" disabled={cartItemsLength <= 0}>
+          Checkout
+        </Button>
+      </form>
+    </Form>
   );
 };
 

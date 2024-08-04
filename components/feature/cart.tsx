@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { qtySchema } from '@/lib/schemas';
@@ -91,11 +91,6 @@ export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
               Total price: <br /> <span className="text-3xl">{getPrice({ price: totalPrice })}</span>
             </p>
           </CardContent>
-          <CardFooter>
-            <Button className="w-full" disabled={cartItems.length === 0}>
-              Checkout
-            </Button>
-          </CardFooter>
         </Card>
       </aside>
     </section>
