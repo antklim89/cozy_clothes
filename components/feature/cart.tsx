@@ -5,21 +5,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { qtySchema } from '@/lib/schemas';
 import { useCartStore } from '@/lib/store';
-import { calculatePrice, cn, getPrice } from '@/lib/utils';
+import { cn, getPrice } from '@/lib/utils';
 import { Trash } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { CheckoutForm } from '../form/checkout-form';
+import { CartCheckoutTotal } from './cart-checkout-total';
 
 export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
   const cartItems = useCartStore((store) => store.cartItems);
   const updateCart = useCartStore((store) => store.updateCart);
   const removeFromCart = useCartStore((store) => store.removeFromCart);
-
-  const totalPrice = cartItems.reduce(
-    (total, { qty, product: { price, discount } }) => total + calculatePrice({ qty, price, discount }),
-    0,
-  );
 
   return (
     <section {...props} className={cn('container grid gap-4 grid-cols-1 md:grid-cols-[2fr_1fr]', className)}>
@@ -82,16 +78,7 @@ export const Cart = ({ className, ...props }: ComponentProps<'section'>) => {
           ))}
         </div>
 
-        <Card>
-          <CardHeader>
-            <h2>Total Items: ( {cartItems.length} )</h2>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Total price: <br /> <span className="text-3xl">{getPrice({ price: totalPrice })}</span>
-            </p>
-          </CardContent>
-        </Card>
+        <CartCheckoutTotal />
       </aside>
     </section>
   );
