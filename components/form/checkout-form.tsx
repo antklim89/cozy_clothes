@@ -1,6 +1,8 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +10,6 @@ import IMask from 'imask';
 import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Button } from '../ui/button';
 
 type Props = ComponentProps<'form'>;
 
@@ -49,6 +50,11 @@ const formSchema = z.object({
     .string()
     .min(5, { message: minMsg('Address', 5) })
     .max(500, { message: maxMsg('Address', 500) }),
+  additional: z
+    .string()
+    .min(0, { message: minMsg('Additional info', 5) })
+    .max(5000, { message: maxMsg('Additional info', 5000) })
+    .optional(),
 });
 
 export const CheckoutForm = ({ className, ...props }: Props) => {
@@ -194,6 +200,25 @@ export const CheckoutForm = ({ className, ...props }: Props) => {
             )}
           />
         </div>
+
+        <h3 className="text-xl font-bold text-center">Additional info</h3>
+        <FormField
+          control={form.control}
+          name="additional"
+          render={({ field }) => (
+            <FormItem className="col-auto lg:col-span-3">
+              <FormControl>
+                <Textarea
+                  {...field}
+                  rows={10}
+                  className="resize-none"
+                  placeholder="Write additional information about the order here"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button onClick={handleCartSubmit} className="w-full" disabled={cartItemsLength <= 0}>
           Checkout
