@@ -1,6 +1,6 @@
-import CartCheckoutList from '@/components/feature/cart-checkout-list';
+import { CartCheckoutList } from '@/components/feature/cart-checkout-list';
 import { CartCheckoutTotal } from '@/components/feature/cart-checkout-total';
-import CheckoutForm from '@/components/form/checkout-form';
+import { CheckoutForm } from '@/components/form/checkout-form';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

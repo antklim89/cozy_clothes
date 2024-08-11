@@ -1,5 +1,5 @@
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
-import ProductsList from '@/components/feature/products-list';
+import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
