@@ -39,5 +39,3 @@ export const Hero = async () => {
     </section>
   );
 };
-
-export default Hero;

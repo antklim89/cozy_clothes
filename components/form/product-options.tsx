@@ -77,5 +77,3 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
     </form>
   );
 };
-
-export default ProductOptions;

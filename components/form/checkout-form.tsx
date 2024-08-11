@@ -227,5 +227,3 @@ export const CheckoutForm = ({ className, ...props }: Props) => {
     </Form>
   );
 };
-
-export default CheckoutForm;

@@ -39,5 +39,3 @@ export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
     </HoverCard>
   );
 };
-
-export default CartButton;

@@ -1,7 +1,7 @@
 import aboutImage from '@/public/about_image.jpg';
 import Image from 'next/image';
 
-function About() {
+export const About = () => {
   return (
     <section className="prose container my-8">
       <h1>About Us</h1>
@@ -109,6 +109,4 @@ function About() {
       </div>
     </section>
   );
-}
-
-export default About;
+};

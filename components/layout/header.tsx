@@ -1,4 +1,4 @@
-import CartButton from '@/components/feature/cart-button';
+import { CartButton } from '@/components/feature/cart-button';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -91,5 +91,3 @@ export const Header = async () => {
     </header>
   );
 };
-
-export default Header;

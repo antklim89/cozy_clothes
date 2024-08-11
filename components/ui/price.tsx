@@ -18,5 +18,3 @@ export const Price = ({ price, discount = 0 }: Props) => {
     </p>
   );
 };
-
-export default Price;

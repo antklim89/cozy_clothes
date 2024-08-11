@@ -1,7 +1,7 @@
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
-import ProductCard from './product-card';
+import { ProductCard } from './product-card';
 
 interface Props extends ComponentProps<'div'> {
   products: ProductType[];
@@ -22,5 +22,3 @@ export const ProductsList = async ({ products, className, ...props }: Props) => 
     </div>
   );
 };
-
-export default ProductsList;

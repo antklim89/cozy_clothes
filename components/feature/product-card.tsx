@@ -1,4 +1,4 @@
-import Price from '@/components/ui/price';
+import { Price } from '@/components/ui/price';
 import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
@@ -41,5 +41,3 @@ export const ProductCard = async ({ product }: Props) => {
     </section>
   );
 };
-
-export default ProductCard;

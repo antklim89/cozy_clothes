@@ -72,5 +72,3 @@ export const CartCheckoutList = ({ className, ...props }: ComponentProps<'sectio
     </section>
   );
 };
-
-export default CartCheckoutList;
