@@ -12,7 +12,7 @@ export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
 
   return (
     <HoverCard>
-      <HoverCardTrigger>
+      <HoverCardTrigger asChild>
         <Link href="/checkout" {...props} className={cn('flex flex-nowrap', className)}>
           <ShoppingCart />
           <p className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">{cartItems.length}</p>
