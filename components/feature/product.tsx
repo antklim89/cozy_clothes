@@ -16,7 +16,7 @@ interface Props extends ComponentProps<'div'> {
 export const Product = async ({ product, className, ...props }: Props) => {
   const blurDataURLs = await Promise.all(product.images.map((image) => createBlurDataURL(image)));
   return (
-    <div {...props} className={cn('container flex flex-col md:flex-row', className)}>
+    <div {...props} className={cn('container grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4', className)}>
       <section className="border px-4 flex-[2_1_0]">
         <Carousel>
           <CarouselContent>
