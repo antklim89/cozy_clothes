@@ -30,6 +30,14 @@ export const testimonialSchema = z.object({
   name: z.string(),
 });
 
+export const contactSchema = z.object({
+  id: z.string(),
+  hidden: z.coerce.boolean(),
+  title: z.string(),
+  email: z.string().email(),
+  phone: z.string(),
+});
+
 export const qtySchema = z.coerce
   .number()
   .min(1)
