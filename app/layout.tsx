@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import '@/styles/main.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
 import Footer from '@/components/layout/footer';
