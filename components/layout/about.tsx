@@ -41,7 +41,12 @@ function About() {
         aliquid voluptate veniam sed pariatur vitae placeat obcaecati, ipsum nemo ea porro, cum at recusandae.
       </p>
 
-      <Image alt="About" src={aboutImage} className="w-full h-80 object-cover object-center rounded-3xl" />
+      <Image
+        alt="About"
+        src={aboutImage}
+        className="w-full h-80 object-cover object-center rounded-3xl"
+        placeholder="blur"
+      />
 
       <h2>Our values</h2>
       <p>

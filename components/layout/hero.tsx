@@ -1,11 +1,13 @@
 import { Button } from '@/components/ui/button';
 import { heroLoader } from '@/lib/contentLoaders';
+import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import Image from 'next/image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 
 export const Hero = async () => {
   const { imagePreview, text } = await heroLoader();
+  const blurDataURL = await createBlurDataURL(imagePreview);
 
   return (
     <section className="bg-slate-100">
@@ -29,6 +31,8 @@ export const Hero = async () => {
             alt="hero"
             width={480}
             height={720}
+            blurDataURL={blurDataURL}
+            placeholder="blur"
           />
         </div>
       </div>

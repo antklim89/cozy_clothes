@@ -1,4 +1,5 @@
 import Price from '@/components/ui/price';
+import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +9,9 @@ interface Props {
   product: ProductType;
 }
 
-export const ProductCard = ({ product }: Props) => {
+export const ProductCard = async ({ product }: Props) => {
+  const blurDataURL = await createBlurDataURL(product.imagePreview);
+
   return (
     <section key={product.id} className="group relative">
       <InCartIcon productId={product.id} />
@@ -18,6 +21,8 @@ export const ProductCard = ({ product }: Props) => {
           height={400}
           alt={product.title}
           src={product.imagePreview}
+          blurDataURL={blurDataURL}
+          placeholder="blur"
           className="h-72 w-full object-cover object-center lg:h-80 lg:w-full"
         />
       </div>
