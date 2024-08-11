@@ -9,7 +9,7 @@
     "dev:cms-proxy": "decap-server",
     "dev:typecheck": "yarn typecheck",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start",
     "typecheck": "tsc --noEmit -w --preserveWatchOutput",
     "lint": "biome check --write",
     "docker:dev": "docker compose -f docker-compose.dev.yml up",
