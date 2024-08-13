@@ -3,9 +3,9 @@ import { FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { useSearchParamsState } from '@/lib/hooks';
 import { type ProductType, qtySchema } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { ComponentProps } from 'react';
 
 type Props = ComponentProps<'form'> & {
@@ -13,26 +13,16 @@ type Props = ComponentProps<'form'> & {
 };
 
 export const ProductOptions = ({ options, className, ...props }: Props) => {
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
-  const pathname = usePathname();
-
-  const handleValueChange = (field: string, value: string | number) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set(field, value.toString());
-    replace(`${pathname}?${newSearchParams}`, { scroll: false });
-  };
+  const [size, setSize] = useSearchParamsState('size', options?.sizes?.[0]);
+  const [color, setColor] = useSearchParamsState('color', options?.colors?.[0]);
+  const [qty, setQty] = useSearchParamsState('qty', '1');
 
   return (
     <form {...props} className={cn('flex flex-col gap-4', className)}>
       {options.sizes && (
         <FormItem>
           <Label htmlFor="size">Size:</Label>
-          <ToggleGroup
-            type="single"
-            value={searchParams.get('size') ?? options.sizes[0]}
-            onValueChange={(value) => handleValueChange('size', value)}
-          >
+          <ToggleGroup type="single" value={size} onValueChange={(value) => setSize(value)}>
             {options.sizes.map((size) => (
               <ToggleGroupItem key={size} value={size}>
                 {size}
@@ -45,11 +35,7 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
       {options.colors && (
         <FormItem>
           <Label htmlFor="color">Color:</Label>
-          <ToggleGroup
-            type="single"
-            value={searchParams.get('color') ?? options.colors[0]}
-            onValueChange={(value) => handleValueChange('color', value)}
-          >
+          <ToggleGroup type="single" value={color} onValueChange={(value) => setColor(value)}>
             {options.colors.map((color) => (
               <ToggleGroupItem key={color} value={color} className="flex items-center relative overflow-hidden">
                 <div
@@ -69,9 +55,9 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
           type="number"
           min={1}
           max={100}
-          onChange={(e) => handleValueChange('qty', e.target.value)}
-          onBlur={(e) => handleValueChange('qty', qtySchema.parse(e.target.valueAsNumber))}
-          value={searchParams.get('qty') ?? '1'}
+          onChange={(e) => setQty(e.target.value)}
+          onBlur={(e) => setQty(qtySchema.parse(e.target.valueAsNumber))}
+          value={qty}
         />
       </FormItem>
     </form>
