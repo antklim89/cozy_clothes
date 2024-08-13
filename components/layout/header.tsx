@@ -24,6 +24,10 @@ const links = [
     href: '/about',
     label: 'About',
   },
+  {
+    href: '/search',
+    label: 'Search',
+  },
 ] as const;
 
 export const Header = async () => {
