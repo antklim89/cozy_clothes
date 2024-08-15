@@ -7,7 +7,7 @@ interface Props extends ComponentProps<'div'> {
   products: ProductType[];
 }
 
-export const ProductsList = async ({ products, className, ...props }: Props) => {
+export const ProductsList = ({ products, className, ...props }: Props) => {
   return (
     <div
       {...props}
