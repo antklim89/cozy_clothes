@@ -1,16 +1,18 @@
 import { Price } from '@/components/ui/price';
-import { createBlurDataURL } from '@/lib/createBlurDataURL';
+import { defaultBlurDataUrl } from '@/constants';
 import type { ProductType } from '@/lib/schemas';
 import Image from 'next/image';
 import Link from 'next/link';
+import { use } from 'react';
 import { InCartIcon } from './in-cart-icon';
 
 interface Props {
   product: ProductType;
 }
 
-export const ProductCard = async ({ product }: Props) => {
-  const blurDataURL = await createBlurDataURL(product.imagePreview);
+export const ProductCard = ({ product }: Props) => {
+  const imported = typeof window !== 'undefined' ? null : use(import('@/lib/createBlurDataURL'));
+  const blurDataURL = imported ? use(imported.createBlurDataURL(product.imagePreview)) : defaultBlurDataUrl;
 
   return (
     <section key={product.id} className="group relative">
