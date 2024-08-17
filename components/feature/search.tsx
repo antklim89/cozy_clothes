@@ -2,49 +2,28 @@
 import { PRODUCTS_PER_PAGE } from '@/constants';
 import { useSearchParamsState } from '@/lib/hooks';
 import type { ProductType } from '@/lib/schemas';
-import flexsearch from 'flexsearch';
+import Fuse from 'fuse.js';
 import { SearchIcon } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Input } from '../ui/input';
-import { Skeleton } from '../ui/skeleton';
 import { ProductsList } from './products-list';
 
 export const Search = ({ products }: { products: ProductType[] }) => {
-  const [index, setIndex] = useState<flexsearch.Document<unknown, false> | null>(null);
   const [searchQuery, setSearchQuery] = useSearchParamsState('s', '');
 
-  useEffect(() => {
-    const index = new flexsearch.Document<ProductType>({
-      document: {
-        id: 'id',
-        index: ['description', 'title'] satisfies (keyof ProductType)[],
-      },
-    });
+  const fuse = useMemo(
+    () =>
+      new Fuse(products, {
+        includeScore: true,
+        keys: ['title', 'description'] satisfies (keyof ProductType)[],
+      }),
+    [products],
+  );
 
-    for (const product of products) index.add(product);
-
-    setIndex(index);
-  }, [products]);
-
-  const foundProducts = useMemo(() => {
-    if (!index) return null;
-
-    const searchResult = index.search(searchQuery, PRODUCTS_PER_PAGE).reduce((acc, i) => {
-      acc.push(...i.result);
-      return acc;
-    }, [] as flexsearch.Id[]);
-
-    const result = products.filter((i) => searchResult.includes(i.id));
-    return result;
-  }, [searchQuery, products, index]);
-
-  if (!foundProducts) {
-    return (
-      <div className="container my-8">
-        <Skeleton className="w-full h-[40px]" />
-      </div>
-    );
-  }
+  const foundProducts = useMemo(
+    () => fuse.search(searchQuery, { limit: PRODUCTS_PER_PAGE }).map((i) => i.item),
+    [fuse.search, searchQuery],
+  );
 
   return (
     <section className="container my-8">
