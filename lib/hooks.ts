@@ -1,22 +1,16 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export function useSearchParamsState(query: string, defaultValue: string | number = '') {
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const [search, setSearch] = useState(searchParams.get(query) ?? defaultValue);
   const pathname = usePathname();
 
-  const setSearchParamsState = (value: string | number) => {
-    const newSearchParams = new URLSearchParams(searchParams);
-    const valueStr = value.toString();
-    if (valueStr.trim().length === 0) {
-      newSearchParams.delete(query);
-    } else {
-      newSearchParams.set(query, valueStr);
-    }
-    replace(`${pathname}?${newSearchParams}`, { scroll: false });
-  };
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    params.set(query, search.toString());
+    window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
+  }, [search, pathname, query, searchParams]);
 
-  const searchParamsState = searchParams.get(query) ?? defaultValue.toString();
-
-  return [searchParamsState, setSearchParamsState] as const;
+  return [search.toString(), setSearch] as const;
 }
