@@ -11,7 +11,13 @@ const nextConfig = {
   },
 };
 
-const decapCmsJs = await fs.promises.readFile(path.resolve('./node_modules/decap-cms/dist/decap-cms.js'), 'utf8');
-await fs.promises.writeFile(path.resolve('./public/admin/decap-cms.js'), decapCmsJs);
+const decapCmsSrc = path.resolve('./node_modules/decap-cms/dist/decap-cms.js');
+const decapCmsDestination = path.resolve('./public/admin/decap-cms.js');
+
+try {
+  await fs.promises.access(decapCmsDestination, fs.constants.F_OK);
+} catch {
+  await fs.promises.copyFile(decapCmsSrc, decapCmsDestination);
+}
 
 export default nextConfig;
