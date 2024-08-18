@@ -1,11 +1,20 @@
-version: "3.8"
 
 services:
   client:
+    profiles: [prod]
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    container_name: cozy_clothes
     ports:
       - "${PORT:-3000}:3000"
+
+  client-dev:
+    extends: client
+    profiles: [dev]
+    build:
+      target: base
+    command: ["yarn", "dev"]
+    volumes:
+      - ./:/app
+    user: "1000:1000"
