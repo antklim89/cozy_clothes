@@ -31,6 +31,9 @@ export const Search = ({ products }: { products: ProductType[] }) => {
         <Input onChange={(e) => setSearchQuery(e.target.value)} value={searchQuery} placeholder="Search..." />
         <SearchIcon className="absolute top-1/2 -translate-y-1/2 right-4" />
       </div>
+      {foundProducts.length === 0 ? (
+        <p className="text-center text-xl text-gray-500 mt-20">No products found.</p>
+      ) : null}
       <ProductsList products={foundProducts} className="my-8" />
     </section>
   );
