@@ -30,7 +30,7 @@ const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: strin
           return contentJson;
         } catch (error) {
           console.error(error);
-          throw new Error(`Load Error ${fileName}/${filesPath}.`);
+          throw new Error(`Load Error ${filesPath}/${fileName}.`);
         }
       }),
     );
