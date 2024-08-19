@@ -18,7 +18,13 @@ export const productSchema = z.object({
   category: z.string(),
   options: z.object({
     sizes: z.array(z.string()).nullish(),
-    colors: z.array(z.string()).nullish(),
+    colors: z
+      .object({
+        name: z.string(),
+        code: z.string(),
+      })
+      .array()
+      .nullish(),
   }),
 });
 

@@ -53,6 +53,9 @@ collections:
           - label: Colors
             name: colors
             widget: list
+            fields:
+              - { label: Name, name: name, widget: string, required: true }
+              - { label: Code, name: code, widget: string, required: true }
     
 # ==========
 # CONTACTS

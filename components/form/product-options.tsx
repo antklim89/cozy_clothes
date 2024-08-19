@@ -14,7 +14,7 @@ type Props = ComponentProps<'form'> & {
 
 export const ProductOptions = ({ options, className, ...props }: Props) => {
   const [size, setSize] = useSearchParamsState('size', options?.sizes?.[0]);
-  const [color, setColor] = useSearchParamsState('color', options?.colors?.[0]);
+  const [color, setColor] = useSearchParamsState('color', options?.colors?.[0].name);
   const [qty, setQty] = useSearchParamsState('qty', '1');
 
   return (
@@ -35,14 +35,14 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
       {options.colors && (
         <FormItem>
           <Label htmlFor="color">Color:</Label>
-          <ToggleGroup type="single" value={color} onValueChange={(value) => setColor(value)}>
-            {options.colors.map((color) => (
-              <ToggleGroupItem key={color} value={color} className="flex items-center relative overflow-hidden">
+          <ToggleGroup variant={'outline'} type="single" value={color} onValueChange={(value) => setColor(value)}>
+            {options.colors.map(({ code, name }) => (
+              <ToggleGroupItem key={name} value={name} className="flex items-center relative overflow-hidden">
                 <div
                   className="absolute left-0 right-0 bottom-0 top-[calc(100%-10px)] opacity-80"
-                  style={{ backgroundColor: color }}
+                  style={{ backgroundColor: code }}
                 />
-                {color}
+                {name}
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
