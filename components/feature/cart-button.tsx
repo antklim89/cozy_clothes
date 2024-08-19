@@ -27,8 +27,8 @@ export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
                   {product.title} x {qty}
                 </p>
                 <div className="flex gap-2">
-                  <span className="text-sm text-gray-500 border p-1 uppercase">{size}</span>
-                  <span className="text-sm text-gray-500 border p-1 uppercase">{color}</span>
+                  {size && <span className="text-sm text-gray-500 border p-1 uppercase">{size}</span>}
+                  {color && <span className="text-sm text-gray-500 border p-1 uppercase">{color}</span>}
                 </div>
                 <Link href={`/product/${product.id}?qty=${qty}&size=${size}&color=${color}`}>
                   <span aria-hidden="true" className="absolute inset-0" />
