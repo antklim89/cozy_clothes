@@ -1,0 +1,18 @@
+{
+  "discount": 52,
+  "price": 42189,
+  "hidden": false,
+  "imagePreview": "/images/products/product-14.jpg",
+  "title": "Awesome Metal Gloves",
+  "images": [
+    "/images/products/product-2.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-12-10T15:14:33.061Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Dress",
+  "options": {}
+}

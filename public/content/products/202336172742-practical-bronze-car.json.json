@@ -1,0 +1,22 @@
+{
+  "discount": 57,
+  "price": 12600,
+  "hidden": false,
+  "imagePreview": "/images/products/product-14.jpg",
+  "title": "Practical Bronze Car",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-04-22T14:27:42.930Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Sweater",
+  "options": {}
+}

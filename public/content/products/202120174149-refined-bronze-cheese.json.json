@@ -1,0 +1,27 @@
+{
+  "discount": 83,
+  "price": 59034,
+  "hidden": false,
+  "imagePreview": "/images/products/product-9.jpg",
+  "title": "Refined Bronze Cheese",
+  "images": [
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-03-21T14:41:49.144Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "Sweater",
+  "options": {
+    "sizes": [
+      "s",
+      "xl",
+      "xxl",
+      "xxxl"
+    ]
+  }
+}

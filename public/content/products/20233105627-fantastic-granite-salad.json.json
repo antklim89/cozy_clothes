@@ -1,0 +1,58 @@
+{
+  "discount": 0,
+  "price": 37513,
+  "hidden": false,
+  "imagePreview": "/images/products/product-10.jpg",
+  "title": "Fantastic Granite Salad",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg"
+  ],
+  "createdAt": "2023-04-09T21:56:27.615Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "T-shirt",
+  "options": {
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "discount": 0,
+  "price": 70220,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Ergonomic Wooden Shoes",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg"
+  ],
+  "createdAt": "2023-01-29T13:08:23.539Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Sweater",
+  "options": {}
+}

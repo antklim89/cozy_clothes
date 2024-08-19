@@ -1,0 +1,58 @@
+{
+  "discount": 42,
+  "price": 63865,
+  "hidden": false,
+  "imagePreview": "/images/products/product-10.jpg",
+  "title": "Bespoke Soft Chips",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-10-05T14:03:20.085Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

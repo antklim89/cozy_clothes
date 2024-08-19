@@ -1,0 +1,45 @@
+{
+  "discount": 0,
+  "price": 41713,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Ergonomic Wooden Salad",
+  "images": [
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2022-01-25T02:19:11.432Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "Joggers",
+  "options": {
+    "colors": [
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

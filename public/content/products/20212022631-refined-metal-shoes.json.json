@@ -1,0 +1,20 @@
+{
+  "discount": 0,
+  "price": 4445,
+  "hidden": false,
+  "imagePreview": "/images/products/product-8.jpg",
+  "title": "Refined Metal Shoes",
+  "images": [
+    "/images/products/product-12.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2021-03-20T23:26:31.066Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "Skirt",
+  "options": {}
+}

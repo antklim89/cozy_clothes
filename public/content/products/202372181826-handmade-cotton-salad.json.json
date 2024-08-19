@@ -1,0 +1,19 @@
+{
+  "discount": 80,
+  "price": 59502,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Handmade Cotton Salad",
+  "images": [
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-08-22T15:18:26.192Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Hoodie",
+  "options": {}
+}

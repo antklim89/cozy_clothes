@@ -1,0 +1,58 @@
+{
+  "discount": 56,
+  "price": 40904,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Practical Cotton Salad",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-12-22T12:57:17.316Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

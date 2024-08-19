@@ -1,0 +1,21 @@
+{
+  "discount": 0,
+  "price": 31848,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Licensed Rubber Towels",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-12-07T13:46:29.681Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Joggers",
+  "options": {}
+}

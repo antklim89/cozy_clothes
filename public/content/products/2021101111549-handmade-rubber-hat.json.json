@@ -1,0 +1,67 @@
+{
+  "discount": 0,
+  "price": 73197,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Handmade Rubber Hat",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-11-15T08:15:49.859Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "l",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

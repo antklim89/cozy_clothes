@@ -1,0 +1,19 @@
+{
+  "discount": 28,
+  "price": 68457,
+  "hidden": false,
+  "imagePreview": "/images/products/product-15.jpg",
+  "title": "Rustic Concrete Gloves",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-3.jpg"
+  ],
+  "createdAt": "2021-07-15T04:31:33.198Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Joggers",
+  "options": {}
+}

@@ -1,0 +1,66 @@
+{
+  "discount": 0,
+  "price": 61336,
+  "hidden": false,
+  "imagePreview": "/images/products/product-10.jpg",
+  "title": "Handmade Bronze Cheese",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2020-10-21T13:29:10.109Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Dress",
+  "options": {
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

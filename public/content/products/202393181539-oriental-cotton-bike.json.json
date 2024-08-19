@@ -1,0 +1,30 @@
+{
+  "discount": 0,
+  "price": 9174,
+  "hidden": false,
+  "imagePreview": "/images/products/product-1.jpg",
+  "title": "Oriental Cotton Bike",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-10-04T15:15:39.149Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "l",
+      "xl"
+    ]
+  }
+}

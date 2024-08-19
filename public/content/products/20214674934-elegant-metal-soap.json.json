@@ -1,0 +1,19 @@
+{
+  "discount": 67,
+  "price": 36991,
+  "hidden": false,
+  "imagePreview": "/images/products/product-10.jpg",
+  "title": "Elegant Metal Soap",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-05-22T04:49:34.864Z",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "category": "Dress",
+  "options": {}
+}

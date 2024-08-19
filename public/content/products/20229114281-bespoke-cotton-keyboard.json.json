@@ -1,0 +1,42 @@
+{
+  "discount": 55,
+  "price": 46682,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Bespoke Cotton Keyboard",
+  "images": [
+    "/images/products/product-12.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2022-10-31T11:28:01.489Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Coat",
+  "options": {
+    "sizes": [
+      "sx",
+      "l",
+      "xl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      }
+    ]
+  }
+}

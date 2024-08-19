@@ -1,0 +1,24 @@
+{
+  "discount": 16,
+  "price": 22739,
+  "hidden": false,
+  "imagePreview": "/images/products/product-9.jpg",
+  "title": "Practical Cotton Shirt",
+  "images": [
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-6.jpg"
+  ],
+  "createdAt": "2020-02-05T20:07:50.425Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Coat",
+  "options": {
+    "sizes": [
+      "m",
+      "xxxl"
+    ]
+  }
+}

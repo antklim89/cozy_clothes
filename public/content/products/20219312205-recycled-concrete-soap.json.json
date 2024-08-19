@@ -1,0 +1,21 @@
+{
+  "discount": 23,
+  "price": 22086,
+  "hidden": false,
+  "imagePreview": "/images/products/product-15.jpg",
+  "title": "Recycled Concrete Soap",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-10-27T09:20:05.311Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Sweater",
+  "options": {}
+}

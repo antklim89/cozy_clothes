@@ -1,0 +1,61 @@
+{
+  "discount": 0,
+  "price": 57811,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Small Steel Salad",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-01-15T19:18:49.431Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Sweater",
+  "options": {
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

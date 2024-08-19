@@ -1,0 +1,55 @@
+{
+  "discount": 0,
+  "price": 26931,
+  "hidden": false,
+  "imagePreview": "/images/products/product-1.jpg",
+  "title": "Fantastic Cotton Car",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2023-02-09T20:25:57.520Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "m",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

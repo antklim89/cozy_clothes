@@ -1,0 +1,58 @@
+{
+  "discount": 61,
+  "price": 39349,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Rustic Fresh Chair",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2022-04-08T03:48:14.073Z",
+  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "l",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

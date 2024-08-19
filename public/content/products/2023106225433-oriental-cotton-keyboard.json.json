@@ -1,0 +1,50 @@
+{
+  "discount": 47,
+  "price": 54833,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Oriental Cotton Keyboard",
+  "images": [
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-11-25T19:54:33.175Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Skirt",
+  "options": {
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "discount": 13,
+  "price": 29449,
+  "hidden": false,
+  "imagePreview": "/images/products/product-9.jpg",
+  "title": "Sleek Wooden Car",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2020-02-10T02:39:00.389Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Hoodie",
+  "options": {
+    "colors": [
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

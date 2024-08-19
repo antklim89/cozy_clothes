@@ -1,0 +1,21 @@
+{
+  "discount": 63,
+  "price": 76541,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Tasty Rubber Soap",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2022-12-17T18:11:16.200Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Sweater",
+  "options": {}
+}

@@ -1,0 +1,43 @@
+{
+  "discount": 57,
+  "price": 63373,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Rustic Fresh Chicken",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-4.jpg"
+  ],
+  "createdAt": "2023-08-03T23:53:13.700Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Dress",
+  "options": {
+    "colors": [
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "discount": 0,
+  "price": 63570,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Licensed Frozen Chips",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-12-26T10:50:50.375Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Joggers",
+  "options": {
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

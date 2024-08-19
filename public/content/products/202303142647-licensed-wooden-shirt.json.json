@@ -1,0 +1,56 @@
+{
+  "discount": 0,
+  "price": 29096,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Licensed Wooden Shirt",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-01-18T11:26:47.516Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

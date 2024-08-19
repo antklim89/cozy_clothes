@@ -1,0 +1,30 @@
+{
+  "discount": 32,
+  "price": 67240,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Practical Frozen Keyboard",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-10-02T08:53:47.593Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Dress",
+  "options": {
+    "sizes": [
+      "sx",
+      "l",
+      "xl",
+      "xxxl"
+    ]
+  }
+}

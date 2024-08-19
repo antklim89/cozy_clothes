@@ -1,0 +1,22 @@
+{
+  "discount": 0,
+  "price": 76022,
+  "hidden": false,
+  "imagePreview": "/images/products/product-15.jpg",
+  "title": "Generic Wooden Pizza",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-11-07T02:02:55.098Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Jeans",
+  "options": {}
+}

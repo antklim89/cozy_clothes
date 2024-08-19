@@ -1,0 +1,54 @@
+{
+  "discount": 0,
+  "price": 70271,
+  "hidden": false,
+  "imagePreview": "/images/products/product-6.jpg",
+  "title": "Small Cotton Bacon",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-08-14T00:14:55.956Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "m",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

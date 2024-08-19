@@ -1,0 +1,42 @@
+{
+  "discount": 0,
+  "price": 42493,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Practical Plastic Computer",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg"
+  ],
+  "createdAt": "2022-05-08T11:55:38.986Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Sweater",
+  "options": {
+    "sizes": [
+      "s",
+      "xl",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      }
+    ]
+  }
+}

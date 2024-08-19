@@ -1,0 +1,42 @@
+{
+  "discount": 0,
+  "price": 23620,
+  "hidden": false,
+  "imagePreview": "/images/products/product-12.jpg",
+  "title": "Luxurious Frozen Pizza",
+  "images": [
+    "/images/products/product-14.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-04-21T04:54:38.255Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "T-shirt",
+  "options": {
+    "sizes": [
+      "l",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      }
+    ]
+  }
+}

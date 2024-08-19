@@ -1,0 +1,51 @@
+{
+  "discount": 31,
+  "price": 81609,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Handmade Plastic Shirt",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-09-28T05:12:23.824Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "s",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

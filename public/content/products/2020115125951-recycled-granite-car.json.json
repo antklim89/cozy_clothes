@@ -1,0 +1,51 @@
+{
+  "discount": 82,
+  "price": 7833,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Recycled Granite Car",
+  "images": [
+    "/images/products/product-13.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2020-12-18T09:59:51.747Z",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "category": "Suit",
+  "options": {
+    "sizes": [
+      "s",
+      "l",
+      "xl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

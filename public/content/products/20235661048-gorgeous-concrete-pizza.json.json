@@ -1,0 +1,66 @@
+{
+  "discount": 81,
+  "price": 46636,
+  "hidden": false,
+  "imagePreview": "/images/products/product-15.jpg",
+  "title": "Gorgeous Concrete Pizza",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2023-06-17T03:10:48.577Z",
+  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "m",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

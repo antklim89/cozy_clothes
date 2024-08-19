@@ -1,0 +1,28 @@
+{
+  "discount": 0,
+  "price": 68344,
+  "hidden": false,
+  "imagePreview": "/images/products/product-9.jpg",
+  "title": "Unbranded Plastic Hat",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2020-04-23T13:49:04.753Z",
+  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "m",
+      "xl"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "discount": 0,
+  "price": 75063,
+  "hidden": false,
+  "imagePreview": "/images/products/product-4.jpg",
+  "title": "Recycled Bronze Pizza",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-01-17T07:32:08.932Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Dress",
+  "options": {
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

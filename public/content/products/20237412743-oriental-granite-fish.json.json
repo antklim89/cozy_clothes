@@ -1,0 +1,19 @@
+{
+  "discount": 0,
+  "price": 43466,
+  "hidden": false,
+  "imagePreview": "/images/products/product-6.jpg",
+  "title": "Oriental Granite Fish",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-08-10T09:07:43.926Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Joggers",
+  "options": {}
+}

@@ -1,0 +1,29 @@
+{
+  "discount": 16,
+  "price": 78312,
+  "hidden": false,
+  "imagePreview": "/images/products/product-13.jpg",
+  "title": "Practical Fresh Cheese",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2020-10-29T01:36:51.074Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "s",
+      "l",
+      "xl",
+      "xxl"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "discount": 13,
+  "price": 80310,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Refined Wooden Soap",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-01-14T23:02:25.956Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m"
+    ]
+  }
+}

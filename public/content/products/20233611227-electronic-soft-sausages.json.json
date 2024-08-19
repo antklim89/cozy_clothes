@@ -1,0 +1,25 @@
+{
+  "discount": 0,
+  "price": 79667,
+  "hidden": false,
+  "imagePreview": "/images/products/product-1.jpg",
+  "title": "Electronic Soft Sausages",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-04-14T22:12:27.576Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "l",
+      "xl",
+      "xxxl"
+    ]
+  }
+}
