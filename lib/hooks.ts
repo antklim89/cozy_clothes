@@ -1,16 +1,30 @@
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react';
 
-export function useSearchParamsState(query: string, defaultValue: string | number = '') {
+export function useSearchParamsState(
+  key: string,
+  defaultValue: string,
+): [string, Dispatch<SetStateAction<string | number | null | undefined>>];
+
+export function useSearchParamsState(
+  key: string,
+  defaultValue?: string | null,
+): [string | undefined | null, Dispatch<SetStateAction<string | number | null | undefined>>];
+
+export function useSearchParamsState(key: string, defaultValue?: string | null) {
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get(query) ?? defaultValue);
-  const pathname = usePathname();
+  const [query, setQuery] = useState<string | number | null | undefined>('');
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    params.set(query, search.toString());
-    window.history.replaceState(null, '', `${pathname}?${params.toString()}`);
-  }, [search, pathname, query, searchParams]);
+    setQuery(searchParams.get(key) ?? defaultValue);
+  }, [key, searchParams.get, defaultValue]);
 
-  return [search.toString(), setSearch] as const;
+  useEffect(() => {
+    if (typeof query !== 'string' && typeof query !== 'number') return;
+    const params = new URLSearchParams(searchParams);
+    params.set(key, query.toString());
+    window.history.replaceState(null, '', `?${params}`);
+  }, [query, key, searchParams]);
+
+  return [query?.toString() || defaultValue, setQuery] as const;
 }
