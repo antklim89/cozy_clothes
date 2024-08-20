@@ -1,10 +1,9 @@
 'use client';
 import { FormItem } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useSearchParamsState } from '@/lib/hooks';
-import { type ProductType, qtySchema } from '@/lib/schemas';
+import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 
@@ -15,7 +14,6 @@ type Props = ComponentProps<'form'> & {
 export const ProductOptions = ({ options, className, ...props }: Props) => {
   const [size, setSize] = useSearchParamsState('size', options?.sizes?.[0]);
   const [color, setColor] = useSearchParamsState('color', options?.colors?.[0].name);
-  const [qty, setQty] = useSearchParamsState('qty', '1');
 
   return (
     <form {...props} className={cn('flex flex-col gap-4', className)}>
@@ -58,18 +56,6 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
           </ToggleGroup>
         </FormItem>
       )}
-
-      <FormItem>
-        <Label htmlFor="color">Quantity:</Label>
-        <Input
-          type="number"
-          min={1}
-          max={100}
-          onChange={(e) => setQty(e.target.value)}
-          onBlur={(e) => setQty(qtySchema.parse(e.target.valueAsNumber))}
-          value={qty}
-        />
-      </FormItem>
     </form>
   );
 };
