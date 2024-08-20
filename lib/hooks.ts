@@ -13,18 +13,22 @@ export function useSearchParamsState(
 
 export function useSearchParamsState(key: string, defaultValue?: string | null) {
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState<string | number | null | undefined>('');
+  const [init, setInit] = useState(false);
 
   useEffect(() => {
-    setQuery(searchParams.get(key) ?? defaultValue);
-  }, [key, searchParams.get, defaultValue]);
+    setInit(true);
+  }, []);
 
-  useEffect(() => {
+  if (!init) return ['', () => undefined];
+
+  const setSearchState = (query?: string | null) => {
     if (typeof query !== 'string' && typeof query !== 'number') return;
     const params = new URLSearchParams(searchParams);
     params.set(key, query.toString());
     window.history.replaceState(null, '', `?${params}`);
-  }, [query, key, searchParams]);
+  };
 
-  return [query?.toString() || defaultValue, setQuery] as const;
+  const state = searchParams.get(key);
+
+  return [state?.toString() || defaultValue, setSearchState] as const;
 }
