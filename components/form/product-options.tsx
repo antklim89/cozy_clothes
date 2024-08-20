@@ -22,7 +22,12 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
       {options.sizes && (
         <FormItem>
           <Label htmlFor="size">Size:</Label>
-          <ToggleGroup type="single" value={size} onValueChange={(value) => setSize(value)}>
+          <ToggleGroup
+            variant="outline"
+            type="single"
+            value={size ?? ''}
+            onValueChange={(value) => value.length > 0 && setSize(value)}
+          >
             {options.sizes.map((size) => (
               <ToggleGroupItem key={size} value={size}>
                 {size}
@@ -35,7 +40,12 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
       {options.colors && (
         <FormItem>
           <Label htmlFor="color">Color:</Label>
-          <ToggleGroup variant={'outline'} type="single" value={color} onValueChange={(value) => setColor(value)}>
+          <ToggleGroup
+            variant="outline"
+            type="single"
+            value={color ?? ''}
+            onValueChange={(value) => value.length > 0 && setColor(value)}
+          >
             {options.colors.map(({ code, name }) => (
               <ToggleGroupItem key={name} value={name} className="flex items-center relative overflow-hidden">
                 <div
