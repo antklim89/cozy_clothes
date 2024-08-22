@@ -1,5 +1,9 @@
+# backend:
+#   name: git-gateway
+#   branch: main
 backend:
-  name: git-gateway
+  name: github
+  repo: antklim89/cozy_clothes 
   branch: main
 local_backend: true
 media_folder: /public/images
