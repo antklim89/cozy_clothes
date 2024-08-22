@@ -1,0 +1,59 @@
+{
+  "discount": 0,
+  "price": 49258,
+  "hidden": false,
+  "imagePreview": "/images/products/product-13.jpg",
+  "title": "Generic Concrete Computer",
+  "images": [
+    "/images/products/product-12.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-10-29T02:06:27.092Z",
+  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+  "category": "Dress",
+  "options": {
+    "sizes": [
+      "sx",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Oxford Blue",
+        "code": "#031D44"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "discount": 0,
+  "price": 65773,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Rustic Rubber Shoes",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-03-23T18:50:39.468Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Skirt",
+  "options": {}
+}

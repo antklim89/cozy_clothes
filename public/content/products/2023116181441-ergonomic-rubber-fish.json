@@ -1,0 +1,47 @@
+{
+  "discount": 36,
+  "price": 59948,
+  "hidden": false,
+  "imagePreview": "/images/products/product-16.jpg",
+  "title": "Ergonomic Rubber Fish",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-12-30T15:14:41.099Z",
+  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "s",
+      "m",
+      "xl",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      }
+    ]
+  }
+}

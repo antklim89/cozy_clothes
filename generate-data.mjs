@@ -66,7 +66,7 @@ async function generateProducts() {
     if (rand()) product.options.colors = colors.filter(rand);
 
     const fileName = generateFileName(title, createdAt);
-    await fs.writeFile(path.resolve('./public/content/products', `${fileName}.json`), JSON.stringify(product, null, 2));
+    await fs.writeFile(path.resolve('./public/content/products', fileName), JSON.stringify(product, null, 2));
   });
   await Promise.all(products);
 }

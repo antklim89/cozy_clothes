@@ -1,0 +1,26 @@
+{
+  "discount": 66,
+  "price": 1338,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Licensed Bronze Table",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-03-22T12:00:51.683Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Hoodie",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "l"
+    ]
+  }
+}

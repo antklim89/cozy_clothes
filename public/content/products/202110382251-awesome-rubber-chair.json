@@ -1,0 +1,28 @@
+{
+  "discount": 0,
+  "price": 88111,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Awesome Rubber Chair",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-11-17T05:22:51.796Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "xxl",
+      "xxxl"
+    ]
+  }
+}

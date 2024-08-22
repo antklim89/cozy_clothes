@@ -1,0 +1,21 @@
+{
+  "discount": 0,
+  "price": 19520,
+  "hidden": false,
+  "imagePreview": "/images/products/product-5.jpg",
+  "title": "Incredible Soft Ball",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-11-16T03:22:36.486Z",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "category": "Blouse",
+  "options": {}
+}

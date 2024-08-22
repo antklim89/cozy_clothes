@@ -1,0 +1,49 @@
+{
+  "discount": 44,
+  "price": 87934,
+  "hidden": false,
+  "imagePreview": "/images/products/product-1.jpg",
+  "title": "Electronic Granite Fish",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2020-04-10T07:16:18.568Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

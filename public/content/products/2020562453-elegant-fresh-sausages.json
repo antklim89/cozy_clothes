@@ -1,0 +1,21 @@
+{
+  "discount": 68,
+  "price": 87631,
+  "hidden": false,
+  "imagePreview": "/images/products/product-16.jpg",
+  "title": "Elegant Fresh Sausages",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2020-06-26T23:04:53.330Z",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "category": "Shorts",
+  "options": {}
+}

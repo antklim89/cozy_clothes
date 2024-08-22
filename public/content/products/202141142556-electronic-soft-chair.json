@@ -1,0 +1,18 @@
+{
+  "discount": 15,
+  "price": 12577,
+  "hidden": false,
+  "imagePreview": "/images/products/product-14.jpg",
+  "title": "Electronic Soft Chair",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-05-17T11:25:56.102Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Skirt",
+  "options": {}
+}

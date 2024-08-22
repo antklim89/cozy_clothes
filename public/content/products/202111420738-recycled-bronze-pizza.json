@@ -1,0 +1,62 @@
+{
+  "discount": 85,
+  "price": 58215,
+  "hidden": false,
+  "imagePreview": "/images/products/product-8.jpg",
+  "title": "Recycled Bronze Pizza",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-12-30T17:07:38.490Z",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "category": "Blouse",
+  "options": {
+    "sizes": [
+      "sx",
+      "s",
+      "m",
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

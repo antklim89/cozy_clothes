@@ -1,0 +1,38 @@
+{
+  "discount": 0,
+  "price": 10104,
+  "hidden": false,
+  "imagePreview": "/images/products/product-16.jpg",
+  "title": "Modern Soft Mouse",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-03-28T08:34:05.935Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Jeans",
+  "options": {
+    "colors": [
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

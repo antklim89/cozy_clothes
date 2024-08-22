@@ -1,0 +1,19 @@
+{
+  "discount": 64,
+  "price": 52672,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Incredible Rubber Gloves",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2021-09-06T16:03:31.395Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "Dress",
+  "options": {}
+}

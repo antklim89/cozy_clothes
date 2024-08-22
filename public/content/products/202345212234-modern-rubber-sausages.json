@@ -1,0 +1,55 @@
+{
+  "discount": 85,
+  "price": 24984,
+  "hidden": false,
+  "imagePreview": "/images/products/product-8.jpg",
+  "title": "Modern Rubber Sausages",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2023-05-26T18:22:34.655Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Skirt",
+  "options": {
+    "sizes": [
+      "sx",
+      "m",
+      "xxl"
+    ],
+    "colors": [
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Black",
+        "code": "#02010A"
+      },
+      {
+        "name": "White",
+        "code": "white"
+      },
+      {
+        "name": "Purple",
+        "code": "purple"
+      }
+    ]
+  }
+}

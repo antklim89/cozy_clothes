@@ -1,0 +1,50 @@
+{
+  "discount": 0,
+  "price": 1497,
+  "hidden": false,
+  "imagePreview": "/images/products/product-5.jpg",
+  "title": "Small Wooden Shirt",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-03-07T02:45:17.764Z",
+  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+  "category": "Jeans",
+  "options": {
+    "sizes": [
+      "xxl",
+      "xxxl"
+    ],
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Chocolate cosmos",
+        "code": "#4C191B"
+      },
+      {
+        "name": "Lavender",
+        "code": "#C589E8"
+      },
+      {
+        "name": "Ultra Violet",
+        "code": "#52489C"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Green",
+        "code": "green"
+      }
+    ]
+  }
+}

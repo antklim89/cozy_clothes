@@ -1,0 +1,19 @@
+{
+  "discount": 0,
+  "price": 48282,
+  "hidden": false,
+  "imagePreview": "/images/products/product-5.jpg",
+  "title": "Ergonomic Concrete Pants",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-11-30T14:57:22.767Z",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "category": "Skirt",
+  "options": {}
+}

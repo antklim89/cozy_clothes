@@ -1,0 +1,18 @@
+{
+  "discount": 63,
+  "price": 86777,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Sleek Bronze Chips",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2023-12-25T12:05:50.093Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "T-shirt",
+  "options": {}
+}

@@ -1,0 +1,28 @@
+{
+  "discount": 0,
+  "price": 25109,
+  "hidden": false,
+  "imagePreview": "/images/products/product-14.jpg",
+  "title": "Oriental Fresh Hat",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2021-07-20T09:45:45.271Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Dress",
+  "options": {
+    "sizes": [
+      "s",
+      "l",
+      "xl"
+    ]
+  }
+}

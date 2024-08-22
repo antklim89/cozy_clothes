@@ -1,0 +1,23 @@
+{
+  "discount": 0,
+  "price": 57095,
+  "hidden": false,
+  "imagePreview": "/images/products/product-3.jpg",
+  "title": "Modern Wooden Pizza",
+  "images": [
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-08-11T15:19:18.121Z",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "category": "T-shirt",
+  "options": {}
+}

@@ -1,0 +1,21 @@
+{
+  "discount": 0,
+  "price": 81812,
+  "hidden": false,
+  "imagePreview": "/images/products/product-5.jpg",
+  "title": "Incredible Rubber Car",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-14.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-4.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg"
+  ],
+  "createdAt": "2020-12-09T11:09:36.987Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Jeans",
+  "options": {}
+}

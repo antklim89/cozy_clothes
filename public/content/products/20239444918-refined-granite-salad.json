@@ -1,0 +1,19 @@
+{
+  "discount": 0,
+  "price": 29173,
+  "hidden": false,
+  "imagePreview": "/images/products/product-7.jpg",
+  "title": "Refined Granite Salad",
+  "images": [
+    "/images/products/product-14.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-3.jpg",
+    "/images/products/product-7.jpg"
+  ],
+  "createdAt": "2023-10-19T01:49:18.255Z",
+  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+  "category": "Dress",
+  "options": {}
+}

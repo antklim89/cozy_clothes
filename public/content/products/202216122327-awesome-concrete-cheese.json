@@ -1,0 +1,25 @@
+{
+  "discount": 0,
+  "price": 53283,
+  "hidden": false,
+  "imagePreview": "/images/products/product-11.jpg",
+  "title": "Awesome Concrete Cheese",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-10.jpg",
+    "/images/products/product-11.jpg",
+    "/images/products/product-12.jpg",
+    "/images/products/product-13.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2022-02-12T09:23:27.369Z",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "category": "Joggers",
+  "options": {
+    "sizes": [
+      "m"
+    ]
+  }
+}

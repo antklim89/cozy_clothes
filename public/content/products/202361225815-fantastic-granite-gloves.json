@@ -1,0 +1,43 @@
+{
+  "discount": 48,
+  "price": 67986,
+  "hidden": false,
+  "imagePreview": "/images/products/product-2.jpg",
+  "title": "Fantastic Granite Gloves",
+  "images": [
+    "/images/products/product-1.jpg",
+    "/images/products/product-15.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-2.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-9.jpg"
+  ],
+  "createdAt": "2023-07-31T19:58:15.456Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "T-shirt",
+  "options": {
+    "colors": [
+      {
+        "name": "Mindaro",
+        "code": "#C3E991"
+      },
+      {
+        "name": "Butterscotch",
+        "code": "#CB904D"
+      },
+      {
+        "name": "Bright pink",
+        "code": "#F45B69"
+      },
+      {
+        "name": "Yellow",
+        "code": "#F7B801"
+      },
+      {
+        "name": "Blue",
+        "code": "#0D00A4"
+      }
+    ]
+  }
+}

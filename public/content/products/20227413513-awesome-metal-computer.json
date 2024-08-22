@@ -1,0 +1,27 @@
+{
+  "discount": 64,
+  "price": 44684,
+  "hidden": false,
+  "imagePreview": "/images/products/product-10.jpg",
+  "title": "Awesome Metal Computer",
+  "images": [
+    "/images/products/product-10.jpg",
+    "/images/products/product-16.jpg",
+    "/images/products/product-5.jpg",
+    "/images/products/product-6.jpg",
+    "/images/products/product-7.jpg",
+    "/images/products/product-8.jpg"
+  ],
+  "createdAt": "2022-08-24T22:35:13.379Z",
+  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+  "category": "Dress",
+  "options": {
+    "sizes": [
+      "s",
+      "m",
+      "l",
+      "xl",
+      "xxl"
+    ]
+  }
+}
