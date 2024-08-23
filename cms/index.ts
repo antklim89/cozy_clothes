@@ -1,16 +1,24 @@
-import type { CmsConfig } from 'decap-cms-core';
+import type { CmsBackend, CmsConfig } from 'decap-cms-core';
 import { contacts } from './contacts';
 import { hero } from './hero';
 import { products } from './products';
 import { testimonials } from './testimonials';
 
+const backend: CmsBackend =
+  process.env.NETLIFY === 'true'
+    ? {
+        name: 'git-gateway',
+        branch: 'main',
+      }
+    : {
+        name: 'github',
+        repo: process.env.REPOSITORY_URL,
+        branch: 'main',
+      };
+
 export const decapCmsConfig: CmsConfig = {
   load_config_file: false,
-  backend: {
-    name: 'github',
-    repo: 'antklim89/cozy_clothes',
-    branch: 'main',
-  },
+  backend,
   local_backend: true,
   media_folder: '/public/images',
   public_folder: '/images',
