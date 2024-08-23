@@ -12,3 +12,8 @@ yarn docker:prod
 ```
 yarn docker:dev
 ```
+
+
+## Env
+
+process.env.REPOSITORY_URL = owner-name/repo-name
