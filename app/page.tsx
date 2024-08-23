@@ -4,6 +4,7 @@ import { Contacts } from '@/components/layout/contacts';
 import { Hero } from '@/components/layout/hero';
 import { Testimonials } from '@/components/layout/testimonials';
 import { productsLoader } from '@/lib/contentLoaders';
+import Script from 'next/script';
 
 const HomePage = async () => {
   const products = await productsLoader();
@@ -21,6 +22,7 @@ const HomePage = async () => {
       <h2 className="prose text-center text-2xl mt-4 font-bold">Big discounts</h2>
       <ProductsList products={discountSortedProducts} className="my-8" />
       <Contacts />
+      <Script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
     </div>
   );
 };
