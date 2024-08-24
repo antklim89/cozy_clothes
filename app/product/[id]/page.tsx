@@ -1,7 +1,6 @@
 import { Product } from '@/components/feature/product';
 import { productLoader, productsLoader } from '@/lib/contentLoaders';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 type Props = {
   params: { id: string };
@@ -9,7 +8,6 @@ type Props = {
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const product = await productLoader(params.id);
-  if (!product) return notFound();
 
   return {
     title: product.title,
@@ -36,7 +34,6 @@ export const generateStaticParams = async () => {
 
 const ProductPage = async ({ params }: Props) => {
   const product = await productLoader(params.id);
-  if (!product) return notFound();
 
   return <Product className="my-8" product={product} />;
 };

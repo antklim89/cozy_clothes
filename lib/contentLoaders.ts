@@ -10,7 +10,6 @@ const baseOneFileLoader = cache(async <T extends ZodRawShape>(filePath: string, 
   try {
     const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
     const contentJson = JSON.parse(contentString);
-    if (contentJson.hidden === true) return null;
     contentJson.id = path.parse(filePath).name;
     return schema.parseAsync(contentJson);
   } catch (error) {

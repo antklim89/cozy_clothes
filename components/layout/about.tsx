@@ -4,9 +4,7 @@ import Image from 'next/image';
 import Markdown from 'react-markdown';
 
 export const About = async () => {
-  const about = await aboutLoader();
-  if (!about) return null;
-  const { text, image, values, valuesList } = about;
+  const { text, image, values, valuesList } = await aboutLoader();
 
   const blurDataURL = await createBlurDataURL(image);
 
