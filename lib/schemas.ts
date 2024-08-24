@@ -5,6 +5,15 @@ export const heroSchema = z.object({
   imagePreview: z.string(),
 });
 
+export const infoSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  keywords: z.string().array(),
+  image: z.string(),
+  creator: z.string(),
+});
+
+
 export const aboutSchema = z.object({
   text: z.string(),
   image: z.string(),

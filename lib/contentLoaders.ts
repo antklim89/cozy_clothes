@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
-import { aboutSchema, contactSchema, heroSchema, productSchema, testimonialSchema } from './schemas';
+import { aboutSchema, contactSchema, heroSchema, infoSchema, productSchema, testimonialSchema } from './schemas';
 
 const BASE_PATH = './public/content';
 
@@ -49,6 +49,9 @@ export const aboutLoader = cache(() => {
   return baseOneFileLoader('about', aboutSchema);
 });
 
+export const infoLoader = cache(() => {
+  return baseOneFileLoader('info', infoSchema);
+});
 
 export const productsLoader = cache(() => {
   return baseManyFilesLoader('products', productSchema);
