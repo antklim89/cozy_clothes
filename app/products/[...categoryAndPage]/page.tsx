@@ -3,7 +3,26 @@ import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
+import type { Metadata } from 'next';
 import { z } from 'zod';
+
+type Props = {
+  params: { categoryAndPage: [category: string, page: string] };
+};
+
+export const generateMetadata = ({
+  params: {
+    categoryAndPage: [category],
+  },
+}: Props): Metadata => {
+  const title = category === ALL_CATEGORIES ? 'All Products' : category;
+
+  return {
+    title: title,
+    keywords: [title],
+    description: `Browse our ${category === ALL_CATEGORIES ? 'all' : category} products`,
+  };
+};
 
 export const dynamicParams = false;
 export const generateStaticParams = async () => {
@@ -20,7 +39,7 @@ export const generateStaticParams = async () => {
     }
   }
 
-  const result: { categoryAndPage: [category: string, page: string] }[] = [];
+  const result: Props['params'][] = [];
 
   for (const [category, categoryCount = 0] of Object.entries(categoryCountMap)) {
     for (let page = 0; page < categoryCount / PRODUCTS_PER_PAGE; page++) {
