@@ -5,6 +5,18 @@ export const heroSchema = z.object({
   imagePreview: z.string(),
 });
 
+export const aboutSchema = z.object({
+  text: z.string(),
+  image: z.string(),
+  values: z.string(),
+  valuesList: z
+    .object({
+      title: z.string(),
+      text: z.string(),
+    })
+    .array(),
+});
+
 export const productSchema = z.object({
   id: z.string(),
   discount: z.coerce.number(),

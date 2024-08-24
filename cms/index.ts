@@ -1,4 +1,5 @@
 import type { CmsBackend, CmsConfig } from 'decap-cms-core';
+import { about } from './about';
 import { contacts } from './contacts';
 import { hero } from './hero';
 import { products } from './products';
@@ -32,7 +33,7 @@ export const decapCmsConfig: CmsConfig = {
     {
       name: 'site',
       label: 'Site',
-      files: [hero],
+      files: [hero, about],
     },
   ],
 };
