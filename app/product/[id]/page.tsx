@@ -9,6 +9,7 @@ type Props = {
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
   const product = await productLoader(params.id);
+  if (!product) return notFound();
 
   return {
     title: product.title,
@@ -20,7 +21,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
 export const dynamicParams = false;
 export const generateStaticParams = async () => {
   const products = await productsLoader();
-  return products.map(({ id }) => ({ id }));
+  return products.filter((i) => i.hidden === false).map(({ id }) => ({ id }));
 };
 
 const ProductPage = async ({ params }: Props) => {

@@ -6,7 +6,9 @@ import Link from 'next/link';
 import Markdown from 'react-markdown';
 
 export const Hero = async () => {
-  const { imagePreview, text } = await heroLoader();
+  const hero = await heroLoader();
+  if (!hero) return null;
+  const { imagePreview, text } = hero;
   const blurDataURL = await createBlurDataURL(imagePreview);
 
   return (

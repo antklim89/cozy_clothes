@@ -10,11 +10,11 @@ const baseOneFileLoader = cache(async <T extends ZodRawShape>(filePath: string, 
   try {
     const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
     const contentJson = JSON.parse(contentString);
+    if (contentJson.hidden === true) return null;
     contentJson.id = path.parse(filePath).name;
     return schema.parseAsync(contentJson);
   } catch (error) {
-    console.error(`Load Error ${filePath}:\n`, error);
-    throw error;
+    throw new Error(`Load Error ${filePath}:\n ${error}`);
   }
 });
 
@@ -29,15 +29,15 @@ const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: strin
           contentJson.id = path.parse(fileName).name;
           return contentJson;
         } catch (error) {
-          console.error(error);
-          throw new Error(`Load Error ${filesPath}/${fileName}.`);
+          throw new Error(`Load Error ${filesPath}/${fileName}:\n ${error}`);
         }
       }),
     );
-    return await schema.array().parseAsync(results);
+    const filteredResults = results.filter((i) => Boolean(i) && i.hidden === false);
+
+    return await schema.array().parseAsync(filteredResults);
   } catch (error) {
-    console.error(error);
-    throw Error(`Load Error ${filesPath}.`);
+    throw new Error(`Load Error ${filesPath}:\n ${error}`);
   }
 });
 
