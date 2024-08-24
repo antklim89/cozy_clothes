@@ -1,17 +1,18 @@
 'use client';
+import { Card, CardContent } from '@/components/ui/card';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import { Card, CardContent } from '../ui/card';
 
 export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
   const cartItems = useCartStore((state) => state.cartItems);
+  const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints;
 
   return (
-    <HoverCard>
+    <HoverCard openDelay={0} open={hasTouch ? false : undefined}>
       <HoverCardTrigger asChild>
         <Link href="/checkout" {...props} className={cn('flex flex-nowrap', className)}>
           <ShoppingCart />
