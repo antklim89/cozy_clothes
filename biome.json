@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignore": ["dist", "out"]
+  },
   "organizeImports": {
     "enabled": true
   },
@@ -27,7 +30,7 @@
           "level": "warn",
           "options": {
             "strictCase": false,
-            "filenameCases": ["camelCase", "PascalCase"]
+            "filenameCases": ["camelCase", "PascalCase", "kebab-case"]
           }
         }
       },
@@ -35,7 +38,11 @@
         "noBarrelFile": "off"
       },
       "correctness": {
-        "noNodejsModules": "off"
+        "noNodejsModules": "off",
+        "noUnusedImports": {
+          "fix": "unsafe",
+          "level": "warn"
+        }
       }
     }
   },
