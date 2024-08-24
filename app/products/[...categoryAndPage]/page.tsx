@@ -2,7 +2,7 @@ import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
-import { productsLoader } from '@/lib/contentLoaders';
+import { infoLoader, productsLoader } from '@/lib/contentLoaders';
 import type { Metadata } from 'next';
 import { z } from 'zod';
 
@@ -10,17 +10,24 @@ type Props = {
   params: { categoryAndPage: [category: string, page: string] };
 };
 
-export const generateMetadata = ({
+export const generateMetadata = async ({
   params: {
     categoryAndPage: [category],
   },
-}: Props): Metadata => {
+}: Props): Promise<Metadata> => {
+  const { description, keywords } = await infoLoader();
   const title = category === ALL_CATEGORIES ? 'All Products' : category;
 
   return {
     title: title,
-    keywords: [title],
-    description: `Browse our ${category === ALL_CATEGORIES ? 'all' : category} products`,
+    description: `${description} Browse our ${category === ALL_CATEGORIES ? 'all' : category} products.`,
+    keywords: [...keywords, title],
+    openGraph: {
+      title: title,
+    },
+    twitter: {
+      title: title,
+    },
   };
 };
 

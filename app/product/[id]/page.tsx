@@ -15,6 +15,16 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     title: product.title,
     keywords: [product.title, product.category],
     description: product.description,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      images: product.images.map((image) => ({ url: image })),
+    },
+    twitter: {
+      title: product.title,
+      description: product.description,
+      card: 'summary_large_image',
+    },
   };
 };
 
