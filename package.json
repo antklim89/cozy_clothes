@@ -5,7 +5,7 @@
   "description": "Template",
   "scripts": {
     "dev": "run-p dev:**",
-    "dev:next": "next dev -H 0.0.0.0",
+    "dev:next": "next dev -H 0.0.0.0 --turbo",
     "dev:cms-proxy": "decap-server",
     "dev:typecheck": "yarn typecheck",
     "prebuild": "yarn lint",
