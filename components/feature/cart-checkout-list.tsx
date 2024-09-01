@@ -1,4 +1,7 @@
 'use client';
+import { Trash } from 'lucide-react';
+import Link from 'next/link';
+import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,14 +9,12 @@ import { Label } from '@/components/ui/label';
 import { qtySchema } from '@/lib/schemas';
 import { useCartStore } from '@/lib/store';
 import { cn, getPrice } from '@/lib/utils';
-import { Trash } from 'lucide-react';
-import Link from 'next/link';
-import type { ComponentProps } from 'react';
 
-export const CartCheckoutList = ({ className, ...props }: ComponentProps<'section'>) => {
-  const cartItems = useCartStore((store) => store.cartItems);
-  const updateCart = useCartStore((store) => store.updateCart);
-  const removeFromCart = useCartStore((store) => store.removeFromCart);
+
+export function CartCheckoutList({ className, ...props }: ComponentProps<'section'>) {
+  const cartItems = useCartStore(store => store.cartItems);
+  const updateCart = useCartStore(store => store.updateCart);
+  const removeFromCart = useCartStore(store => store.removeFromCart);
 
   return (
     <section className={cn('flex flex-col gap-4', className)} {...props}>
@@ -26,8 +27,8 @@ export const CartCheckoutList = ({ className, ...props }: ComponentProps<'sectio
       )}
       {cartItems.map(({ id, qty, color, size, product }) => {
         const searchParams = new URLSearchParams();
-        if (size) searchParams.set('size', size.toString());
-        if (color) searchParams.set('color', color.toString());
+        if (size != null) searchParams.set('size', size.toString());
+        if (color != null) searchParams.set('color', color.toString());
 
         return (
           <Card key={id}>
@@ -36,8 +37,8 @@ export const CartCheckoutList = ({ className, ...props }: ComponentProps<'sectio
                 <Link href={`/product/${product.id}?${searchParams.toString()}`}>{product.title}</Link>
               </h3>
               <div className="flex gap-4">
-                {color && <span className="text-gray-600 uppercase">{color}</span>}
-                {size && <span className="text-gray-600 uppercase">{size}</span>}
+                {color != null && <span className="text-gray-600 uppercase">{color}</span>}
+                {size != null && <span className="text-gray-600 uppercase">{size}</span>}
               </div>
             </CardHeader>
 
@@ -46,12 +47,12 @@ export const CartCheckoutList = ({ className, ...props }: ComponentProps<'sectio
                 <Label className="flex items-center">
                   <span className="text-sm">x</span>
                   <Input
-                    min={1}
                     className="w-20 border-none hover:outline hover:outline-1 text-xl"
+                    min={1}
                     type="number"
                     value={qty}
-                    onChange={(e) => updateCart(id, { qty: e.target.valueAsNumber })}
-                    onBlur={(e) => updateCart(id, { qty: qtySchema.parse(e.target.valueAsNumber) })}
+                    onBlur={e => updateCart(id, { qty: qtySchema.parse(e.target.valueAsNumber) })}
+                    onChange={e => updateCart(id, { qty: e.target.valueAsNumber })}
                   />
                   <span className="text-2xl">
                     {getPrice({ qty, price: product.price, discount: product.discount })}
@@ -79,4 +80,4 @@ export const CartCheckoutList = ({ className, ...props }: ComponentProps<'sectio
       })}
     </section>
   );
-};
+}

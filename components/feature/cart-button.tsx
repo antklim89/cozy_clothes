@@ -1,12 +1,13 @@
 'use client';
-import { useCartStore } from '@/lib/store';
-import { cn } from '@/lib/utils';
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
+import { cn } from '@/lib/utils';
+import { useCartStore } from '@/lib/store';
 
-export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
-  const cartItems = useCartStore((state) => state.cartItems);
+
+export function CartButton({ className, ...props }: ComponentProps<'a'>) {
+  const cartItems = useCartStore(state => state.cartItems);
 
   return (
     <Link href="/checkout" {...props} className={cn('flex flex-nowrap', className)}>
@@ -18,4 +19,4 @@ export const CartButton = ({ className, ...props }: ComponentProps<'a'>) => {
       </p>
     </Link>
   );
-};
+}

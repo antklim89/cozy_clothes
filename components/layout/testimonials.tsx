@@ -1,7 +1,8 @@
-import { testimonialsLoader } from '@/lib/contentLoaders';
 import Image from 'next/image';
+import { testimonialsLoader } from '@/lib/contentLoaders';
 
-export const Testimonials = async () => {
+
+export async function Testimonials() {
   const testimonials = await testimonialsLoader();
 
   return (
@@ -12,14 +13,14 @@ export const Testimonials = async () => {
         <h2 className="text-3xl text-center pb-8">Join thousands of happy clients</h2>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:gap-y-12">
           {testimonials.map(({ id, image, name, text }) => (
-            <div key={id} className="flex flex-col">
+            <div className="flex flex-col" key={id}>
               <div>
                 <Image
-                  width={120}
-                  height={120}
-                  src={image}
                   alt={name}
                   className="object-cover object-center w-20 h-20 rounded-full m-0"
+                  height={120}
+                  src={image}
+                  width={120}
                 />
               </div>
               <div>
@@ -32,4 +33,4 @@ export const Testimonials = async () => {
       </div>
     </section>
   );
-};
+}

@@ -1,12 +1,13 @@
+import type { Metadata } from 'next';
 import { Product } from '@/components/feature/product';
 import { productLoader, productsLoader } from '@/lib/contentLoaders';
-import type { Metadata } from 'next';
 
-type Props = {
+
+interface Props {
   params: { id: string };
-};
+}
 
-export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = await productLoader(params.id);
 
   return {
@@ -16,7 +17,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     openGraph: {
       title: product.title,
       description: product.description,
-      images: product.images.map((image) => ({ url: image })),
+      images: product.images.map(image => ({ url: image })),
     },
     twitter: {
       title: product.title,
@@ -24,18 +25,18 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
       card: 'summary_large_image',
     },
   };
-};
+}
 
 export const dynamicParams = false;
-export const generateStaticParams = async () => {
+export async function generateStaticParams() {
   const products = await productsLoader();
-  return products.filter((i) => i.hidden === false).map(({ id }) => ({ id }));
-};
+  return products.filter(i => i.hidden === false).map(({ id }) => ({ id }));
+}
 
-const ProductPage = async ({ params }: Props) => {
+async function ProductPage({ params }: Props) {
   const product = await productLoader(params.id);
 
   return <Product className="my-8" product={product} />;
-};
+}
 
 export default ProductPage;

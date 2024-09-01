@@ -5,6 +5,7 @@ import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'reac
 
 import { cn } from '@/lib/utils';
 
+
 const toggleVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=on]:bg-accent data-[state=on]:text-accent-foreground',
   {
@@ -30,9 +31,10 @@ const Toggle = forwardRef<
   ElementRef<typeof Root>,
   ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants>
 >(({ className, variant, size, ...props }, ref) => (
-  <Root ref={ref} className={cn(toggleVariants({ variant, size, className }))} {...props} />
+  <Root className={cn(toggleVariants({ variant, size, className }))} ref={ref} {...props} />
 ));
 
 Toggle.displayName = Root.displayName;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { Toggle, toggleVariants };

@@ -1,0 +1,47 @@
+import path from 'node:path';
+import antfu from '@antfu/eslint-config';
+
+
+export default antfu({
+  stylistic: {
+    indent: 2,
+    quotes: 'single',
+    semi: true,
+  },
+
+  typescript: {
+    tsconfigPath: path.resolve('./tsconfig.json'),
+    overridesTypeAware: {
+      'ts/restrict-template-expressions': ['error', {
+        allowAny: false,
+        allowBoolean: false,
+        allowNullish: false,
+        allowNumber: true,
+        allowRegExp: false,
+        allowNever: false,
+      }],
+      'ts/no-misused-promises': ['error', { checksVoidReturn: false }],
+      'ts/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
+    },
+  },
+
+  isInEditor: true,
+  react: true,
+
+  ignores: [
+    'public',
+  ],
+
+  rules: {
+    'import/newline-after-import': ['error', { count: 2 }],
+    'style/no-multiple-empty-lines': ['error', { max: 2 }],
+    'antfu/if-newline': 'off',
+    'style/brace-style': ['off', '1tbs'],
+    'no-shadow': 'error',
+    'object-curly-newline': ['error', { minProperties: 6, multiline: false, consistent: true }],
+    'max-lines-per-function': ['error', 200],
+    'max-statements': ['error', 50, { ignoreTopLevelFunctions: true }],
+    'style/jsx-sort-props': ['error', { callbacksLast: true, shorthandFirst: true }],
+    'react-refresh/only-export-components': ['error', { allowExportNames: ['dynamicParams', 'dynamic', 'generateStaticParams', 'generateMetadata', 'metadata'] }],
+  },
+});

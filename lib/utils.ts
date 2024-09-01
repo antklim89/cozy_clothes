@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { qtySchema } from './schemas';
 
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -32,9 +33,7 @@ export function groupBy<T, K extends keyof T>(array: T[], key: K): Record<string
   return array.reduce(
     (acc, item) => {
       const groupKey = item[key] as string;
-      if (!acc[groupKey]) {
-        acc[groupKey] = [];
-      }
+      if (acc[groupKey] == null) acc[groupKey] = [];
       acc[groupKey].push(item);
       return acc;
     },

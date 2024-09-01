@@ -1,15 +1,17 @@
+import process from 'node:process';
 import type { ReactNode } from 'react';
 import '@/styles/main.css';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
+import type { Metadata } from 'next';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { infoLoader } from '@/lib/contentLoaders';
-import type { Metadata } from 'next';
 
-export const generateMetadata = async (): Promise<Metadata> => {
+
+export async function generateMetadata(): Promise<Metadata> {
   const { title, creator, description, image, keywords } = await infoLoader();
 
   return {
@@ -19,13 +21,13 @@ export const generateMetadata = async (): Promise<Metadata> => {
       default: title,
       template: `%s | ${title}`,
     },
-    description: description,
+    description,
     keywords,
     openGraph: {
       type: 'website',
       url: process.env.URL,
-      title: title,
-      description: description,
+      title,
+      description,
       images: [
         {
           url: image,
@@ -35,14 +37,14 @@ export const generateMetadata = async (): Promise<Metadata> => {
       ],
     },
     twitter: {
-      title: title,
-      description: description,
+      title,
+      description,
       creator,
     },
   };
-};
+}
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head />
@@ -53,7 +55,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       </body>
     </html>
   );
-};
+}
 
 export const dynamic = 'force-static';
 

@@ -1,5 +1,6 @@
-import { About } from '@/components/layout/about';
 import type { Metadata } from 'next';
+import { About } from '@/components/layout/about';
+
 
 export const metadata: Metadata = {
   title: {
@@ -8,8 +9,8 @@ export const metadata: Metadata = {
   },
 };
 
-const AboutPage = () => {
+function AboutPage() {
   return <About />;
-};
+}
 
 export default AboutPage;

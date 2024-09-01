@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
 
+
 const categories = [
   'T-shirt',
   'Jeans',
@@ -45,7 +46,7 @@ async function generateProducts() {
   const products = Array.from({ length: PRODUCTS_NUMBER }, async () => {
     const createdAt = faker.date.between({ from: '2020-01-01T00:00:00.000Z', to: '2024-01-01T00:00:00.000Z' });
     const title = faker.commerce.productName();
-    const productImagesPaths = productImages.map((i) => path.join('/images/products', i));
+    const productImagesPaths = productImages.map(i => path.join('/images/products', i));
     const imageSrc = productImagesPaths[faker.number.int({ min: 0, max: productImages.length - 1 })];
 
     /** @type {import('./lib/schemas').ProductType} */
@@ -54,9 +55,9 @@ async function generateProducts() {
       price: faker.number.int({ min: 10, max: 90000 }),
       hidden: false,
       imagePreview: imageSrc,
-      title: title,
+      title,
       images: productImagesPaths.filter(rand),
-      createdAt: createdAt,
+      createdAt,
       description: faker.commerce.productDescription(),
       category: categories[faker.number.int({ min: 0, max: categories.length - 1 })],
       options: {},
@@ -106,7 +107,7 @@ function generateFileName(title, createdAt) {
 function toKebabCase(str) {
   return str
     .replace(/([A-Z])([A-Z])([a-z])/g, '$1-$2$3')
-    .replace(/([^\w\d]|_)+/g, '-')
+    .replace(/(\W|_)+/g, '-')
     .toLowerCase();
 }
 

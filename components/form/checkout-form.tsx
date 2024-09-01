@@ -1,15 +1,23 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useCartStore } from '@/lib/store';
-import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import IMask from 'imask';
 import type { ComponentProps } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useCartStore } from '@/lib/store';
+import { cn } from '@/lib/utils';
+
 
 type Props = ComponentProps<'form'>;
 
@@ -57,8 +65,8 @@ const formSchema = z.object({
     .optional(),
 });
 
-export const CheckoutForm = ({ className, ...props }: Props) => {
-  const cartItemsLength = useCartStore((store) => store.cartItems.length);
+export function CheckoutForm({ className, ...props }: Props) {
+  const cartItemsLength = useCartStore(store => store.cartItems.length);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -131,9 +139,9 @@ export const CheckoutForm = ({ className, ...props }: Props) => {
                 <FormControl>
                   <Input
                     {...field}
-                    onChange={(e) => field.onChange(IMask.pipe(e.currentTarget.value, { mask: '(000) 000-00-00' }))}
                     placeholder="(555) 555-55-55"
                     type="tel"
+                    onChange={e => field.onChange(IMask.pipe(e.currentTarget.value, { mask: '(000) 000-00-00' }))}
                   />
                 </FormControl>
                 <FormMessage />
@@ -210,9 +218,9 @@ export const CheckoutForm = ({ className, ...props }: Props) => {
               <FormControl>
                 <Textarea
                   {...field}
-                  rows={10}
                   className="resize-none"
                   placeholder="Write additional information about the order here"
+                  rows={10}
                 />
               </FormControl>
               <FormMessage />
@@ -220,10 +228,10 @@ export const CheckoutForm = ({ className, ...props }: Props) => {
           )}
         />
 
-        <Button onClick={handleCartSubmit} className="w-full" disabled={cartItemsLength <= 0}>
+        <Button className="w-full" disabled={cartItemsLength <= 0} onClick={handleCartSubmit}>
           Checkout
         </Button>
       </form>
     </Form>
   );
-};
+}

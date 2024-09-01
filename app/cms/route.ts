@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { decapCmsConfig } from '@/cms';
 
+
 export async function GET() {
   const decapCmsSrc = path.resolve('./node_modules/decap-cms/dist/decap-cms.js');
   const decapCmsJs = await fs.promises.readFile(decapCmsSrc, 'utf8');

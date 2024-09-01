@@ -1,5 +1,6 @@
 import type { CmsCollection } from 'decap-cms-core';
 
+
 export const contacts: CmsCollection = {
   name: 'contacts',
   label: 'Contacts',

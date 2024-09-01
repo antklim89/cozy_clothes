@@ -1,7 +1,8 @@
-import { contactsLoader } from '@/lib/contentLoaders';
 import { Card, CardContent, CardHeader } from '../ui/card';
+import { contactsLoader } from '@/lib/contentLoaders';
 
-export const Contacts = async () => {
+
+export async function Contacts() {
   const contacts = await contactsLoader();
 
   return (
@@ -14,7 +15,7 @@ export const Contacts = async () => {
         {contacts.map(
           ({ email, id, phone, title, hidden }) =>
             !hidden && (
-              <div key={id} className="bg-slate-200 rounded p-4">
+              <div className="bg-slate-200 rounded p-4" key={id}>
                 <h3>{title}</h3>
                 <p>
                   <a className="font-bold text-blue-800" href="mailto:email">
@@ -31,4 +32,4 @@ export const Contacts = async () => {
       </CardContent>
     </Card>
   );
-};
+}

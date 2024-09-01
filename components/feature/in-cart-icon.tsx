@@ -1,10 +1,11 @@
 'use client';
+import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/store';
-import { ShoppingCart } from 'lucide-react';
 
-export const InCartIcon = ({ productId }: { productId: string }) => {
-  const isInCart = useCartStore((state) => state.cartItems.findIndex((i) => i.product.id === productId) >= 0);
+
+export function InCartIcon({ productId }: { productId: string }) {
+  const isInCart = useCartStore(state => state.cartItems.findIndex(i => i.product.id === productId) >= 0);
 
   if (!isInCart) return null;
   return (
@@ -12,4 +13,4 @@ export const InCartIcon = ({ productId }: { productId: string }) => {
       <ShoppingCart />
     </Button>
   );
-};
+}

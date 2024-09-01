@@ -1,3 +1,6 @@
+import { Menu } from 'lucide-react';
+import Image, { type StaticImageData } from 'next/image';
+import Link from 'next/link';
 import { CartButton } from '@/components/feature/cart-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -11,9 +14,7 @@ import {
 import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import logo from '@/public/logo.svg';
-import { Menu } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+
 
 const links = [
   {
@@ -30,7 +31,7 @@ const links = [
   },
 ] as const;
 
-export const Header = async () => {
+export async function Header() {
   const products = await productsLoader();
   const categories = products.reduce((acc, i) => acc.add(i.category), new Set<string>()).values();
 
@@ -38,7 +39,7 @@ export const Header = async () => {
     <header className="bg-primary text-primary-foreground">
       <div className="container flex items-center px-4 sm:px-6">
         <Link className="flex items-center mr-auto" href="/">
-          <Image src={logo} className="h-12 mr-4 w-full" width={48} height={48} alt="logo" />
+          <Image alt="logo" className="h-12 mr-4 w-full" height={48} src={logo as StaticImageData} width={48} />
           <span className="text-nowrap text-2xl sm:block hidden">Cozy Clothes</span>
         </Link>
 
@@ -80,7 +81,7 @@ export const Header = async () => {
                   </DropdownMenuItem>
                 </li>
 
-                {Array.from(categories, (category) => (
+                {Array.from(categories, category => (
                   <li key={category}>
                     <DropdownMenuItem asChild className="flex justify-center">
                       <Link href={`/products/${category}/1`}>{category}</Link>
@@ -94,4 +95,4 @@ export const Header = async () => {
       </div>
     </header>
   );
-};
+}

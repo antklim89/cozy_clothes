@@ -1,13 +1,14 @@
-import type { ProductType } from '@/lib/schemas';
-import { cn } from '@/lib/utils';
 import type { ComponentProps } from 'react';
 import { ProductCard } from './product-card';
+import type { ProductType } from '@/lib/schemas';
+import { cn } from '@/lib/utils';
+
 
 interface Props extends ComponentProps<'div'> {
   products: ProductType[];
 }
 
-export const ProductsList = ({ products, className, ...props }: Props) => {
+export function ProductsList({ products, className, ...props }: Props) {
   return (
     <div
       {...props}
@@ -16,9 +17,9 @@ export const ProductsList = ({ products, className, ...props }: Props) => {
         className,
       )}
     >
-      {products.map((product) => (
+      {products.map(product => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );
-};
+}

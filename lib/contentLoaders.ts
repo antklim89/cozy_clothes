@@ -2,18 +2,26 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { cache } from 'react';
 import type { ZodObject, ZodRawShape } from 'zod';
-import { aboutSchema, contactSchema, heroSchema, infoSchema, productSchema, testimonialSchema } from './schemas';
+import {
+  aboutSchema,
+  contactSchema,
+  heroSchema,
+  infoSchema,
+  productSchema,
+  testimonialSchema,
+} from './schemas';
+
 
 const BASE_PATH = './public/content';
 
 const baseOneFileLoader = cache(async <T extends ZodRawShape>(filePath: string, schema: ZodObject<T>) => {
   try {
     const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
-    const contentJson = JSON.parse(contentString);
+    const contentJson = JSON.parse(contentString) as Record<string, unknown>;
     contentJson.id = path.parse(filePath).name;
-    return schema.parseAsync(contentJson);
+    return await schema.parseAsync(contentJson);
   } catch (error) {
-    throw new Error(`Load Error ${filePath}:\n ${error}`);
+    throw new Error(`Load Error ${filePath}:\n ${error instanceof Error ? error.message : ''}`);
   }
 });
 
@@ -24,46 +32,46 @@ const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: strin
       fileNames.map(async (fileName) => {
         try {
           const contentString = await fs.readFile(path.resolve(BASE_PATH, filesPath, fileName), 'utf8');
-          const contentJson = JSON.parse(contentString);
+          const contentJson = JSON.parse(contentString) as Record<string, unknown>;
           contentJson.id = path.parse(fileName).name;
           return contentJson;
         } catch (error) {
-          throw new Error(`Load Error ${filesPath}/${fileName}:\n ${error}`);
+          throw new Error(`Load Error ${filesPath}/${fileName}:\n ${error instanceof Error ? error.message : ''}`);
         }
       }),
     );
-    const filteredResults = results.filter((i) => Boolean(i) && i.hidden === false);
+    const filteredResults = results.filter(i => (i != null) && (i.hidden === false));
 
     return await schema.array().parseAsync(filteredResults);
   } catch (error) {
-    throw new Error(`Load Error ${filesPath}:\n ${error}`);
+    throw new Error(`Load Error ${filesPath}:\n ${error instanceof Error ? error.message : ''}`);
   }
 });
 
-export const heroLoader = cache(() => {
+export const heroLoader = cache(async () => {
   return baseOneFileLoader('hero', heroSchema);
 });
 
-export const aboutLoader = cache(() => {
+export const aboutLoader = cache(async () => {
   return baseOneFileLoader('about', aboutSchema);
 });
 
-export const infoLoader = cache(() => {
+export const infoLoader = cache(async () => {
   return baseOneFileLoader('info', infoSchema);
 });
 
-export const productsLoader = cache(() => {
+export const productsLoader = cache(async () => {
   return baseManyFilesLoader('products', productSchema);
 });
 
-export const testimonialsLoader = cache(() => {
+export const testimonialsLoader = cache(async () => {
   return baseManyFilesLoader('testimonials', testimonialSchema);
 });
 
-export const contactsLoader = cache(() => {
+export const contactsLoader = cache(async () => {
   return baseManyFilesLoader('contacts', contactSchema);
 });
 
-export const productLoader = cache((id: string) => {
+export const productLoader = cache(async (id: string) => {
   return baseOneFileLoader(`products/${id}`, productSchema);
 });

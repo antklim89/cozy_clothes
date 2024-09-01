@@ -1,45 +1,47 @@
+import type { Metadata } from 'next';
+import { z } from 'zod';
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { infoLoader, productsLoader } from '@/lib/contentLoaders';
-import type { Metadata } from 'next';
-import { z } from 'zod';
 
-type Props = {
+
+interface Props {
   params: { categoryAndPage: [category: string, page: string] };
-};
+}
 
-export const generateMetadata = async ({
+export async function generateMetadata({
   params: {
     categoryAndPage: [category],
   },
-}: Props): Promise<Metadata> => {
+}: Props): Promise<Metadata> {
   const { description, keywords } = await infoLoader();
   const title = category === ALL_CATEGORIES ? 'All Products' : category;
 
   return {
-    title: title,
+    title,
     description: `${description} Browse our ${category === ALL_CATEGORIES ? 'all' : category} products.`,
     keywords: [...keywords, title],
     openGraph: {
-      title: title,
+      title,
     },
     twitter: {
-      title: title,
+      title,
     },
   };
-};
+}
 
 export const dynamicParams = false;
-export const generateStaticParams = async () => {
+
+export async function generateStaticParams() {
   const products = await productsLoader();
 
   const categoryCountMap: Record<string, number | undefined> = {};
 
   for (const product of products) {
     const categoryCount = categoryCountMap[product.category];
-    if (categoryCount) {
+    if (categoryCount != null) {
       categoryCountMap[product.category] = categoryCount + 1;
     } else {
       categoryCountMap[product.category] = 1;
@@ -59,13 +61,13 @@ export const generateStaticParams = async () => {
   }
 
   return result;
-};
+}
 
 const paramsSchema = z.object({
   categoryAndPage: z.tuple([z.string(), z.coerce.number().positive()]),
 });
 
-const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> }) => {
+async function ProductPage({ params }: { params: z.infer<typeof paramsSchema> }) {
   const {
     categoryAndPage: [category, page],
   } = await paramsSchema.parseAsync(params);
@@ -73,7 +75,7 @@ const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> })
   let products = await productsLoader();
 
   if (category !== ALL_CATEGORIES) {
-    products = products.filter((i) => i.category === category);
+    products = products.filter(i => i.category === category);
   }
 
   const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
@@ -92,6 +94,6 @@ const ProductPage = async ({ params }: { params: z.infer<typeof paramsSchema> })
       <ProductsPagination category={category} page={page} totalPages={totalPages} />
     </div>
   );
-};
+}
 
 export default ProductPage;

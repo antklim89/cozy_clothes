@@ -1,5 +1,6 @@
 import type { CmsCollectionFile } from 'decap-cms-core';
 
+
 export const info: CmsCollectionFile = {
   label: 'Info',
   name: 'info',

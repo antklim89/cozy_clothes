@@ -1,5 +1,6 @@
 import type { CmsCollection } from 'decap-cms-core';
 
+
 export const products: CmsCollection = {
   name: 'products',
   label: 'Products',

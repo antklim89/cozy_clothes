@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import type { ComponentProps } from 'react';
+import { AddToCartButton } from './add-to-cart-button';
 import { ProductOptions } from '@/components/form/product-options';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Price } from '@/components/ui/price';
@@ -5,16 +8,14 @@ import { defaultBlurDataUrl } from '@/constants';
 import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
-import type { ComponentProps } from 'react';
-import { AddToCartButton } from './add-to-cart-button';
+
 
 interface Props extends ComponentProps<'div'> {
   product: ProductType;
 }
 
-export const Product = async ({ product, className, ...props }: Props) => {
-  const blurDataURLs = await Promise.all(product.images.map((image) => createBlurDataURL(image)));
+export async function Product({ product, className, ...props }: Props) {
+  const blurDataURLs = await Promise.all(product.images.map(async image => createBlurDataURL(image)));
   return (
     <div {...props} className={cn('container grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4', className)}>
       <section className="border px-4 flex-[2_1_0]">
@@ -23,13 +24,13 @@ export const Product = async ({ product, className, ...props }: Props) => {
             {product.images.map((image, idx) => (
               <CarouselItem key={image}>
                 <Image
-                  src={image}
-                  blurDataURL={blurDataURLs[idx] ?? defaultBlurDataUrl}
-                  width={480}
-                  height={320}
                   alt={product.title}
+                  blurDataURL={blurDataURLs[idx] ?? defaultBlurDataUrl}
                   className="object-cover w-full supports-[height:80dvh]:h-[80dvh] h-80vh"
+                  height={320}
                   placeholder="blur"
+                  src={image}
+                  width={480}
                 />
               </CarouselItem>
             ))}
@@ -43,9 +44,9 @@ export const Product = async ({ product, className, ...props }: Props) => {
         <h3>{product.category}</h3>
         <p>{product.description}</p>
         <ProductOptions options={product.options} />
-        <Price price={product.price} discount={product.discount} />
+        <Price discount={product.discount} price={product.price} />
         <AddToCartButton product={product} />
       </aside>
     </div>
   );
-};
+}

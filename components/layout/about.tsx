@@ -1,9 +1,10 @@
-import { aboutLoader } from '@/lib/contentLoaders';
-import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
+import { aboutLoader } from '@/lib/contentLoaders';
+import { createBlurDataURL } from '@/lib/createBlurDataURL';
 
-export const About = async () => {
+
+export async function About() {
   const { text, image, values, valuesList } = await aboutLoader();
 
   const blurDataURL = await createBlurDataURL(image);
@@ -14,23 +15,23 @@ export const About = async () => {
 
       <Image
         alt="About"
-        src={image}
-        className="w-full h-80 object-cover object-center rounded-3xl"
-        placeholder="blur"
-        width={1024}
-        height={320}
         blurDataURL={blurDataURL}
+        className="w-full h-80 object-cover object-center rounded-3xl"
+        height={320}
+        placeholder="blur"
+        src={image}
+        width={1024}
       />
 
       <Markdown>{values}</Markdown>
       <div className="grid gap-0 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {valuesList.map(({ text, title }) => (
-          <section key={title}>
-            <h4>{title}</h4>
-            <p>{text}</p>
+        {valuesList.map(i => (
+          <section key={i.title}>
+            <h4>{i.title}</h4>
+            <p>{i.text}</p>
           </section>
         ))}
       </div>
     </section>
   );
-};
+}

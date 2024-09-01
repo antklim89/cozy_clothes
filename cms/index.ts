@@ -1,3 +1,4 @@
+import process from 'node:process';
 import type { CmsBackend, CmsConfig } from 'decap-cms-core';
 import { about } from './about';
 import { contacts } from './contacts';
@@ -6,8 +7,9 @@ import { info } from './info';
 import { products } from './products';
 import { testimonials } from './testimonials';
 
-const backend: CmsBackend =
-  process.env.NETLIFY === 'true'
+
+const backend: CmsBackend
+  = process.env.NETLIFY === 'true'
     ? {
         name: 'git-gateway',
         branch: 'main',

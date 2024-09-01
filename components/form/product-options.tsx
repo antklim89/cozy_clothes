@@ -1,17 +1,18 @@
 'use client';
+import type { ComponentProps } from 'react';
 import { FormItem } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useSearchParamsState } from '@/lib/hooks';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
-import type { ComponentProps } from 'react';
+
 
 type Props = ComponentProps<'form'> & {
   options: ProductType['options'];
 };
 
-export const ProductOptions = ({ options, className, ...props }: Props) => {
+export function ProductOptions({ options, className, ...props }: Props) {
   const [size, setSize] = useSearchParamsState('size', options?.sizes?.[0]);
   const [color, setColor] = useSearchParamsState('color', options?.colors?.[0].name);
 
@@ -21,14 +22,14 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
         <FormItem>
           <Label htmlFor="size">Size:</Label>
           <ToggleGroup
-            variant="outline"
             type="single"
             value={size ?? ''}
-            onValueChange={(value) => value.length > 0 && setSize(value)}
+            variant="outline"
+            onValueChange={value => value.length > 0 && setSize(value)}
           >
-            {options.sizes.map((size) => (
-              <ToggleGroupItem key={size} value={size}>
-                {size}
+            {options.sizes.map(sizeItem => (
+              <ToggleGroupItem key={sizeItem} value={sizeItem}>
+                {sizeItem}
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
@@ -39,13 +40,13 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
         <FormItem>
           <Label htmlFor="color">Color:</Label>
           <ToggleGroup
-            variant="outline"
             type="single"
             value={color ?? ''}
-            onValueChange={(value) => value.length > 0 && setColor(value)}
+            variant="outline"
+            onValueChange={value => value.length > 0 && setColor(value)}
           >
             {options.colors.map(({ code, name }) => (
-              <ToggleGroupItem key={name} value={name} className="flex items-center relative overflow-hidden">
+              <ToggleGroupItem className="flex items-center relative overflow-hidden" key={name} value={name}>
                 <div
                   className="absolute left-0 right-0 bottom-0 top-[calc(100%-10px)] opacity-80"
                   style={{ backgroundColor: code }}
@@ -58,4 +59,4 @@ export const ProductOptions = ({ options, className, ...props }: Props) => {
       )}
     </form>
   );
-};
+}

@@ -1,9 +1,17 @@
 'use client';
-import { toggleVariants } from '@/components/ui/toggle';
-import { cn } from '@/lib/utils';
 import { Item, Root } from '@radix-ui/react-toggle-group';
 import type { VariantProps } from 'class-variance-authority';
-import { type ComponentPropsWithoutRef, type ElementRef, createContext, forwardRef, useContext } from 'react';
+import {
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  createContext,
+  forwardRef,
+  useContext,
+  useMemo,
+} from 'react';
+import { cn } from '@/lib/utils';
+import { toggleVariants } from '@/components/ui/toggle';
+
 
 const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
   size: 'default',
@@ -13,11 +21,14 @@ const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
 const ToggleGroup = forwardRef<
   ElementRef<typeof Root>,
   ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants>
->(({ className, variant, size, children, ...props }, ref) => (
-  <Root ref={ref} className={cn('flex items-center justify-center gap-1 flex-wrap', className)} {...props}>
-    <ToggleGroupContext.Provider value={{ variant, size }}>{children}</ToggleGroupContext.Provider>
-  </Root>
-));
+>(({ className, variant, size, children, ...props }, ref) => {
+  const values = useMemo(() => ({ variant, size }), [variant, size]);
+  return (
+    <Root className={cn('flex items-center justify-center gap-1 flex-wrap', className)} ref={ref} {...props}>
+      <ToggleGroupContext.Provider value={values}>{children}</ToggleGroupContext.Provider>
+    </Root>
+  );
+});
 
 ToggleGroup.displayName = Root.displayName;
 
@@ -29,7 +40,6 @@ const ToggleGroupItem = forwardRef<
 
   return (
     <Item
-      ref={ref}
       className={cn(
         'data-[state=on]:border-primary ',
         toggleVariants({
@@ -38,6 +48,7 @@ const ToggleGroupItem = forwardRef<
         }),
         className,
       )}
+      ref={ref}
       {...props}
     >
       {children}
