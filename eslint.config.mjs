@@ -34,6 +34,7 @@ export default antfu({
     '**/build/**',
     '**/out/**',
     '**/dist/**',
+    '.netlify',
   ],
 
   rules: {
