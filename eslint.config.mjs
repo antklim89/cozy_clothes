@@ -30,6 +30,10 @@ export default antfu({
 
   ignores: [
     'public',
+    '**/node_modules/**',
+    '**/build/**',
+    '**/out/**',
+    '**/dist/**',
   ],
 
   rules: {
