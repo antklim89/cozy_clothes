@@ -7,7 +7,8 @@ const nextConfig = {
   compress: true,
   output: 'standalone',
   env: {
-    URL: process.env.URL ?? `http://localhost:${process.env.PORT ?? 3000}`,
+    URL: process.env.URL ?? 'http://localhost:3000',
+    REPOSITORY_URL: process.env.REPOSITORY_URL,
   },
   eslint: {
     ignoreDuringBuilds: true,
