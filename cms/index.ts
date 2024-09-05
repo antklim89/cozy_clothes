@@ -16,14 +16,21 @@ const backend: CmsBackend
       }
     : {
         name: 'github',
-        repo: process.env.REPOSITORY_URL,
+        repo: process.env.REPOSITORY_URL ?? 'test/test',
         branch: 'main',
       };
+
+const URL_HOSTNAME = new URL(process.env.URL ?? 'http://localhost:3000').hostname;
 
 export const decapCmsConfig: CmsConfig = {
   load_config_file: false,
   backend,
-  local_backend: true,
+
+  local_backend: {
+    url: `http://${URL_HOSTNAME}:8081/api/v1`,
+    allowed_hosts: [URL_HOSTNAME],
+  },
+
   media_folder: '/public/images',
   public_folder: '/images',
   editor: {
