@@ -1,9 +1,23 @@
 {
   "name": "cozy_clothes",
   "version": "0.1.0",
-  "private": true,
-  "packageManager": "yarn@1.22.22",
-  "description": "Template",
+  "private": false,
+  "description": "Simple clothes shop. Learning project.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antklim89/cozy_clothes"
+  },
+  "keywords": [
+    "clothes",
+    "shop",
+    "react",
+    "nextjs",
+    "typescript",
+    "zod",
+    "tailwindcss",
+    "decap-cms"
+  ],
   "scripts": {
     "dev": "run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0 --turbo",
