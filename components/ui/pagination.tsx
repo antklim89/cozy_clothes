@@ -1,8 +1,8 @@
+import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
+import Link from 'next/link';
 import type { ComponentProps, RefObject } from 'react';
 import { type ButtonProps, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-import Link from 'next/link';
 
 
 function Pagination({ className, ...props }: ComponentProps<'nav'>) {
@@ -29,7 +29,12 @@ type PaginationLinkProps = {
 } & Pick<ButtonProps, 'size'> &
 ComponentProps<typeof Link>;
 
-function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
+function PaginationLink({
+  className,
+  isActive,
+  size = 'icon',
+  ...props
+}: PaginationLinkProps) {
   return (
     <Link
       aria-current={isActive ? 'page' : undefined}
@@ -47,7 +52,12 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 
 function PaginationPrevious({ className, ...props }: ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label="Go to previous page" className={cn('gap-1 pl-2.5', className)} size="default" {...props}>
+    <PaginationLink
+      aria-label="Go to previous page"
+      className={cn('gap-1 pl-2.5', className)}
+      size="default"
+      {...props}
+    >
       <ChevronLeft className="h-4 w-4" />
       <span>Previous</span>
     </PaginationLink>
@@ -56,7 +66,12 @@ function PaginationPrevious({ className, ...props }: ComponentProps<typeof Pagin
 
 function PaginationNext({ className, ...props }: ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label="Go to next page" className={cn('gap-1 pr-2.5', className)} size="default" {...props}>
+    <PaginationLink
+      aria-label="Go to next page"
+      className={cn('gap-1 pr-2.5', className)}
+      size="default"
+      {...props}
+    >
       <span>Next</span>
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>

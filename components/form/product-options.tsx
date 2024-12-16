@@ -1,10 +1,10 @@
 'use client';
-import type { ProductType } from '@/lib/schemas';
 import type { ComponentProps } from 'react';
 import { FormItem } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useSearchParamsState } from '@/lib/hooks';
+import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 
 

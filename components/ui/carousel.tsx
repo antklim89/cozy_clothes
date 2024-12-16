@@ -1,8 +1,5 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
-
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import {
   type ComponentProps,
@@ -15,6 +12,8 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -175,7 +174,13 @@ function CarouselItem({ ref, className, ...props }: HTMLAttributes<HTMLDivElemen
   );
 }
 
-function CarouselPrevious({ ref, className, variant = 'outline', size = 'icon', ...props }: ComponentProps<typeof Button> & { ref?: RefObject<HTMLButtonElement> }) {
+function CarouselPrevious({
+  ref,
+  className,
+  variant = 'outline',
+  size = 'icon',
+  ...props
+}: ComponentProps<typeof Button> & { ref?: RefObject<HTMLButtonElement> }) {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
@@ -200,7 +205,13 @@ function CarouselPrevious({ ref, className, variant = 'outline', size = 'icon', 
   );
 }
 
-function CarouselNext({ ref, className, variant = 'outline', size = 'icon', ...props }: ComponentProps<typeof Button> & { ref?: RefObject<HTMLButtonElement> }) {
+function CarouselNext({
+  ref,
+  className,
+  variant = 'outline',
+  size = 'icon',
+  ...props
+}: ComponentProps<typeof Button> & { ref?: RefObject<HTMLButtonElement> }) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
@@ -225,4 +236,10 @@ function CarouselNext({ ref, className, variant = 'outline', size = 'icon', ...p
   );
 }
 
-export { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious };
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+};

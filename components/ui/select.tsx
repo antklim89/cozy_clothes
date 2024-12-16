@@ -1,6 +1,4 @@
 'use client';
-import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { cn } from '@/lib/utils';
 import {
   Content,
   Group,
@@ -19,6 +17,8 @@ import {
   Viewport,
 } from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
+import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
+import { cn } from '@/lib/utils';
 
 
 const Select = Root;
@@ -27,7 +27,12 @@ const SelectGroup = Group;
 
 const SelectValue = Value;
 
-function SelectTrigger({ ref, className, children, ...props }: ComponentPropsWithoutRef<typeof Trigger> & { ref?: RefObject<ComponentRef<typeof Trigger>> }) {
+function SelectTrigger({
+  ref,
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof Trigger> & { ref?: RefObject<ComponentRef<typeof Trigger>> }) {
   return (
     <Trigger
       className={cn(
@@ -69,7 +74,13 @@ function SelectScrollDownButton({ ref, className, ...props }: ComponentPropsWith
   );
 }
 
-function SelectContent({ ref, className, children, position = 'popper', ...props }: ComponentPropsWithoutRef<typeof Content> & { ref?: RefObject<ComponentRef<typeof Content>> }) {
+function SelectContent({
+  ref,
+  className,
+  children,
+  position = 'popper',
+  ...props
+}: ComponentPropsWithoutRef<typeof Content> & { ref?: RefObject<ComponentRef<typeof Content>> }) {
   return (
     <Portal>
       <Content
@@ -103,7 +114,12 @@ function SelectLabel({ ref, className, ...props }: ComponentPropsWithoutRef<type
   return <Label className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} ref={ref} {...props} />;
 }
 
-function SelectItem({ ref, className, children, ...props }: ComponentPropsWithoutRef<typeof Item> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
+function SelectItem({
+  ref,
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof Item> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
   return (
     <Item
       className={cn(

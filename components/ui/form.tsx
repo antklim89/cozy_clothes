@@ -1,7 +1,5 @@
 'use client';
 import type * as LabelPrimitive from '@radix-ui/react-label';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
 import { Slot } from '@radix-ui/react-slot';
 import {
   type ComponentPropsWithoutRef,
@@ -21,6 +19,8 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
+import { Label } from '@/components/ui/label';
+import { cn } from '@/lib/utils';
 
 
 const Form = FormProvider;
@@ -92,11 +92,23 @@ function FormItem({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> &
 function FormLabel({ ref, className, ...props }: ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & { ref?: RefObject<ComponentRef<typeof LabelPrimitive.Root>> }) {
   const { error, formItemId } = useFormField();
 
-  return <Label className={cn(error && 'text-destructive', className)} htmlFor={formItemId} ref={ref} {...props} />;
+  return (
+    <Label
+      className={cn(error && 'text-destructive', className)}
+      htmlFor={formItemId}
+      ref={ref}
+      {...props}
+    />
+  );
 }
 
 function FormControl({ ref, ...props }: ComponentPropsWithoutRef<typeof Slot> & { ref?: RefObject<ComponentRef<typeof Slot>> }) {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+  const {
+    error,
+    formItemId,
+    formDescriptionId,
+    formMessageId,
+  } = useFormField();
 
   return (
     <Slot
@@ -112,17 +124,34 @@ function FormControl({ ref, ...props }: ComponentPropsWithoutRef<typeof Slot> & 
 function FormDescription({ ref, className, ...props }: HTMLAttributes<HTMLParagraphElement> & { ref?: RefObject<HTMLParagraphElement> }) {
   const { formDescriptionId } = useFormField();
 
-  return <p className={cn('text-sm text-muted-foreground', className)} id={formDescriptionId} ref={ref} {...props} />;
+  return (
+    <p
+      className={cn('text-sm text-muted-foreground', className)}
+      id={formDescriptionId}
+      ref={ref}
+      {...props}
+    />
+  );
 }
 
-function FormMessage({ ref, className, children, ...props }: HTMLAttributes<HTMLParagraphElement> & { ref?: RefObject<HTMLParagraphElement> }) {
+function FormMessage({
+  ref,
+  className,
+  children,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement> & { ref?: RefObject<HTMLParagraphElement> }) {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
   if (body == null) return null;
 
   return (
-    <p className={cn('text-sm font-medium text-destructive', className)} id={formMessageId} ref={ref} {...props}>
+    <p
+      className={cn('text-sm font-medium text-destructive', className)}
+      id={formMessageId}
+      ref={ref}
+      {...props}
+    >
       {body}
     </p>
   );

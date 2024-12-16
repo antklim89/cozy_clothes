@@ -10,9 +10,6 @@ const nextConfig = {
     URL: process.env.URL ?? 'http://localhost:3000',
     REPOSITORY_URL: process.env.REPOSITORY_URL,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
 };
 
 export default nextConfig;

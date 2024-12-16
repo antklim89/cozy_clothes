@@ -1,7 +1,7 @@
 'use client';
+import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/store';
-import { ShoppingCart } from 'lucide-react';
 
 
 export function InCartIcon({ productId }: { productId: string }) {

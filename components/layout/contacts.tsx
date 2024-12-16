@@ -1,5 +1,5 @@
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { contactsLoader } from '@/lib/contentLoaders';
-import { Card, CardContent, CardHeader } from '../ui/card';
 
 
 export async function Contacts() {
@@ -13,7 +13,13 @@ export async function Contacts() {
       </CardHeader>
       <CardContent className="flex-[2_1_0%] grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
         {contacts.map(
-          ({ email, id, phone, title, hidden }) =>
+          ({
+            email,
+            id,
+            phone,
+            title,
+            hidden,
+          }) =>
             !hidden && (
               <div className="bg-slate-200 rounded p-4" key={id}>
                 <h3>{title}</h3>

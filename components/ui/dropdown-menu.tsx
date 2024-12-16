@@ -1,6 +1,4 @@
 'use client';
-import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes, RefObject } from 'react';
-import { cn } from '@/lib/utils';
 import {
   CheckboxItem,
   Content,
@@ -19,6 +17,13 @@ import {
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
 import { Check, ChevronRight, Circle } from 'lucide-react';
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+  RefObject,
+} from 'react';
+import { cn } from '@/lib/utils';
 
 
 const DropdownMenu = Root;
@@ -33,7 +38,13 @@ const DropdownMenuSub = Sub;
 
 const DropdownMenuRadioGroup = RadioGroup;
 
-function DropdownMenuSubTrigger({ ref, className, inset, children, ...props }: ComponentPropsWithoutRef<typeof SubTrigger> & {
+function DropdownMenuSubTrigger({
+  ref,
+  className,
+  inset,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof SubTrigger> & {
   inset?: boolean;
 } & { ref?: RefObject<ComponentRef<typeof SubTrigger>> }) {
   return (
@@ -65,7 +76,12 @@ function DropdownMenuSubContent({ ref, className, ...props }: ComponentPropsWith
   );
 }
 
-function DropdownMenuContent({ ref, className, sideOffset = 4, ...props }: ComponentPropsWithoutRef<typeof Content> & { ref?: RefObject<ComponentRef<typeof Content>> }) {
+function DropdownMenuContent({
+  ref,
+  className,
+  sideOffset = 4,
+  ...props
+}: ComponentPropsWithoutRef<typeof Content> & { ref?: RefObject<ComponentRef<typeof Content>> }) {
   return (
     <Portal>
       <Content
@@ -81,7 +97,12 @@ function DropdownMenuContent({ ref, className, sideOffset = 4, ...props }: Compo
   );
 }
 
-function DropdownMenuItem({ ref, className, inset, ...props }: ComponentPropsWithoutRef<typeof Item> & {
+function DropdownMenuItem({
+  ref,
+  className,
+  inset,
+  ...props
+}: ComponentPropsWithoutRef<typeof Item> & {
   inset?: boolean;
 } & { ref?: RefObject<ComponentRef<typeof Item>> }) {
   return (
@@ -97,7 +118,13 @@ function DropdownMenuItem({ ref, className, inset, ...props }: ComponentPropsWit
   );
 }
 
-function DropdownMenuCheckboxItem({ ref, className, children, checked, ...props }: ComponentPropsWithoutRef<typeof CheckboxItem> & { ref?: RefObject<ComponentRef<typeof CheckboxItem>> }) {
+function DropdownMenuCheckboxItem({
+  ref,
+  className,
+  children,
+  checked,
+  ...props
+}: ComponentPropsWithoutRef<typeof CheckboxItem> & { ref?: RefObject<ComponentRef<typeof CheckboxItem>> }) {
   return (
     <CheckboxItem
       checked={checked}
@@ -118,7 +145,12 @@ function DropdownMenuCheckboxItem({ ref, className, children, checked, ...props 
   );
 }
 
-function DropdownMenuRadioItem({ ref, className, children, ...props }: ComponentPropsWithoutRef<typeof RadioItem> & { ref?: RefObject<ComponentRef<typeof RadioItem>> }) {
+function DropdownMenuRadioItem({
+  ref,
+  className,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof RadioItem> & { ref?: RefObject<ComponentRef<typeof RadioItem>> }) {
   return (
     <RadioItem
       className={cn(
@@ -138,7 +170,12 @@ function DropdownMenuRadioItem({ ref, className, children, ...props }: Component
   );
 }
 
-function DropdownMenuLabel({ ref, className, inset, ...props }: ComponentPropsWithoutRef<typeof Label> & {
+function DropdownMenuLabel({
+  ref,
+  className,
+  inset,
+  ...props
+}: ComponentPropsWithoutRef<typeof Label> & {
   inset?: boolean;
 } & { ref?: RefObject<ComponentRef<typeof Label>> }) {
   return <Label className={cn('px-2 py-1.5 text-sm font-semibold', inset && 'pl-8', className)} ref={ref} {...props} />;

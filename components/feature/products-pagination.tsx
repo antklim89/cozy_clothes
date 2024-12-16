@@ -16,7 +16,13 @@ interface Props extends ComponentProps<'nav'> {
   category: string;
 }
 
-export function ProductsPagination({ className, category, totalPages, page, ...props }: Props) {
+export function ProductsPagination({
+  className,
+  category,
+  totalPages,
+  page,
+  ...props
+}: Props) {
   if (totalPages <= 1) return null;
   const hasNext = page < totalPages;
   const hasPrev = page > 1;

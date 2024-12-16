@@ -1,5 +1,5 @@
-import type { CmsBackend, CmsConfig } from 'decap-cms-core';
 import process from 'node:process';
+import type { CmsBackend, CmsConfig } from 'decap-cms-core';
 import { about } from './about';
 import { contacts } from './contacts';
 import { hero } from './hero';

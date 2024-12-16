@@ -1,4 +1,6 @@
 'use client';
+import { Trash } from 'lucide-react';
+import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -7,8 +9,6 @@ import { Label } from '@/components/ui/label';
 import { qtySchema } from '@/lib/schemas';
 import { useCartStore } from '@/lib/store';
 import { cn, getPrice } from '@/lib/utils';
-import { Trash } from 'lucide-react';
-import Link from 'next/link';
 
 
 export function CartCheckoutList({ className, ...props }: ComponentProps<'section'>) {
@@ -25,7 +25,13 @@ export function CartCheckoutList({ className, ...props }: ComponentProps<'sectio
           </CardHeader>
         </Card>
       )}
-      {cartItems.map(({ id, qty, color, size, product }) => {
+      {cartItems.map(({
+        id,
+        qty,
+        color,
+        size,
+        product,
+      }) => {
         const searchParams = new URLSearchParams();
         if (size != null) searchParams.set('size', size.toString());
         if (color != null) searchParams.set('color', color.toString());

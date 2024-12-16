@@ -1,10 +1,10 @@
+import Script from 'next/script';
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductsList } from '@/components/feature/products-list';
 import { Contacts } from '@/components/layout/contacts';
 import { Hero } from '@/components/layout/hero';
 import { Testimonials } from '@/components/layout/testimonials';
 import { productsLoader } from '@/lib/contentLoaders';
-import Script from 'next/script';
 
 
 async function HomePage() {

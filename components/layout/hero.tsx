@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
-import { heroLoader } from '@/lib/contentLoaders';
-import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import Image from 'next/image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
+import { Button } from '@/components/ui/button';
+import { heroLoader } from '@/lib/contentLoaders';
+import { createBlurDataURL } from '@/lib/createBlurDataURL';
 
 
 export async function Hero() {

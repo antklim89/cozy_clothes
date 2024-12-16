@@ -1,11 +1,16 @@
-import { aboutLoader } from '@/lib/contentLoaders';
-import { createBlurDataURL } from '@/lib/createBlurDataURL';
 import Image from 'next/image';
 import Markdown from 'react-markdown';
+import { aboutLoader } from '@/lib/contentLoaders';
+import { createBlurDataURL } from '@/lib/createBlurDataURL';
 
 
 export async function About() {
-  const { text, image, values, valuesList } = await aboutLoader();
+  const {
+    text,
+    image,
+    values,
+    valuesList,
+  } = await aboutLoader();
 
   const blurDataURL = await createBlurDataURL(image);
 

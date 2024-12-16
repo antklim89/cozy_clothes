@@ -1,9 +1,9 @@
 'use client';
+import { ShoppingCart } from 'lucide-react';
+import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { useCartStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
-import { ShoppingCart } from 'lucide-react';
-import Link from 'next/link';
 
 
 export function CartButton({ className, ...props }: ComponentProps<'a'>) {

@@ -1,11 +1,11 @@
 'use client';
-import type { ProductType } from '@/lib/schemas';
+import { SearchIcon } from 'lucide-react';
+import { useMemo } from 'react';
+import Fuse from 'fuse.js';
 import { Input } from '@/components/ui/input';
 import { PRODUCTS_PER_PAGE } from '@/constants';
 import { useSearchParamsState } from '@/lib/hooks';
-import Fuse from 'fuse.js';
-import { SearchIcon } from 'lucide-react';
-import { useMemo } from 'react';
+import type { ProductType } from '@/lib/schemas';
 import { ProductsList } from './products-list';
 
 

@@ -1,9 +1,9 @@
 'use client';
-import type { ProductType } from '@/lib/schemas';
-import { Button } from '@/components/ui/button';
-import { type CartItem, useCartStore } from '@/lib/store';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import type { ProductType } from '@/lib/schemas';
+import { type CartItem, useCartStore } from '@/lib/store';
 
 
 interface Props {

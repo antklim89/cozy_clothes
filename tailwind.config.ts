@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
 import tailwindcssTypographyPlugin from '@tailwindcss/typography';
+import type { Config } from 'tailwindcss';
 import tailwindcssAnimatePlugin from 'tailwindcss-animate';
 
 

@@ -1,5 +1,5 @@
-import type { ProductType } from '@/lib/schemas';
 import type { ComponentProps } from 'react';
+import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { ProductCard } from './product-card';
 

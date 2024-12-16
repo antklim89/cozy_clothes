@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
+import { z } from 'zod';
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { infoLoader, productsLoader } from '@/lib/contentLoaders';
-import { z } from 'zod';
 
 
 interface Props {

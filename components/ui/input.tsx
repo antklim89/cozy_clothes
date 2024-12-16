@@ -4,7 +4,12 @@ import { cn } from '@/lib/utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-function Input({ ref, className, type, ...props }: InputProps & { ref?: Ref<HTMLInputElement> }) {
+function Input({
+  ref,
+  className,
+  type,
+  ...props
+}: InputProps & { ref?: Ref<HTMLInputElement> }) {
   return (
     <input
       className={cn(

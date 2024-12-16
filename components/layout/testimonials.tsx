@@ -1,5 +1,5 @@
-import { testimonialsLoader } from '@/lib/contentLoaders';
 import Image from 'next/image';
+import { testimonialsLoader } from '@/lib/contentLoaders';
 
 
 export async function Testimonials() {
@@ -12,7 +12,12 @@ export async function Testimonials() {
       <div className="container prose">
         <h2 className="text-3xl text-center pb-8">Join thousands of happy clients</h2>
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:gap-y-12">
-          {testimonials.map(({ id, image, name, text }) => (
+          {testimonials.map(({
+            id,
+            image,
+            name,
+            text,
+          }) => (
             <div className="flex flex-col" key={id}>
               <div>
                 <Image
