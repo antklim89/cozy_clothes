@@ -1,9 +1,8 @@
 'use client';
-import { Root } from '@radix-ui/react-toggle';
-import { type VariantProps, cva } from 'class-variance-authority';
-import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
-
+import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
 import { cn } from '@/lib/utils';
+import { Root } from '@radix-ui/react-toggle';
+import { cva, type VariantProps } from 'class-variance-authority';
 
 
 const toggleVariants = cva(
@@ -27,14 +26,10 @@ const toggleVariants = cva(
   },
 );
 
-const Toggle = forwardRef<
-  ElementRef<typeof Root>,
-  ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants>
->(({ className, variant, size, ...props }, ref) => (
-  <Root className={cn(toggleVariants({ variant, size, className }))} ref={ref} {...props} />
-));
+function Toggle({ ref, className, variant, size, ...props }: ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Root>> }) {
+  return <Root className={cn(toggleVariants({ variant, size, className }))} ref={ref} {...props} />;
+}
 
-Toggle.displayName = Root.displayName;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export { Toggle, toggleVariants };

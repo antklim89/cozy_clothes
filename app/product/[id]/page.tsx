@@ -4,11 +4,11 @@ import { productLoader, productsLoader } from '@/lib/contentLoaders';
 
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await productLoader(params.id);
+  const product = await productLoader((await params).id);
 
   return {
     title: product.title,
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 }
 
 async function ProductPage({ params }: Props) {
-  const product = await productLoader(params.id);
+  const product = await productLoader((await params).id);
 
   return <Product className="my-8" product={product} />;
 }

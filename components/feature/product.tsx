@@ -1,13 +1,13 @@
-import Image from 'next/image';
+import type { ProductType } from '@/lib/schemas';
 import type { ComponentProps } from 'react';
-import { AddToCartButton } from './add-to-cart-button';
 import { ProductOptions } from '@/components/form/product-options';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Price } from '@/components/ui/price';
 import { defaultBlurDataUrl } from '@/constants';
 import { createBlurDataURL } from '@/lib/createBlurDataURL';
-import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
+import { AddToCartButton } from './add-to-cart-button';
 
 
 interface Props extends ComponentProps<'div'> {

@@ -1,12 +1,12 @@
 'use client';
+import type { ProductType } from '@/lib/schemas';
+import { Input } from '@/components/ui/input';
+import { PRODUCTS_PER_PAGE } from '@/constants';
+import { useSearchParamsState } from '@/lib/hooks';
 import Fuse from 'fuse.js';
 import { SearchIcon } from 'lucide-react';
 import { useMemo } from 'react';
 import { ProductsList } from './products-list';
-import { Input } from '@/components/ui/input';
-import type { ProductType } from '@/lib/schemas';
-import { useSearchParamsState } from '@/lib/hooks';
-import { PRODUCTS_PER_PAGE } from '@/constants';
 
 
 export function Search({ products }: { products: ProductType[] }) {

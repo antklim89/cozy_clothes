@@ -1,21 +1,20 @@
 import type { Metadata } from 'next';
-import { z } from 'zod';
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductsList } from '@/components/feature/products-list';
 import { ProductsPagination } from '@/components/feature/products-pagination';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { infoLoader, productsLoader } from '@/lib/contentLoaders';
+import { z } from 'zod';
 
 
 interface Props {
-  params: { categoryAndPage: [category: string, page: string] };
+  params: Promise<{ categoryAndPage: [category: string, page: string] }>;
 }
 
 export async function generateMetadata({
-  params: {
-    categoryAndPage: [category],
-  },
+  params,
 }: Props): Promise<Metadata> {
+  const { categoryAndPage: [category] } = await params;
   const { description, keywords } = await infoLoader();
   const title = category === ALL_CATEGORIES ? 'All Products' : category;
 
@@ -48,7 +47,7 @@ export async function generateStaticParams() {
     }
   }
 
-  const result: Props['params'][] = [];
+  const result: Awaited<Props['params']>[] = [];
 
   for (const [category, categoryCount = 0] of Object.entries(categoryCountMap)) {
     for (let page = 0; page < categoryCount / PRODUCTS_PER_PAGE; page++) {
@@ -67,10 +66,10 @@ const paramsSchema = z.object({
   categoryAndPage: z.tuple([z.string(), z.coerce.number().positive()]),
 });
 
-async function ProductPage({ params }: { params: z.infer<typeof paramsSchema> }) {
+async function ProductPage({ params }: { params: Promise<z.infer<typeof paramsSchema>> }) {
   const {
     categoryAndPage: [category, page],
-  } = await paramsSchema.parseAsync(params);
+  } = await paramsSchema.parseAsync(await params);
 
   let products = await productsLoader();
 

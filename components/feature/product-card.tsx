@@ -1,10 +1,10 @@
+import type { ProductType } from '@/lib/schemas';
+import { Price } from '@/components/ui/price';
+import { defaultBlurDataUrl } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 import { use } from 'react';
 import { InCartIcon } from './in-cart-icon';
-import type { ProductType } from '@/lib/schemas';
-import { defaultBlurDataUrl } from '@/constants';
-import { Price } from '@/components/ui/price';
 
 
 interface Props {

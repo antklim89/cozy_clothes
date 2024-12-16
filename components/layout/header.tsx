@@ -1,6 +1,3 @@
-import { Menu } from 'lucide-react';
-import Image, { type StaticImageData } from 'next/image';
-import Link from 'next/link';
 import { CartButton } from '@/components/feature/cart-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +11,9 @@ import {
 import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import logo from '@/public/logo.svg';
+import { Menu } from 'lucide-react';
+import Image, { type StaticImageData } from 'next/image';
+import Link from 'next/link';
 
 
 const links = [

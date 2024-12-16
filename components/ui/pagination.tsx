@@ -1,8 +1,8 @@
+import type { ComponentProps, RefObject } from 'react';
+import { type ButtonProps, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
-import { type ComponentProps, forwardRef } from 'react';
-import { cn } from '@/lib/utils';
-import { type ButtonProps, buttonVariants } from '@/components/ui/button';
 
 
 function Pagination({ className, ...props }: ComponentProps<'nav'>) {
@@ -15,17 +15,14 @@ function Pagination({ className, ...props }: ComponentProps<'nav'>) {
     />
   );
 }
-Pagination.displayName = 'Pagination';
 
-const PaginationContent = forwardRef<HTMLUListElement, ComponentProps<'ul'>>(({ className, ...props }, ref) => (
-  <ul className={cn('flex flex-row items-center gap-1', className)} ref={ref} {...props} />
-));
-PaginationContent.displayName = 'PaginationContent';
+function PaginationContent({ ref, className, ...props }: ComponentProps<'ul'> & { ref?: RefObject<HTMLUListElement> }) {
+  return <ul className={cn('flex flex-row items-center gap-1', className)} ref={ref} {...props} />;
+}
 
-const PaginationItem = forwardRef<HTMLLIElement, ComponentProps<'li'>>(({ className, ...props }, ref) => (
-  <li className={cn('', className)} ref={ref} {...props} />
-));
-PaginationItem.displayName = 'PaginationItem';
+function PaginationItem({ ref, className, ...props }: ComponentProps<'li'> & { ref?: RefObject<HTMLLIElement> }) {
+  return <li className={cn('', className)} ref={ref} {...props} />;
+}
 
 type PaginationLinkProps = {
   isActive?: boolean;
@@ -47,7 +44,6 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
     />
   );
 }
-PaginationLink.displayName = 'PaginationLink';
 
 function PaginationPrevious({ className, ...props }: ComponentProps<typeof PaginationLink>) {
   return (
@@ -57,7 +53,6 @@ function PaginationPrevious({ className, ...props }: ComponentProps<typeof Pagin
     </PaginationLink>
   );
 }
-PaginationPrevious.displayName = 'PaginationPrevious';
 
 function PaginationNext({ className, ...props }: ComponentProps<typeof PaginationLink>) {
   return (
@@ -67,7 +62,6 @@ function PaginationNext({ className, ...props }: ComponentProps<typeof Paginatio
     </PaginationLink>
   );
 }
-PaginationNext.displayName = 'PaginationNext';
 
 function PaginationEllipsis({ className, ...props }: ComponentProps<'span'>) {
   return (
@@ -77,7 +71,6 @@ function PaginationEllipsis({ className, ...props }: ComponentProps<'span'>) {
     </span>
   );
 }
-PaginationEllipsis.displayName = 'PaginationEllipsis';
 
 export {
   Pagination,

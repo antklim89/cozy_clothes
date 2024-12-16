@@ -1,4 +1,6 @@
 'use client';
+import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
+import { cn } from '@/lib/utils';
 import {
   Content,
   Group,
@@ -17,9 +19,6 @@ import {
   Viewport,
 } from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
-
-import { cn } from '@/lib/utils';
 
 
 const Select = Root;
@@ -28,8 +27,8 @@ const SelectGroup = Group;
 
 const SelectValue = Value;
 
-const SelectTrigger = forwardRef<ElementRef<typeof Trigger>, ComponentPropsWithoutRef<typeof Trigger>>(
-  ({ className, children, ...props }, ref) => (
+function SelectTrigger({ ref, className, children, ...props }: ComponentPropsWithoutRef<typeof Trigger> & { ref?: RefObject<ComponentRef<typeof Trigger>> }) {
+  return (
     <Trigger
       className={cn(
         'flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
@@ -43,40 +42,35 @@ const SelectTrigger = forwardRef<ElementRef<typeof Trigger>, ComponentPropsWitho
         <ChevronDown className="h-4 w-4 opacity-50" />
       </Icon>
     </Trigger>
-  ),
-);
-SelectTrigger.displayName = Trigger.displayName;
+  );
+}
 
-const SelectScrollUpButton = forwardRef<
-  ElementRef<typeof ScrollUpButton>,
-  ComponentPropsWithoutRef<typeof ScrollUpButton>
->(({ className, ...props }, ref) => (
-  <ScrollUpButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
-    ref={ref}
-    {...props}
-  >
-    <ChevronUp className="h-4 w-4" />
-  </ScrollUpButton>
-));
-SelectScrollUpButton.displayName = ScrollUpButton.displayName;
+function SelectScrollUpButton({ ref, className, ...props }: ComponentPropsWithoutRef<typeof ScrollUpButton> & { ref?: RefObject<ComponentRef<typeof ScrollUpButton>> }) {
+  return (
+    <ScrollUpButton
+      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      ref={ref}
+      {...props}
+    >
+      <ChevronUp className="h-4 w-4" />
+    </ScrollUpButton>
+  );
+}
 
-const SelectScrollDownButton = forwardRef<
-  ElementRef<typeof ScrollDownButton>,
-  ComponentPropsWithoutRef<typeof ScrollDownButton>
->(({ className, ...props }, ref) => (
-  <ScrollDownButton
-    className={cn('flex cursor-default items-center justify-center py-1', className)}
-    ref={ref}
-    {...props}
-  >
-    <ChevronDown className="h-4 w-4" />
-  </ScrollDownButton>
-));
-SelectScrollDownButton.displayName = ScrollDownButton.displayName;
+function SelectScrollDownButton({ ref, className, ...props }: ComponentPropsWithoutRef<typeof ScrollDownButton> & { ref?: RefObject<ComponentRef<typeof ScrollDownButton>> }) {
+  return (
+    <ScrollDownButton
+      className={cn('flex cursor-default items-center justify-center py-1', className)}
+      ref={ref}
+      {...props}
+    >
+      <ChevronDown className="h-4 w-4" />
+    </ScrollDownButton>
+  );
+}
 
-const SelectContent = forwardRef<ElementRef<typeof Content>, ComponentPropsWithoutRef<typeof Content>>(
-  ({ className, children, position = 'popper', ...props }, ref) => (
+function SelectContent({ ref, className, children, position = 'popper', ...props }: ComponentPropsWithoutRef<typeof Content> & { ref?: RefObject<ComponentRef<typeof Content>> }) {
+  return (
     <Portal>
       <Content
         className={cn(
@@ -102,19 +96,15 @@ const SelectContent = forwardRef<ElementRef<typeof Content>, ComponentPropsWitho
         <SelectScrollDownButton />
       </Content>
     </Portal>
-  ),
-);
-SelectContent.displayName = Content.displayName;
+  );
+}
 
-const SelectLabel = forwardRef<ElementRef<typeof Label>, ComponentPropsWithoutRef<typeof Label>>(
-  ({ className, ...props }, ref) => (
-    <Label className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} ref={ref} {...props} />
-  ),
-);
-SelectLabel.displayName = Label.displayName;
+function SelectLabel({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Label> & { ref?: RefObject<ComponentRef<typeof Label>> }) {
+  return <Label className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} ref={ref} {...props} />;
+}
 
-const SelectItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithoutRef<typeof Item>>(
-  ({ className, children, ...props }, ref) => (
+function SelectItem({ ref, className, children, ...props }: ComponentPropsWithoutRef<typeof Item> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
+  return (
     <Item
       className={cn(
         'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
@@ -131,26 +121,22 @@ const SelectItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithoutRef<
 
       <ItemText>{children}</ItemText>
     </Item>
-  ),
-);
-SelectItem.displayName = Item.displayName;
+  );
+}
 
-const SelectSeparator = forwardRef<ElementRef<typeof Separator>, ComponentPropsWithoutRef<typeof Separator>>(
-  ({ className, ...props }, ref) => (
-    <Separator className={cn('-mx-1 my-1 h-px bg-muted', className)} ref={ref} {...props} />
-  ),
-);
-SelectSeparator.displayName = Separator.displayName;
+function SelectSeparator({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Separator> & { ref?: RefObject<ComponentRef<typeof Separator>> }) {
+  return <Separator className={cn('-mx-1 my-1 h-px bg-muted', className)} ref={ref} {...props} />;
+}
 
 export {
   Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
   SelectContent,
-  SelectLabel,
+  SelectGroup,
   SelectItem,
-  SelectSeparator,
-  SelectScrollUpButton,
+  SelectLabel,
   SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
 };

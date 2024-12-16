@@ -1,16 +1,16 @@
 'use client';
-import { Item, Root } from '@radix-ui/react-toggle-group';
 import type { VariantProps } from 'class-variance-authority';
+import { toggleVariants } from '@/components/ui/toggle';
+import { cn } from '@/lib/utils';
+import { Item, Root } from '@radix-ui/react-toggle-group';
 import {
   type ComponentPropsWithoutRef,
-  type ElementRef,
+  type ComponentRef,
   createContext,
-  forwardRef,
+  type RefObject,
   useContext,
   useMemo,
 } from 'react';
-import { cn } from '@/lib/utils';
-import { toggleVariants } from '@/components/ui/toggle';
 
 
 const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
@@ -18,24 +18,30 @@ const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
   variant: 'default',
 });
 
-const ToggleGroup = forwardRef<
-  ElementRef<typeof Root>,
-  ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants>
->(({ className, variant, size, children, ...props }, ref) => {
+function ToggleGroup({
+  ref,
+  className,
+  variant,
+  size,
+  children,
+  ...props
+}: ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Root>> }) {
   const values = useMemo(() => ({ variant, size }), [variant, size]);
   return (
     <Root className={cn('flex items-center justify-center gap-1 flex-wrap', className)} ref={ref} {...props}>
-      <ToggleGroupContext.Provider value={values}>{children}</ToggleGroupContext.Provider>
+      <ToggleGroupContext value={values}>{children}</ToggleGroupContext>
     </Root>
   );
-});
+}
 
-ToggleGroup.displayName = Root.displayName;
-
-const ToggleGroupItem = forwardRef<
-  ElementRef<typeof Item>,
-  ComponentPropsWithoutRef<typeof Item> & VariantProps<typeof toggleVariants>
->(({ className, children, variant, size, ...props }, ref) => {
+function ToggleGroupItem({
+  ref,
+  className,
+  children,
+  variant,
+  size,
+  ...props
+}: ComponentPropsWithoutRef<typeof Item> & VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
   const context = useContext(ToggleGroupContext);
 
   return (
@@ -54,8 +60,6 @@ const ToggleGroupItem = forwardRef<
       {children}
     </Item>
   );
-});
-
-ToggleGroupItem.displayName = Item.displayName;
+}
 
 export { ToggleGroup, ToggleGroupItem };

@@ -1,9 +1,9 @@
-import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { ALL_CATEGORIES } from '@/constants';
 import { productsLoader } from '@/lib/contentLoaders';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 
 type Props = ComponentProps<'nav'> & {

@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Markdown from 'react-markdown';
 import { aboutLoader } from '@/lib/contentLoaders';
 import { createBlurDataURL } from '@/lib/createBlurDataURL';
+import Image from 'next/image';
+import Markdown from 'react-markdown';
 
 
 export async function About() {

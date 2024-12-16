@@ -1,14 +1,14 @@
-import process from 'node:process';
+import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import process from 'node:process';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
+import { infoLoader } from '@/lib/contentLoaders';
 import '@/styles/main.css';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
-import type { Metadata } from 'next';
-import { Footer } from '@/components/layout/footer';
-import { Header } from '@/components/layout/header';
-import { infoLoader } from '@/lib/contentLoaders';
 
 
 export async function generateMetadata(): Promise<Metadata> {
