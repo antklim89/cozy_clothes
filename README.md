@@ -6,7 +6,8 @@ Learning project
 ## Run
 ### prod
 ```
-yarn docker:prod
+yarn docker:build
+yarn docker:up
 ```
 ### dev
 ```
@@ -16,4 +17,4 @@ yarn docker:dev
 
 ## Env
 
-process.env.REPOSITORY_URL = owner-name/repo-name
+REPOSITORY_URL = owner-name/repo-name

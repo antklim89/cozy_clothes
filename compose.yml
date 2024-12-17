@@ -1,0 +1,11 @@
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - ${CLIENT_PORT:-3000}:3000
