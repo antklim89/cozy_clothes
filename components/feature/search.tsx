@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { PRODUCTS_PER_PAGE } from '@/constants';
 import { useSearchParamsState } from '@/lib/hooks';
 import type { ProductType } from '@/lib/schemas';
-import { ProductsList } from './products-list';
+import { ProductCard } from './product-card';
+import { ProductsList, ProductsListContent, ProductsListTitle } from './products-list';
 
 
 export function Search({ products }: { products: ProductType[] }) {
@@ -32,12 +33,22 @@ export function Search({ products }: { products: ProductType[] }) {
         <Input placeholder="Search..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
         <SearchIcon className="absolute top-1/2 -translate-y-1/2 right-4" />
       </div>
+
       {foundProducts.length === 0
         ? (
-            <p className="text-center text-xl text-gray-500 mt-20">No products found.</p>
+            <p className="text-center my-48 text-2xl text-black-500">No products found.</p>
           )
-        : null}
-      <ProductsList className="my-8" products={foundProducts} />
+        : (
+            <ProductsList>
+              <ProductsListTitle>Search results</ProductsListTitle>
+              <ProductsListContent>
+                {foundProducts.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </ProductsListContent>
+            </ProductsList>
+          )}
+
     </section>
   );
 }

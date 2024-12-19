@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { z } from 'zod';
 import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
-import { ProductsList } from '@/components/feature/products-list';
-import { ProductsPagination } from '@/components/feature/products-pagination';
+import { ProductCard } from '@/components/feature/product-card';
+import { ProductsList, ProductsListContent, ProductsListPagination } from '@/components/feature/products-list';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
 import { infoLoader, productsLoader } from '@/lib/contentLoaders';
 
@@ -20,7 +20,7 @@ export async function generateMetadata({
 
   return {
     title,
-    description: `${description} Browse our ${category === ALL_CATEGORIES ? 'all' : category} products.`,
+    description: `${description} Browse our ${category === ALL_CATEGORIES ? '' : category} products.`,
     keywords: [...keywords, title],
     openGraph: {
       title,
@@ -88,9 +88,15 @@ async function ProductPage({ params }: { params: Promise<z.infer<typeof paramsSc
   return (
     <div className="flex flex-col gap-4 my-8">
       <CategoriesNavBar selectedCategory={category} />
-      <ProductsPagination category={category} page={page} totalPages={totalPages} />
-      <ProductsList products={products} />
-      <ProductsPagination category={category} page={page} totalPages={totalPages} />
+      <ProductsList>
+        <ProductsListPagination category={category} page={page} totalPages={totalPages} />
+        <ProductsListContent>
+          {products.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </ProductsListContent>
+        <ProductsListPagination category={category} page={page} totalPages={totalPages} />
+      </ProductsList>
     </div>
   );
 }
