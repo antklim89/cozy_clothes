@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { ComponentProps } from 'react';
 import { ProductOptions } from '@/components/form/product-options';
 import {
@@ -8,9 +7,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { PlaceholderImage } from '@/components/ui/placeholder-image';
 import { Price } from '@/components/ui/price';
-import { defaultBlurDataUrl } from '@/constants';
-import { createBlurDataURL } from '@/lib/create-blur-data-url';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { AddToCartButton } from './add-to-cart-button';
@@ -21,20 +19,17 @@ interface Props extends ComponentProps<'div'> {
 }
 
 export async function Product({ product, className, ...props }: Props) {
-  const blurDataURLs = await Promise.all(product.images.map(async image => createBlurDataURL(image)));
   return (
     <div {...props} className={cn('container grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4', className)}>
       <section className="border px-4 flex-[2_1_0]">
         <Carousel>
           <CarouselContent>
-            {product.images.map((image, idx) => (
+            {product.images.map(image => (
               <CarouselItem key={image}>
-                <Image
+                <PlaceholderImage
                   alt={product.title}
-                  blurDataURL={blurDataURLs[idx] ?? defaultBlurDataUrl}
                   className="object-cover w-full supports-[height:80dvh]:h-[80dvh] h-80vh"
                   height={320}
-                  placeholder="blur"
                   src={image}
                   width={480}
                 />

@@ -1,7 +1,6 @@
-import Image from 'next/image';
 import Markdown from 'react-markdown';
+import { PlaceholderImage } from '@/components/ui/placeholder-image';
 import { aboutLoader } from '@/lib/content-loaders';
-import { createBlurDataURL } from '@/lib/create-blur-data-url';
 
 
 export async function About() {
@@ -11,19 +10,14 @@ export async function About() {
     values,
     valuesList,
   } = await aboutLoader();
-
-  const blurDataURL = await createBlurDataURL(image);
-
   return (
     <section className="prose container my-8">
       <Markdown>{text}</Markdown>
 
-      <Image
+      <PlaceholderImage
         alt="About"
-        blurDataURL={blurDataURL}
         className="w-full h-80 object-cover object-center rounded-3xl"
         height={320}
-        placeholder="blur"
         src={image}
         width={1024}
       />

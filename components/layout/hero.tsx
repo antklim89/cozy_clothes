@@ -1,14 +1,12 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Markdown from 'react-markdown';
 import { Button } from '@/components/ui/button';
+import { PlaceholderImage } from '@/components/ui/placeholder-image';
 import { heroLoader } from '@/lib/content-loaders';
-import { createBlurDataURL } from '@/lib/create-blur-data-url';
 
 
 export async function Hero() {
   const { imagePreview, text } = await heroLoader();
-  const blurDataURL = await createBlurDataURL(imagePreview);
 
   return (
     <section className="bg-slate-100">
@@ -26,12 +24,10 @@ export async function Hero() {
           </div>
         </div>
         <div className="inset-y-0 right-0 w-full max-w-xl px-4 mx-auto lg:pl-8 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-1/2 lg:max-w-full lg:absolute xl:px-0">
-          <Image
+          <PlaceholderImage
             alt="hero"
-            blurDataURL={blurDataURL}
             className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none sm:h-96 lg:h-full"
             height={720}
-            placeholder="blur"
             src={imagePreview}
             width={480}
           />

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { PlaceholderImage } from '@/components/ui/placeholder-image';
 import { testimonialsLoader } from '@/lib/content-loaders';
 
 
@@ -20,7 +20,7 @@ export async function Testimonials() {
           }) => (
             <div className="flex flex-col" key={id}>
               <div>
-                <Image
+                <PlaceholderImage
                   alt={name}
                   className="object-cover object-center w-20 h-20 rounded-full m-0"
                   height={120}
