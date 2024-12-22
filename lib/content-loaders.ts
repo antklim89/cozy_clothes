@@ -1,7 +1,7 @@
-import { cache } from 'react';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import type { ZodObject, ZodRawShape } from 'zod';
+import NodeCache from 'node-cache';
+import type { z, ZodObject, ZodRawShape } from 'zod';
 import {
   aboutSchema,
   contactSchema,
@@ -12,20 +12,27 @@ import {
 } from './schemas';
 
 
+const cache = new NodeCache({ stdTTL: 60 * 60 });
+
 const BASE_PATH = './public/content';
 
-const baseOneFileLoader = cache(async <T extends ZodRawShape>(filePath: string, schema: ZodObject<T>) => {
+async function baseOneFileLoader<T extends ZodRawShape>(filePath: string, schema: ZodObject<T>): Promise<z.infer<ZodObject<T>>> {
+  if (cache.has(filePath)) return cache.get(filePath) as z.infer<ZodObject<T>>;
+
   try {
     const contentString = await fs.readFile(path.resolve(BASE_PATH, `${filePath}.json`), 'utf8');
     const contentJson = JSON.parse(contentString) as Record<string, unknown>;
     contentJson.id = path.parse(filePath).name;
-    return await schema.parseAsync(contentJson);
+    const result = await schema.parseAsync(contentJson);
+    cache.set(filePath, result);
+    return result;
   } catch (error) {
     throw new Error(`Load Error ${filePath}:\n ${error instanceof Error ? error.message : ''}`);
   }
-});
+}
 
-const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: string, schema: ZodObject<T>) => {
+async function baseManyFilesLoader<T extends ZodRawShape>(filesPath: string, schema: ZodObject<T>): Promise<z.infer<ZodObject<T>>[]> {
+  if (cache.has(filesPath)) return cache.get(filesPath) as z.infer<ZodObject<T>>[];
   try {
     const fileNames = await fs.readdir(path.resolve(BASE_PATH, filesPath));
     const results = await Promise.all(
@@ -42,36 +49,38 @@ const baseManyFilesLoader = cache(async <T extends ZodRawShape>(filesPath: strin
     );
     const filteredResults = results.filter(i => (i != null) && (i.hidden === false));
 
-    return await schema.array().parseAsync(filteredResults);
+    const result = await schema.array().parseAsync(filteredResults);
+    cache.set(filesPath, result);
+    return result;
   } catch (error) {
     throw new Error(`Load Error ${filesPath}:\n ${error instanceof Error ? error.message : ''}`);
   }
-});
+}
 
-export const heroLoader = cache(async () => {
+export async function heroLoader() {
   return baseOneFileLoader('hero', heroSchema);
-});
+}
 
-export const aboutLoader = cache(async () => {
+export async function aboutLoader() {
   return baseOneFileLoader('about', aboutSchema);
-});
+}
 
-export const infoLoader = cache(async () => {
+export async function infoLoader() {
   return baseOneFileLoader('info', infoSchema);
-});
+}
 
-export const productsLoader = cache(async () => {
+export async function productsLoader() {
   return baseManyFilesLoader('products', productSchema);
-});
+}
 
-export const testimonialsLoader = cache(async () => {
+export async function testimonialsLoader() {
   return baseManyFilesLoader('testimonials', testimonialSchema);
-});
+}
 
-export const contactsLoader = cache(async () => {
+export async function contactsLoader() {
   return baseManyFilesLoader('contacts', contactSchema);
-});
+}
 
-export const productLoader = cache(async (id: string) => {
+export async function productLoader(id: string) {
   return baseOneFileLoader(`products/${id}`, productSchema);
-});
+}
