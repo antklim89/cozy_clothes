@@ -64,7 +64,7 @@ export async function Header() {
         <CartButton className="ml-4" />
 
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger aria-label="Navigation Menu">
             <Menu />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
