@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { testimonialsLoader } from '@/lib/contentLoaders';
+import { testimonialsLoader } from '@/lib/content-loaders';
 
 
 export async function Testimonials() {

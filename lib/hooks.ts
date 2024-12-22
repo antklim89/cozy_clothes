@@ -21,20 +21,17 @@ export function useSearchParamsState(key: string, defaultValue?: string | null) 
   const searchParams = useSearchParams();
   const [init, setInit] = useState(false);
 
-  useEffect(() => {
-    setInit(true);
-  }, []);
-
+  useEffect(() => setInit(true), []);
   if (!init) return ['', () => undefined];
 
   const setSearchState = (query?: string | null) => {
     if (typeof query !== 'string' && typeof query !== 'number') return;
     const params = new URLSearchParams(searchParams);
     params.set(key, query.toString());
-    window.history.replaceState(null, '', `?${params.toString()}`);
+    window.history.replaceState(null, '', `?${params}`);
   };
 
   const state = searchParams.get(key);
 
-  return [state?.toString() ?? defaultValue, setSearchState] as const;
+  return [state ?? defaultValue, setSearchState] as const;
 }

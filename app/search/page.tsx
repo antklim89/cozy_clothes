@@ -1,5 +1,5 @@
 import { Search } from '@/components/feature/search';
-import { productsLoader } from '@/lib/contentLoaders';
+import { productsLoader } from '@/lib/content-loaders';
 
 
 async function SearchPage() {

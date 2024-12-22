@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Product } from '@/components/feature/product';
-import { productLoader, productsLoader } from '@/lib/contentLoaders';
+import { productLoader, productsLoader } from '@/lib/content-loaders';
 
 
 interface Props {

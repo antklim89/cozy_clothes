@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ALL_CATEGORIES } from '@/constants';
-import { productsLoader } from '@/lib/contentLoaders';
+import { productsLoader } from '@/lib/content-loaders';
 import logo from '@/public/logo.svg';
 
 

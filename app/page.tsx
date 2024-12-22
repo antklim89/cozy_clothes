@@ -5,7 +5,7 @@ import { ProductsList, ProductsListContent, ProductsListTitle } from '@/componen
 import { Contacts } from '@/components/layout/contacts';
 import { Hero } from '@/components/layout/hero';
 import { Testimonials } from '@/components/layout/testimonials';
-import { productsLoader } from '@/lib/contentLoaders';
+import { productsLoader } from '@/lib/content-loaders';
 
 
 async function HomePage() {

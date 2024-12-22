@@ -12,7 +12,7 @@ interface Props {
 }
 
 export function ProductCard({ product }: Props) {
-  const imported = typeof window !== 'undefined' ? null : use(import('@/lib/createBlurDataURL'));
+  const imported = typeof window !== 'undefined' ? null : use(import('@/lib/create-blur-data-url'));
   const blurDataURL = imported ? use(imported.createBlurDataURL(product.imagePreview)) : defaultBlurDataUrl;
 
   return (

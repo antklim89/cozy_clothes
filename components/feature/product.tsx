@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/carousel';
 import { Price } from '@/components/ui/price';
 import { defaultBlurDataUrl } from '@/constants';
-import { createBlurDataURL } from '@/lib/createBlurDataURL';
+import { createBlurDataURL } from '@/lib/create-blur-data-url';
 import type { ProductType } from '@/lib/schemas';
 import { cn } from '@/lib/utils';
 import { AddToCartButton } from './add-to-cart-button';

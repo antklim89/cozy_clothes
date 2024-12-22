@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { ALL_CATEGORIES } from '@/constants';
-import { productsLoader } from '@/lib/contentLoaders';
+import { productsLoader } from '@/lib/content-loaders';
 import { cn } from '@/lib/utils';
 
 

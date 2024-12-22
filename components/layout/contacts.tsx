@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { contactsLoader } from '@/lib/contentLoaders';
+import { contactsLoader } from '@/lib/content-loaders';
 
 
 export async function Contacts() {

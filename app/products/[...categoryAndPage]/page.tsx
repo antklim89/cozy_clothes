@@ -4,7 +4,7 @@ import { CategoriesNavBar } from '@/components/feature/categories-nav-bar';
 import { ProductCard } from '@/components/feature/product-card';
 import { ProductsList, ProductsListContent, ProductsListPagination } from '@/components/feature/products-list';
 import { ALL_CATEGORIES, PRODUCTS_PER_PAGE } from '@/constants';
-import { infoLoader, productsLoader } from '@/lib/contentLoaders';
+import { infoLoader, productsLoader } from '@/lib/content-loaders';
 
 
 interface Props {

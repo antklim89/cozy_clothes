@@ -8,7 +8,7 @@ import '@fontsource/poppins/700-italic.css';
 import process from 'node:process';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
-import { infoLoader } from '@/lib/contentLoaders';
+import { infoLoader } from '@/lib/content-loaders';
 
 
 export async function generateMetadata(): Promise<Metadata> {
