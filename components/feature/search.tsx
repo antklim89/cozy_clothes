@@ -3,7 +3,7 @@ import { SearchIcon } from 'lucide-react';
 import { useMemo } from 'react';
 import Fuse from 'fuse.js';
 import { Input } from '@/components/ui/input';
-import { PRODUCTS_PER_PAGE } from '@/constants';
+import { PRODUCTS_PER_PAGE } from '@/lib/constants';
 import { useSearchParamsState } from '@/lib/hooks';
 import type { ProductType } from '@/lib/schemas';
 import { ProductCard } from './product-card';

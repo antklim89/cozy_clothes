@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { type ComponentProps, Suspense, use } from 'react';
-import { defaultBlurDataUrl } from '@/constants';
+import { defaultBlurDataUrl } from '@/lib/constants';
 
 
 type Props = Omit<ComponentProps<typeof Image>, 'blurDataURL' | 'placeholder' | 'src'> & {

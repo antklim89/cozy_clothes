@@ -1,7 +1,7 @@
 import path from 'node:path';
 import process from 'node:process';
 import sharp from 'sharp';
-import { defaultBlurDataUrl } from '@/constants';
+import { defaultBlurDataUrl } from '@/lib/constants';
 
 
 export async function createBlurDataURL(imagePreview: string) {
