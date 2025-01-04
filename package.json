@@ -2,6 +2,7 @@
   "name": "cozy_clothes",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "description": "Template",
   "scripts": {
     "dev": "run-p dev:**",
