@@ -1,5 +1,6 @@
 import process from 'node:process';
 import type { CmsBackend, CmsConfig } from 'decap-cms-core';
+import { NETLIFY, SITE_URL } from '@/lib/env';
 import { about } from './about';
 import { contacts } from './contacts';
 import { hero } from './hero';
@@ -8,19 +9,20 @@ import { products } from './products';
 import { testimonials } from './testimonials';
 
 
-const backend: CmsBackend
-  = process.env.NETLIFY === 'true'
-    ? {
-        name: 'git-gateway',
-        branch: 'main',
-      }
-    : {
-        name: 'github',
-        repo: process.env.REPOSITORY_URL ?? 'test/test',
-        branch: 'main',
-      };
+const backend: CmsBackend = NETLIFY
+  ? {
+      name: 'git-gateway',
+      branch: 'main',
+    }
+  : {
+      name: 'github',
+      repo: 'antklim89/cozy_clothes',
+      branch: 'main',
+      base_url: process.env.URL,
+      auth_endpoint: 'auth',
+    };
 
-const URL_HOSTNAME = new URL(process.env.URL ?? 'http://localhost:3000').hostname;
+const URL_HOSTNAME = new URL(SITE_URL).hostname;
 
 export const decapCmsConfig: CmsConfig = {
   load_config_file: false,
