@@ -1,3 +1,4 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import process from 'node:process';
 
 
@@ -12,4 +13,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPayload(nextConfig);

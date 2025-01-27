@@ -10,10 +10,13 @@
     ],
     "baseUrl": ".",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@payload-config": [
+        "./payload.config.ts"
       ]
     },
     "resolveJsonModule": true,
