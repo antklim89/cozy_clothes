@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { ProductType } from './schemas';
+import type { ProductType } from './types';
 
 
 export interface CartItem {
