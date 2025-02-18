@@ -55,7 +55,7 @@ function createRichText(textArr: string[]): Product['description'] {
 }
 
 async function getImages(collection: CollectionSlug, imagesPath: string) {
-  const imagesDir = path.resolve('seed/media', imagesPath);
+  const imagesDir = path.resolve('seed/placeholders', imagesPath);
   const imagesNames = await fs.readdir(imagesDir);
 
   const images = await Promise.all(imagesNames.map(async (imageName) => {
