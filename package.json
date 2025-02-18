@@ -26,7 +26,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit -w --preserveWatchOutput",
-    "seed": "yarn payload run seed.ts",
+    "seed": "yarn payload run seed/seed.ts",
     "lint": "eslint .",
     "docker:dev": "docker compose -f compose.yml -f compose.dev.yml up --build --watch",
     "docker:up": "docker compose up",
