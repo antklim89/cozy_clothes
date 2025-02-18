@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { qtySchema } from '@/lib/schemas';
 import { useCartStore } from '@/lib/store';
 import { cn, getPrice } from '@/lib/utils';
 
@@ -40,7 +39,7 @@ export function CartCheckoutList({ className, ...props }: ComponentProps<'sectio
           <Card key={id}>
             <CardHeader>
               <h3 className="text-xl">
-                <Link href={`/product/${product.id}?${searchParams.toString()}`}>{product.title}</Link>
+                <Link href={`/products/${product.id}?${searchParams.toString()}`}>{product.title}</Link>
               </h3>
               <div className="flex gap-4">
                 {color != null && <span className="text-gray-600 uppercase">{color}</span>}
@@ -57,7 +56,7 @@ export function CartCheckoutList({ className, ...props }: ComponentProps<'sectio
                     min={1}
                     type="number"
                     value={qty}
-                    onBlur={e => updateCart(id, { qty: qtySchema.parse(e.target.valueAsNumber) })}
+                    onBlur={e => updateCart(id, { qty: e.target.valueAsNumber })}
                     onChange={e => updateCart(id, { qty: e.target.valueAsNumber })}
                   />
                   <span className="text-2xl">

@@ -1,6 +1,6 @@
-import { type ClassValue, clsx } from 'clsx';
+import { clsx } from 'clsx';
+import type { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { qtySchema } from './schemas';
 
 
 export function cn(...inputs: ClassValue[]) {
@@ -24,7 +24,10 @@ export function calculatePrice({
   price = 0,
   discount = 0,
   qty = 1,
-}: { price: number; discount?: number; qty?: number }): number {
-  const q = qtySchema.parse(qty);
-  return (price - price * (discount / 100)) * q;
+}: {
+  price: number;
+  discount?: number;
+  qty?: number;
+}): number {
+  return (price - price * (discount / 100)) * qty;
 }
