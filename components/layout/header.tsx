@@ -1,6 +1,8 @@
 import { Menu } from 'lucide-react';
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next/image';
+import type { StaticImageData } from 'next/image';
 import Link from 'next/link';
+import { fetchCategories } from '@/actions/categories';
 import { CartButton } from '@/components/feature/cart-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +14,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ALL_CATEGORIES } from '@/lib/constants';
-import { productsLoader } from '@/lib/content-loaders';
 import logo from '@/public/logo.svg';
 
 
@@ -32,8 +33,7 @@ const links = [
 ] as const;
 
 export async function Header() {
-  const products = await productsLoader();
-  const categories = products.reduce((acc, i) => acc.add(i.category), new Set<string>()).values();
+  const categories = await fetchCategories();
 
   return (
     <header className="bg-primary text-primary-foreground">
@@ -88,9 +88,9 @@ export async function Header() {
                 </li>
 
                 {Array.from(categories, category => (
-                  <li key={category}>
+                  <li key={category.id}>
                     <DropdownMenuItem asChild className="flex justify-center">
-                      <Link href={`/products/${category}/1`}>{category}</Link>
+                      <Link href={`/products/${category.id}/1`}>{category.name}</Link>
                     </DropdownMenuItem>
                   </li>
                 ))}

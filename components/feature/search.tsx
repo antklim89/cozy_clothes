@@ -5,7 +5,7 @@ import Fuse from 'fuse.js';
 import { Input } from '@/components/ui/input';
 import { PRODUCTS_PER_PAGE } from '@/lib/constants';
 import { useSearchParamsState } from '@/lib/hooks';
-import type { ProductType } from '@/lib/schemas';
+import type { ProductType } from '@/lib/types';
 import { ProductCard } from './product-card';
 import { ProductsList, ProductsListContent, ProductsListTitle } from './products-list';
 

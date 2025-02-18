@@ -1,10 +1,6 @@
 import { useSearchParams } from 'next/navigation';
-import {
-  type Dispatch,
-  type SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 
 export function useSearchParamsState(

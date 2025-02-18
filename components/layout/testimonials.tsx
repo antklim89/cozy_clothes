@@ -1,9 +1,9 @@
-import { PlaceholderImage } from '@/components/ui/placeholder-image';
-import { testimonialsLoader } from '@/lib/content-loaders';
+import Image from 'next/image';
+import { fetchTestimonials } from '@/actions/testimonials';
 
 
 export async function Testimonials() {
-  const testimonials = await testimonialsLoader();
+  const testimonials = await fetchTestimonials();
 
   return (
     <section className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -20,12 +20,14 @@ export async function Testimonials() {
           }) => (
             <div className="flex flex-col" key={id}>
               <div>
-                <PlaceholderImage
+                <Image
                   alt={name}
+                  blurDataURL={image.blurDataUrl}
                   className="object-cover object-center w-20 h-20 rounded-full m-0"
-                  height={120}
-                  src={image}
-                  width={120}
+                  height={image.height}
+                  placeholder="blur"
+                  src={image.url}
+                  width={image.width}
                 />
               </div>
               <div>

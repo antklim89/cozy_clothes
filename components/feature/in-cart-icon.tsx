@@ -2,9 +2,10 @@
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCartStore } from '@/lib/store';
+import type { ProductType } from '@/lib/types';
 
 
-export function InCartIcon({ productId }: { productId: string }) {
+export function InCartIcon({ productId }: { productId: ProductType['id'] }) {
   const isInCart = useCartStore(state => state.cartItems.findIndex(i => i.product.id === productId) >= 0);
 
   if (!isInCart) return null;

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
+import { fetchProduct, fetchProducts } from '@/actions/products';
 import { Product } from '@/components/feature/product';
-import { productLoader, productsLoader } from '@/lib/content-loaders';
 
 
 interface Props {
@@ -8,20 +8,21 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const product = await productLoader((await params).id);
+  const { id } = await params;
+  const product = await fetchProduct(Number(id));
 
   return {
     title: product.title,
-    keywords: [product.title, product.category],
-    description: product.description,
+    keywords: [product.title, product.category.name],
+    // description: product.description,
     openGraph: {
       title: product.title,
-      description: product.description,
-      images: product.images.map(image => ({ url: image })),
+      // description: product.description,
+      images: product.images.map(image => ({ url: image.url })),
     },
     twitter: {
       title: product.title,
-      description: product.description,
+      // description: product.description,
       card: 'summary_large_image',
     },
   };
@@ -29,12 +30,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
-  const products = await productsLoader();
-  return products.filter(i => i.hidden === false).map(({ id }) => ({ id }));
+  const products = await fetchProducts({
+    pagination: false,
+  });
+  const paths = products.docs.map(({ id }) => ({ id: id.toString() }));
+
+  return paths;
 }
 
 async function ProductPage({ params }: Props) {
-  const product = await productLoader((await params).id);
+  const { id } = await params;
+  const product = await fetchProduct(Number(id));
 
   return <Product className="my-8" product={product} />;
 }

@@ -1,5 +1,7 @@
+import { RichText } from '@payloadcms/richtext-lexical/react';
+import Image from 'next/image';
 import type { ComponentProps } from 'react';
-import { ProductOptions } from '@/components/form/product-options';
+import { ProductVariants } from '@/components/form/product-variants';
 import {
   Carousel,
   CarouselContent,
@@ -7,9 +9,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { PlaceholderImage } from '@/components/ui/placeholder-image';
 import { Price } from '@/components/ui/price';
-import type { ProductType } from '@/lib/schemas';
+import type { ProductType } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AddToCartButton } from './add-to-cart-button';
 
@@ -25,13 +26,15 @@ export async function Product({ product, className, ...props }: Props) {
         <Carousel>
           <CarouselContent>
             {product.images.map(image => (
-              <CarouselItem key={image}>
-                <PlaceholderImage
+              <CarouselItem key={image.url}>
+                <Image
                   alt={product.title}
+                  blurDataURL={image.blurDataUrl}
                   className="object-cover w-full supports-[height:80dvh]:h-[80dvh] h-80vh"
-                  height={320}
-                  src={image}
-                  width={480}
+                  height={image.height}
+                  placeholder="blur"
+                  src={image.url}
+                  width={image.width}
                 />
               </CarouselItem>
             ))}
@@ -42,9 +45,9 @@ export async function Product({ product, className, ...props }: Props) {
       </section>
       <aside className="border prose px-4 flex-[1_1_0] flex flex-col">
         <h1>{product.title}</h1>
-        <h3>{product.category}</h3>
-        <p>{product.description}</p>
-        <ProductOptions options={product.options} />
+        <h3>{product.category.name}</h3>
+        <RichText data={product.description} />
+        <ProductVariants variants={product.variants} />
         <Price discount={product.discount} price={product.price} />
         <AddToCartButton product={product} />
       </aside>

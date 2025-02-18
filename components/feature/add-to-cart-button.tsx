@@ -2,8 +2,9 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import type { ProductType } from '@/lib/schemas';
-import { type CartItem, useCartStore } from '@/lib/store';
+import { useCartStore } from '@/lib/store';
+import type { CartItem } from '@/lib/store';
+import type { ProductType } from '@/lib/types';
 
 
 interface Props {
@@ -13,8 +14,8 @@ interface Props {
 export function AddToCartButton({ product }: Props) {
   const searchParams = useSearchParams();
   const qty = Number(searchParams.get('qty') ?? 1);
-  const size = searchParams.get('size') ?? product.options.sizes?.[0] ?? null;
-  const color = searchParams.get('color') ?? product.options.colors?.[0].name ?? null;
+  const size = searchParams.get('size') ?? product.variants?.sizes?.[0] ?? null;
+  const color = searchParams.get('color') ?? product.variants?.colors?.[0]?.name ?? null;
   const cartId = `${product.id}-${size ?? ''}-${color ?? ''}`;
 
   const addToCart = useCartStore(store => store.addToCart);

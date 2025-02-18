@@ -1,6 +1,6 @@
-import Markdown from 'react-markdown';
-import { PlaceholderImage } from '@/components/ui/placeholder-image';
-import { aboutLoader } from '@/lib/content-loaders';
+import { RichText } from '@payloadcms/richtext-lexical/react';
+import Image from 'next/image';
+import { fetchAbout } from '@/actions/about';
 
 
 export async function About() {
@@ -9,20 +9,24 @@ export async function About() {
     image,
     values,
     valuesList,
-  } = await aboutLoader();
+  } = await fetchAbout();
+
   return (
     <section className="prose container my-8">
-      <Markdown>{text}</Markdown>
+      <RichText data={text} />
 
-      <PlaceholderImage
+      <Image
         alt="About"
+        blurDataURL={image.blurDataUrl}
         className="w-full h-80 object-cover object-center rounded-3xl"
-        height={320}
-        src={image}
-        width={1024}
+        height={image.height}
+        placeholder="blur"
+        src={image.url}
+        width={image.width}
       />
 
-      <Markdown>{values}</Markdown>
+      <RichText data={values} />
+
       <div className="grid gap-0 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {valuesList.map(i => (
           <section key={i.title}>

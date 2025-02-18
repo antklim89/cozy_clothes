@@ -6,9 +6,9 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
 import process from 'node:process';
+import { fetchSeo } from '@/actions/seo';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
-import { infoLoader } from '@/lib/content-loaders';
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -16,9 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     creator,
     description,
-    image,
+    // image,
     keywords,
-  } = await infoLoader();
+  } = await fetchSeo();
 
   return {
     metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
@@ -34,13 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: process.env.URL,
       title,
       description,
-      images: [
-        {
-          url: image,
-          width: 800,
-          height: 600,
-        },
-      ],
+      // images: [
+      //   {
+      //     url: image,
+      //     width: 800,
+      //     height: 600,
+      //   },
+      // ],
     },
     twitter: {
       title,
@@ -62,7 +62,5 @@ function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
-
-export const dynamic = 'force-static';
 
 export default RootLayout;
