@@ -1,6 +1,7 @@
 import { Slot } from '@radix-ui/react-slot';
 import type { ButtonHTMLAttributes, RefObject } from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
+import type { VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 

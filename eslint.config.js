@@ -41,6 +41,9 @@ export default antfu(
       '**/out/**',
       '**/dist/**',
       '.netlify',
+      '**/app/(payload)/**',
+      '**/migrations/**',
+      'payload-types.ts',
     ],
 
     rules: {
