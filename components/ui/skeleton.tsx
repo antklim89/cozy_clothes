@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 
 function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('animate-pulse rounded-md bg-muted', className)} {...props} />;
+  return <div className={cn('animate-pulse rounded-md bg-gray-400', className)} {...props} />;
 }
 
 function SkeletonText({ className, number = 2, ...props }: HTMLAttributes<HTMLDivElement> & { number?: number }) {
