@@ -16,7 +16,7 @@ type Props = ComponentProps<'form'> & {
 export function ProductVariants({ variants, className, ...props }: Props) {
   const searchParams = useSearchParams();
 
-  const selectedVariantId = searchParams.get('v');
+  const selectedVariantId = Number(searchParams.get('v'));
   const selectedVariant = variants.find(i => i.id === selectedVariantId) ?? variants[0];
 
   if (selectedVariant == null) return null;
@@ -40,14 +40,14 @@ function ColorVariant({
   const router = useRouter();
   const id = useId();
 
-  const colors = Object.groupBy(variants, i => i.color.code);
+  const colors = Object.groupBy(variants, i => i.colorCode);
 
   const handleValueChange = (value: string): void => {
-    const newVariant = (selectedVariant.color.code === value ? selectedVariant : null)
-      ?? variants.find(i => i.size === selectedVariant.size && i.color.code === value)
-      ?? variants.find(i => i.color.code === value);
+    const newVariant = (selectedVariant.colorCode === value ? selectedVariant : null)
+      ?? variants.find(i => i.size === selectedVariant.size && i.colorCode === value)
+      ?? variants.find(i => i.colorCode === value);
 
-    if (newVariant == null || newVariant.id == null) return;
+    if (newVariant == null) return;
 
     router.replace(`?v=${newVariant.id}`);
   };
@@ -58,7 +58,7 @@ function ColorVariant({
       <ToggleGroup
         id={id}
         type="single"
-        value={selectedVariant.color.code}
+        value={selectedVariant.colorCode}
         variant="outline"
         onValueChange={handleValueChange}
       >
@@ -69,7 +69,7 @@ function ColorVariant({
             value={color}
           >
             <span className="rounded-full size-6 mr-2" style={{ backgroundColor: color }}></span>
-            {variant[0]?.color.name ?? color}
+            {variant[0]?.colorName ?? color}
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
@@ -97,7 +97,7 @@ function SizeVariant({
         variant="outline"
         onValueChange={(value) => {
           const newVariant = (selectedVariant.size === value ? selectedVariant : null)
-            ?? variants.find(i => i.color.code === selectedVariant.color.code && i.size === value)
+            ?? variants.find(i => i.colorCode === selectedVariant.colorCode && i.size === value)
             ?? variants.find(i => i.size === value);
 
           if (newVariant == null || newVariant.id == null) return;
@@ -107,7 +107,7 @@ function SizeVariant({
       >
         {Object.entries(sizes).map(([size, variant]) => (
           <ToggleGroupItem
-            className={cn('uppercase text-2xl', { 'text-gray-300': variant.findIndex(i => i.color.code === selectedVariant.color.code) < 0 })}
+            className={cn('uppercase text-2xl', { 'text-gray-300': variant.findIndex(i => i.colorCode === selectedVariant.colorCode) < 0 })}
             key={size}
             value={size}
           >

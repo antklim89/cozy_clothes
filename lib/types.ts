@@ -5,6 +5,7 @@ import type {
   Contact,
   Hero,
   Product,
+  ProductVariant,
   Seo,
   Testimonial,
 } from '@/payload-types';
@@ -22,6 +23,7 @@ export type AboutType = Populated<About, 'image'>;
 export type ContactType = Contact;
 export type CategoryType = Category;
 export type HeroType = Populated<Hero, 'image'>;
-export type ProductType = Populated<Product, 'images' | 'category'>;
+export type ProductType = Populated<Product, 'images' | 'category' | 'variants'>;
+export type ProductVariantType = ProductVariant;
 export type SeoType = Seo;
 export type TestimonialType = Populated<Testimonial, 'image'>;

@@ -9,6 +9,7 @@ import { Categories } from './collections/Categories';
 import { Contacts } from './collections/Contacts';
 import { Hero, HeroMedia } from './collections/Hero';
 import { Products, ProductsMedia } from './collections/Products';
+import { ProductVariants } from './collections/ProductVariants';
 import { Seo } from './collections/Seo';
 import { Testimonials, TestimonialsMedia } from './collections/Testimonials';
 import { Users } from './collections/Users';
@@ -35,6 +36,7 @@ export default buildConfig({
     TestimonialsMedia,
     AboutMedia,
     ProductsMedia,
+    ProductVariants,
     HeroMedia,
     Products,
     Categories,

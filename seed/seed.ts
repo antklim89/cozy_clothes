@@ -3,15 +3,16 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
+import type { CollectionSlug } from 'payload';
 import { getPayload } from 'payload';
-import type { CollectionSlug, DataFromCollectionSlug } from 'payload';
 import { SIZES } from '../lib/constants';
-import type { Category, Product } from '../payload-types';
+import type { Product } from '../payload-types';
 import config from '../payload.config';
 
 
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
+const VARIANTS_NUMBER = 20;
 const PRODUCTS_NUMBER = 100;
 
 const payload = await getPayload({ config });
@@ -75,12 +76,15 @@ async function getImages(collection: CollectionSlug, imagesPath: string) {
 }
 
 async function clear() {
-  await payload.db.migrateFresh({ forceAcceptWarning: true });
+  // await payload.db.migrateFresh({ forceAcceptWarning: true });
   await fs.rm(path.resolve('media'), { force: true, recursive: true });
   await fs.mkdir(path.resolve('media'));
 }
 
-async function createAbout(image: DataFromCollectionSlug<CollectionSlug>) {
+async function createAbout() {
+  const [image] = await getImages('about-media', 'about');
+  if (image == null) throw new Error('No about image.');
+
   await payload.updateGlobal({
     slug: 'About',
     data: {
@@ -107,7 +111,10 @@ async function createSeo() {
   });
 }
 
-async function createHero(image: DataFromCollectionSlug<CollectionSlug>) {
+async function createHero() {
+  const [image] = await getImages('hero-media', 'hero');
+  if (image == null) throw new Error('No hero image.');
+
   await payload.updateGlobal({
     slug: 'Hero',
     data: {
@@ -128,7 +135,27 @@ async function createCategories() {
   }));
 }
 
-async function createProducts(categories: Category[], images: DataFromCollectionSlug<CollectionSlug>[]) {
+async function createProductVariants() {
+  return Promise.all(Array.from({ length: VARIANTS_NUMBER }, async () => {
+    const { name: colorName, code: colorCode } = getRandomItem(colors);
+    const size = getRandomItem(SIZES);
+
+    return payload.create({
+      collection: 'product-variants',
+      data: {
+        colorName,
+        colorCode,
+        size,
+      },
+    });
+  }));
+}
+
+async function createProducts() {
+  const categories = await createCategories();
+  const variants = await createProductVariants();
+  const images = await getImages('products-media', 'products');
+
   return Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
     const category = getRandomItem(categories);
 
@@ -141,16 +168,15 @@ async function createProducts(categories: Category[], images: DataFromCollection
         price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
         title: faker.commerce.productName(),
         images: sliceRandom(shuffle(images)).map(i => i.id),
-        variants: Array.from({ length: faker.number.int({ min: 1, max: 50 }) }).map(() => ({
-          color: getRandomItem(colors),
-          size: getRandomItem(SIZES),
-        })),
+        variants: sliceRandom(shuffle(variants)).map(i => i.id),
       },
     });
   }));
 }
 
-async function createTestimonials(images: DataFromCollectionSlug<CollectionSlug>[]) {
+async function createTestimonials() {
+  const images = await getImages('testimonials-media', 'testimonials');
+
   return Promise.all(images.map(async (image) => {
     return payload.create({
       collection: 'testimonials',
@@ -178,22 +204,11 @@ async function createContacts() {
 
 await clear();
 
-
-const [aboutImage] = await getImages('about-media', 'about');
-if (aboutImage == null) throw new Error('No about image.');
-
-const [heroImage] = await getImages('hero-media', 'hero');
-if (heroImage == null) throw new Error('No hero image.');
-
-const productImages = await getImages('products-media', 'products');
-const testimonialsImages = await getImages('testimonials-media', 'testimonials');
-
-await createAbout(aboutImage);
-await createHero(heroImage);
-await createSeo();
-await createContacts();
-
-const categories = await createCategories();
-await createProducts(categories, productImages);
-
-await createTestimonials(testimonialsImages);
+await Promise.all([
+  createAbout(),
+  createHero(),
+  createSeo(),
+  createContacts(),
+  createProducts(),
+  createTestimonials(),
+]);
