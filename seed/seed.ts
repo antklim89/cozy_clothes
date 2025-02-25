@@ -5,6 +5,7 @@ import path from 'node:path';
 import { faker } from '@faker-js/faker';
 import { getPayload } from 'payload';
 import type { CollectionSlug, DataFromCollectionSlug } from 'payload';
+import { SIZES } from '../lib/constants';
 import type { Category, Product } from '../payload-types';
 import config from '../payload.config';
 
@@ -15,17 +16,17 @@ const PRODUCTS_NUMBER = 100;
 
 const payload = await getPayload({ config });
 
-function getRandomItem<T>(arr: T[]): T {
+function getRandomItem<T>(arr: readonly T[]): T {
   const result = arr[faker.number.int({ min: 0, max: arr.length - 1 })];
   if (result == null) throw new Error(`An array in getRandomItem is empty.`);
   return result;
 }
 
-function shuffle<T>(arr: T[]): T[] {
+function shuffle<T>(arr: readonly T[]): T[] {
   return arr.toSorted(() => Math.random() - 0.5);
 }
 
-function sliceRandom<T>(arr: T[]): T[] {
+function sliceRandom<T>(arr: readonly T[]): T[] {
   return arr.slice(0, faker.number.int({ min: 1, max: arr.length - 1 }));
 }
 
@@ -53,6 +54,11 @@ function createRichText(textArr: string[]): Product['description'] {
     },
   };
 }
+
+const colors = Array.from({ length: 20 }, () => ({
+  name: faker.lorem.word(),
+  code: faker.internet.color(),
+}));
 
 async function getImages(collection: CollectionSlug, imagesPath: string) {
   const imagesDir = path.resolve('seed/placeholders', imagesPath);
@@ -135,6 +141,10 @@ async function createProducts(categories: Category[], images: DataFromCollection
         price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
         title: faker.commerce.productName(),
         images: sliceRandom(shuffle(images)).map(i => i.id),
+        variants: Array.from({ length: faker.number.int({ min: 1, max: 50 }) }).map(() => ({
+          color: getRandomItem(colors),
+          size: getRandomItem(SIZES),
+        })),
       },
     });
   }));

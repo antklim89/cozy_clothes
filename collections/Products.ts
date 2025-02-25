@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { SIZES } from '@/lib/constants';
 import { Media } from './Media';
 
 
@@ -49,17 +50,19 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'variants',
-      type: 'group',
+      type: 'array',
+      minRows: 1,
+      required: true,
       fields: [
         {
-          name: 'sizes',
+          name: 'size',
           type: 'select',
-          hasMany: true,
-          options: ['sx', 's', 'm', 'l', 'xl', 'xxl', 'xxxl'],
+          options: SIZES as unknown as string[],
+          required: true,
         },
         {
-          name: 'colors',
-          type: 'array',
+          name: 'color',
+          type: 'group',
           fields: [
             {
               name: 'name',
@@ -75,7 +78,6 @@ export const Products: CollectionConfig = {
         },
       ],
     },
-
   ],
 };
 
