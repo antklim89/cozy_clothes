@@ -16,28 +16,8 @@ export interface Props {
   }>;
 }
 
-// export async function generateMetadata({
-//   params,
-// }: Props): Promise<Metadata> {
-//   const { category } = await params;
-//   const { description, keywords } = await fetchSeo();
-//   const title = category === ALL_CATEGORIES ? 'All Products' : category;
 
-//   return {
-//     title,
-//     description: `${description} Browse our ${category === ALL_CATEGORIES ? '' : category} products.`,
-//     keywords: [...keywords, title],
-//     openGraph: {
-//       title,
-//     },
-//     twitter: {
-//       title,
-//     },
-//   };
-// }
-
-
-async function ProductPage({ searchParams }: Props) {
+async function Page({ searchParams }: Props) {
   const { category, page = 1 } = await paramsSchema.parseAsync(await searchParams);
 
   const products = await fetchProducts({
@@ -47,18 +27,6 @@ async function ProductPage({ searchParams }: Props) {
       category: category != null ? { equals: category } : {},
     },
   });
-
-  // if (category !== ALL_CATEGORIES) {
-  //   products = products.filter(i => i.category === category);
-  // }
-
-  // const totalPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
-
-  // if (totalPages > 1) {
-  //   const start = PRODUCTS_PER_PAGE * page - PRODUCTS_PER_PAGE;
-  //   const end = start + PRODUCTS_PER_PAGE;
-  //   products = products.slice(start, end);
-  // }
 
   return (
     <div className="flex flex-col gap-4 my-8">
@@ -75,4 +43,4 @@ async function ProductPage({ searchParams }: Props) {
   );
 }
 
-export default ProductPage;
+export default Page;
