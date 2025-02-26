@@ -13,6 +13,7 @@ import { Price } from '@/components/ui/price';
 import type { ProductType } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { AddToCartButton } from './add-to-cart-button';
+import { ProductQtyInput } from './product-qty-input';
 
 
 interface Props extends ComponentProps<'div'> {
@@ -49,6 +50,10 @@ export async function Product({ product, className, ...props }: Props) {
         <RichText data={product.description} />
         <ProductVariants variants={product.variants} />
         <Price discount={product.discount} price={product.price} />
+        <ProductQtyInput
+          className="my-8 self-center"
+          product={product}
+        />
         <AddToCartButton product={product} />
       </aside>
     </div>

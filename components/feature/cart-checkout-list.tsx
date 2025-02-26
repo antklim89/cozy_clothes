@@ -12,6 +12,7 @@ import {
 import type { CartItem } from '@/lib/cart-store';
 import { useCartStore } from '@/lib/cart-store';
 import { cn, getPrice } from '@/lib/utils';
+import { ProductQtyInput } from './product-qty-input';
 
 
 export function CartCheckoutList({ className, ...props }: ComponentProps<'section'>) {
@@ -58,6 +59,13 @@ function CartCheckoutItem({ cartItem }: { cartItem: CartItem }) {
 
       <CardContent className="flex justify-between gap-4">
         <div>
+          <ProductQtyInput
+            className="my-8"
+            product={product}
+            qty={qty}
+            variant={variant}
+          />
+
           {qty > 1 && (
             <div className="flex items-center text-gray-600">
               <span className="text-sm">x</span>
