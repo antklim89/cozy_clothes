@@ -3,17 +3,19 @@ import { Trash } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useCartStore } from '@/lib/store';
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from '@/components/ui/card';
+import type { CartItem } from '@/lib/cart-store';
+import { useCartStore } from '@/lib/cart-store';
 import { cn, getPrice } from '@/lib/utils';
 
 
 export function CartCheckoutList({ className, ...props }: ComponentProps<'section'>) {
   const cartItems = useCartStore(store => store.cartItems);
-  const updateCart = useCartStore(store => store.updateCart);
-  const removeFromCart = useCartStore(store => store.removeFromCart);
 
   return (
     <section className={cn('flex flex-col gap-4', className)} {...props}>
@@ -24,65 +26,66 @@ export function CartCheckoutList({ className, ...props }: ComponentProps<'sectio
           </CardHeader>
         </Card>
       )}
-      {cartItems.map(({
-        id,
-        qty,
-        color,
-        size,
-        product,
-      }) => {
-        const searchParams = new URLSearchParams();
-        if (size != null) searchParams.set('size', size.toString());
-        if (color != null) searchParams.set('color', color.toString());
-
-        return (
-          <Card key={id}>
-            <CardHeader>
-              <h3 className="text-xl">
-                <Link href={`/products/${product.id}?${searchParams.toString()}`}>{product.title}</Link>
-              </h3>
-              <div className="flex gap-4">
-                {color != null && <span className="text-gray-600 uppercase">{color}</span>}
-                {size != null && <span className="text-gray-600 uppercase">{size}</span>}
-              </div>
-            </CardHeader>
-
-            <CardContent className="flex justify-between gap-4">
-              <div>
-                <Label className="flex items-center">
-                  <span className="text-sm">x</span>
-                  <Input
-                    className="w-20 border-none hover:outline hover:outline-1 text-xl"
-                    min={1}
-                    type="number"
-                    value={qty}
-                    onBlur={e => updateCart(id, { qty: e.target.valueAsNumber })}
-                    onChange={e => updateCart(id, { qty: e.target.valueAsNumber })}
-                  />
-                  <span className="text-2xl">
-                    {getPrice({ qty, price: product.price, discount: product.discount })}
-                  </span>
-                </Label>
-
-                {qty > 1 && (
-                  <div className="flex items-center text-gray-600 text-sm">
-                    <span className="text-sm">x</span>
-                    <span className="px-4 w-20 border-none text-lg">1</span>
-                    <span className="text-xl">{getPrice({ price: product.price, discount: product.discount })}</span>
-                  </div>
-                )}
-              </div>
-              <Button
-                aria-label={`delete ${product.title} from cart`}
-                className="self-end bg-transparent border border-red-600 hover:bg-slate-100 p-2"
-                onClick={() => removeFromCart(id)}
-              >
-                <Trash className="size-4 text-red-600" />
-              </Button>
-            </CardContent>
-          </Card>
-        );
-      })}
+      {cartItems.map(cartItem => (
+        <CartCheckoutItem
+          cartItem={cartItem}
+          key={`${cartItem.product.id} - ${cartItem.variant.id}`}
+        />
+      )) }
     </section>
+  );
+}
+
+function CartCheckoutItem({ cartItem }: { cartItem: CartItem }) {
+  const removeFromCart = useCartStore(store => store.removeFromCart);
+  const {
+    qty,
+    product,
+    variant,
+  } = cartItem;
+
+  return (
+    <Card>
+      <CardHeader>
+        <h3 className="text-xl">
+          <Link href={`/products/${product.id}?v=${variant.id}`}>{product.title}</Link>
+        </h3>
+        <div className="flex gap-4">
+          <span className="text-gray-600 uppercase">{variant.colorName}</span>
+          <span className="text-gray-600 uppercase">{variant.size}</span>
+        </div>
+      </CardHeader>
+
+      <CardContent className="flex justify-between gap-4">
+        <div>
+          {qty > 1 && (
+            <div className="flex items-center text-gray-600">
+              <span className="text-sm">x</span>
+              <span className="px-4 w-20 border-none text-md">1</span>
+              <span className="text-xl">{getPrice({ price: product.price, discount: product.discount })}</span>
+            </div>
+          )}
+
+          <div className="flex items-center ">
+            <span className="text-sm">x</span>
+            <span className="px-4 w-20 border-none text-lg">{qty}</span>
+            <span className="text-2xl">{getPrice({ qty, price: product.price, discount: product.discount })}</span>
+          </div>
+        </div>
+
+      </CardContent>
+      <CardFooter className="flex justify-end">
+        <Button
+          aria-label={`delete ${product.title} from cart`}
+          className="self-end bg-transparent border border-red-600 hover:bg-slate-100 p-2"
+          onClick={() => removeFromCart({
+            productId: product.id,
+            variantId: variant.id,
+          })}
+        >
+          <Trash className="size-4 text-red-600" />
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
