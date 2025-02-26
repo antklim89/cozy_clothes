@@ -49,7 +49,7 @@ function ColorVariant({
 
     if (newVariant == null) return;
 
-    router.replace(`?v=${newVariant.id}`);
+    router.replace(`?v=${newVariant.id}`, { scroll: false });
   };
 
   return (
@@ -102,7 +102,7 @@ function SizeVariant({
 
           if (newVariant == null || newVariant.id == null) return;
 
-          router.replace(`?v=${newVariant.id}`);
+          router.replace(`?v=${newVariant.id}`, { scroll: false });
         }}
       >
         {Object.entries(sizes).map(([size, variant]) => (
