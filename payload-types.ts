@@ -69,6 +69,7 @@ export interface Config {
     'testimonials-media': TestimonialsMedia;
     'about-media': AboutMedia;
     'products-media': ProductsMedia;
+    'product-variants': ProductVariant;
     'hero-media': HeroMedia;
     products: Product;
     categories: Category;
@@ -84,6 +85,7 @@ export interface Config {
     'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     'products-media': ProductsMediaSelect<false> | ProductsMediaSelect<true>;
+    'product-variants': ProductVariantsSelect<false> | ProductVariantsSelect<true>;
     'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -204,6 +206,18 @@ export interface ProductsMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants".
+ */
+export interface ProductVariant {
+  id: number;
+  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
+  colorName: string;
+  colorCode: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
@@ -247,16 +261,7 @@ export interface Product {
   discount: number;
   category: number | Category;
   images: (number | ProductsMedia)[];
-  variants?: {
-    sizes?: ('sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl')[] | null;
-    colors?:
-      | {
-          name: string;
-          code: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
+  variants: (number | ProductVariant)[];
   updatedAt: string;
   createdAt: string;
 }
@@ -321,6 +326,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'products-media';
         value: number | ProductsMedia;
+      } | null)
+    | ({
+        relationTo: 'product-variants';
+        value: number | ProductVariant;
       } | null)
     | ({
         relationTo: 'hero-media';
@@ -451,6 +460,17 @@ export interface ProductsMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants_select".
+ */
+export interface ProductVariantsSelect<T extends boolean = true> {
+  size?: T;
+  colorName?: T;
+  colorCode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media_select".
  */
 export interface HeroMediaSelect<T extends boolean = true> {
@@ -478,18 +498,7 @@ export interface ProductsSelect<T extends boolean = true> {
   discount?: T;
   category?: T;
   images?: T;
-  variants?:
-    | T
-    | {
-        sizes?: T;
-        colors?:
-          | T
-          | {
-              name?: T;
-              code?: T;
-              id?: T;
-            };
-      };
+  variants?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -109,6 +109,7 @@ export default antfu(
           'metadata',
           'getStaticProps',
           'getStaticPaths',
+          'revalidate',
         ],
       }],
       'style/jsx-one-expression-per-line': ['error', { allow: 'non-jsx' }],
