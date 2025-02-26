@@ -1,7 +1,7 @@
 'use client';
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCartStore } from '@/lib/store';
+import { useCartStore } from '@/lib/cart-store';
 import type { ProductType } from '@/lib/types';
 
 

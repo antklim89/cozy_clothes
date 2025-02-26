@@ -1,10 +1,9 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
-import { useCartStore } from '@/lib/store';
-import type { CartItem } from '@/lib/store';
-import type { ProductType } from '@/lib/types';
+import { useCartStore } from '@/lib/cart-store';
+import type { ProductType, ProductVariantType } from '@/lib/types';
 
 
 interface Props {
@@ -13,39 +12,35 @@ interface Props {
 
 export function AddToCartButton({ product }: Props) {
   const searchParams = useSearchParams();
-  const qty = Number(searchParams.get('qty') ?? 1);
-  const size = searchParams.get('size') ?? product.variants?.sizes?.[0] ?? null;
-  const color = searchParams.get('color') ?? product.variants?.colors?.[0]?.name ?? null;
-  const cartId = `${product.id}-${size ?? ''}-${color ?? ''}`;
 
+  const qty = z.coerce.number().default(1).catch(1).parse(searchParams.get('qty'));
+  const variantId = z.coerce.number().optional().catch(undefined).parse(searchParams.get('v'));
+  if (variantId == null) return;
+  const variant = product.variants.find(i => i.id === variantId) ?? product.variants[0];
+  if (variant == null) return;
+
+  return <AddToCartButtonChild product={product} qty={qty} variant={variant} />;
+}
+
+function AddToCartButtonChild({ product, variant, qty }: { product: ProductType; variant: ProductVariantType; qty: number }) {
   const addToCart = useCartStore(store => store.addToCart);
   const removeFromCart = useCartStore(store => store.removeFromCart);
-  const updateCart = useCartStore(store => store.updateCart);
-  const hasCartItem = useCartStore(store => store.cartItems.findIndex(i => i.id === cartId) >= 0);
+  const hasCartItem = useCartStore(store => store.cartItems.some(i => (i.product.id === product.id && i.variant.id === variant.id)));
 
   const handleAddToCart = () => {
-    const newCartItem: CartItem = {
-      id: cartId,
+    addToCart({
       product,
-      qty: Number(searchParams.get('qty') ?? 1),
-      size,
-      color,
-    };
-    addToCart(newCartItem);
+      qty,
+      variant,
+    });
   };
 
   const handleRemoveFromCart = () => {
-    removeFromCart(cartId);
-  };
-
-  useEffect(() => {
-    if (!hasCartItem) return;
-    updateCart(cartId, {
-      qty,
-      size,
-      color,
+    removeFromCart({
+      productId: product.id,
+      variantId: variant.id,
     });
-  }, [cartId, qty, size, color, updateCart, hasCartItem]);
+  };
 
   if (hasCartItem) return <Button onClick={handleRemoveFromCart}>Remove From Cart</Button>;
   return <Button onClick={handleAddToCart}>Add To Cart</Button>;
