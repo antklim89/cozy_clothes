@@ -6,19 +6,23 @@ import '@fontsource/poppins/700.css';
 import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/700-italic.css';
 import process from 'node:process';
-import { fetchSeo } from '@/actions/seo';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
+import { CategoryDropdownMenu } from '@/features/product-categories';
+import { fetchSeo } from '@/features/seo';
 
 
 export async function generateMetadata(): Promise<Metadata> {
+  const { type, result } = await fetchSeo();
+  if (type === 'error') return {};
+
   const {
     title,
     creator,
     description,
     // image,
     keywords,
-  } = await fetchSeo();
+  } = result;
 
   return {
     metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
@@ -50,12 +54,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function RootLayout({ children }: { children: ReactNode }) {
+function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head />
       <body className="grid grid-rows-[auto_1fr_auto] h-screen">
-        <Header />
+        <Header categoryMenu={<CategoryDropdownMenu />} />
         <main>{children}</main>
         <Footer />
       </body>
@@ -63,4 +67,4 @@ function RootLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export default RootLayout;
+export default Layout;

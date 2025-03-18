@@ -89,12 +89,6 @@ async function createAbout() {
     slug: 'About',
     data: {
       text: createRichText([faker.lorem.paragraph(), faker.lorem.paragraph(), faker.lorem.paragraph()]),
-      values: createRichText([faker.lorem.text()]),
-      valuesList: Array.from({ length: 6 }, () => ({
-        text: faker.lorem.paragraph(3),
-        title: faker.company.catchPhrase(),
-      })),
-      image,
     },
   });
 }
@@ -127,7 +121,7 @@ async function createHero() {
 async function createCategories() {
   return Promise.all(Array.from({ length: CATEGORIES_NUMBER }, async () => {
     return payload.create({
-      collection: 'categories',
+      collection: 'product-categories',
       data: {
         name: faker.commerce.productMaterial(),
       },
@@ -154,7 +148,7 @@ async function createProductVariants() {
 async function createProducts() {
   const categories = await createCategories();
   const variants = await createProductVariants();
-  const images = await getImages('products-media', 'products');
+  const images = await getImages('product-media', 'products');
 
   return Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
     const category = getRandomItem(categories);

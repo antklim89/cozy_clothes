@@ -1,13 +1,11 @@
-import { z } from 'zod';
-import { fetchProducts } from '@/actions/products';
-import { ProductCard } from '@/components/feature/product-card';
-import { ProductsList, ProductsListContent, ProductsListPagination } from '@/components/feature/products-list';
+import { notFound } from 'next/navigation';
+import {
+  fetchProductList,
+  ParamsSchema,
+  ProductList,
+  ProductPagination,
+} from '@/features/product';
 
-
-const paramsSchema = z.object({
-  category: z.coerce.number().min(1).optional().catch(undefined),
-  page: z.coerce.number().min(1).optional().catch(undefined),
-});
 
 export interface Props {
   searchParams: Promise<{
@@ -16,30 +14,19 @@ export interface Props {
   }>;
 }
 
-
 async function Page({ searchParams }: Props) {
-  const { category, page = 1 } = await paramsSchema.parseAsync(await searchParams);
+  const { success, data } = await ParamsSchema.safeParseAsync(await searchParams);
+  if (!success) notFound();
+  const { category, page } = data;
 
-  const products = await fetchProducts({
-    pagination: true,
-    page,
-    where: {
-      category: category != null ? { equals: category } : {},
-    },
-  });
+  const { type, result: products } = await fetchProductList({ page, category });
+  if (type === 'error') return null;
 
   return (
-    <div className="flex flex-col gap-4 my-8">
-      <ProductsList>
-        <ProductsListPagination page={page} searchParams={await searchParams} totalPages={products.totalPages} />
-        <ProductsListContent>
-          {products.docs.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </ProductsListContent>
-        <ProductsListPagination page={page} totalPages={products.totalPages} />
-      </ProductsList>
-    </div>
+    <ProductList
+      pagination={<ProductPagination page={page} totalPages={products.totalPages} />}
+      products={products.docs}
+    />
   );
 }
 

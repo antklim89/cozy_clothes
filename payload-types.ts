@@ -66,14 +66,14 @@ export interface Config {
   };
   collections: {
     contacts: Contact;
-    'testimonials-media': TestimonialsMedia;
     'about-media': AboutMedia;
-    'products-media': ProductsMedia;
-    'product-variants': ProductVariant;
-    'hero-media': HeroMedia;
     products: Product;
-    categories: Category;
+    'product-media': ProductMedia;
+    'product-variants': ProductVariant;
+    'product-categories': ProductCategory;
+    'hero-media': HeroMedia;
     testimonials: Testimonial;
+    'testimonials-media': TestimonialsMedia;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,14 +82,14 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     contacts: ContactsSelect<false> | ContactsSelect<true>;
-    'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
-    'products-media': ProductsMediaSelect<false> | ProductsMediaSelect<true>;
-    'product-variants': ProductVariantsSelect<false> | ProductVariantsSelect<true>;
-    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'product-media': ProductMediaSelect<false> | ProductMediaSelect<true>;
+    'product-variants': ProductVariantsSelect<false> | ProductVariantsSelect<true>;
+    'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
+    'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -149,25 +149,6 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials-media".
- */
-export interface TestimonialsMedia {
-  id: number;
-  blurDataUrl: string;
-  updatedAt: string;
-  createdAt: string;
-  url: string;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width: number;
-  height: number;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-media".
  */
 export interface AboutMedia {
@@ -187,9 +168,49 @@ export interface AboutMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products-media".
+ * via the `definition` "products".
  */
-export interface ProductsMedia {
+export interface Product {
+  id: number;
+  title: string;
+  description: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  price: number;
+  discount: number;
+  category: number | ProductCategory;
+  images: (number | ProductMedia)[];
+  variants: (number | ProductVariant)[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories".
+ */
+export interface ProductCategory {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-media".
+ */
+export interface ProductMedia {
   id: number;
   blurDataUrl: string;
   updatedAt: string;
@@ -237,46 +258,6 @@ export interface HeroMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: number;
-  title: string;
-  description: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  price: number;
-  discount: number;
-  category: number | Category;
-  images: (number | ProductsMedia)[];
-  variants: (number | ProductVariant)[];
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: number;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
  */
 export interface Testimonial {
@@ -286,6 +267,25 @@ export interface Testimonial {
   name: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-media".
+ */
+export interface TestimonialsMedia {
+  id: number;
+  blurDataUrl: string;
+  updatedAt: string;
+  createdAt: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width: number;
+  height: number;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -316,36 +316,36 @@ export interface PayloadLockedDocument {
         value: number | Contact;
       } | null)
     | ({
-        relationTo: 'testimonials-media';
-        value: number | TestimonialsMedia;
-      } | null)
-    | ({
         relationTo: 'about-media';
         value: number | AboutMedia;
-      } | null)
-    | ({
-        relationTo: 'products-media';
-        value: number | ProductsMedia;
-      } | null)
-    | ({
-        relationTo: 'product-variants';
-        value: number | ProductVariant;
-      } | null)
-    | ({
-        relationTo: 'hero-media';
-        value: number | HeroMedia;
       } | null)
     | ({
         relationTo: 'products';
         value: number | Product;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: number | Category;
+        relationTo: 'product-media';
+        value: number | ProductMedia;
+      } | null)
+    | ({
+        relationTo: 'product-variants';
+        value: number | ProductVariant;
+      } | null)
+    | ({
+        relationTo: 'product-categories';
+        value: number | ProductCategory;
+      } | null)
+    | ({
+        relationTo: 'hero-media';
+        value: number | HeroMedia;
       } | null)
     | ({
         relationTo: 'testimonials';
         value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'testimonials-media';
+        value: number | TestimonialsMedia;
       } | null)
     | ({
         relationTo: 'users';
@@ -406,74 +406,9 @@ export interface ContactsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials-media_select".
- */
-export interface TestimonialsMediaSelect<T extends boolean = true> {
-  blurDataUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-media_select".
  */
 export interface AboutMediaSelect<T extends boolean = true> {
-  blurDataUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products-media_select".
- */
-export interface ProductsMediaSelect<T extends boolean = true> {
-  blurDataUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-variants_select".
- */
-export interface ProductVariantsSelect<T extends boolean = true> {
-  size?: T;
-  colorName?: T;
-  colorCode?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "hero-media_select".
- */
-export interface HeroMediaSelect<T extends boolean = true> {
   blurDataUrl?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -504,12 +439,59 @@ export interface ProductsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
+ * via the `definition` "product-media_select".
  */
-export interface CategoriesSelect<T extends boolean = true> {
+export interface ProductMediaSelect<T extends boolean = true> {
+  blurDataUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants_select".
+ */
+export interface ProductVariantsSelect<T extends boolean = true> {
+  size?: T;
+  colorName?: T;
+  colorCode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories_select".
+ */
+export interface ProductCategoriesSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero-media_select".
+ */
+export interface HeroMediaSelect<T extends boolean = true> {
+  blurDataUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -521,6 +503,24 @@ export interface TestimonialsSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-media_select".
+ */
+export interface TestimonialsMediaSelect<T extends boolean = true> {
+  blurDataUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -590,27 +590,6 @@ export interface About {
     };
     [k: string]: unknown;
   };
-  image: number | AboutMedia;
-  values: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  valuesList: {
-    title: string;
-    text: string;
-    id?: string | null;
-  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -658,15 +637,6 @@ export interface Seo {
  */
 export interface AboutSelect<T extends boolean = true> {
   text?: T;
-  image?: T;
-  values?: T;
-  valuesList?:
-    | T
-    | {
-        title?: T;
-        text?: T;
-        id?: T;
-      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

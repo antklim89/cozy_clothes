@@ -1,16 +1,11 @@
-import type { Metadata } from 'next';
-import { About } from '@/components/layout/about';
+import { About, fetchAbout } from '@/features/about';
 
 
-export const metadata: Metadata = {
-  title: {
-    default: 'Cozy Clothes',
-    template: '&s | About',
-  },
-};
+async function Page() {
+  const { type, result: about } = await fetchAbout();
+  if (type === 'error') return null;
 
-function AboutPage() {
-  return <About />;
+  return <About about={about} />;
 }
 
-export default AboutPage;
+export default Page;
