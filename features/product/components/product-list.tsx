@@ -13,24 +13,22 @@ export interface Props {
 
 export async function ProductList({ products, pagination, title }: Props) {
   return (
-    <div className="flex flex-col gap-4 my-8">
-      <section className="my-8">
-        {pagination}
-        {title != null
-          ? (
-              <h2 className="prose text-center text-2xl mt-4 font-bold">
-                {title}
-              </h2>
-            )
-          : null}
-        <Grid>
-          {products.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </Grid>
-        {pagination}
-      </section>
-    </div>
+    <section className="flex flex-col gap-4 my-4">
+      {pagination}
+      {title != null
+        ? (
+            <h2 className="prose text-center text-2xl mt-4 font-bold">
+              {title}
+            </h2>
+          )
+        : null}
+      <Grid>
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </Grid>
+      {pagination}
+    </section>
   );
 }
 
