@@ -1,6 +1,7 @@
 import { Contacts, fetchContacts } from '@/features/contacts';
 import { fetchHero, Hero } from '@/features/hero';
 import { fetchDiscountProducts, fetchNewProducts, ProductList } from '@/features/product';
+import { CategoryNavBar } from '@/features/product-categories';
 import { fetchTestimonials, Testimonials } from '@/features/testimonials';
 
 
@@ -24,6 +25,8 @@ async function Page() {
       {hero.type !== 'error'
         ? <Hero hero={hero.result} />
         : null}
+
+      <CategoryNavBar />
 
       {newProducts.type !== 'error'
         ? <ProductList products={newProducts.result} title="New Products" />

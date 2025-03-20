@@ -5,6 +5,7 @@ import {
   ProductList,
   ProductPagination,
 } from '@/features/product';
+import { CategoryNavBar } from '@/features/product-categories';
 
 
 export interface Props {
@@ -23,10 +24,13 @@ async function Page({ searchParams }: Props) {
   if (type === 'error') return null;
 
   return (
-    <ProductList
-      pagination={<ProductPagination page={page} totalPages={products.totalPages} />}
-      products={products.docs}
-    />
+    <>
+      <CategoryNavBar />
+      <ProductList
+        pagination={<ProductPagination page={page} totalPages={products.totalPages} />}
+        products={products.docs}
+      />
+    </>
   );
 }
 
