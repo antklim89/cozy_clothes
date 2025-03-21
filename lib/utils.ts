@@ -29,5 +29,5 @@ export function calculatePrice({
   discount?: number;
   qty?: number;
 }): number {
-  return (price - price * (discount / 100)) * qty;
+  return (price / (1 - discount / 100)) * qty;
 }
