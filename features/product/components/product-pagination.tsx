@@ -15,10 +15,10 @@ import { cn } from '@/lib/utils';
 export function ProductPagination({
   className,
   totalPages,
-  page,
+  page = 1,
   ...props
 }: ComponentProps<'nav'> & {
-  page: number;
+  page?: number;
   totalPages: number;
 }) {
   const searchParams = useSearchParams();
@@ -39,10 +39,11 @@ export function ProductPagination({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
+            aria-disabled={!hasPrev}
             className={cn({
               'text-gray-200 bg-transparent hover:text-gray-200 hover:bg-transparent cursor-default': !hasPrev,
             })}
-            href={getSearchParamsLink(Math.max(1, page - 1))}
+            href={hasPrev ? getSearchParamsLink(Math.max(1, page - 1)) : ''}
             tabIndex={hasPrev ? 0 : -1}
           />
         </PaginationItem>
@@ -62,10 +63,11 @@ export function ProductPagination({
 
         <PaginationItem>
           <PaginationNext
+            aria-disabled={!hasNext}
             className={cn({
               'text-gray-200 bg-transparent hover:text-gray-200 hover:bg-transparent cursor-default': !hasNext,
             })}
-            href={getSearchParamsLink(Math.min(totalPages, page + 1))}
+            href={hasNext ? getSearchParamsLink(Math.min(totalPages, page + 1)) : ''}
             tabIndex={hasNext ? 0 : -1}
           />
         </PaginationItem>
