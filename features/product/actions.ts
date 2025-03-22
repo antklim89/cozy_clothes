@@ -37,18 +37,10 @@ export const fetchDiscountProducts = cache(async (): PromiseResult<ProductType[]
 
 export const fetchProductList = cache(async (input: z.infer<typeof FetchProductsInputSchema>): PromiseResult<PaginatedDocs<ProductType>> => {
   try {
-    const validationResult = await FetchProductsInputSchema.safeParseAsync(input);
-    if (!validationResult.success) return err({ type: 'validation', errors: validationResult.error.flatten() });
+    const validatedInput = await FetchProductsInputSchema.safeParseAsync(input);
+    if (!validatedInput.success) return err({ type: 'validation', errors: validatedInput.error.flatten() });
 
-    const { page, category } = validationResult.data;
-
-    const result = await getManyProducts({
-      pagination: true,
-      page,
-      where: {
-        category: category != null ? { equals: category } : {},
-      },
-    });
+    const result = await getManyProducts(validatedInput.data);
 
     return success(result);
   } catch {

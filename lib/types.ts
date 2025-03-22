@@ -1,4 +1,4 @@
-import type { PaginatedDocs, Where } from 'payload';
+import type { PaginatedDocs } from 'payload';
 
 
 export type Populated<T, K extends keyof T> = {
@@ -13,6 +13,5 @@ export interface PayloadOptions {
   sort?: string;
   pagination?: boolean;
   limit?: number;
-  where?: Where;
   page?: number;
 }
