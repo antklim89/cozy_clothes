@@ -55,7 +55,7 @@ export default buildConfig({
   db: sqliteAdapter({
     migrationDir: path.resolve('migrations'),
     client: {
-      url: process.env.DATABASE_URI ?? '',
+      url: 'file:./database.db',
     },
   }),
   sharp,
