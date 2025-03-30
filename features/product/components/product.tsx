@@ -30,7 +30,7 @@ export async function Product({
         <h3>{product.category.name}</h3>
         <RichText data={product.description} />
         <ProductVariants variants={product.variants} />
-        <Price discount={product.discount} price={product.price} />
+        <Price discount={product.discount} price={product.price} size="lg" />
         <div className="flex flex-col items-center gap-4 my-4">
           {qtyInput}
           {addToCartButton}
