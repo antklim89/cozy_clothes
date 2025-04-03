@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CartStore } from '@/features/cart/types';
+import { CartItemSchema } from './schemas';
 
 
 export const useCartStore = create(
@@ -19,7 +20,7 @@ export const useCartStore = create(
       removeFromCart: ({ productId, variantId }) => {
         set(state => ({
           cartItems: state.cartItems.filter(cartItem => (
-            cartItem.product.id !== productId || cartItem.variant.id !== variantId
+            cartItem.productId !== productId || cartItem.variantId !== variantId
           )),
         }));
       },
@@ -27,13 +28,20 @@ export const useCartStore = create(
       updateQty: ({ productId, variantId, qty }) => {
         set(state => ({
           cartItems: state.cartItems.map(oldCartItem =>
-            (oldCartItem.product.id === productId && oldCartItem.variant.id === variantId)
+            (oldCartItem.productId === productId && oldCartItem.variantId === variantId)
               ? { ...oldCartItem, qty }
               : oldCartItem,
           ),
         }));
       },
     }),
-    { name: 'cozy_clothes_cart' },
+    {
+      name: 'cozy_clothes_cart',
+      merge: (persistedState, currentState) => {
+        const { success, data } = z.object({ cartItems: CartItemSchema.array() }).safeParse(persistedState);
+        if (success) currentState.cartItems = data.cartItems;
+        return currentState;
+      },
+    },
   ),
 );

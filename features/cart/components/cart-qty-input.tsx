@@ -9,18 +9,22 @@ import { useCartStore } from '@/features/cart/store';
 import type { CartItem } from '@/features/cart/types';
 
 
-type Props = Pick<CartItem, 'product' | 'variant'> & { className?: string };
+interface Props {
+  productId: CartItem['productId'];
+  variantId: CartItem['variantId'];
+  className?: string;
+}
 
-export function CartQtyInput({ product, variant, className }: Props) {
-  const currentCart = useCartStore(store => store.cartItems.find(i => i.product.id === product.id && i.variant.id === variant.id));
+export function CartQtyInput({ productId, variantId, className }: Props) {
+  const currentCart = useCartStore(store => store.cartItems.find(i => i.productId === productId && i.variantId === variantId));
   const updateQty = useCartStore(store => store.updateQty);
   const qty = currentCart?.qty ?? 1;
 
   const handleChange = (newQty: number): void => {
     if (currentCart == null) return;
     updateQty({
-      productId: currentCart.product.id,
-      variantId: currentCart.variant.id,
+      productId: currentCart.productId,
+      variantId: currentCart.variantId,
       qty: newQty,
     });
   };

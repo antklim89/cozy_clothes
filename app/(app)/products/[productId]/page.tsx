@@ -65,7 +65,7 @@ async function Page({ params, searchParams }: Props) {
     <Product
       addToCartButton={<AddToCartButton product={product} variant={variant} />}
       product={product}
-      qtyInput={<CartQtyInput product={product} variant={variant} />}
+      qtyInput={<CartQtyInput productId={product.id} variantId={variant.id} />}
     />
   );
 }

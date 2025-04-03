@@ -3,15 +3,18 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useCartStoreIsHydrated } from '@/features/cart/hooks/useCartStoreHydrated';
 import { useCartStore } from '@/features/cart/store';
-import type { CartItem } from '@/features/cart/types';
+import type { ProductType, ProductVariantType } from '@/features/product';
 
 
-type Props = Pick<CartItem, 'product' | 'variant'>;
+interface Props {
+  product: ProductType;
+  variant: ProductVariantType;
+}
 
 export function AddToCartButton({ product, variant }: Props) {
   const addToCart = useCartStore(store => store.addToCart);
   const removeFromCart = useCartStore(store => store.removeFromCart);
-  const hasCartItem = useCartStore(store => store.cartItems.some(i => (i.product.id === product.id && i.variant.id === variant.id)));
+  const hasCartItem = useCartStore(store => store.cartItems.some(i => (i.productId === product.id && i.variantId === variant.id)));
 
   function handleAddOrRemove() {
     if (hasCartItem) {
@@ -21,9 +24,15 @@ export function AddToCartButton({ product, variant }: Props) {
       });
     } else {
       addToCart({
-        product,
+        colorName: variant.colorName,
+        discount: product.discount,
+        image: product.images[0]?.url,
+        price: product.price,
+        size: variant.size,
+        title: product.title,
+        variantId: variant.id,
+        productId: product.id,
         qty: 1,
-        variant,
       });
     }
   }

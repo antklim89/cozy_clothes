@@ -1,11 +1,9 @@
+import type { z } from 'zod';
 import type { ProductType, ProductVariantType } from '@/features/product';
+import type { CartItemSchema } from './schemas';
 
 
-export interface CartItem {
-  product: ProductType;
-  variant: ProductVariantType;
-  qty: number;
-}
+export type CartItem = z.infer<typeof CartItemSchema>;
 
 export interface CartStore {
   cartItems: CartItem[];

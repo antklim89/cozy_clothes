@@ -5,8 +5,8 @@ import { useCartStore } from '@/features/cart/store';
 import type { CartItem } from '@/features/cart/types';
 
 
-export function InCartIcon({ productId }: { productId: CartItem['product']['id'] }) {
-  const isInCart = useCartStore(state => state.cartItems.findIndex(i => i.product.id === productId) >= 0);
+export function InCartIcon({ productId }: { productId: CartItem['productId'] }) {
+  const isInCart = useCartStore(state => state.cartItems.findIndex(i => i.productId === productId) >= 0);
 
   if (!isInCart) return null;
   return (

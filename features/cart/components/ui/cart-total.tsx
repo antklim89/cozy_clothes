@@ -7,7 +7,7 @@ import { calculatePrice, getPrice } from '@/lib/utils';
 export function CartTotal() {
   const cartItems = useCartStore(store => store.cartItems);
   const totalPrice = cartItems.reduce(
-    (total, { qty, product: { price, discount } }) => total + calculatePrice({ qty, price, discount }),
+    (total, { qty, discount, price }) => total + calculatePrice({ qty, price, discount }),
     0,
   );
 
