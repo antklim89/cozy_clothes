@@ -81,7 +81,7 @@ export default antfu(
           },
         },
       ],
-      'no-restricted-imports': ['error', { patterns: ['../'] }],
+      // 'no-restricted-imports': ['error', { patterns: ['../'] }],
       'style/no-multiple-empty-lines': ['error', { max: 2 }],
       'antfu/if-newline': 'off',
       'style/brace-style': ['off', '1tbs'],
