@@ -22,15 +22,16 @@ export async function getManyProducts({
   minPrice,
   maxPrice,
   search,
+  countries,
   ...options
 }: GetManyProductsOptions): Promise<PaginatedDocs<ProductType>> {
   const payload = await getPayload({ config });
-
 
   const result = await payload.find({
     limit: limit ?? PRODUCTS_PER_PAGE,
     ...options,
     where: {
+      country: countries != null ? { in: countries } : {},
       category: category != null ? { equals: category } : {},
       price: (minPrice != null && maxPrice != null)
         ? { greater_than_equal: minPrice, less_than_equal: maxPrice }
@@ -58,7 +59,7 @@ export async function getAllProductIds(): Promise<ProductType['id'][]> {
     limit: Number.MAX_SAFE_INTEGER,
     depth: 0,
     select: {
-      // @ts-expect-error select only id
+      // @ts-expect-error id exists
       id: true,
     },
   });

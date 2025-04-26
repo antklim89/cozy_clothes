@@ -11,6 +11,7 @@ import { Contacts } from './features/contacts/collections/Contacts';
 import { Hero } from './features/hero/collections/Hero';
 import { HeroMedia } from './features/hero/collections/HeroMedia';
 import { ProductCategories } from './features/product-categories/collections/ProductCategories';
+import { ProductCountries } from './features/product-countries/collections/ProductCountries';
 import { ProductMedia } from './features/product/collections/ProductMedia';
 import { Products } from './features/product/collections/Products';
 import { ProductVariants } from './features/product/collections/ProductVariants';
@@ -55,6 +56,7 @@ export default buildConfig({
     Seo,
   ],
   collections: [
+    ProductCountries,
     Contacts,
     AboutMedia,
     Products,

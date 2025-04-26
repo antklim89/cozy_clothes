@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import qs from 'qs';
 import type { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +14,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { CountrySelect } from '@/features/product-countries';
 import { ProductFilterSchema } from '@/features/product/schemas';
 
 
@@ -22,18 +24,15 @@ export function ProductFilter() {
   const form = useForm<z.infer<typeof ProductFilterSchema>>({
     resolver: zodResolver(ProductFilterSchema),
     async defaultValues() {
-      const searchParams = new URLSearchParams(location.search);
-      return ProductFilterSchema.safeParseAsync(Object.fromEntries(searchParams)).then(({ data }) => data ?? {});
+      const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+      const { data = {} } = await ProductFilterSchema.safeParseAsync(query);
+      return data;
     },
   });
 
-  const handleSearch = form.handleSubmit((_values) => {
-    const values = Object.entries(_values)
-      .filter(([_, v]) => v != null && v !== '' && v !== 0)
-      .map(([k, v]) => [k, String(v)]);
-
-    const newSearchParams = new URLSearchParams(values);
-    router.replace(`?${newSearchParams.toString()}`);
+  const handleSearch = form.handleSubmit((values) => {
+    const searchParams = qs.stringify(values, { arrayFormat: 'repeat', addQueryPrefix: true, strictNullHandling: true });
+    router.replace(searchParams);
   });
 
   function handleReset() {
@@ -87,6 +86,20 @@ export function ProductFilter() {
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="countries"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Max Price</FormLabel>
+              <FormControl>
+                <CountrySelect selectedValues={field.value ?? []} onSelectedValuesChange={field.onChange} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <Button
           className="w-full mt-2"

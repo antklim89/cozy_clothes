@@ -43,7 +43,8 @@ export const fetchProductList = cache(async (input: z.infer<typeof FetchProducts
     const result = await getManyProducts(validatedInput.data);
 
     return success(result);
-  } catch {
+  } catch (error) {
+    console.error('🚀 ~ error: \n', error);
     return err(UNEXPECTED_ERROR);
   }
 });

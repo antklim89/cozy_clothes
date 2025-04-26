@@ -4,7 +4,7 @@ import type { Product, ProductVariant } from '@/payload-types';
 import type { FetchProductsInputSchema } from './schemas';
 
 
-export type ProductType = Populated<Product, 'images' | 'category' | 'variants'>;
+export type ProductType = Populated<Product, 'images' | 'category' | 'variants' | 'country'>;
 export type ProductVariantType = ProductVariant;
 
 export type GetManyProductsOptions = PayloadOptions & z.infer<typeof FetchProductsInputSchema>;

@@ -69,6 +69,7 @@ export interface Config {
     ColumnsBlock: ColumnsBlock;
   };
   collections: {
+    'product-countries': ProductCountry;
     contacts: Contact;
     'about-media': AboutMedia;
     products: Product;
@@ -85,6 +86,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
@@ -168,6 +170,16 @@ export interface ColumnsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-countries".
+ */
+export interface ProductCountry {
+  id: number;
+  name: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts".
  */
 export interface Contact {
@@ -222,6 +234,7 @@ export interface Product {
   price: number;
   discount: number;
   category: number | ProductCategory;
+  country: number | ProductCountry;
   images: (number | ProductMedia)[];
   variants: (number | ProductVariant)[];
   updatedAt: string;
@@ -343,6 +356,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'product-countries';
+        value: number | ProductCountry;
+      } | null)
+    | ({
         relationTo: 'contacts';
         value: number | Contact;
       } | null)
@@ -426,6 +443,15 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-countries_select".
+ */
+export interface ProductCountriesSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts_select".
  */
 export interface ContactsSelect<T extends boolean = true> {
@@ -463,6 +489,7 @@ export interface ProductsSelect<T extends boolean = true> {
   price?: T;
   discount?: T;
   category?: T;
+  country?: T;
   images?: T;
   variants?: T;
   updatedAt?: T;

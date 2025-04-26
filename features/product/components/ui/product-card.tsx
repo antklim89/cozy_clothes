@@ -38,6 +38,7 @@ export function ProductCard({ product }: Props) {
               {product.title}
             </Link>
           </h3>
+          <p className="mt-1 text-sm text-gray-500">{product.country.name}</p>
           <p className="mt-1 text-sm text-gray-500">{product.category.name}</p>
         </div>
         <Price discount={product.discount} price={product.price} />

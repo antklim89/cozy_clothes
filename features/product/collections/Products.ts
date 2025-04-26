@@ -40,6 +40,12 @@ export const Products: CollectionConfig = {
       required: true,
     },
     {
+      name: 'country',
+      type: 'relationship',
+      relationTo: 'product-countries',
+      required: true,
+    },
+    {
       name: 'images',
       type: 'upload',
       hasMany: true,

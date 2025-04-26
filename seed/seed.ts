@@ -12,6 +12,7 @@ import config from '../payload.config';
 
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
+const COUNTRIES_NUMBER = 10;
 const VARIANTS_NUMBER = 20;
 const PRODUCTS_NUMBER = 100;
 
@@ -129,6 +130,17 @@ async function createCategories() {
   }));
 }
 
+async function createCountries() {
+  return Promise.all(Array.from({ length: COUNTRIES_NUMBER }, async () => {
+    return payload.create({
+      collection: 'product-countries',
+      data: {
+        name: faker.location.country(),
+      },
+    });
+  }));
+}
+
 async function createProductVariants() {
   return Promise.all(Array.from({ length: VARIANTS_NUMBER }, async () => {
     const { name: colorName, code: colorCode } = getRandomItem(colors);
@@ -147,16 +159,19 @@ async function createProductVariants() {
 
 async function createProducts() {
   const categories = await createCategories();
+  const countries = await createCountries();
   const variants = await createProductVariants();
   const images = await getImages('product-media', 'products');
 
   return Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
     const category = getRandomItem(categories);
+    const country = getRandomItem(countries);
 
     return payload.create({
       collection: 'products',
       data: {
         category: category.id,
+        country: country.id,
         description: createRichText([faker.lorem.text()]),
         discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
         price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
