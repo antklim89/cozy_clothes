@@ -58,10 +58,10 @@ export default antfu(
           internalPattern: ['^(~|@)/.*'],
           newlinesBetween: 'never',
           groups: [
-            'custom',
-            'style',
             'side-effect',
             'side-effect-style',
+            'custom',
+            'style',
             ['builtin', 'builtin-type'],
             ['external', 'external-type'],
             ['internal', 'internal-type'],
