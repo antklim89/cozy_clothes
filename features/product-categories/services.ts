@@ -1,14 +1,20 @@
+import '@/lib/server-only';
 import { getPayload } from 'payload';
-import type { ProductCategoryType } from '@/features/product-categories/types';
+import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
 
 
-export async function getCategories(): Promise<ProductCategoryType[]> {
-  const payload = await getPayload({ config });
-  const result = await payload.find({
-    collection: 'product-categories',
-    pagination: false,
-  });
+export async function getCategories() {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'product-categories',
+      pagination: false,
+    });
 
-  return result.docs;
+    return ok(result.docs);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return err({ type: 'unexpected', message: 'Failed to fetch categories' });
+  }
 }

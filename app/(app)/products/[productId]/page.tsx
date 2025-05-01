@@ -72,4 +72,4 @@ async function Page({ params, searchParams }: Props) {
 
 export default Page;
 
-export const dynamicParams = false;
+// export const dynamicParams = false;

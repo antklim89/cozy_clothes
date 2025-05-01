@@ -1,15 +1,20 @@
+import '@/lib/server-only';
 import { getPayload } from 'payload';
-import type { PaginatedDocs } from 'payload';
-import type { ContactType } from '@/features/contacts/types';
+import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
 
 
-export async function getContacts(): Promise<PaginatedDocs<ContactType>> {
-  const payload = await getPayload({ config });
-  const result = await payload.find({
-    collection: 'contacts',
-    pagination: false,
-  });
+export async function getContacts() {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'contacts',
+      pagination: false,
+    });
 
-  return result;
+    return ok(result);
+  } catch (error) {
+    console.error('Error fetching contacts:', error);
+    return err({ type: 'unexpected', message: 'Failed to fetch contacts. Try again later.' });
+  }
 }

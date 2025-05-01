@@ -1,2 +1,2 @@
-export * from './actions';
 export * from './components/contacts';
+export * from './dal';

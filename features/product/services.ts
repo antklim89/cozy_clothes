@@ -1,19 +1,29 @@
+import '@/lib/server-only';
 import { getPayload } from 'payload';
 import type { PaginatedDocs } from 'payload';
 import type { GetManyProductsOptions, ProductType } from '@/features/product/types';
+import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
 import { PRODUCTS_PER_PAGE } from './constants';
 
 
-export async function getOneProduct(id: ProductType['id']): Promise<ProductType> {
-  const payload = await getPayload({ config });
-  const result = await payload.findByID({
-    collection: 'products',
-    id,
-    depth: 1,
-  });
+export async function getOneProduct(id: ProductType['id']) {
+  try {
+    const payload = await getPayload({ config });
 
-  return result as ProductType;
+    const result = await payload.findByID({
+      collection: 'products',
+      id,
+      depth: 1,
+    });
+
+    return ok(result as ProductType);
+  } catch (error) {
+    if (error instanceof Error && error.name === 'NotFound') {
+      return err({ type: 'not-found', message: `Product with id "${id}" not found.` });
+    }
+    return err({ type: 'unexpected', message: `Failed to fetch product with id "${id}". Try again later.` });
+  }
 }
 
 export async function getManyProducts({
@@ -24,47 +34,57 @@ export async function getManyProducts({
   search,
   countries,
   ...options
-}: GetManyProductsOptions): Promise<PaginatedDocs<ProductType>> {
-  const payload = await getPayload({ config });
+}: GetManyProductsOptions) {
+  try {
+    const payload = await getPayload({ config });
 
-  const result = await payload.find({
-    limit: limit ?? PRODUCTS_PER_PAGE,
-    ...options,
-    where: {
-      country: countries != null ? { in: countries } : {},
-      category: category != null ? { equals: category } : {},
-      price: (minPrice != null && maxPrice != null)
-        ? { greater_than_equal: minPrice, less_than_equal: maxPrice }
-        : minPrice != null
-          ? { greater_than_equal: minPrice }
-          : maxPrice != null
-            ? { less_than_equal: maxPrice }
-            : {},
-      or: [
-        search != null ? { title: { contains: search } } : {},
-        search != null ? { description: { contains: search } } : {},
-      ],
-    },
-    collection: 'products',
-    depth: 1,
-  });
+    const result = await payload.find({
+      limit: limit ?? PRODUCTS_PER_PAGE,
+      ...options,
+      where: {
+        country: countries != null ? { in: countries } : {},
+        category: category != null ? { equals: category } : {},
+        price: (minPrice != null && maxPrice != null)
+          ? { greater_than_equal: minPrice, less_than_equal: maxPrice }
+          : minPrice != null
+            ? { greater_than_equal: minPrice }
+            : maxPrice != null
+              ? { less_than_equal: maxPrice }
+              : {},
+        or: [
+          search != null ? { title: { contains: search } } : {},
+          search != null ? { description: { contains: search } } : {},
+        ],
+      },
+      collection: 'products',
+      depth: 1,
+    });
 
-  return result as PaginatedDocs<ProductType>;
+    return ok(result as PaginatedDocs<ProductType>);
+  } catch (error) {
+    console.error('Error: \n', error);
+    return err({ type: 'unexpected', message: 'Failed to fetch product list. Try again later.' });
+  }
 }
 
-export async function getAllProductIds(): Promise<ProductType['id'][]> {
-  const payload = await getPayload({ config });
-  const result = await payload.find({
-    collection: 'products',
-    limit: Number.MAX_SAFE_INTEGER,
-    depth: 0,
-    select: {
-      // @ts-expect-error id exists
-      id: true,
-    },
-  });
+export async function getAllProductIds() {
+  try {
+    const payload = await getPayload({ config });
+    const result = await payload.find({
+      collection: 'products',
+      limit: Number.MAX_SAFE_INTEGER,
+      depth: 0,
+      select: {
+        // @ts-expect-error id exists
+        id: true,
+      },
+    });
 
-  const ids = result.docs.map(i => i.id);
+    const ids = result.docs.map(i => i.id);
 
-  return ids;
+    return ok(ids);
+  } catch (error) {
+    console.error('Error: \n', error);
+    return err({ type: 'unexpected', message: 'Failed to fetch product ids. Try again later.' });
+  }
 }
