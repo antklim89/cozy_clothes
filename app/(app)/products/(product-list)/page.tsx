@@ -2,12 +2,10 @@ import { notFound } from 'next/navigation';
 import type { z } from 'zod';
 import {
   fetchProductList,
-  ProductFilter,
   ProductList,
   ProductPagination,
   ProductParamsSchema,
 } from '@/features/product';
-import { CategoryNavBar } from '@/features/product-categories';
 
 
 export interface Props {
@@ -21,15 +19,13 @@ async function Page({ searchParams }: Props) {
   const { type, result: products } = await fetchProductList(data);
   if (type === 'error') return null;
 
+
   return (
-    <>
-      <CategoryNavBar />
-      <ProductList
-        filter={<ProductFilter />}
-        pagination={<ProductPagination page={data.page} totalPages={products.totalPages} />}
-        products={products.docs}
-      />
-    </>
+    <div>
+      <ProductPagination page={data.page} totalPages={products.totalPages} />
+      <ProductList products={products.docs} />
+      <ProductPagination page={data.page} totalPages={products.totalPages} />
+    </div>
   );
 }
 
