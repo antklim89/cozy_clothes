@@ -22,7 +22,6 @@ export function CountrySelect() {
           label: i.name,
           value: i.id.toString(),
         }))}
-        placeholder="Select countries..."
         selectedValues={searchInput}
         onSelectedValuesChange={async value => setSearchInput(value)}
       />
