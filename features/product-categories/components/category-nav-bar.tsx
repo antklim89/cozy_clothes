@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { fetchCategories } from '@/features/product-categories';
+import type { ProductCategoryType } from '../types';
 
 
-export async function CategoryNavBar() {
-  const { type, result: categories } = await fetchCategories();
-  if (type === 'error') return null;
-
+export async function CategoryNavBar({ categories }: { categories: ProductCategoryType[] }) {
   return (
-    <section className="container w-[90vw] my-4">
+    <section className="container w-[90vw] h-20 my-4">
       <ScrollArea>
         <nav className="mb-4">
           <ul className="flex gap-2">
