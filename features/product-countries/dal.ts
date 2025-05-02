@@ -1,4 +1,3 @@
-'use server';
 import '@/lib/server-only';
 import { cache } from 'react';
 import { getCountries } from './services';

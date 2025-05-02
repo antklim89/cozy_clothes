@@ -1,12 +1,11 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import { useQueryState } from 'nuqs';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CountrySelect } from '@/features/product-countries';
 
 
 const priceSchema = z.string().trim().regex(/^\d*$/g);
@@ -18,7 +17,7 @@ const nuqsOptions = {
   defaultValue: '',
 };
 
-export function ProductFilter() {
+export function ProductFilter({ filters }: { filters?: ReactNode }) {
   const router = useRouter();
   const [searchInput, setSearchInput] = useQueryState('search', nuqsOptions);
   const [minPriceInput, setMinPriceInput] = useQueryState('minPrice', nuqsOptions);
@@ -73,7 +72,7 @@ export function ProductFilter() {
         </Label>
       </div>
 
-      <CountrySelect />
+      {filters}
 
       <Button
         className="w-full mt-2"
