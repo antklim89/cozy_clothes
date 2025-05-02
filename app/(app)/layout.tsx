@@ -4,13 +4,14 @@ import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/700-italic.css';
 import '@fontsource/poppins/700.css';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import type { ReactNode } from 'react';
 import process from 'node:process';
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import NuqsProvider from '@/components/providers/nuqs-provider';
 import { QueryProvider } from '@/components/providers/query-provider';
-import { CategoryDropdownMenu } from '@/features/product-categories';
+import { CategoryDropdownMenu, CategoryDropdownMenuFallback } from '@/features/product-categories';
 import { fetchSeo } from '@/features/seo';
 
 
@@ -63,7 +64,12 @@ function Layout({ children }: { children: ReactNode }) {
       <NuqsProvider>
         <QueryProvider>
           <body className="grid grid-rows-[auto_1fr_auto] h-screen">
-            <Header categoryMenu={<CategoryDropdownMenu />} />
+            <Header categoryMenu={(
+              <Suspense fallback={<CategoryDropdownMenuFallback />}>
+                <CategoryDropdownMenu />
+              </Suspense>
+            )}
+            />
             <main>{children}</main>
             <Footer />
           </body>
