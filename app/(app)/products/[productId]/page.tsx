@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { z } from 'zod';
 import { AddToCartButton, CartQtyInput } from '@/features/cart';
 import {
   fetchAllProductIds,
   fetchProduct,
   Product,
-  ProductIdSchema,
 } from '@/features/product';
 
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { success, data: productId } = await ProductIdSchema.safeParseAsync((await params).productId);
+  const { success, data: productId } = await z.coerce.number().safeParseAsync((await params).productId);
   if (!success) return {};
 
   const { type, result: product } = await fetchProduct(productId);
@@ -50,10 +50,10 @@ export async function generateStaticParams() {
 
 
 async function Page({ params, searchParams }: Props) {
-  const { success, data: productId } = await ProductIdSchema.safeParseAsync((await params).productId);
+  const { success, data: productId } = await z.coerce.number().safeParseAsync((await params).productId);
   if (!success) notFound();
 
-  const { data: variantId } = await ProductIdSchema.safeParseAsync((await searchParams).v);
+  const { data: variantId } = await z.coerce.number().safeParseAsync((await searchParams).v);
 
   const { type, result: product } = await fetchProduct(productId);
   if (type === 'error') notFound();
@@ -72,4 +72,4 @@ async function Page({ params, searchParams }: Props) {
 
 export default Page;
 
-// export const dynamicParams = false;
+export const dynamicParams = false;
