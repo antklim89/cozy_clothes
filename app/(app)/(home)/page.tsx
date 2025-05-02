@@ -29,7 +29,7 @@ async function Page() {
       {/* <CategoryNavBar /> */}
 
       {newProducts.type !== 'error'
-        ? <ProductList products={newProducts.result} title="New Products" />
+        ? <ProductList className="container" products={newProducts.result} title="New Products" />
         : null}
 
       {testimonials.type !== 'error'
@@ -37,7 +37,7 @@ async function Page() {
         : null}
 
       {discountProducts.type !== 'error'
-        ? <ProductList products={discountProducts.result} title="Big Discount" />
+        ? <ProductList className="container" products={discountProducts.result} title="Big Discount" />
         : null}
 
       {contacts.type !== 'error'
