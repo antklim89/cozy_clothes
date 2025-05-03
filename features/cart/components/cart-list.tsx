@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CartListPlaceholder } from '@/features/cart/components/placeholders/cart-list-placeholder';
+import { CartListFallback } from '@/features/cart/components/fallbacks/cart-list-fallback';
 import { CartListEmpty } from '@/features/cart/components/ui/cart-list-empty';
 import { CartListItem } from '@/features/cart/components/ui/cart-list-item';
 import { CartTotal } from '@/features/cart/components/ui/cart-total';
@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 export function CartList({ className, ...props }: ComponentProps<'section'>) {
   const cartItems = useCartStore(store => store.cartItems);
 
-  if (!useCartStoreIsHydrated()) return <CartListPlaceholder />;
+  if (!useCartStoreIsHydrated()) return <CartListFallback />;
   if (cartItems.length === 0) return <CartListEmpty />;
   return (
     <section className={cn('container my-8', className)} {...props}>

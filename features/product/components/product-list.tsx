@@ -1,7 +1,8 @@
 import type { ComponentProps } from 'react';
-import { ProductCard } from '@/features/product/components/ui/product-card';
-import type { ProductType } from '@/features/product/types';
 import { cn } from '@/lib/utils';
+import { ProductCard } from './ui/product-card';
+import { ProductGrid } from './ui/product-grid';
+import type { ProductType } from '../types';
 
 
 interface Props extends ComponentProps<'section'> {
@@ -18,11 +19,11 @@ export async function ProductList({
   return (
     <section className={cn('my-4', className)} {...props}>
       <h2 className="text-xl mb-4">{title}</h2>
-      <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(min(320px,100%),1fr))]">
+      <ProductGrid>
         {products.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </ProductGrid>
     </section>
   );
 }

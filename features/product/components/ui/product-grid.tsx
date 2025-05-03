@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
 
-export function Grid({ children, className, ...props }: ComponentProps<'div'>) {
+export function ProductGrid({ children, className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       {...props}

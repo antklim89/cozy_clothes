@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 
 
-export function CartListPlaceholder({ className, ...props }: ComponentProps<'section'>) {
+export function CartListFallback({ className, ...props }: ComponentProps<'section'>) {
   return (
     <section className={cn('container flex flex-col gap-4 my-8', className)} {...props}>
       <div className="grid gap-4 grid-cols-1 md:grid-cols-[3fr_1fr]">

@@ -1,7 +1,7 @@
 import { Skeleton } from '@/components/ui/skeleton';
 
 
-export function CardPlaceholder() {
+export function CardFallback() {
   return (
     <section className="group relative">
       <div className="w-full overflow-hidden lg:aspect-none lg:h-80">
