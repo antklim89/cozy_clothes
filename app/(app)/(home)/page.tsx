@@ -1,7 +1,7 @@
 import { Contacts, fetchContacts } from '@/features/contacts';
 import { fetchHero, Hero } from '@/features/hero';
 import { fetchDiscountProducts, fetchNewProducts, ProductList } from '@/features/product';
-// import { CategoryNavBar } from '@/features/product-categories';
+import { CategoryNavBar, fetchCategories } from '@/features/product-categories';
 import { fetchTestimonials, Testimonials } from '@/features/testimonials';
 
 
@@ -12,12 +12,14 @@ async function Page() {
     hero,
     testimonials,
     contacts,
+    categories,
   ] = await Promise.all([
     fetchNewProducts(),
     fetchDiscountProducts(),
     fetchHero(),
     fetchTestimonials(),
     fetchContacts(),
+    fetchCategories(),
   ]);
 
   return (
@@ -26,7 +28,9 @@ async function Page() {
         ? <Hero hero={hero.result} />
         : null}
 
-      {/* <CategoryNavBar /> */}
+      {categories.type !== 'error'
+        ? <CategoryNavBar categories={categories.result} />
+        : null}
 
       {newProducts.type !== 'error'
         ? <ProductList className="container" products={newProducts.result} title="New Products" />
