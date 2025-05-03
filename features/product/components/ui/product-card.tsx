@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Price } from '@/components/ui/price';
-import type { ProductType } from '@/features/product/types';
 import placeholder from '@/public/placeholder.jpg';
+import type { ProductType } from '../../types';
 
 
 interface Props {

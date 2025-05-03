@@ -1,8 +1,8 @@
 import '@/lib/server-only';
 import { getPayload } from 'payload';
-import type { HeroType } from '@/features/hero/types';
 import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
+import type { HeroType } from './types';
 
 
 export async function getHero() {

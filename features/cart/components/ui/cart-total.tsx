@@ -1,7 +1,7 @@
 'use client';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { useCartStore } from '@/features/cart/store';
 import { calculatePrice, getPrice } from '@/lib/utils';
+import { useCartStore } from '../../store';
 
 
 export function CartTotal() {

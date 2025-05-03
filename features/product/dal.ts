@@ -1,9 +1,9 @@
 import '@/lib/server-only.ts';
 import { cache } from 'react';
 import type { z } from 'zod';
-import { getAllProductIds, getManyProducts, getOneProduct } from '@/features/product/services';
 import { err, okMap } from '@/lib/result';
 import { FetchProductsInputSchema } from './schemas';
+import { getAllProductIds, getManyProducts, getOneProduct } from './services';
 import type { ProductType } from './types';
 
 

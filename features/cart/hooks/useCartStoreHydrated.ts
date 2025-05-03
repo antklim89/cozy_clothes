@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useCartStore } from '@/features/cart/store';
+import { useCartStore } from '../store';
 
 
 export function useCartStoreIsHydrated() {

@@ -1,10 +1,10 @@
 import '@/lib/server-only';
 import { getPayload } from 'payload';
 import type { PaginatedDocs } from 'payload';
-import type { GetManyProductsOptions, ProductType } from '@/features/product/types';
 import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
 import { PRODUCTS_PER_PAGE } from './constants';
+import type { GetManyProductsOptions, ProductType } from './types';
 
 
 export async function getOneProduct(id: ProductType['id']) {

@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import type { ProductType } from '@/features/product/types';
+import type { ProductType } from '../../types';
 
 
 interface Props {

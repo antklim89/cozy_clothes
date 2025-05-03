@@ -1,5 +1,4 @@
-import { CountrySelect } from '@/features/product-countries';
-import { fetchCountries } from '@/features/product-countries/dal';
+import { CountrySelect, fetchCountries } from '@/features/product-countries';
 
 
 async function Page() {

@@ -1,6 +1,6 @@
 import '@/lib/server-only';
 import { getPayload } from 'payload';
-import type { TestimonialType } from '@/features/testimonials/types';
+import type { TestimonialType } from '@/features/testimonials';
 import { err, ok } from '@/lib/result';
 import config from '@/payload.config';
 

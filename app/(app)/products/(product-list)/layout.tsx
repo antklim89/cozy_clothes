@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ProductSheet } from '@/features/product/components/ui/product-sheet';
+import { ProductSheet } from '@/features/product';
 
 
 export default function Layout({

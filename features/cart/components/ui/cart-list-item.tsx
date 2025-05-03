@@ -4,10 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CartQtyInput } from '@/features/cart/components/cart-qty-input';
-import { useCartStore } from '@/features/cart/store';
-import type { CartItem } from '@/features/cart/types';
 import { getPrice } from '@/lib/utils';
+import { useCartStore } from '../../store';
+import type { CartItem } from '../../types';
+import { CartQtyInput } from '../cart-qty-input';
 
 
 export function CartListItem({ cartItem }: { cartItem: CartItem }) {

@@ -1,4 +1,4 @@
-import type { ContactType } from '@/features/contacts/types';
+import type { ContactType } from '../../types';
 
 
 export function ContactItem({ contact }: { contact: ContactType }) {

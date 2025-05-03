@@ -1,10 +1,10 @@
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import type { ComponentProps, ReactNode } from 'react';
 import { Price } from '@/components/ui/price';
-import { ImageCarousel } from '@/features/product/components/ui/image-carousel';
-import { ProductVariants } from '@/features/product/components/ui/product-variants';
-import type { ProductType } from '@/features/product/types';
 import { cn } from '@/lib/utils';
+import { ImageCarousel } from './ui/image-carousel';
+import { ProductVariants } from './ui/product-variants';
+import type { ProductType } from '../types';
 
 
 interface Props extends ComponentProps<'div'> {

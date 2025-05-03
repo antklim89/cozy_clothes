@@ -2,9 +2,9 @@
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import { useCartStoreIsHydrated } from '@/features/cart/hooks/useCartStoreHydrated';
-import { useCartStore } from '@/features/cart/store';
 import { cn } from '@/lib/utils';
+import { useCartStoreIsHydrated } from '../hooks/useCartStoreHydrated';
+import { useCartStore } from '../store';
 
 
 export function CartButton({ className, ...props }: ComponentProps<'a'>) {

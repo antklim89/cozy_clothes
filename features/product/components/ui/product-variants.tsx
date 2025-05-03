@@ -5,8 +5,8 @@ import type { ComponentProps } from 'react';
 import { FormItem } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import type { ProductType } from '@/features/product/types';
 import { cn } from '@/lib/utils';
+import type { ProductType } from '../../types';
 
 
 type Props = ComponentProps<'form'> & {

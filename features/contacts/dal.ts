@@ -1,7 +1,7 @@
 import '@/lib/server-only';
 import { cache } from 'react';
-import { getContacts } from '@/features/contacts/services';
 import { okMap } from '@/lib/result';
+import { getContacts } from './services';
 
 
 export const fetchContacts = cache(async () => {

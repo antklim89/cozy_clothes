@@ -3,13 +3,13 @@ import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { CartListFallback } from '@/features/cart/components/fallbacks/cart-list-fallback';
-import { CartListEmpty } from '@/features/cart/components/ui/cart-list-empty';
-import { CartListItem } from '@/features/cart/components/ui/cart-list-item';
-import { CartTotal } from '@/features/cart/components/ui/cart-total';
-import { useCartStoreIsHydrated } from '@/features/cart/hooks/useCartStoreHydrated';
-import { useCartStore } from '@/features/cart/store';
 import { cn } from '@/lib/utils';
+import { CartListFallback } from './fallbacks/cart-list-fallback';
+import { CartListEmpty } from './ui/cart-list-empty';
+import { CartListItem } from './ui/cart-list-item';
+import { CartTotal } from './ui/cart-total';
+import { useCartStoreIsHydrated } from '../hooks/useCartStoreHydrated';
+import { useCartStore } from '../store';
 
 
 export function CartList({ className, ...props }: ComponentProps<'section'>) {

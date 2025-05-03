@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { CartStore } from '@/features/cart/types';
 import { CartItemSchema } from './schemas';
+import type { CartStore } from './types';
 
 
 export const useCartStore = create(

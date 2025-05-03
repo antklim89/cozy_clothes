@@ -1,6 +1,6 @@
-import { CardFallback } from '@/features/product/components/fallbacks/card-fallback';
-import { ProductGrid } from '@/features/product/components/ui/product-grid';
-import { PRODUCTS_PER_PAGE } from '@/features/product/constants';
+import { CardFallback } from './card-fallback';
+import { PRODUCTS_PER_PAGE } from '../../constants';
+import { ProductGrid } from '../ui/product-grid';
 
 
 export function ProductGridFallback() {

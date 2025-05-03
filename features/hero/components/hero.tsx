@@ -2,7 +2,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import type { HeroType } from '@/features/hero/types';
+import type { HeroType } from '../types';
 
 
 export async function Hero({ hero: { text, image } }: { hero: HeroType }) {

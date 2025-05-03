@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { TestimonialType } from '@/features/testimonials/types';
+import type { TestimonialType } from '../../types';
 
 
 export function TestimonialItem({ image, name, text }: TestimonialType) {

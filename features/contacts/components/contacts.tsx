@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ContactItem } from '@/features/contacts/components/ui/contact-item';
-import type { ContactType } from '@/features/contacts/types';
+import { ContactItem } from './ui/contact-item';
+import type { ContactType } from '../types';
 
 
 export async function Contacts({ contacts }: { contacts: ContactType[] }) {

@@ -47,6 +47,9 @@ export default antfu(
     ],
 
     rules: {
+      'no-restricted-imports': ['error', {
+        patterns: ['**/features/*/*'],
+      }],
       'ts/no-non-null-assertion': 'error',
       'unused-imports/no-unused-imports': 'error',
       'import/newline-after-import': ['error', { count: 2 }],

@@ -15,8 +15,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { formSchema } from '@/features/checkout/schemas';
 import { cn } from '@/lib/utils';
+import { formSchema } from '../schemas';
 
 
 type Props = ComponentProps<'form'>;

@@ -1,5 +1,5 @@
 import { RichTextImproved } from '@/components/ui/rich-text-improved';
-import type { AboutType } from '@/features/about/types';
+import type { AboutType } from '../types';
 
 
 export async function About({ about }: { about: AboutType }) {

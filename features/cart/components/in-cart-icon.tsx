@@ -1,8 +1,8 @@
 'use client';
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCartStore } from '@/features/cart/store';
-import type { CartItem } from '@/features/cart/types';
+import { useCartStore } from '../store';
+import type { CartItem } from '../types';
 
 
 export function InCartIcon({ productId }: { productId: CartItem['productId'] }) {

@@ -1,6 +1,6 @@
-import { Background } from '@/features/testimonials/components/ui/background';
-import { TestimonialItem } from '@/features/testimonials/components/ui/testimonial-item';
-import type { TestimonialType } from '@/features/testimonials/types';
+import { Background } from './ui/background';
+import { TestimonialItem } from './ui/testimonial-item';
+import type { TestimonialType } from '../types';
 
 
 export async function Testimonials({ testimonials }: { testimonials: TestimonialType[] }) {

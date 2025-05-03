@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-imports */
 /* eslint-disable antfu/no-top-level-await */
 import fs from 'node:fs/promises';
 import path from 'node:path';

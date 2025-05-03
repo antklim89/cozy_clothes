@@ -1,9 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useCartStoreIsHydrated } from '@/features/cart/hooks/useCartStoreHydrated';
-import { useCartStore } from '@/features/cart/store';
 import type { ProductType, ProductVariantType } from '@/features/product';
+import { useCartStoreIsHydrated } from '../hooks/useCartStoreHydrated';
+import { useCartStore } from '../store';
 
 
 interface Props {

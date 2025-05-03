@@ -5,8 +5,8 @@ import {
   InputNumberDecrement,
   InputNumberIncrement,
 } from '@/components/ui/input-number';
-import { useCartStore } from '@/features/cart/store';
-import type { CartItem } from '@/features/cart/types';
+import { useCartStore } from '../store';
+import type { CartItem } from '../types';
 
 
 interface Props {

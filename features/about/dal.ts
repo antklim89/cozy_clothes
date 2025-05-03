@@ -1,8 +1,8 @@
 import '@/lib/server-only';
 import { cache } from 'react';
-import { getAbout } from '@/features/about/services';
-import type { AboutType } from '@/features/about/types';
 import type { PromiseResult } from '@/lib/result';
+import { getAbout } from './services';
+import type { AboutType } from './types';
 
 
 export const fetchAbout = cache(async (): PromiseResult<AboutType> => {
