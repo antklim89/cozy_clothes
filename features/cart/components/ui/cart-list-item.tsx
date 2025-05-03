@@ -40,7 +40,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItem }) {
         <h3 className="text-xl">
           <Link href={`/products/${productId}?v=${variantId}`}>{title}</Link>
         </h3>
-        <div className="flex">
+        <div className="flex gap-4">
           <span className="text-gray-600 uppercase">{colorName}</span>
           <span className="text-gray-600 uppercase">{size}</span>
         </div>
