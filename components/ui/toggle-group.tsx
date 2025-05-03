@@ -26,7 +26,7 @@ function ToggleGroup({
 }: ComponentPropsWithoutRef<typeof Root> & VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Root>> }) {
   const values = useMemo(() => ({ variant, size }), [variant, size]);
   return (
-    <Root className={cn('flex items-center justify-center gap-1 flex-wrap', className)} ref={ref} {...props}>
+    <Root className={cn('flex gap-1 flex-wrap', className)} ref={ref} {...props}>
       <ToggleGroupContext value={values}>{children}</ToggleGroupContext>
     </Root>
   );

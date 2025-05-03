@@ -62,14 +62,14 @@ function ColorVariant({
         variant="outline"
         onValueChange={handleValueChange}
       >
-        {Object.entries(colors).map(([color, variant = []]) => (
+        {Object.entries(colors).map(([color, variant]) => (
           <ToggleGroupItem
-            className={cn('uppercase text-lg', { 'text-gray-300': variant.findIndex(i => i.size === selectedVariant.size) < 0 })}
+            className={cn('uppercase text-md', { 'text-gray-300': variant?.some(i => i.size === selectedVariant.size) })}
             key={color}
             value={color}
           >
-            <span className="rounded-full size-6 mr-2" style={{ backgroundColor: color }}></span>
-            {variant[0]?.colorName ?? color}
+            <span className="rounded-full size-4 mr-2" style={{ backgroundColor: color }}></span>
+            {variant?.[0]?.colorName ?? color}
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
@@ -107,7 +107,7 @@ function SizeVariant({
       >
         {Object.entries(sizes).map(([size, variant]) => (
           <ToggleGroupItem
-            className={cn('uppercase text-2xl', { 'text-gray-300': variant.findIndex(i => i.colorCode === selectedVariant.colorCode) < 0 })}
+            className={cn('uppercase text-md', { 'text-gray-300': variant.findIndex(i => i.colorCode === selectedVariant.colorCode) < 0 })}
             key={size}
             value={size}
           >
