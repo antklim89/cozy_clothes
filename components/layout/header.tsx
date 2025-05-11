@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { CartButton } from '@/features/cart';
+import { AuthLinks } from '@/features/users';
 import logo from '@/public/logo.svg';
 
 
@@ -36,6 +37,7 @@ export async function Header({ categoryMenu }: { categoryMenu?: ReactNode }) {
       <div className="container flex items-center px-4 sm:px-6">
         <Logo />
         <Links />
+        <AuthLinks />
         <CartButton className="ml-4" />
 
         <DropdownMenu>

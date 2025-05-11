@@ -61,14 +61,14 @@ const colors = Array.from({ length: 20 }, () => ({
   code: faker.internet.color(),
 }));
 
-async function getImages(collection: CollectionSlug, imagesPath: string) {
+async function getImages(collection: Extract<CollectionSlug, 'about-media' | 'testimonials-media' | 'product-media' | 'hero-media'>, imagesPath: string) {
   const imagesDir = path.resolve('seed/placeholders', imagesPath);
   const imagesNames = await fs.readdir(imagesDir);
 
   const images = await Promise.all(imagesNames.map(async (imageName) => {
     return payload.create({
       collection,
-      data: {},
+      data: {} as never,
       filePath: path.resolve(imagesDir, imageName),
     });
   }));

@@ -5,7 +5,7 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite';
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
-import { Users } from './collections/Users';
+import { Admins } from './collections/Admins';
 import { About } from './features/about/collections/About';
 import { AboutMedia } from './features/about/collections/AboutMedia';
 import { Contacts } from './features/contacts/collections/Contacts';
@@ -19,6 +19,7 @@ import { ProductVariants } from './features/product/collections/ProductVariants'
 import { Seo } from './features/seo/collections/Seo';
 import { Testimonials } from './features/testimonials/collections/Testimonials';
 import { TestimonialsMedia } from './features/testimonials/collections/TestimonialsMedia';
+import { Users } from './features/users/collections/Users';
 
 
 const filename = fileURLToPath(import.meta.url);
@@ -27,7 +28,7 @@ const dirname = path.dirname(filename);
 
 export default buildConfig({
   admin: {
-    user: Users.slug,
+    user: Admins.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -57,6 +58,7 @@ export default buildConfig({
     Seo,
   ],
   collections: [
+    Admins,
     ProductCountries,
     Contacts,
     AboutMedia,
