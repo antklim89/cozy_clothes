@@ -72,6 +72,7 @@ export interface Config {
   collections: {
     admins: Admin;
     'product-countries': ProductCountry;
+    cart: Cart;
     contacts: Contact;
     'about-media': AboutMedia;
     products: Product;
@@ -90,6 +91,7 @@ export interface Config {
   collectionsSelect: {
     admins: AdminsSelect<false> | AdminsSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
+    cart: CartSelect<false> | CartSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
@@ -198,7 +200,7 @@ export interface ColumnsBlock {
  * via the `definition` "admins".
  */
 export interface Admin {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -222,34 +224,15 @@ export interface ProductCountry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contacts".
+ * via the `definition` "cart".
  */
-export interface Contact {
+export interface Cart {
   id: number;
-  title: string;
-  email: string;
-  phone: string;
+  product?: (number | null) | Product;
+  user?: (number | null) | User;
+  qty?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "about-media".
- */
-export interface AboutMedia {
-  id: number;
-  blurDataUrl: string;
-  updatedAt: string;
-  createdAt: string;
-  url: string;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width: number;
-  height: number;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -325,6 +308,54 @@ export interface ProductVariant {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: number;
+  title: string;
+  email: string;
+  phone: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-media".
+ */
+export interface AboutMedia {
+  id: number;
+  blurDataUrl: string;
+  updatedAt: string;
+  createdAt: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width: number;
+  height: number;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
@@ -375,23 +406,6 @@ export interface TestimonialsMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: string;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -399,11 +413,15 @@ export interface PayloadLockedDocument {
   document?:
     | ({
         relationTo: 'admins';
-        value: string | Admin;
+        value: number | Admin;
       } | null)
     | ({
         relationTo: 'product-countries';
         value: number | ProductCountry;
+      } | null)
+    | ({
+        relationTo: 'cart';
+        value: number | Cart;
       } | null)
     | ({
         relationTo: 'contacts';
@@ -443,17 +461,17 @@ export interface PayloadLockedDocument {
       } | null)
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user:
     | {
         relationTo: 'admins';
-        value: string | Admin;
+        value: number | Admin;
       }
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       };
   updatedAt: string;
   createdAt: string;
@@ -467,11 +485,11 @@ export interface PayloadPreference {
   user:
     | {
         relationTo: 'admins';
-        value: string | Admin;
+        value: number | Admin;
       }
     | {
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       };
   key?: string | null;
   value?:
@@ -502,7 +520,6 @@ export interface PayloadMigration {
  * via the `definition` "admins_select".
  */
 export interface AdminsSelect<T extends boolean = true> {
-  id?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -519,6 +536,17 @@ export interface AdminsSelect<T extends boolean = true> {
  */
 export interface ProductCountriesSelect<T extends boolean = true> {
   name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cart_select".
+ */
+export interface CartSelect<T extends boolean = true> {
+  product?: T;
+  user?: T;
+  qty?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -657,7 +685,6 @@ export interface TestimonialsMediaSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  id?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
