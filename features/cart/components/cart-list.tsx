@@ -4,18 +4,17 @@ import type { ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-import { CartListFallback } from './fallbacks/cart-list-fallback';
 import { CartListEmpty } from './ui/cart-list-empty';
 import { CartListItem } from './ui/cart-list-item';
 import { CartTotal } from './ui/cart-total';
-import { useCartStoreIsHydrated } from '../hooks/useCartStoreHydrated';
-import { useCartStore } from '../store';
+import { useCartQuery } from '../hooks/use-cart-query';
 
 
 export function CartList({ className, ...props }: ComponentProps<'section'>) {
-  const cartItems = useCartStore(store => store.cartItems);
+  const { data: cartItems, isFetched } = useCartQuery();
 
-  if (!useCartStoreIsHydrated()) return <CartListFallback />;
+  if (!isFetched) return null;
+
   if (cartItems.length === 0) return <CartListEmpty />;
   return (
     <section className={cn('container my-8', className)} {...props}>
@@ -24,12 +23,12 @@ export function CartList({ className, ...props }: ComponentProps<'section'>) {
           {cartItems.map(cartItem => (
             <CartListItem
               cartItem={cartItem}
-              key={`${cartItem.productId} - ${cartItem.variantId}`}
+              key={cartItem.variantId}
             />
           ))}
         </div>
         <div className="flex flex-col gap-2">
-          <CartTotal />
+          <CartTotal cartItems={cartItems} />
           <Card className="p-8 flex justify-center w-full">
             <Button asChild>
               <Link href="/checkout">Checkout</Link>

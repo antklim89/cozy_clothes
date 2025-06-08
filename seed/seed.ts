@@ -140,29 +140,31 @@ async function createCountries() {
   }));
 }
 
-async function createProductVariants() {
-  return Promise.all(Array.from({ length: VARIANTS_NUMBER }, async () => {
-    const { name: colorName, code: colorCode } = getRandomItem(colors);
-    const size = getRandomItem(SIZES);
+async function createProductVariants(products: Product[]) {
+  return Promise.all(products.map(async (product) => {
+    return Promise.all(Array.from({ length: faker.number.int({ min: 1, max: VARIANTS_NUMBER }) }, async () => {
+      const { name: colorName, code: colorCode } = getRandomItem(colors);
+      const size = getRandomItem(SIZES);
 
-    return payload.create({
-      collection: 'product-variants',
-      data: {
-        colorName,
-        colorCode,
-        size,
-      },
-    });
+      return payload.create({
+        collection: 'product-variants',
+        data: {
+          colorName,
+          colorCode,
+          size,
+          product: product.id,
+        },
+      });
+    }));
   }));
 }
 
 async function createProducts() {
   const categories = await createCategories();
   const countries = await createCountries();
-  const variants = await createProductVariants();
   const images = await getImages('product-media', 'products');
 
-  return Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
+  const products = await Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
     const category = getRandomItem(categories);
     const country = getRandomItem(countries);
 
@@ -176,10 +178,11 @@ async function createProducts() {
         price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
         title: faker.commerce.productName(),
         images: sliceRandom(shuffle(images)).map(i => i.id),
-        variants: sliceRandom(shuffle(variants)).map(i => i.id),
       },
     });
   }));
+
+  await createProductVariants(products);
 }
 
 async function createTestimonials() {

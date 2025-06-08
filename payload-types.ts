@@ -87,7 +87,11 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    products: {
+      variants: 'product-variants';
+    };
+  };
   collectionsSelect: {
     admins: AdminsSelect<false> | AdminsSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
@@ -228,9 +232,20 @@ export interface ProductCountry {
  */
 export interface Cart {
   id: number;
-  product?: (number | null) | Product;
-  user?: (number | null) | User;
-  qty?: number | null;
+  variant: number | ProductVariant;
+  user: number | User;
+  qty: number;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants".
+ */
+export interface ProductVariant {
+  id: number;
+  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
+  colorName: string;
+  colorCode: string;
+  product: number | Product;
   updatedAt: string;
   createdAt: string;
 }
@@ -261,7 +276,11 @@ export interface Product {
   category: number | ProductCategory;
   country: number | ProductCountry;
   images: (number | ProductMedia)[];
-  variants: (number | ProductVariant)[];
+  variants?: {
+    docs?: (number | ProductVariant)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -293,18 +312,6 @@ export interface ProductMedia {
   height: number;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-variants".
- */
-export interface ProductVariant {
-  id: number;
-  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
-  colorName: string;
-  colorCode: string;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -544,11 +551,9 @@ export interface ProductCountriesSelect<T extends boolean = true> {
  * via the `definition` "cart_select".
  */
 export interface CartSelect<T extends boolean = true> {
-  product?: T;
+  variant?: T;
   user?: T;
   qty?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -621,6 +626,7 @@ export interface ProductVariantsSelect<T extends boolean = true> {
   size?: T;
   colorName?: T;
   colorCode?: T;
+  product?: T;
   updatedAt?: T;
   createdAt?: T;
 }

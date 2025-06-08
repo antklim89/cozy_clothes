@@ -1,9 +1,10 @@
 import '@/lib/server-only';
 import { login as payloadLogin, logout as payloadLogout } from '@payloadcms/next/auth';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { cache } from 'react';
 import { getPayload } from 'payload';
 import type { ValidationError } from 'payload';
+import { addAuthenticatedCookie, removeAuthenticatedCookie } from '@/lib/auth';
 import { err, ok } from '@/lib/result';
 import type { PromiseResult } from '@/lib/result';
 import type { User } from '@/payload-types';
@@ -23,6 +24,7 @@ export const createUser = cache(async ({ email, password }: { email: string; pas
         password,
       },
     });
+    addAuthenticatedCookie(await cookies());
 
     return ok({
       id: result.id,
@@ -54,6 +56,8 @@ export const login = cache(async ({ email, password }: { email: string; password
 
     const user = result.user as User;
 
+    addAuthenticatedCookie(await cookies());
+
     return ok({
       id: user.id,
       email: user.email,
@@ -68,9 +72,11 @@ export const login = cache(async ({ email, password }: { email: string; password
 
 export const logout = cache(async () => {
   await payloadLogout({ config });
+
+  removeAuthenticatedCookie(await cookies());
 });
 
-export const auth = cache(async (): Promise<UserType | null> => {
+export const authService = cache(async (): Promise<UserType | null> => {
   try {
     const payload = await getPayload({ config });
     const result = await payload.auth({ headers: await headers() });

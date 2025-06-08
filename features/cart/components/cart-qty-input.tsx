@@ -5,31 +5,32 @@ import {
   InputNumberDecrement,
   InputNumberIncrement,
 } from '@/components/ui/input-number';
-import { useCartStore } from '../store';
-import type { CartItem } from '../types';
+import { useCartQuery } from '../hooks/use-cart-query';
+import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
+import type { LocalCartItemType } from '../types';
 
 
 interface Props {
-  productId: CartItem['productId'];
-  variantId: CartItem['variantId'];
+  variantId: LocalCartItemType['variantId'];
   className?: string;
 }
 
-export function CartQtyInput({ productId, variantId, className }: Props) {
-  const currentCart = useCartStore(store => store.cartItems.find(i => i.productId === productId && i.variantId === variantId));
-  const updateQty = useCartStore(store => store.updateQty);
-  const qty = currentCart?.qty ?? 1;
+export function CartQtyInput({ variantId, className }: Props) {
+  const { data: currentCart, isFetched } = useCartQuery();
+  const { mutateAsync: updateQty } = useUpdateCartMutation();
+  if (currentCart == null) return null;
+  const currentCartItem = currentCart.find(item => item.variantId === variantId);
+  const qty = currentCartItem?.qty ?? 1;
 
-  const handleChange = (newQty: number): void => {
+  async function handleChange(newQty: number) {
     if (currentCart == null) return;
-    updateQty({
-      productId: currentCart.productId,
-      variantId: currentCart.variantId,
+    await updateQty({
+      variantId,
       qty: newQty,
     });
-  };
+  }
 
-  if (currentCart == null) {
+  if (currentCartItem == null || !isFetched) {
     return (
       <InputNumber className="opacity-0" value={0}>
         <InputNumberContent />

@@ -33,7 +33,7 @@ export const NOT_FOUND_ERROR = {
   message: 'Not found.',
 } as const satisfies ErrVariant<'not-found'>;
 
-export function ok<const T>(result: T): Ok<T> {
+export function ok<T>(result: T): Ok<T> {
   return {
     type: 'ok',
     result,
@@ -41,7 +41,7 @@ export function ok<const T>(result: T): Ok<T> {
   };
 }
 
-export function err<const T extends string>(error: ErrVariant<T>): Err<T> {
+export function err<T extends string>(error: ErrVariant<T>): Err<T> {
   return {
     type: 'error',
     error,

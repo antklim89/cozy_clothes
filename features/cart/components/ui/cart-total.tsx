@@ -1,13 +1,14 @@
 'use client';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { calculatePrice, getPrice } from '@/lib/utils';
-import { useCartStore } from '../../store';
+import type { CartItemType } from '../../types';
 
 
-export function CartTotal() {
-  const cartItems = useCartStore(store => store.cartItems);
+export function CartTotal({ cartItems }: { cartItems: CartItemType[] }) {
   const totalPrice = cartItems.reduce(
-    (total, { qty, discount, price }) => total + calculatePrice({ qty, price, discount }),
+    (total, { qty, price, discount }) => {
+      return total + calculatePrice({ qty, price, discount });
+    },
     0,
   );
 

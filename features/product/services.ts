@@ -11,13 +11,18 @@ export async function getOneProduct(id: ProductType['id']) {
   try {
     const payload = await getPayload({ config });
 
-    const result = await payload.findByID({
+    const productPayloadResult = await payload.findByID({
       collection: 'products',
       id,
       depth: 1,
     });
 
-    return ok(result as ProductType);
+    const productResult = {
+      ...productPayloadResult,
+      variants: productPayloadResult.variants?.docs,
+    };
+
+    return ok(productResult as ProductType);
   } catch (error) {
     if (error instanceof Error && error.name === 'NotFound') {
       return err({ type: 'not-found', message: `Product with id "${id}" not found.` });
@@ -38,7 +43,7 @@ export async function getManyProducts({
   try {
     const payload = await getPayload({ config });
 
-    const result = await payload.find({
+    const productsPayloadResult = await payload.find({
       limit: limit ?? PRODUCTS_PER_PAGE,
       ...options,
       where: {
@@ -60,7 +65,15 @@ export async function getManyProducts({
       depth: 1,
     });
 
-    return ok(result as PaginatedDocs<ProductType>);
+    const productsResult = {
+      ...productsPayloadResult,
+      docs: productsPayloadResult.docs.map(i => ({
+        ...i,
+        variants: i.variants?.docs,
+      })),
+    };
+
+    return ok(productsResult as PaginatedDocs<ProductType>);
   } catch (error) {
     console.error('Error: \n', error);
     return err({ type: 'unexpected', message: 'Failed to fetch product list. Try again later.' });

@@ -1,13 +1,19 @@
 import type { z } from 'zod';
 import type { ProductType, ProductVariantType } from '@/features/product';
-import type { CartItemSchema } from './schemas';
+import type { LocalCartItemSchema } from './schemas';
 
 
-export type CartItem = z.infer<typeof CartItemSchema>;
-
-export interface CartStore {
-  cartItems: CartItem[];
-  addToCart: (newCartItem: CartItem) => void;
-  removeFromCart: (args: { productId: ProductType['id']; variantId: ProductVariantType['id'] }) => void;
-  updateQty: (args: { productId: ProductType['id']; variantId: ProductVariantType['id']; qty: number }) => void;
+export interface CartItemType {
+  id?: number;
+  variantId: ProductVariantType['id'];
+  productId: ProductType['id'];
+  size: ProductVariantType['size'];
+  colorName: ProductVariantType['colorName'];
+  title: ProductType['title'];
+  price: ProductType['price'];
+  discount: ProductType['discount'];
+  image: string;
+  qty: number;
 }
+
+export type LocalCartItemType = z.infer<typeof LocalCartItemSchema>;

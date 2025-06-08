@@ -8,6 +8,7 @@ import sharp from 'sharp';
 import { Admins } from './collections/Admins';
 import { About } from './features/about/collections/About';
 import { AboutMedia } from './features/about/collections/AboutMedia';
+import { Cart } from './features/cart/collections/Cart';
 import { Contacts } from './features/contacts/collections/Contacts';
 import { Hero } from './features/hero/collections/Hero';
 import { HeroMedia } from './features/hero/collections/HeroMedia';
@@ -60,6 +61,7 @@ export default buildConfig({
   collections: [
     Admins,
     ProductCountries,
+    Cart,
     Contacts,
     AboutMedia,
     Products,

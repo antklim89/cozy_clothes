@@ -1,55 +1,40 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import type { ProductType, ProductVariantType } from '@/features/product';
-import { useCartStoreIsHydrated } from '../hooks/useCartStoreHydrated';
-import { useCartStore } from '../store';
+import type { ProductVariantType } from '@/features/product';
+import { useAddCartMutation } from '../hooks/use-add-cart-mutation';
+import { useCartQuery } from '../hooks/use-cart-query';
+import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';
 
 
 interface Props {
-  product: ProductType;
   variant: ProductVariantType;
 }
 
-export function AddToCartButton({ product, variant }: Props) {
-  const addToCart = useCartStore(store => store.addToCart);
-  const removeFromCart = useCartStore(store => store.removeFromCart);
-  const hasCartItem = useCartStore(store => store.cartItems.some(i => (i.productId === product.id && i.variantId === variant.id)));
+export function AddToCartButton({ variant }: Props) {
+  const addCartMutation = useAddCartMutation();
+  const removeCartMutation = useRemoveCartMutation();
+  const { data: cart, isFetched } = useCartQuery();
 
-  function handleAddOrRemove() {
+  const hasCartItem = cart.some(i => i.variantId === variant.id);
+
+  async function handleAddOrRemove() {
     if (hasCartItem) {
-      removeFromCart({
-        productId: product.id,
+      await removeCartMutation.mutateAsync({
         variantId: variant.id,
       });
     } else {
-      addToCart({
-        colorName: variant.colorName,
-        discount: product.discount,
-        image: product.images[0]?.url,
-        price: product.price,
-        size: variant.size,
-        title: product.title,
+      await addCartMutation.mutateAsync({
         variantId: variant.id,
-        productId: product.id,
         qty: 1,
       });
     }
   }
-
-  if (!useCartStoreIsHydrated()) {
-    return (
-      <Skeleton className="w-full">
-        <Button className="w-full">
-          Loading...
-        </Button>
-      </Skeleton>
-    );
-  }
+  const isLoading = !isFetched || addCartMutation.isPending || removeCartMutation.isPending;
+  const buttonText = hasCartItem ? 'Remove From Cart' : 'Add To Cart';
 
   return (
-    <Button className="w-full" onClick={handleAddOrRemove}>
-      {hasCartItem ? 'Remove From Cart' : 'Add To Cart'}
+    <Button className="w-full" disabled={isLoading} onClick={handleAddOrRemove}>
+      {isLoading ? 'Loading...' : buttonText}
     </Button>
   );
 }

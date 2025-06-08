@@ -54,9 +54,9 @@ export const Products: CollectionConfig = {
     },
     {
       name: 'variants',
-      type: 'relationship',
-      relationTo: 'product-variants',
-      required: true,
+      type: 'join',
+      collection: 'product-variants',
+      on: 'product',
       hasMany: true,
     },
   ],

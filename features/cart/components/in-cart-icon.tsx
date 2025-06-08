@@ -1,12 +1,13 @@
 'use client';
 import { ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useCartStore } from '../store';
-import type { CartItem } from '../types';
+import type { ProductType } from '@/features/product';
+import { useCartQuery } from '../hooks/use-cart-query';
 
 
-export function InCartIcon({ productId }: { productId: CartItem['productId'] }) {
-  const isInCart = useCartStore(state => state.cartItems.findIndex(i => i.productId === productId) >= 0);
+export function InCartIcon({ productId }: { productId: ProductType['id'] }) {
+  const { data: cart } = useCartQuery();
+  const isInCart = cart.some(item => item.productId === productId);
 
   if (!isInCart) return null;
   return (

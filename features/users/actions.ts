@@ -3,7 +3,7 @@ import '@/lib/server-only';
 import { err } from '@/lib/result';
 import { AuthSchema } from './schemas';
 import {
-  auth as authService,
+  authService,
   createUser as createUserService,
   login as loginService,
   logout as logoutService,
