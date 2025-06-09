@@ -15,7 +15,7 @@ function Separator({
     <Root
       className={cn(
         'shrink-0 bg-border',
-        orientation === 'horizontal' ? 'h-[1px] w-full' : 'h-full w-[1px]',
+        orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
         className,
       )}
       decorative={decorative}

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 
 function Card({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
-  return <div className={cn('rounded-lg border bg-card text-card-foreground shadow-sm', className)} ref={ref} {...props} />;
+  return <div className={cn('rounded-lg border bg-card text-card-foreground shadow-xs', className)} ref={ref} {...props} />;
 }
 
 function CardHeader({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
