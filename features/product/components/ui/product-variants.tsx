@@ -64,7 +64,7 @@ function ColorVariant({
       >
         {Object.entries(colors).map(([color, variant]) => (
           <ToggleGroupItem
-            className={cn('uppercase text-md', { 'text-gray-300': variant?.some(i => i.size === selectedVariant.size) })}
+            className={cn('uppercase text-md', { 'opacity-40': variant?.some(i => i.size === selectedVariant.size) })}
             key={color}
             value={color}
           >
@@ -107,7 +107,7 @@ function SizeVariant({
       >
         {Object.entries(sizes).map(([size, variant]) => (
           <ToggleGroupItem
-            className={cn('uppercase text-md', { 'text-gray-300': variant.findIndex(i => i.colorCode === selectedVariant.colorCode) < 0 })}
+            className={cn('uppercase text-md', { 'opacity-40': variant.findIndex(i => i.colorCode === selectedVariant.colorCode) < 0 })}
             key={size}
             value={size}
           >

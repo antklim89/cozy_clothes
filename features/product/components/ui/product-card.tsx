@@ -19,7 +19,7 @@ export function ProductCard({ product }: Props) {
 
   return (
     <section className="group relative" key={product.id}>
-      <div className="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+      <div className="w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
         <Image
           alt={product.title}
           blurDataURL={image.blurDataUrl}
@@ -32,14 +32,14 @@ export function ProductCard({ product }: Props) {
       </div>
       <div className="mt-4 flex justify-between">
         <div>
-          <h3 className="text-sm text-gray-700">
+          <h3 className="text-sm">
             <Link href={`/products/${product.id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
               {product.title}
             </Link>
           </h3>
-          <p className="mt-1 text-sm text-gray-500">{product.country.name}</p>
-          <p className="mt-1 text-sm text-gray-500">{product.category.name}</p>
+          <p className="mt-1 text-sm">{product.country.name}</p>
+          <p className="mt-1 text-sm">{product.category.name}</p>
         </div>
         <Price discount={product.discount} price={product.price} />
       </div>

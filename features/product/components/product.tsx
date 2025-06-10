@@ -25,7 +25,7 @@ export async function Product({
       <section>
         <ImageCarousel alt={product.title} images={product.images} />
       </section>
-      <aside className="prose px-4 flex flex-col">
+      <aside className="prose dark:prose-invert px-4 flex flex-col">
         <h1>{product.title}</h1>
         <h3>{product.category.name}</h3>
         <RichText data={product.description} />

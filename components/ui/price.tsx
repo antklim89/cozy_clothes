@@ -4,7 +4,7 @@ import { cn, getPrice } from '@/lib/utils';
 
 
 const priceVariants = cva(
-  'font-bold tracking-tight text-gray-900',
+  'font-bold tracking-tight',
   {
     variants: {
       size: { md: 'text-xl', sm: 'text-lg', lg: 'text-3xl' },
@@ -16,7 +16,7 @@ const priceVariants = cva(
 );
 
 const discountVariants = cva(
-  'font-sans text-gray-800/70 text-nowrap',
+  'font-sans  opacity-70 text-nowrap',
   {
     variants: {
       size: { md: 'text-sm', sm: 'text-xs', lg: 'text-lg' },
@@ -28,7 +28,7 @@ const discountVariants = cva(
 );
 
 const priceWithoutDiscountVariants = cva(
-  'line-through font-sans text-gray-500/70 text-nowrap',
+  'line-through font-sans  opacity-60 text-nowrap',
   {
     variants: {
       size: { md: 'text-sm', sm: 'text-xs', lg: 'text-lg' },

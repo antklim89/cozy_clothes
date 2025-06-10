@@ -9,14 +9,14 @@ export function ContactItem({ contact }: { contact: ContactType }) {
     title,
   } = contact;
   return (
-    <div className="bg-slate-200 rounded p-4" key={id}>
+    <div className="border-accent border rounded p-4" key={id}>
       <h3>{title}</h3>
       <p>
-        <a className="font-bold text-blue-800" href="mailto:email">
+        <a className="font-bold text-blue-800 dark:text-blue-400" href="mailto:email">
           {email}
         </a>
         <br />
-        <a className="italic text-blue-800" href="tel:phone">
+        <a className="italic text-blue-800 dark:text-blue-400" href="tel:phone">
           {phone}
         </a>
       </p>

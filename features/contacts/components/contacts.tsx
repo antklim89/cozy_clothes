@@ -5,7 +5,7 @@ import type { ContactType } from '../types';
 
 export async function Contacts({ contacts }: { contacts: ContactType[] }) {
   return (
-    <Card className="container my-8 prose flex flex-col lg:flex-row">
+    <Card className="container my-8 prose dark:prose-invert flex flex-col lg:flex-row">
       <CardHeader className="flex-[1_1_0%]">
         <h2>Get In Touch</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
