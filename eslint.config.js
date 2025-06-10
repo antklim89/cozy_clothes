@@ -47,6 +47,7 @@ export default antfu(
     ],
 
     rules: {
+      'ts/no-explicit-any': 'error',
       'no-restricted-imports': ['error', {
         patterns: ['**/features/*/*'],
       }],
