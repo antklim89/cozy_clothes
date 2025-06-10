@@ -3,13 +3,11 @@ import useEmblaCarousel from 'embla-carousel-react';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import {
-
   createContext,
-
-
+  use,
   useCallback,
-  useContext,
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 import type {
@@ -46,7 +44,7 @@ type CarouselContextProps = {
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
-  const context = useContext(CarouselContext);
+  const context = use(CarouselContext);
 
   if (!context) {
     throw new Error('useCarousel must be used within a <Carousel />');
@@ -76,11 +74,11 @@ function Carousel({
   const [canScrollNext, setCanScrollNext] = useState(false);
 
   const onSelect = useCallback((carouselApi: CarouselApi) => {
-    if (!carouselApi) {
-      return;
-    }
+    if (!carouselApi) return;
 
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCanScrollPrev(carouselApi.canScrollPrev());
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCanScrollNext(carouselApi.canScrollNext());
   }, []);
 
@@ -125,19 +123,19 @@ function Carousel({
     };
   }, [api, onSelect]);
 
+  const contextValue = useMemo(() => ({
+    carouselRef,
+    api,
+    opts,
+    orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+    scrollPrev,
+    scrollNext,
+    canScrollPrev,
+    canScrollNext,
+  }), [carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext]);
+
   return (
-    <CarouselContext
-      value={{
-        carouselRef,
-        api,
-        opts,
-        orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
-        scrollPrev,
-        scrollNext,
-        canScrollPrev,
-        canScrollNext,
-      }}
-    >
+    <CarouselContext value={contextValue}>
       <div
         aria-roledescription="carousel"
         className={cn('relative', className)}

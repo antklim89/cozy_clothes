@@ -52,7 +52,6 @@ export default antfu(
       }],
       'ts/no-non-null-assertion': 'error',
       'unused-imports/no-unused-imports': 'error',
-      'import/newline-after-import': ['error', { count: 2 }],
       'perfectionist/sort-imports': [
         'error',
         {
@@ -84,7 +83,6 @@ export default antfu(
           },
         },
       ],
-      // 'no-restricted-imports': ['error', { patterns: ['../'] }],
       'style/no-multiple-empty-lines': ['error', { max: 2 }],
       'antfu/if-newline': 'off',
       'style/brace-style': ['off', '1tbs'],

@@ -27,8 +27,8 @@ function PaginationItem({ ref, className, ...props }: ComponentProps<'li'> & { r
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, 'size'> &
-ComponentProps<typeof Link>;
+} & Pick<ButtonProps, 'size'>
+& ComponentProps<typeof Link>;
 
 function PaginationLink({
   className,

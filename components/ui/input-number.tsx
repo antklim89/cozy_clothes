@@ -1,5 +1,10 @@
 import { Minus, Plus } from 'lucide-react';
-import { createContext, use } from 'react';
+import {
+  createContext,
+  use,
+  useCallback,
+  useMemo,
+} from 'react';
 import type {
   KeyboardEvent,
   ReactNode,
@@ -42,15 +47,15 @@ export function InputNumber({
   className,
   ...props
 }: InputNumberProps) {
-  function handleDecrement() {
+  const handleDecrement = useCallback(() => {
     const newValue = Math.max(min, value - 1);
     onChange?.(newValue);
-  }
+  }, [min, value, onChange]);
 
-  function handleIncrement() {
+  const handleIncrement = useCallback(() => {
     const newValue = Math.min(max, value + 1);
     onChange?.(newValue);
-  }
+  }, [max, value, onChange]);
 
   function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
     switch (e.key) {
@@ -69,13 +74,14 @@ export function InputNumber({
     }
   }
 
+  const contextValue = useMemo(() => ({
+    value,
+    handleDecrement,
+    handleIncrement,
+  }), [handleDecrement, handleIncrement, value]);
+
   return (
-    <Context value={{
-      value,
-      handleDecrement,
-      handleIncrement,
-    }}
-    >
+    <Context value={contextValue}>
       <div
         {...props}
         className={cn('flex gap-1', className)}

@@ -15,9 +15,7 @@ const MediaSchema = z.object({
 });
 
 
-type NodeTypes =
-  | DefaultNodeTypes
-  | SerializedBlockNode<ColumnsBlock>;
+type NodeTypes = DefaultNodeTypes | SerializedBlockNode<ColumnsBlock>;
 
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
   defaultConverters,

@@ -2,7 +2,7 @@
 import { Item, Root } from '@radix-ui/react-toggle-group';
 import {
   createContext,
-  useContext,
+  use,
   useMemo,
 } from 'react';
 import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
@@ -40,7 +40,7 @@ function ToggleGroupItem({
   size,
   ...props
 }: ComponentPropsWithoutRef<typeof Item> & VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
-  const context = useContext(ToggleGroupContext);
+  const context = use(ToggleGroupContext);
 
   return (
     <Item
