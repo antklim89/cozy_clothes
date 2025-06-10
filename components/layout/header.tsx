@@ -14,6 +14,7 @@ import {
 import { CartButton } from '@/features/cart';
 import { AuthLinks } from '@/features/users';
 import logo from '@/public/logo.svg';
+import { ThemeToggle } from '../ui/theme-toggle';
 
 
 const links = [
@@ -39,7 +40,7 @@ export async function Header({ categoryMenu }: { categoryMenu?: ReactNode }) {
         <Links />
         <AuthLinks />
         <CartButton className="ml-4" />
-
+        <ThemeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger aria-label="Navigation Menu">
             <Menu />
