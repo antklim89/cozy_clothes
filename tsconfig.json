@@ -46,6 +46,7 @@
     "node_modules",
     ".next",
     "build",
-    "out"
+    "out",
+    "**hidden**"
   ]
 }

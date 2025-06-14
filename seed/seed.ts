@@ -4,8 +4,8 @@ import path from 'node:path';
 import { faker } from '@faker-js/faker';
 import type { CollectionSlug } from 'payload';
 import { getPayload } from 'payload';
-import { SIZES } from '../lib/constants';
-import type { Product } from '../payload-types';
+import type { Product } from '@/payload-types';
+import { SIZES } from '@/src/shared/config';
 import config from '../payload.config';
 
 

@@ -1,26 +1,23 @@
-/* eslint-disable no-restricted-imports */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sqliteAdapter } from '@payloadcms/db-sqlite';
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
-import { Admins } from './collections/Admins';
-import { About } from './features/about/collections/About';
-import { AboutMedia } from './features/about/collections/AboutMedia';
-import { Cart } from './features/cart/collections/Cart';
-import { Contacts } from './features/contacts/collections/Contacts';
-import { Hero } from './features/hero/collections/Hero';
-import { HeroMedia } from './features/hero/collections/HeroMedia';
-import { ProductCategories } from './features/product-categories/collections/ProductCategories';
-import { ProductCountries } from './features/product-countries/collections/ProductCountries';
-import { ProductMedia } from './features/product/collections/ProductMedia';
-import { Products } from './features/product/collections/Products';
-import { ProductVariants } from './features/product/collections/ProductVariants';
-import { Seo } from './features/seo/collections/Seo';
-import { Testimonials } from './features/testimonials/collections/Testimonials';
-import { TestimonialsMedia } from './features/testimonials/collections/TestimonialsMedia';
-import { Users } from './features/users/collections/Users';
+import { Admins } from './hidden/collections/Admins';
+import { About } from './hidden/features/about/collections/About';
+import { AboutMedia } from './hidden/features/about/collections/AboutMedia';
+import { Cart } from './hidden/features/cart/collections/Cart';
+import { Contacts } from './hidden/features/contacts/collections/Contacts';
+import { Hero } from './hidden/features/hero/collections/Hero';
+import { HeroMedia } from './hidden/features/hero/collections/HeroMedia';
+import { ProductCategories } from './hidden/features/product-categories/collections/ProductCategories';
+import { ProductCountries } from './hidden/features/product-countries/collections/ProductCountries';
+import { Testimonials } from './hidden/features/testimonials/collections/Testimonials';
+import { TestimonialsMedia } from './hidden/features/testimonials/collections/TestimonialsMedia';
+import { ProductMedia, Products, ProductVariants } from './src/entities/products/model';
+import { Seo } from './src/entities/seo/models';
+import { Users } from './src/entities/user/model';
 
 
 const filename = fileURLToPath(import.meta.url);

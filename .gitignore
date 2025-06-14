@@ -39,3 +39,5 @@ yarn-error.log*
 *.tsbuildinfo
 database.db
 media
+
+**hidden**

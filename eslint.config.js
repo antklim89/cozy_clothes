@@ -48,9 +48,9 @@ export default antfu(
 
     rules: {
       'ts/no-explicit-any': 'error',
-      'no-restricted-imports': ['error', {
-        patterns: ['**/features/*/*'],
-      }],
+      // 'no-restricted-imports': ['error', {
+      //   patterns: ['**/features/*/*'],
+      // }],
       'ts/no-non-null-assertion': 'error',
       'unused-imports/no-unused-imports': 'error',
       'perfectionist/sort-imports': [
