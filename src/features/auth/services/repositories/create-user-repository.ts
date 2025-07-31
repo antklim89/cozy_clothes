@@ -1,9 +1,8 @@
 import 'server-only';
 import type { ValidationError } from 'payload';
+import type { AuthType, UserType } from '@/src/entities/user/model';
 import { getPayload } from '@/src/shared/lib/payload';
 import { err, ok, type PromiseResult } from '@/src/shared/lib/result';
-import { Users } from '../model/collections';
-import type { AuthType, UserType } from '../model/types';
 
 
 export async function createUserRepository({ email, password }: AuthType): PromiseResult<UserType, 'unexpected' | 'validation'> {
@@ -11,7 +10,7 @@ export async function createUserRepository({ email, password }: AuthType): Promi
     const payload = await getPayload();
 
     const result = await payload.create({
-      collection: Users.slug,
+      collection: 'users',
       data: {
         email,
         password,

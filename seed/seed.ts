@@ -58,10 +58,10 @@ function createRichText(textArr: string[]): Product['description'] {
 
 const colors = Array.from({ length: 20 }, () => ({
   name: faker.lorem.word(),
-  code: faker.internet.color(),
+  code: faker.color.rgb(),
 }));
 
-async function getImages(collection: Extract<CollectionSlug, 'about-media' | 'testimonials-media' | 'product-media' | 'hero-media'>, imagesPath: string) {
+async function getImages<T extends CollectionSlug>(collection: T, imagesPath: string) {
   const imagesDir = path.resolve('seed/placeholders', imagesPath);
   const imagesNames = await fs.readdir(imagesDir);
 
@@ -94,6 +94,7 @@ async function createAbout() {
 }
 
 async function createSeo() {
+  const images = await getImages('seo-media', 'seo');
   await payload.updateGlobal({
     slug: 'Seo',
     data: {
@@ -101,6 +102,7 @@ async function createSeo() {
       title: 'Cozy Clothes',
       keywords: ['shop', 'clothes', 'cozy'],
       description: faker.lorem.text(),
+      images,
     },
   });
 }

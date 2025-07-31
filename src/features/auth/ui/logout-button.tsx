@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { useTransition } from 'react';
 import { Button } from '@/src/shared/ui/button';
 import type { ButtonProps } from '@/src/shared/ui/button';
-import { logoutAction } from '../actions';
+import { logoutAction } from '../api/actions';
 
 
 export function LogoutButton({ children, ...props }: ButtonProps) {

@@ -1,4 +1,4 @@
-import { fetchNewProducts } from '@/src/features/products-list/dal';
+import { fetchNewProducts } from '@/src/widgets/products-promo/services';
 import { ProductsPromo } from '@/src/widgets/products-promo/ui';
 
 async function Page() {

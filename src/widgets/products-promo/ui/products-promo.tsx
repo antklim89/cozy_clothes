@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 import type { ProductType } from '@/src/entities/products/model';
-import { ProductsList, ProductsListCard } from '@/src/features/products-list/ui';
+import { ProductsList, ProductsListCard } from '@/src/entities/products/ui';
 import { cn } from '@/src/shared/lib/utils';
 
 
@@ -30,5 +30,3 @@ export function ProductsPromo({
     </section>
   );
 }
-
-

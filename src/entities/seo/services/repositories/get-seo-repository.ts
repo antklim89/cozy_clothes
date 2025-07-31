@@ -1,7 +1,7 @@
 import 'server-only';
 import { getPayload } from '@/src/shared/lib/payload';
 import { err, ok } from '@/src/shared/lib/result';
-import { seoDto } from '../models/dto';
+import { seoDto } from '../../models/dto';
 
 
 export async function getSeoRepository() {

@@ -71,6 +71,7 @@ export interface Config {
   };
   collections: {
     admins: Admin;
+    'seo-media': SeoMedia;
     'product-countries': ProductCountry;
     cart: Cart;
     contacts: Contact;
@@ -94,6 +95,7 @@ export interface Config {
   };
   collectionsSelect: {
     admins: AdminsSelect<false> | AdminsSelect<true>;
+    'seo-media': SeoMediaSelect<false> | SeoMediaSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
     cart: CartSelect<false> | CartSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
@@ -215,6 +217,24 @@ export interface Admin {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-media".
+ */
+export interface SeoMedia {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -423,6 +443,10 @@ export interface PayloadLockedDocument {
         value: number | Admin;
       } | null)
     | ({
+        relationTo: 'seo-media';
+        value: number | SeoMedia;
+      } | null)
+    | ({
         relationTo: 'product-countries';
         value: number | ProductCountry;
       } | null)
@@ -536,6 +560,23 @@ export interface AdminsSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-media_select".
+ */
+export interface SeoMediaSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -792,6 +833,7 @@ export interface Seo {
   description: string;
   keywords: string[];
   creator: string;
+  images: (number | SeoMedia)[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -825,6 +867,7 @@ export interface SeoSelect<T extends boolean = true> {
   description?: T;
   keywords?: T;
   creator?: T;
+  images?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

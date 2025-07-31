@@ -1,11 +1,11 @@
 import 'server-only';
 import { headers } from 'next/headers';
 import { getPayload } from '@/src/shared/lib/payload';
-import { Users } from '../model/collections';
-import type { UserType } from '../model/types';
+import { Users } from '../../model/collections';
+import type { UserType } from '../../model/types';
 
 
-export async function authenticateRepository(): Promise<UserType | null> {
+export async function checkAuthenticationRepository(): Promise<UserType | null> {
   try {
     const payload = await getPayload();
     const result = await payload.auth({ headers: await headers() });

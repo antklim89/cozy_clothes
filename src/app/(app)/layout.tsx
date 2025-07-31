@@ -5,7 +5,7 @@ import '@fontsource/poppins/700-italic.css';
 import '@fontsource/poppins/700.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { getSeo } from '@/src/entities/seo/dal';
+import { getSeo } from '@/src/entities/seo/services/dal';
 import { Footer } from '@/src/widgets/footer/ui';
 import { Header } from '@/src/widgets/header/ui';
 import NuqsProvider from '../providers/nuqs-provider';
@@ -14,20 +14,23 @@ import { ThemeProvider } from '../providers/theme-provider';
 
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { type, result: seo } = await getSeo();
-  if (type === 'error') return {};
+  const { type, error, result: seo } = await getSeo();
+  if (type === 'error') {
+    console.error(error?.message);
+    return {};
+  }
 
   const {
     title,
     creator,
     description,
-    // image,
+    images,
     keywords,
   } = seo;
 
   return {
     metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
-    authors: [],
+    authors: [{ name: creator }],
     title: {
       default: title,
       template: `%s | ${title}`,
@@ -39,13 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: process.env.URL,
       title,
       description,
-      // images: [
-      //   {
-      //     url: image,
-      //     width: 800,
-      //     height: 600,
-      //   },
-      // ],
+      images,
     },
     twitter: {
       title,

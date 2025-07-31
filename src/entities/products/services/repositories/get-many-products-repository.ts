@@ -4,9 +4,9 @@ import { paginationDto } from '@/src/shared/dto/pagination-dto';
 import { getPayload } from '@/src/shared/lib/payload';
 import { err, ok } from '@/src/shared/lib/result';
 import type { PayloadOptions } from '@/src/shared/model/types';
-import { PRODUCTS_PER_PAGE } from '../config/constants';
-import { productDto } from '../model/dto';
-import type { ProductFilterType } from '../model/types';
+import { PRODUCTS_PER_PAGE } from '../../config';
+import type { ProductFilterType } from '../../model';
+import { productDto } from '../../model/dto';
 
 
 export async function getManyProductsRepository({

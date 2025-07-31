@@ -17,6 +17,7 @@ import { Testimonials } from './hidden/features/testimonials/collections/Testimo
 import { TestimonialsMedia } from './hidden/features/testimonials/collections/TestimonialsMedia';
 import { ProductMedia, Products, ProductVariants } from './src/entities/products/model';
 import { Seo } from './src/entities/seo/models';
+import { SeoMedia } from './src/entities/seo/models/collections';
 import { Users } from './src/entities/user/model';
 
 
@@ -57,6 +58,7 @@ export default buildConfig({
   ],
   collections: [
     Admins,
+    SeoMedia,
     ProductCountries,
     Cart,
     Contacts,

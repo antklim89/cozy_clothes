@@ -1,11 +1,12 @@
-'use server';
 import 'server-only';
 import { cache } from 'react';
 import { AuthSchema, type AuthType } from '@/src/entities/user/model';
-import { createUserRepository, loginRepository, logoutRepository } from '@/src/entities/user/repositories';
 import { err } from '@/src/shared/lib/result';
+import { createUserRepository } from './repositories/create-user-repository';
+import { loginRepository } from './repositories/login-repository';
+import { logoutRepository } from './repositories/logout-repository';
 
-export const registerAction = cache(async ({ email, password }: AuthType) => {
+export const register = cache(async ({ email, password }: AuthType) => {
   const { success, data: validatedInput, error } = AuthSchema.safeParse({ email, password });
   if (!success) return err({ type: 'validation', message: error.message });
 
@@ -16,7 +17,7 @@ export const registerAction = cache(async ({ email, password }: AuthType) => {
   return loginResult;
 });
 
-export const loginAction = cache(async ({ email, password }: AuthType) => {
+export const login = cache(async ({ email, password }: AuthType) => {
   const { success, data: validatedInput, error } = AuthSchema.safeParse({ email, password });
   if (!success) return err({ type: 'validation', message: error.message });
 
@@ -24,6 +25,6 @@ export const loginAction = cache(async ({ email, password }: AuthType) => {
   return loginResult;
 });
 
-export const logoutAction = cache(async () => {
+export const logout = cache(async () => {
   await logoutRepository();
 });

@@ -1,1 +1,1 @@
-export { useUser } from './use-user';
+export { userQueryOptions, useUserQuery } from './use-user';

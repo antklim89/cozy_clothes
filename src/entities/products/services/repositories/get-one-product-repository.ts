@@ -1,8 +1,8 @@
 import 'server-only';
 import { getPayload } from '@/src/shared/lib/payload';
 import { err, ok } from '@/src/shared/lib/result';
-import { productDto } from '../model/dto';
-import type { ProductType } from '../model/types';
+import type { ProductType } from '../../model';
+import { productDto } from '../../model/dto';
 
 
 export async function getOneProductRepository(id: ProductType['id']) {

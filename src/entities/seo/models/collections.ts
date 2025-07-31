@@ -1,4 +1,4 @@
-import type { GlobalConfig } from 'payload';
+import type { CollectionConfig, GlobalConfig } from 'payload';
 
 
 export const Seo: GlobalConfig = {
@@ -31,5 +31,27 @@ export const Seo: GlobalConfig = {
       minLength: 5,
       maxLength: 1000,
     },
+    {
+      name: 'images',
+      type: 'upload',
+      hasMany: true,
+      relationTo: 'seo-media',
+      required: true,
+    },
   ],
 };
+
+export const SeoMedia = {
+  slug: 'seo-media',
+  fields: [],
+  upload: {
+    staticDir: 'media/seo',
+    resizeOptions: {
+      position: 'center',
+      fit: 'cover',
+      width: 800,
+      height: 600,
+    },
+  },
+} as const satisfies CollectionConfig;
+

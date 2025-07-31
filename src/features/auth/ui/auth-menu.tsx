@@ -5,7 +5,7 @@ import {
   UserIcon,
   UserPlus,
 } from 'lucide-react';
-import { useUser } from '@/src/entities/user/hooks';
+import { useUserQuery } from '@/src/entities/user/hooks';
 import { Button } from '@/src/shared/ui/button';
 import {
   DropdownMenu,
@@ -16,21 +16,13 @@ import {
   DropdownMenuTrigger,
 } from '@/src/shared/ui/dropdown-menu';
 import { Separator } from '@/src/shared/ui/separator';
-import { Skeleton } from '@/src/shared/ui/skeleton';
 import { AuthDialog } from './auth-dialog';
 import { LogoutButton } from './logout-button';
 
 
 export function AuthMenu() {
-  const { data: user, isPending } = useUser();
+  const { user } = useUserQuery();
 
-  if (isPending) {
-    return (
-      <Button aria-label="User Menu">
-        <Skeleton className="size-8 rounded-full" />
-      </Button>
-    );
-  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
