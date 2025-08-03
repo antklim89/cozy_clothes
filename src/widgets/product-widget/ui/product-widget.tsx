@@ -1,4 +1,5 @@
 import type { ComponentProps } from 'react';
+import { AddToCartButton } from '@/src/entities/cart/ui';
 import type { ProductType } from '@/src/entities/products/model';
 import { Product, ProductImagesCarousel } from '@/src/entities/products/ui';
 import { cn } from '@/src/shared/lib/utils';
@@ -20,6 +21,8 @@ export async function ProductWidget({
       </section>
       <aside className="prose dark:prose-invert px-4 flex flex-col">
         <Product product={product} />
+        {/* @ts-expect-error //TODO: fix later */}
+        <AddToCartButton variantId={product.variants[0]?.id} />
       </aside>
     </div>
   );
