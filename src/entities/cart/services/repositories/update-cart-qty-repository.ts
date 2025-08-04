@@ -5,11 +5,11 @@ import { err, ok } from '@/src/shared/lib/result';
 
 
 export const updateCartQtyRepository = cache(async ({
-  variantId,
+  productId,
   userId,
   qty,
 }: {
-  variantId: number;
+  productId: number;
   userId: number;
   qty: number;
 }) => {
@@ -25,8 +25,8 @@ export const updateCartQtyRepository = cache(async ({
         user: {
           equals: userId,
         },
-        variant: {
-          equals: variantId,
+        product: {
+          equals: productId,
         },
       },
     });

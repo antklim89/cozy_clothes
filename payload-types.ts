@@ -72,14 +72,14 @@ export interface Config {
   collections: {
     admins: Admin;
     'seo-media': SeoMedia;
-    'product-countries': ProductCountry;
     cart: Cart;
     contacts: Contact;
     'about-media': AboutMedia;
     products: Product;
+    'product-bases': ProductBase;
     'product-media': ProductMedia;
-    'product-variants': ProductVariant;
     'product-categories': ProductCategory;
+    'product-countries': ProductCountry;
     'hero-media': HeroMedia;
     testimonials: Testimonial;
     'testimonials-media': TestimonialsMedia;
@@ -90,20 +90,23 @@ export interface Config {
   };
   collectionsJoins: {
     products: {
-      variants: 'product-variants';
+      productVariants: 'products';
+    };
+    'product-bases': {
+      products: 'products';
     };
   };
   collectionsSelect: {
     admins: AdminsSelect<false> | AdminsSelect<true>;
     'seo-media': SeoMediaSelect<false> | SeoMediaSelect<true>;
-    'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
     cart: CartSelect<false> | CartSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    'product-bases': ProductBasesSelect<false> | ProductBasesSelect<true>;
     'product-media': ProductMediaSelect<false> | ProductMediaSelect<true>;
-    'product-variants': ProductVariantsSelect<false> | ProductVariantsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
+    'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
     'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
@@ -238,42 +241,76 @@ export interface SeoMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-countries".
- */
-export interface ProductCountry {
-  id: number;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cart".
  */
 export interface Cart {
   id: number;
-  variant: number | ProductVariant;
+  product: number | Product;
   user: number | User;
   qty: number;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-variants".
- */
-export interface ProductVariant {
-  id: number;
-  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
-  colorName: string;
-  colorCode: string;
-  product: number | Product;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
+  id: number;
+  title: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  price?: number | null;
+  discount?: number | null;
+  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
+  colorName: string;
+  colorCode: string;
+  imagePreview: number | ProductMedia;
+  images?: (number | ProductMedia)[] | null;
+  productBase: number | ProductBase;
+  productVariants?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-media".
+ */
+export interface ProductMedia {
+  id: number;
+  blurDataUrl: string;
+  updatedAt: string;
+  createdAt: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width: number;
+  height: number;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-bases".
+ */
+export interface ProductBase {
   id: number;
   title: string;
   description: {
@@ -296,8 +333,8 @@ export interface Product {
   category: number | ProductCategory;
   country: number | ProductCountry;
   images: (number | ProductMedia)[];
-  variants?: {
-    docs?: (number | ProductVariant)[];
+  products?: {
+    docs?: (number | Product)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
@@ -316,22 +353,13 @@ export interface ProductCategory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-media".
+ * via the `definition` "product-countries".
  */
-export interface ProductMedia {
+export interface ProductCountry {
   id: number;
-  blurDataUrl: string;
+  name: string;
   updatedAt: string;
   createdAt: string;
-  url: string;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width: number;
-  height: number;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -447,10 +475,6 @@ export interface PayloadLockedDocument {
         value: number | SeoMedia;
       } | null)
     | ({
-        relationTo: 'product-countries';
-        value: number | ProductCountry;
-      } | null)
-    | ({
         relationTo: 'cart';
         value: number | Cart;
       } | null)
@@ -467,16 +491,20 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null)
     | ({
+        relationTo: 'product-bases';
+        value: number | ProductBase;
+      } | null)
+    | ({
         relationTo: 'product-media';
         value: number | ProductMedia;
       } | null)
     | ({
-        relationTo: 'product-variants';
-        value: number | ProductVariant;
-      } | null)
-    | ({
         relationTo: 'product-categories';
         value: number | ProductCategory;
+      } | null)
+    | ({
+        relationTo: 'product-countries';
+        value: number | ProductCountry;
       } | null)
     | ({
         relationTo: 'hero-media';
@@ -580,19 +608,10 @@ export interface SeoMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-countries_select".
- */
-export interface ProductCountriesSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cart_select".
  */
 export interface CartSelect<T extends boolean = true> {
-  variant?: T;
+  product?: T;
   user?: T;
   qty?: T;
 }
@@ -634,10 +653,29 @@ export interface ProductsSelect<T extends boolean = true> {
   description?: T;
   price?: T;
   discount?: T;
+  size?: T;
+  colorName?: T;
+  colorCode?: T;
+  imagePreview?: T;
+  images?: T;
+  productBase?: T;
+  productVariants?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-bases_select".
+ */
+export interface ProductBasesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  price?: T;
+  discount?: T;
   category?: T;
   country?: T;
   images?: T;
-  variants?: T;
+  products?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -661,21 +699,18 @@ export interface ProductMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-variants_select".
+ * via the `definition` "product-categories_select".
  */
-export interface ProductVariantsSelect<T extends boolean = true> {
-  size?: T;
-  colorName?: T;
-  colorCode?: T;
-  product?: T;
+export interface ProductCategoriesSelect<T extends boolean = true> {
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-categories_select".
+ * via the `definition` "product-countries_select".
  */
-export interface ProductCategoriesSelect<T extends boolean = true> {
+export interface ProductCountriesSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;

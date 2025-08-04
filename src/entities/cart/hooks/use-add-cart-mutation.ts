@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { cartQueryOptions } from './use-cart-query';
 import { useUserQuery } from '../@x/user/hooks';
-import { addCartItemAction, getCartItemByVariantIdAction } from '../api/actions';
+import { addCartItemAction, getCartItemByProductIdAction } from '../api/actions';
 import { addCartItemToLocalStorage } from '../lib/cart-storage';
 
 
@@ -10,10 +10,10 @@ export function useAddCartMutation() {
   const { isAuthenticated } = useUserQuery();
 
   return useMutation({
-    mutationFn: async (newLocalCartItem: { variantId: number; qty: number }) => {
+    mutationFn: async (newLocalCartItem: { productId: number; qty: number }) => {
       const newCartItem = isAuthenticated
         ? await addCartItemAction(newLocalCartItem)
-        : await getCartItemByVariantIdAction({ variantId: newLocalCartItem.variantId });
+        : await getCartItemByProductIdAction({ productId: newLocalCartItem.productId });
 
       if (newCartItem.type === 'error') throw new Error(newCartItem.error.message);
 

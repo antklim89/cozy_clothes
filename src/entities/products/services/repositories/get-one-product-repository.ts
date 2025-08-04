@@ -12,7 +12,7 @@ export async function getOneProductRepository(id: ProductType['id']) {
     const productPayloadResult = await payload.findByID({
       collection: 'products',
       id,
-      depth: 1,
+      depth: 2,
     });
 
     const productResult = productDto(productPayloadResult);

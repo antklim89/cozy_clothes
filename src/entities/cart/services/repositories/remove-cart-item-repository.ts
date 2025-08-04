@@ -5,10 +5,10 @@ import { err, ok } from '@/src/shared/lib/result';
 
 
 export const removeCartItemRepository = cache(async ({
-  variantId,
+  productId,
   userId,
 }: {
-  variantId: number;
+  productId: number;
   userId: number;
 }) => {
   try {
@@ -20,8 +20,8 @@ export const removeCartItemRepository = cache(async ({
         user: {
           equals: userId,
         },
-        variant: {
-          equals: variantId,
+        product: {
+          equals: productId,
         },
       },
     });

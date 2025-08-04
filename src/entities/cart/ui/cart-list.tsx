@@ -23,7 +23,7 @@ export function CartList({ className, ...props }: ComponentProps<'section'>) {
           {cartItems.map(cartItem => (
             <CartListItem
               cartItem={cartItem}
-              key={cartItem.variantId}
+              key={cartItem.productId}
             />
           ))}
         </div>

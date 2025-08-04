@@ -33,7 +33,7 @@ export const MediaSchema = z.object({
   id: z.number(),
   blurDataUrl: z.string(),
   url: z.string(),
-  filename: z.string().nullable(),
+  filename: z.string().nullish(),
   width: z.number(),
   height: z.number(),
 });

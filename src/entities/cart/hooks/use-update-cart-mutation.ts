@@ -12,7 +12,7 @@ export function useUpdateCartMutation() {
   const { isAuthenticated } = useUserQuery();
 
   return useMutation({
-    mutationFn: async (updatedCartItem: { variantId: number; qty: number }) => {
+    mutationFn: async (updatedCartItem: { productId: number; qty: number }) => {
       if (isAuthenticated) {
         await updateCartQtyActionDebounced(updatedCartItem);
       }
@@ -21,7 +21,7 @@ export function useUpdateCartMutation() {
 
       queryClient.setQueryData(
         cartQueryOptions().queryKey,
-        oldValue => oldValue?.map(i => i.variantId === updatedCartItem.variantId ? { ...i, qty: updatedCartItem.qty } : i),
+        oldValue => oldValue?.map(i => i.productId === updatedCartItem.productId ? { ...i, qty: updatedCartItem.qty } : i),
       );
     },
   });

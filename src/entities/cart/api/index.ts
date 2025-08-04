@@ -1,8 +1,8 @@
 export {
   addCartItemAction,
   getCartAction,
-  getCartByVariantIdsAction,
-  getCartItemByVariantIdAction,
+  getCartByProductIdsAction,
+  getCartItemByProductIdAction,
   removeCartItemAction,
   updateCartQtyAction,
 

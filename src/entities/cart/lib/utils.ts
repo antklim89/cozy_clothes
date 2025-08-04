@@ -10,7 +10,7 @@ export async function syncLocalAndServerCart(localCart: LocalCartItemType[], ser
 
   cartDifference.server.forEach((i) => {
     const newCart = addCartItemToLocalStorage({
-      variantId: i.variantId,
+      productId: i.productId,
       qty: i.qty,
     });
 
@@ -19,7 +19,7 @@ export async function syncLocalAndServerCart(localCart: LocalCartItemType[], ser
 
   await Promise.all(cartDifference.local.map(async (i) => {
     const addedCart = await addCartItemAction({
-      variantId: i.variantId,
+      productId: i.productId,
       qty: i.qty,
     });
     if (addedCart.type === 'ok') server.push(addedCart.result);
@@ -30,7 +30,7 @@ export async function syncLocalAndServerCart(localCart: LocalCartItemType[], ser
 
 function localAndServerCartDifference(localCart: LocalCartItemType[], serverCart: CartItemType[]) {
   return {
-    local: localCart.filter(i => !serverCart.some(j => j.variantId === i.variantId)),
-    server: serverCart.filter(i => !localCart.some(j => j.variantId === i.variantId)),
+    local: localCart.filter(i => !serverCart.some(j => j.productId === i.productId)),
+    server: serverCart.filter(i => !localCart.some(j => j.productId === i.productId)),
   };
 }

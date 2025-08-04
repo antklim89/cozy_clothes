@@ -6,7 +6,7 @@ import { err, ok } from '@/src/shared/lib/result';
 import type { PayloadOptions } from '@/src/shared/model/types';
 import { PRODUCTS_PER_PAGE } from '../../config';
 import type { ProductFilterType } from '../../model';
-import { productDto } from '../../model/dto';
+import { productPreviewDto } from '../../model/dto';
 
 
 export async function getManyProductsRepository({
@@ -39,10 +39,10 @@ export async function getManyProductsRepository({
       limit: options.limit ?? PRODUCTS_PER_PAGE,
       where,
       collection: 'products',
-      depth: 1,
+      depth: 2,
     });
 
-    const productsResult = paginationDto(productsPayloadResult, productDto);
+    const productsResult = paginationDto(productsPayloadResult, productPreviewDto);
 
     return ok(productsResult);
   } catch (error) {

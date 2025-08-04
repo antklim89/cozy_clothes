@@ -2,8 +2,8 @@ import 'server-only';
 import { z } from 'zod/v4-mini';
 import { err } from '@/src/shared/lib/result';
 import { addCartItemRepository } from './repositories/add-cart-item-repository';
-import { getCartByVariantIdsRepository } from './repositories/get-cart-by-variant-ids-repository';
-import { getCartItemByVariantIdRepository } from './repositories/get-cart-item-by-variant-id-repository';
+import { getCartByProductIdsRepository } from './repositories/get-cart-by-product-ids-repository';
+import { getCartItemByProductIdRepository } from './repositories/get-cart-item-by-product-id-repository';
 import { getCartRepository } from './repositories/get-cart-repository';
 import { removeCartItemRepository } from './repositories/remove-cart-item-repository';
 import { updateCartQtyRepository } from './repositories/update-cart-qty-repository';
@@ -19,18 +19,18 @@ export async function getCart() {
   return result;
 }
 
-export async function getCartByVariantIds({ variantIds }: { variantIds: number[] }) {
-  const result = await getCartByVariantIdsRepository({ variantIds });
+export async function getCartByProductIds({ productIds }: { productIds: number[] }) {
+  const result = await getCartByProductIdsRepository({ productIds });
   return result;
 }
 
-export async function getCartItemByVariantId({ variantId }: { variantId: number }) {
-  const result = await getCartItemByVariantIdRepository({ variantId });
+export async function getCartItemByProductId({ productId }: { productId: number }) {
+  const result = await getCartItemByProductIdRepository({ productId });
   return result;
 }
 
 
-export async function addCartItem({ variantId, qty }: { variantId: number; qty?: number }) {
+export async function addCartItem({ productId, qty }: { productId: number; qty?: number }) {
   const { success, data: validatedQty } = await z.optional((CartQtySchema)).safeParseAsync(qty);
   if (!success) return err({ type: 'validation', message: 'Invalid quantity' });
 
@@ -38,25 +38,25 @@ export async function addCartItem({ variantId, qty }: { variantId: number; qty?:
   if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
 
   const result = await addCartItemRepository({
-    variantId,
+    productId,
     userId: user.id,
     qty: validatedQty,
   });
   return result;
 }
 
-export async function removeCartItem({ variantId }: { variantId: number }) {
+export async function removeCartItem({ productId }: { productId: number }) {
   const user = await checkAuthentication();
   if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
 
   const result = await removeCartItemRepository({
-    variantId,
+    productId,
     userId: user.id,
   });
   return result;
 }
 
-export async function updateCartQty({ variantId, qty }: { variantId: number; qty: number }) {
+export async function updateCartQty({ productId, qty }: { productId: number; qty: number }) {
   const { success, data: validatedQty } = await CartQtySchema.safeParseAsync(qty);
   if (!success) return err({ type: 'validation', message: 'Invalid quantity' });
 
@@ -64,7 +64,7 @@ export async function updateCartQty({ variantId, qty }: { variantId: number; qty
   if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
 
   const result = await updateCartQtyRepository({
-    variantId,
+    productId,
     qty: validatedQty,
     userId: user.id,
   });

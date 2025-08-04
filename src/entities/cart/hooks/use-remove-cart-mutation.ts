@@ -10,13 +10,13 @@ export function useRemoveCartMutation() {
   const { isAuthenticated } = useUserQuery();
 
   return useMutation({
-    mutationFn: async (deletedCartItem: { variantId: number }) => {
+    mutationFn: async (deletedCartItem: { productId: number }) => {
       if (isAuthenticated) {
         await removeCartItemAction(deletedCartItem);
       }
 
       removeCartItemFromLocalStorage(deletedCartItem);
-      queryClient.setQueryData(cartQueryOptions().queryKey, oldValue => oldValue?.filter(i => i.variantId !== deletedCartItem.variantId));
+      queryClient.setQueryData(cartQueryOptions().queryKey, oldValue => oldValue?.filter(i => i.productId !== deletedCartItem.productId));
     },
   });
 }

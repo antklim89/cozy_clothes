@@ -6,11 +6,11 @@ export const Cart: CollectionConfig = {
   timestamps: false,
   fields: [
     {
-      label: 'Product variant',
-      name: 'variant',
+      label: 'Product product',
+      name: 'product',
       type: 'relationship',
       required: true,
-      relationTo: 'product-variants',
+      relationTo: 'products',
     },
     {
       label: 'User',

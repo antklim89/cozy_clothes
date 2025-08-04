@@ -6,11 +6,11 @@ import { cartDto } from '../../model/dto';
 
 
 export const addCartItemRepository = cache(async ({
-  variantId,
+  productId,
   userId,
   qty = 1,
 }: {
-  variantId: number;
+  productId: number;
   userId: number;
   qty?: number;
 }) => {
@@ -22,14 +22,14 @@ export const addCartItemRepository = cache(async ({
       depth: 3,
       data: {
         user: userId,
-        variant: variantId,
+        product: productId,
         qty,
       },
     });
 
-    const result = cartDto(payloadResult);
+    const cart = cartDto(payloadResult);
 
-    return ok(result);
+    return ok(cart);
   } catch (error) {
     console.error(error);
     return err({ type: 'unexpected', message: 'Failed to add cart item.' });

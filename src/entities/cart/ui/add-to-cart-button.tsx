@@ -11,30 +11,30 @@ import { useCartQuery } from '../hooks/use-cart-query';
 import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';
 import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
 
-export function AddToCartButton({ variantId }: { variantId: number }) {
+export function AddToCartButton({ productId }: { productId: number }) {
   const addCartMutation = useAddCartMutation();
   const removeCartMutation = useRemoveCartMutation();
   const updateCartMutation = useUpdateCartMutation();
   const cartQuery = useCartQuery();
-  const currentCartItem = cartQuery.data.find(item => item.variantId === variantId);
+  const currentCartItem = cartQuery.data.find(item => item.productId === productId);
   const qty = currentCartItem?.qty ?? 1;
-  const hasCartItem = cartQuery.data.some(i => i.variantId === variantId);
+  const hasCartItem = cartQuery.data.some(i => i.productId === productId);
 
   async function handleRemoveCartItem() {
     await removeCartMutation.mutateAsync({
-      variantId,
+      productId,
     });
   }
   async function handleAddCartItem() {
     await addCartMutation.mutateAsync({
-      variantId,
+      productId,
       qty: 1,
     });
   }
 
   async function handleChange(newQty: number) {
     await updateCartMutation.mutateAsync({
-      variantId,
+      productId,
       qty: newQty,
     });
   }

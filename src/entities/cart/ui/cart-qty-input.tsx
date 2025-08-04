@@ -11,21 +11,21 @@ import type { LocalCartItemType } from '../model';
 
 
 interface Props {
-  variantId: LocalCartItemType['variantId'];
+  productId: LocalCartItemType['productId'];
   className?: string;
 }
 
-export function CartQtyInput({ variantId, className }: Props) {
+export function CartQtyInput({ productId, className }: Props) {
   const { data: currentCart, isFetched } = useCartQuery();
   const { mutateAsync: updateQty } = useUpdateCartMutation();
   if (currentCart == null) return null;
-  const currentCartItem = currentCart.find(item => item.variantId === variantId);
+  const currentCartItem = currentCart.find(item => item.productId === productId);
   const qty = currentCartItem?.qty ?? 1;
 
   async function handleChange(newQty: number) {
     if (currentCart == null) return;
     await updateQty({
-      variantId,
+      productId,
       qty: newQty,
     });
   }

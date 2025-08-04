@@ -15,7 +15,7 @@ import { ProductCountries } from './hidden/features/product-countries/collection
 import { Testimonials } from './hidden/features/testimonials/collections/Testimonials';
 import { TestimonialsMedia } from './hidden/features/testimonials/collections/TestimonialsMedia';
 import { Cart } from './src/entities/cart/model';
-import { ProductMedia, Products, ProductVariants } from './src/entities/products/model';
+import { ProductBases, ProductMedia, Products } from './src/entities/products/model';
 import { Seo } from './src/entities/seo/models';
 import { SeoMedia } from './src/entities/seo/models/collections';
 import { Users } from './src/entities/user/model';
@@ -59,14 +59,14 @@ export default buildConfig({
   collections: [
     Admins,
     SeoMedia,
-    ProductCountries,
     Cart,
     Contacts,
     AboutMedia,
     Products,
+    ProductBases,
     ProductMedia,
-    ProductVariants,
     ProductCategories,
+    ProductCountries,
     HeroMedia,
     Testimonials,
     TestimonialsMedia,

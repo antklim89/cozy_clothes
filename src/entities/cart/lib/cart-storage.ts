@@ -26,16 +26,16 @@ export function addCartItemToLocalStorage(cartItem: LocalCartItemType): LocalCar
   return newCart;
 }
 
-export function removeCartItemFromLocalStorage({ variantId }: { variantId: number }): LocalCartItemType[] {
+export function removeCartItemFromLocalStorage({ productId }: { productId: number }): LocalCartItemType[] {
   const cart = getCartFromLocalStorage();
-  const newCart = cart.filter(item => item.variantId !== variantId);
+  const newCart = cart.filter(item => item.productId !== productId);
   localStorage.setItem('cart', JSON.stringify(newCart));
   return newCart;
 }
 
-export function updateCartQtyInLocalStorage({ variantId, qty }: { variantId: number; qty: number }): LocalCartItemType[] {
+export function updateCartQtyInLocalStorage({ productId, qty }: { productId: number; qty: number }): LocalCartItemType[] {
   const cart = getCartFromLocalStorage();
-  const newCart = cart.map(item => item.variantId === variantId ? { ...item, qty } : item);
+  const newCart = cart.map(item => item.productId === productId ? { ...item, qty } : item);
   localStorage.setItem('cart', JSON.stringify(newCart));
 
   return newCart;

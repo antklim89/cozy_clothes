@@ -4,7 +4,7 @@ import path from 'node:path';
 import { faker } from '@faker-js/faker';
 import type { CollectionSlug } from 'payload';
 import { getPayload } from 'payload';
-import type { Product } from '@/payload-types';
+import type { ProductBase } from '@/payload-types';
 import { SIZES } from '@/src/shared/config';
 import config from '../payload.config';
 
@@ -31,7 +31,7 @@ function sliceRandom<T>(arr: readonly T[]): T[] {
   return arr.slice(0, faker.number.int({ min: 1, max: arr.length - 1 }));
 }
 
-function createRichText(textArr: string[]): Product['description'] {
+function createRichText(textArr: string[]): ProductBase['description'] {
   return {
     root: {
       direction: 'ltr',
@@ -142,26 +142,34 @@ async function createCountries() {
   }));
 }
 
-async function createProductVariants(products: Product[]) {
+async function createProducts(products: ProductBase[]) {
+  const images = await getImages('product-media', 'products');
+
   return Promise.all(products.map(async (product) => {
     return Promise.all(Array.from({ length: faker.number.int({ min: 1, max: VARIANTS_NUMBER }) }, async () => {
       const { name: colorName, code: colorCode } = getRandomItem(colors);
       const size = getRandomItem(SIZES);
 
       return payload.create({
-        collection: 'product-variants',
+        collection: 'products',
         data: {
+          title: faker.commerce.productName(),
+          description: createRichText([faker.lorem.text()]),
+          discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
+          price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
+          imagePreview: getRandomItem(images).id,
+          images: sliceRandom(shuffle(images)).map(i => i.id),
           colorName,
           colorCode,
           size,
-          product: product.id,
+          productBase: product.id,
         },
       });
     }));
   }));
 }
 
-async function createProducts() {
+async function createProductBases() {
   const categories = await createCategories();
   const countries = await createCountries();
   const images = await getImages('product-media', 'products');
@@ -171,20 +179,20 @@ async function createProducts() {
     const country = getRandomItem(countries);
 
     return payload.create({
-      collection: 'products',
+      collection: 'product-bases',
       data: {
+        title: faker.commerce.productName(),
+        description: createRichText([faker.lorem.text()]),
         category: category.id,
         country: country.id,
-        description: createRichText([faker.lorem.text()]),
         discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
         price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
-        title: faker.commerce.productName(),
         images: sliceRandom(shuffle(images)).map(i => i.id),
       },
     });
   }));
 
-  await createProductVariants(products);
+  await createProducts(products);
 }
 
 async function createTestimonials() {
@@ -222,6 +230,6 @@ await Promise.all([
   createHero(),
   createSeo(),
   createContacts(),
-  createProducts(),
+  createProductBases(),
   createTestimonials(),
 ]);

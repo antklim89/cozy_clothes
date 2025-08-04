@@ -1,11 +1,11 @@
 import type { ComponentProps } from 'react';
-import type { ProductType } from '@/src/entities/products/model';
+import type { ProductPreviewType } from '@/src/entities/products/model';
 import { ProductsList, ProductsListCard } from '@/src/entities/products/ui';
 import { cn } from '@/src/shared/lib/utils';
 
 
 interface Props extends ComponentProps<'section'> {
-  products: ProductType[];
+  products: ProductPreviewType[];
   title?: string;
 }
 

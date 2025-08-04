@@ -19,14 +19,13 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
     image,
     price,
     discount,
-    variantId,
     productId,
     colorName,
     size,
   } = cartItem;
 
   async function handleRemoveFromCart() {
-    await removeFromCart({ variantId });
+    await removeFromCart({ productId });
   }
 
   return (
@@ -43,7 +42,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
 
       <div className="col-span-2">
         <h3 className="text-xl">
-          <Link href={`/products/${productId}?v=${variantId}`}>{title}</Link>
+          <Link href={`/products/${productId}?v=${productId}`}>{title}</Link>
         </h3>
         <div className="flex gap-4">
           <span className="text-gray-600 uppercase">{colorName}</span>
@@ -53,7 +52,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
 
       <div className="flex justify-between max-h-52">
         <div>
-          <CartQtyInput className="my-8" variantId={variantId} />
+          <CartQtyInput className="my-8" productId={productId} />
 
           {qty > 1 && (
             <div className="flex items-center text-gray-600">

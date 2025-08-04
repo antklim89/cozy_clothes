@@ -1,3 +1,3 @@
-export { ProductMedia, Products, ProductVariants } from './collections';
-export { ProductFilterSchema, ProductSchema } from './schemas';
-export type { ProductFilterType, ProductType } from './types';
+export { ProductBases, ProductMedia, Products } from './collections';
+export { ProductFilterSchema } from './schemas';
+export type { ProductFilterType, ProductPreviewType, ProductType } from './types';
