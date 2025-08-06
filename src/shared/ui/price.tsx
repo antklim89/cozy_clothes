@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react';
 import { cva } from 'class-variance-authority';
 import type { VariantProps } from 'class-variance-authority';
 import { cn, getPrice } from '@/src/shared/lib/utils';
@@ -39,7 +40,7 @@ const priceWithoutDiscountVariants = cva(
   },
 );
 
-interface Props extends VariantProps<typeof priceVariants> {
+interface Props extends VariantProps<typeof priceVariants>, ComponentProps<'p'> {
   price: number;
   discount?: number;
   qty?: number;
@@ -50,9 +51,11 @@ export function Price({
   discount = 0,
   qty,
   size,
+  className,
+  ...props
 }: Props) {
   return (
-    <p className="flex flex-col items-end gap-1">
+    <p className={cn('flex flex-col gap-1', className)} {...props}>
       <span className={cn(priceVariants({ size }))}>
         {getPrice({ price, qty })}
       </span>

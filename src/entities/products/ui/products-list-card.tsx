@@ -37,7 +37,7 @@ export function ProductsListCard({ product }: Props) {
           <p className="mt-1 text-sm">{product.country.name}</p>
           <p className="mt-1 text-sm">{product.category.name}</p>
         </div>
-        <Price discount={product.discount} price={product.price} />
+        <Price className="items-end" discount={product.discount} price={product.price} />
       </CardContent>
     </Card>
   );
