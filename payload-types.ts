@@ -89,11 +89,8 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
-    products: {
-      productVariants: 'products';
-    };
     'product-bases': {
-      products: 'products';
+      productVariants: 'products';
     };
   };
   collectionsSelect: {
@@ -279,11 +276,6 @@ export interface Product {
   imagePreview: number | ProductMedia;
   images?: (number | ProductMedia)[] | null;
   productBase: number | ProductBase;
-  productVariants?: {
-    docs?: (number | Product)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
   updatedAt: string;
   createdAt: string;
 }
@@ -333,7 +325,7 @@ export interface ProductBase {
   category: number | ProductCategory;
   country: number | ProductCountry;
   images: (number | ProductMedia)[];
-  products?: {
+  productVariants?: {
     docs?: (number | Product)[];
     hasNextPage?: boolean;
     totalDocs?: number;
@@ -659,7 +651,6 @@ export interface ProductsSelect<T extends boolean = true> {
   imagePreview?: T;
   images?: T;
   productBase?: T;
-  productVariants?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -675,7 +666,7 @@ export interface ProductBasesSelect<T extends boolean = true> {
   category?: T;
   country?: T;
   images?: T;
-  products?: T;
+  productVariants?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -12,8 +12,8 @@ import config from '../payload.config';
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const VARIANTS_NUMBER = 20;
-const PRODUCTS_NUMBER = 100;
+const PRODUCT_BASES_LENGTH = 20;
+const PRODUCTS_LENGTH = 100;
 
 const payload = await getPayload({ config });
 
@@ -57,7 +57,7 @@ function createRichText(textArr: string[]): ProductBase['description'] {
 }
 
 const colors = Array.from({ length: 20 }, () => ({
-  name: faker.lorem.word(),
+  name: faker.color.human(),
   code: faker.color.rgb(),
 }));
 
@@ -142,11 +142,11 @@ async function createCountries() {
   }));
 }
 
-async function createProducts(products: ProductBase[]) {
+async function createProducts(productBases: ProductBase[]) {
   const images = await getImages('product-media', 'products');
 
-  return Promise.all(products.map(async (product) => {
-    return Promise.all(Array.from({ length: faker.number.int({ min: 1, max: VARIANTS_NUMBER }) }, async () => {
+  return Promise.all(productBases.map(async (productBase) => {
+    return Promise.all(Array.from({ length: faker.number.int({ min: 1, max: PRODUCTS_LENGTH }) }, async () => {
       const { name: colorName, code: colorCode } = getRandomItem(colors);
       const size = getRandomItem(SIZES);
 
@@ -162,7 +162,7 @@ async function createProducts(products: ProductBase[]) {
           colorName,
           colorCode,
           size,
-          productBase: product.id,
+          productBase: productBase.id,
         },
       });
     }));
@@ -174,7 +174,7 @@ async function createProductBases() {
   const countries = await createCountries();
   const images = await getImages('product-media', 'products');
 
-  const products = await Promise.all(Array.from({ length: PRODUCTS_NUMBER }, async () => {
+  const products = await Promise.all(Array.from({ length: PRODUCT_BASES_LENGTH }, async () => {
     const category = getRandomItem(categories);
     const country = getRandomItem(countries);
 

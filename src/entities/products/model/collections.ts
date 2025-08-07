@@ -70,14 +70,6 @@ export const Products = {
       relationTo: 'product-bases',
       required: true,
     },
-    {
-      name: 'productVariants',
-      label: 'Product Variants',
-      type: 'join',
-      collection: 'products',
-      on: 'productBase',
-      hasMany: true,
-    },
   ],
 } as const satisfies CollectionConfig;
 
@@ -137,11 +129,13 @@ export const ProductBases = {
       required: true,
     },
     {
-      name: 'products',
+      name: 'productVariants',
+      label: 'Product Variants',
       type: 'join',
       collection: 'products',
       on: 'productBase',
       hasMany: true,
+      maxDepth: 2,
     },
   ],
 } as const satisfies CollectionConfig;

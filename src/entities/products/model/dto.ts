@@ -10,7 +10,7 @@ import type { ProductPreviewType, ProductType } from './types';
 
 export function productDto(product: Product): ProductType {
   const productBase = product.productBase as ProductBase;
-  const productVariants = (product.productVariants?.docs ?? []) as Product[];
+  const productVariants = (productBase.productVariants?.docs ?? []) as Product[];
   const category = productBase.category as ProductCategory;
   const country = productBase.country as ProductCountry;
   const baseImages = (productBase.images ?? []) as ProductMedia[];

@@ -4,6 +4,13 @@ import type { Media, RichText } from '@/src/shared/model/types';
 import type { ProductFilterSchema } from './schemas';
 
 
+export interface ProductVariantType {
+  id: number;
+  size: typeof SIZES[number];
+  colorName: string;
+  colorCode: string;
+}
+
 export interface ProductType {
   id: number;
   baseTitle: string;
@@ -24,12 +31,7 @@ export interface ProductType {
   size: typeof SIZES[number];
   colorName: string;
   colorCode: string;
-  productVariants: {
-    id: number;
-    size: typeof SIZES[number];
-    colorName: string;
-    colorCode: string;
-  }[];
+  productVariants: ProductVariantType[];
   updatedAt: string;
   createdAt: string;
 }
