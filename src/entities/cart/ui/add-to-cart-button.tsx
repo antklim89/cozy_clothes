@@ -39,13 +39,13 @@ export function AddToCartButton({ productId }: { productId: number }) {
     });
   }
 
-  const isLoading = !cartQuery.isFetched || addCartMutation.isPending || removeCartMutation.isPending;
+  const isLoading = cartQuery.isPending || addCartMutation.isPending || removeCartMutation.isPending;
 
   if (hasCartItem) {
     return (
       <div className="flex gap-4">
         <Button className="w-full" disabled={isLoading} onClick={handleRemoveCartItem}>
-          {isLoading ? 'Loading...' : 'Remove From Cart'}
+          Remove From Cart
         </Button>
         <InputNumber value={qty} onChange={handleChange}>
           <InputNumberDecrement aria-label="Decrement product quantity" />
@@ -57,7 +57,7 @@ export function AddToCartButton({ productId }: { productId: number }) {
   }
   return (
     <Button className="w-full" disabled={isLoading} onClick={handleAddCartItem}>
-      {isLoading ? 'Loading...' : 'Add To Cart'}
+      Add To Cart
     </Button>
   );
 }
