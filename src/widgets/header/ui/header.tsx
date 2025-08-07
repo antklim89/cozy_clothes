@@ -1,3 +1,4 @@
+import { CartButton } from '@/src/entities/cart/ui';
 import { AuthMenu } from '@/src/features/auth/ui';
 import { ThemeToggle } from '@/src/shared/ui/theme-toggle';
 import { HeaderSheet } from './header-sheet';
@@ -12,19 +13,18 @@ export async function Header() {
         <Links />
         <ThemeToggle />
         <AuthMenu />
-        {/* <CartButton /> */}
+        <CartButton />
       </div>
       <div className="container sm:hidden flex items-center">
         <Logo />
-        {/* <CartButton /> */}
+        <CartButton />
         <AuthMenu />
 
         <HeaderSheet>
+          <ThemeToggle className="self-end" />
           <Links className="flex-col gap-4" />
 
-          <div className="flex justify-end">
-            <ThemeToggle />
-          </div>
+          <div className="flex-1" />
         </HeaderSheet>
       </div>
     </header>
