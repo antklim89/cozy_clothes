@@ -10,6 +10,7 @@ export function cartQueryOptions() {
   return queryOptions({
     queryKey: ['cart'],
     async queryFn({ client }) {
+      // TODO: refactor local and server cart syncing, clear local storage after syncing
       const localCart = getCartFromLocalStorage();
 
       const isAuthenticated = client.getQueryData(userQueryOptions.queryKey) != null;
