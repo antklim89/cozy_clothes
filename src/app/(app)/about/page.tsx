@@ -1,12 +1,12 @@
+import { getAbout } from '@/src/entities/about/services/dal';
+import { About } from '@/src/entities/about/ui';
 
-export function Page() {
+async function Page() {
+  const { type, result: about } = await getAbout();
+  if (type === 'error') return <p>Error</p>;
+
   return (
-    <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">About</h1>
-      <p>
-        This is the about page.
-      </p>
-    </div>
+    <About about={about} />
   );
 }
 

@@ -1,0 +1,1 @@
+export { getAbout } from './dal';
