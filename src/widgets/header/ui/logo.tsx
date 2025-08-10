@@ -13,7 +13,7 @@ export function Logo() {
         src={logo as StaticImageData}
         width={48}
       />
-      <span className="text-nowrap text-2xl">Cozy Clothes</span>
+      <span className="hidden sm:inline text-nowrap text-2xl">Cozy Clothes</span>
     </Link>
   );
 }

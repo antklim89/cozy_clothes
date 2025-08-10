@@ -7,8 +7,8 @@ import type { ProductCategoryType } from '../model/types';
 export async function ProductCategoryNavBar({ categories }: { categories: ProductCategoryType[] }) {
   return (
     <section className="container my-4">
-      <Carousel className="cursor-pointer select-none" opts={{ align: 'start', dragFree: true, loop: true }}>
-        <CarouselContent>
+      <Carousel className="w-[90vw] sm:w-full m-auto cursor-pointer select-none" opts={{ align: 'start', dragFree: true, loop: true }}>
+        <CarouselContent className="">
           <CarouselItem className="basis-auto">
             <Button asChild className="p-8" variant="outline">
               <Link href="/products">ALL</Link>

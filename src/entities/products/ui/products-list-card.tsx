@@ -27,7 +27,7 @@ export function ProductsListCard({ product }: Props) {
         />
       </div>
       <CardHeader>
-        <Link className="w-full truncate" href={`/products/${product.id}`} title={title}>
+        <Link className="w-full" href={`/products/${product.id}`} title={title}>
           <span aria-hidden="true" className="absolute inset-0" />
           {title}
         </Link>
