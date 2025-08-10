@@ -5,16 +5,19 @@ function Layout({
   new_products: newProducts,
   hero,
   testimonials,
+  contacts,
 }: {
   new_products: ReactNode;
   hero: ReactNode;
   testimonials: ReactNode;
+  contacts: ReactNode;
 }) {
   return (
     <>
       {hero}
       {newProducts}
       {testimonials}
+      {contacts}
     </>
   );
 }
