@@ -10,14 +10,13 @@ import { AboutMedia } from './hidden/features/about/collections/AboutMedia';
 import { Contacts } from './hidden/features/contacts/collections/Contacts';
 import { ProductCategories } from './hidden/features/product-categories/collections/ProductCategories';
 import { ProductCountries } from './hidden/features/product-countries/collections/ProductCountries';
-import { Testimonials } from './hidden/features/testimonials/collections/Testimonials';
-import { TestimonialsMedia } from './hidden/features/testimonials/collections/TestimonialsMedia';
 import { Cart } from './src/entities/cart/model';
-import { Hero } from './src/entities/hero/model/collections';
+import { Hero } from './src/entities/hero/model';
 import { HeroMedia } from './src/entities/hero/model/collections';
 import { ProductBases, ProductMedia, Products } from './src/entities/products/model';
 import { Seo } from './src/entities/seo/models';
 import { SeoMedia } from './src/entities/seo/models/collections';
+import { Testimonials, TestimonialsMedia } from './src/entities/testimonials/model';
 import { Users } from './src/entities/user/model';
 
 

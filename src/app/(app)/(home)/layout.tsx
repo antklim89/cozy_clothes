@@ -4,14 +4,17 @@ import type { ReactNode } from 'react';
 function Layout({
   new_products: newProducts,
   hero,
+  testimonials,
 }: {
   new_products: ReactNode;
   hero: ReactNode;
+  testimonials: ReactNode;
 }) {
   return (
     <>
       {hero}
       {newProducts}
+      {testimonials}
     </>
   );
 }
