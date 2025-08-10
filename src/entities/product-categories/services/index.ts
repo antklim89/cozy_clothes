@@ -1,0 +1,1 @@
+export { getProductCategories } from './dal';

@@ -5,16 +5,19 @@ function Layout({
   new_products: newProducts,
   hero,
   testimonials,
+  categories_nav_bar: categoriesNavBar,
   contacts,
 }: {
   new_products: ReactNode;
   hero: ReactNode;
   testimonials: ReactNode;
   contacts: ReactNode;
+  categories_nav_bar: ReactNode;
 }) {
   return (
     <>
       {hero}
+      {categoriesNavBar}
       {newProducts}
       {testimonials}
       {contacts}
