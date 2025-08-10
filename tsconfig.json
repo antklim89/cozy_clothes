@@ -13,7 +13,7 @@
     "moduleResolution": "bundler",
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ],
       "@payload-config": [
         "./payload.config.ts"

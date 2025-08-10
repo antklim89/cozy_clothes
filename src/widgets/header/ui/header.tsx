@@ -1,6 +1,6 @@
-import { CartButton } from '@/src/entities/cart/ui';
-import { AuthMenu } from '@/src/features/auth/ui';
-import { ThemeToggle } from '@/src/shared/ui/theme-toggle';
+import { CartButton } from '@/entities/cart/ui';
+import { AuthMenu } from '@/features/auth/ui';
+import { ThemeToggle } from '@/shared/ui/theme-toggle';
 import { HeaderSheet } from './header-sheet';
 import { Links } from './links';
 import { Logo } from './logo';

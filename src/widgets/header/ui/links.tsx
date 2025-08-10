@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { cn } from '@/src/shared/lib/utils';
-import { Button } from '@/src/shared/ui/button';
+import { cn } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui/button';
 import { links } from '../model/links';
 
 

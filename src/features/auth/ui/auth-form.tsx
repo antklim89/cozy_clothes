@@ -8,11 +8,11 @@ import {
   RegisterSchema,
   type RegisterType,
   type UserType,
-} from '@/src/entities/user/model';
-import type { PromiseResult } from '@/src/shared/lib/result';
-import { cn } from '@/src/shared/lib/utils';
-import { Alert, AlertDescription, AlertTitle } from '@/src/shared/ui/alert';
-import { Button } from '@/src/shared/ui/button';
+} from '@/entities/user/model';
+import type { PromiseResult } from '@/shared/lib/result';
+import { cn } from '@/shared/lib/utils';
+import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';
+import { Button } from '@/shared/ui/button';
 import {
   Form,
   FormControl,
@@ -20,8 +20,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/src/shared/ui/form';
-import { Input } from '@/src/shared/ui/input';
+} from '@/shared/ui/form';
+import { Input } from '@/shared/ui/input';
 
 
 interface Props extends Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit'> {

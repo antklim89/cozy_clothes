@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
-import { getPayload } from '@/src/shared/lib/payload';
-import { err, ok } from '@/src/shared/lib/result';
+import { getPayload } from '@/shared/lib/payload';
+import { err, ok } from '@/shared/lib/result';
 import { cartDto } from '../../model/dto';
 
 

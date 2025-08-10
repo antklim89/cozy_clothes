@@ -1,6 +1,6 @@
 'use client';
-import { calculatePrice, getPrice } from '@/src/shared/lib/utils';
-import { Card, CardContent, CardHeader } from '@/src/shared/ui/card';
+import { calculatePrice, getPrice } from '@/shared/lib/utils';
+import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import type { CartItemType } from '../model';
 
 

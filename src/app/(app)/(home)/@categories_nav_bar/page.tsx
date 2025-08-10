@@ -1,5 +1,5 @@
-import { getProductCategories } from '@/src/entities/product-categories/services/dal';
-import { ProductCategoryNavBar } from '@/src/entities/product-categories/ui';
+import { getProductCategories } from '@/entities/product-categories/services/dal';
+import { ProductCategoryNavBar } from '@/entities/product-categories/ui';
 
 async function Page() {
   const { type, result: categories } = await getProductCategories();

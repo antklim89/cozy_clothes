@@ -1,5 +1,5 @@
-import { getAbout } from '@/src/entities/about/services/dal';
-import { About } from '@/src/entities/about/ui';
+import { getAbout } from '@/entities/about/services/dal';
+import { About } from '@/entities/about/ui';
 
 async function Page() {
   const { type, result: about } = await getAbout();

@@ -1,11 +1,11 @@
 'use client';
-import { Button } from '@/src/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 import {
   InputNumber,
   InputNumberContent,
   InputNumberDecrement,
   InputNumberIncrement,
-} from '@/src/shared/ui/input-number';
+} from '@/shared/ui/input-number';
 import { useAddCartMutation } from '../hooks/use-add-cart-mutation';
 import { useCartQuery } from '../hooks/use-cart-query';
 import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';

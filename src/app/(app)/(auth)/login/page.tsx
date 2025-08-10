@@ -1,4 +1,4 @@
-import { Auth } from '@/src/features/auth/ui';
+import { Auth } from '@/features/auth/ui';
 
 
 async function Page() {

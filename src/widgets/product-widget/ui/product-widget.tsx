@@ -1,10 +1,10 @@
 import type { ComponentProps } from 'react';
-import { AddToCartButton } from '@/src/entities/cart/ui';
-import type { ProductType } from '@/src/entities/products/model';
-import { Product, ProductImagesCarousel } from '@/src/entities/products/ui';
-import { ProductsVariantsSelect } from '@/src/entities/products/ui';
-import { cn } from '@/src/shared/lib/utils';
-import { Price } from '@/src/shared/ui/price';
+import { AddToCartButton } from '@/entities/cart/ui';
+import type { ProductType } from '@/entities/products/model';
+import { Product, ProductImagesCarousel } from '@/entities/products/ui';
+import { ProductsVariantsSelect } from '@/entities/products/ui';
+import { cn } from '@/shared/lib/utils';
+import { Price } from '@/shared/ui/price';
 
 
 interface Props extends ComponentProps<'div'> {

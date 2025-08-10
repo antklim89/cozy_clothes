@@ -1,9 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
-import type { ProductType } from '@/src/entities/products/model';
-import type { ProductFilterType } from '@/src/entities/products/model';
-import { err } from '@/src/shared/lib/result';
-import type { PayloadOptions } from '@/src/shared/model/types';
+import type { ProductType } from '@/entities/products/model';
+import type { ProductFilterType } from '@/entities/products/model';
+import { err } from '@/shared/lib/result';
+import type { PayloadOptions } from '@/shared/model/types';
 import { getManyProductsRepository } from './repositories/get-many-products-repository';
 import { getOneProductRepository } from './repositories/get-one-product-repository';
 import { FetchProductListInputSchema } from '../model/schemas';

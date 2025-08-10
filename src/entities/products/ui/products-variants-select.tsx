@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import type { ProductVariantType } from '@/src/entities/products/model';
-import { cn } from '@/src/shared/lib/utils';
-import { Button } from '@/src/shared/ui/button';
+import type { ProductVariantType } from '@/entities/products/model';
+import { cn } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui/button';
 
 
 interface Props extends ComponentProps<'div'> {

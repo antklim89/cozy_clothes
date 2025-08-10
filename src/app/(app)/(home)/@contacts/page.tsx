@@ -1,5 +1,5 @@
-import { getContacts } from '@/src/entities/contacts/services/dal';
-import { Contacts } from '@/src/entities/contacts/ui';
+import { getContacts } from '@/entities/contacts/services/dal';
+import { Contacts } from '@/entities/contacts/ui';
 
 async function Page() {
   const { type, result: contacts } = await getContacts();

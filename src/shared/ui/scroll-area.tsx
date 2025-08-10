@@ -8,7 +8,7 @@ import {
   Viewport,
 } from '@radix-ui/react-scroll-area';
 import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 function ScrollArea({

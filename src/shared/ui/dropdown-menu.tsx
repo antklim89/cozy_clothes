@@ -23,7 +23,7 @@ import type {
   HTMLAttributes,
   RefObject,
 } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 const DropdownMenu = Root;

@@ -82,7 +82,7 @@ export default buildConfig({
   }),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
+    outputFile: path.resolve(dirname, 'src/shared/model/payload-types.generated.ts'),
   },
   db: sqliteAdapter({
     migrationDir: path.resolve('migrations'),

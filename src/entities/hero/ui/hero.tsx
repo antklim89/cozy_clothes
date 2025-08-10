@@ -1,7 +1,7 @@
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/src/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 import type { HeroType } from '../model/types';
 
 

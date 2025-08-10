@@ -18,7 +18,7 @@ import {
 } from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 const Select = Root;

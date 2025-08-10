@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useDebounce } from '@/src/shared/hooks/use-debounce';
+import { useDebounce } from '@/shared/hooks/use-debounce';
 import { cartQueryOptions } from './use-cart-query';
 import { useUserQuery } from '../@x/user/hooks';
 import { updateCartQtyAction } from '../api/actions';

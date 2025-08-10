@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
-import { AuthSchema, type AuthType } from '@/src/entities/user/model';
-import { err } from '@/src/shared/lib/result';
+import { AuthSchema, type AuthType } from '@/entities/user/model';
+import { err } from '@/shared/lib/result';
 import { createUserRepository } from './repositories/create-user-repository';
 import { loginRepository } from './repositories/login-repository';
 import { logoutRepository } from './repositories/logout-repository';

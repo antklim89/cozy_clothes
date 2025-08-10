@@ -1,1 +1,1 @@
-export { userQueryOptions, useUserQuery } from '@/src/entities/user/hooks';
+export { userQueryOptions, useUserQuery } from '@/entities/user/hooks';

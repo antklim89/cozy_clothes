@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 interface Props extends ComponentProps<'section'> {

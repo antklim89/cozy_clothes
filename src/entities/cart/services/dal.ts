@@ -1,6 +1,6 @@
 import 'server-only';
 import { z } from 'zod/v4-mini';
-import { err } from '@/src/shared/lib/result';
+import { err } from '@/shared/lib/result';
 import { addCartItemRepository } from './repositories/add-cart-item-repository';
 import { getCartByProductIdsRepository } from './repositories/get-cart-by-product-ids-repository';
 import { getCartItemByProductIdRepository } from './repositories/get-cart-item-by-product-id-repository';

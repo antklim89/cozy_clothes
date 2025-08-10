@@ -1,4 +1,4 @@
-import { Skeleton } from '@/src/shared/ui/skeleton';
+import { Skeleton } from '@/shared/ui/skeleton';
 
 
 export function ProductCategoryNavBarFallback() {

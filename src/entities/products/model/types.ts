@@ -1,6 +1,6 @@
 import type { z } from 'zod/v4-mini';
-import type { SIZES } from '@/src/shared/config';
-import type { Media, RichText } from '@/src/shared/model/types';
+import type { SIZES } from '@/shared/config';
+import type { Media, RichText } from '@/shared/model/types';
 import type { ProductFilterSchema } from './schemas';
 
 

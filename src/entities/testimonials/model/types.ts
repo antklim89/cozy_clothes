@@ -1,4 +1,4 @@
-import type { Media } from '@/src/shared/model/types';
+import type { Media } from '@/shared/model/types';
 
 
 export interface TestimonialType {

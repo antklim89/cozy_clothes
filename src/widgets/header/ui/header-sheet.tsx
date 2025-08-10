@@ -1,6 +1,6 @@
 import { MenuIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Button } from '@/src/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 import {
   Sheet,
   SheetContent,
@@ -8,7 +8,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/src/shared/ui/sheet';
+} from '@/shared/ui/sheet';
 
 export function HeaderSheet({ children }: { children: ReactNode }) {
   return (

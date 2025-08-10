@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
-import { cn } from '@/src/shared/lib/utils';
-import { Skeleton } from '@/src/shared/ui/skeleton';
+import { cn } from '@/shared/lib/utils';
+import { Skeleton } from '@/shared/ui/skeleton';
 
 
 export function CartListFallback({ className, ...props }: ComponentProps<'section'>) {

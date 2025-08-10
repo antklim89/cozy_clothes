@@ -1,4 +1,4 @@
-import { PRODUCTS_PER_PAGE } from '@/src/entities/products/config/constants';
+import { PRODUCTS_PER_PAGE } from '@/entities/products/config/constants';
 import { ProductsList } from './products-list';
 import { ProductsListCardFallback } from './products-list-card-fallback';
 

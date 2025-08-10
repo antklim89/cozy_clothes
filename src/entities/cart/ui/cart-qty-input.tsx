@@ -4,7 +4,7 @@ import {
   InputNumberContent,
   InputNumberDecrement,
   InputNumberIncrement,
-} from '@/src/shared/ui/input-number';
+} from '@/shared/ui/input-number';
 import { useCartQuery } from '../hooks/use-cart-query';
 import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
 import type { LocalCartItemType } from '../model';

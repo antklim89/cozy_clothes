@@ -1,5 +1,5 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
-import { MediaCollection } from '@/src/shared/model/media-collection';
+import { MediaCollection } from '@/shared/model/media-collection';
 
 
 export const About: GlobalConfig = {

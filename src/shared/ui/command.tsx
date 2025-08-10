@@ -8,8 +8,8 @@ import type {
   RefObject,
 } from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
-import { Dialog, DialogContent } from '@/src/shared/ui/dialog';
-import { cn } from '@/src/shared/lib/utils';
+import { Dialog, DialogContent } from '@/shared/ui/dialog';
+import { cn } from '@/shared/lib/utils';
 
 
 function Command({ ref, className, ...props }: ComponentPropsWithoutRef<typeof CommandPrimitive> & { ref?: RefObject<ComponentRef<typeof CommandPrimitive> | null> }) {

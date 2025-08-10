@@ -1,10 +1,10 @@
 import 'server-only';
-import { PRODUCTS_PER_PAGE } from '@/src/entities/products/config';
-import type { ProductType } from '@/src/entities/products/model';
-import { productPreviewDto } from '@/src/entities/products/model/dto';
-import { paginationDto } from '@/src/shared/dto/pagination-dto';
-import { getPayload } from '@/src/shared/lib/payload';
-import { err, ok } from '@/src/shared/lib/result';
+import { PRODUCTS_PER_PAGE } from '@/entities/products/config';
+import type { ProductType } from '@/entities/products/model';
+import { productPreviewDto } from '@/entities/products/model/dto';
+import { paginationDto } from '@/shared/dto/pagination-dto';
+import { getPayload } from '@/shared/lib/payload';
+import { err, ok } from '@/shared/lib/result';
 
 
 export async function getPromoProductsRepository({ sort }: { sort: keyof ProductType }) {

@@ -1,5 +1,5 @@
 import type { ComponentProps } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 export function Spinner({ className, ...props }: ComponentProps<'svg'>) {

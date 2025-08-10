@@ -1,8 +1,8 @@
 'use client';
 import { Loader2 } from 'lucide-react';
 import { useTransition } from 'react';
-import { Button } from '@/src/shared/ui/button';
-import type { ButtonProps } from '@/src/shared/ui/button';
+import { Button } from '@/shared/ui/button';
+import type { ButtonProps } from '@/shared/ui/button';
 import { logoutAction } from '../api/actions';
 
 

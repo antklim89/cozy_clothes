@@ -7,8 +7,8 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/src/shared/ui/command';
-import { cn } from '@/src/shared/lib/utils';
+} from '@/shared/ui/command';
+import { cn } from '@/shared/lib/utils';
 
 
 interface Option {

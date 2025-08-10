@@ -1,5 +1,5 @@
-import { fetchNewProducts } from '@/src/widgets/products-promo/services';
-import { ProductsPromo } from '@/src/widgets/products-promo/ui';
+import { fetchNewProducts } from '@/widgets/products-promo/services';
+import { ProductsPromo } from '@/widgets/products-promo/ui';
 
 async function Page() {
   const { type, result: products } = await fetchNewProducts();

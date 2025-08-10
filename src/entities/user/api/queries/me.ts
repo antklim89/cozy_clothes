@@ -1,4 +1,4 @@
-import type { User } from '@/payload-types';
+import type { User } from '@/shared/model/payload-types.generated';
 import { Users } from '../../model';
 
 

@@ -1,7 +1,7 @@
 'use client';
 import { useQueryClient } from '@tanstack/react-query';
-import { userQueryOptions } from '@/src/entities/user/hooks/use-user';
-import type { AuthType } from '@/src/entities/user/model/types';
+import { userQueryOptions } from '@/entities/user/hooks/use-user';
+import type { AuthType } from '@/entities/user/model/types';
 import { AuthForm } from './auth-form';
 import { loginAction, registerAction } from '../api/actions';
 

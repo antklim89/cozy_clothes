@@ -1,15 +1,15 @@
 'use client';
 import Link from 'next/link';
-import { useCartQuery } from '@/src/entities/cart/hooks/use-cart-query';
+import { useCartQuery } from '@/entities/cart/hooks/use-cart-query';
 import {
   CartList,
   CartListEmpty,
   CartListFallback,
   CartListItem,
   CartTotal,
-} from '@/src/entities/cart/ui';
-import { Button } from '@/src/shared/ui/button';
-import { Card } from '@/src/shared/ui/card';
+} from '@/entities/cart/ui';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
 
 
 function Page() {

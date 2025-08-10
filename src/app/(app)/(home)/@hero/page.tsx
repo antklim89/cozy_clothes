@@ -1,5 +1,5 @@
-import { getHero } from '@/src/entities/hero/services/dal';
-import { Hero } from '@/src/entities/hero/ui';
+import { getHero } from '@/entities/hero/services/dal';
+import { Hero } from '@/entities/hero/ui';
 
 async function Page() {
   const { type, result: hero } = await getHero();

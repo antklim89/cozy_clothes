@@ -2,8 +2,8 @@
 import { ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import { cn } from '@/src/shared/lib/utils';
-import { Button } from '@/src/shared/ui/button';
+import { cn } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui/button';
 import { useCartQuery } from '../hooks/use-cart-query';
 
 

@@ -7,7 +7,7 @@ import {
   Trigger,
 } from '@radix-ui/react-popover';
 import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 const Popover = Root;

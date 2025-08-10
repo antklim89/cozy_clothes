@@ -1,5 +1,5 @@
 import { RichText } from '@payloadcms/richtext-lexical/react';
-import type { ProductType } from '@/src/entities/products/model';
+import type { ProductType } from '@/entities/products/model';
 
 
 export async function Product({ product }: { product: ProductType }) {

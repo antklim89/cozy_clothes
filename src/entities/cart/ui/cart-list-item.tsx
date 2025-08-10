@@ -2,9 +2,9 @@
 import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPrice } from '@/src/shared/lib/utils';
-import { Button } from '@/src/shared/ui/button';
-import { Card } from '@/src/shared/ui/card';
+import { getPrice } from '@/shared/lib/utils';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
 import { CartQtyInput } from './cart-qty-input';
 import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';
 import type { CartItemType } from '../model';

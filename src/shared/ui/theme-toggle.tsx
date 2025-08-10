@@ -2,7 +2,7 @@
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import type { ComponentProps } from 'react';
-import { useIsClient } from '@/src/shared/hooks/use-is-client';
+import { useIsClient } from '@/shared/hooks/use-is-client';
 import { Button } from './button';
 import { Skeleton } from './skeleton';
 

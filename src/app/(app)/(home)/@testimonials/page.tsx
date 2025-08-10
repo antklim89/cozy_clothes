@@ -1,5 +1,5 @@
-import { getTestimonials } from '@/src/entities/testimonials/services/dal';
-import { Testimonials } from '@/src/entities/testimonials/ui';
+import { getTestimonials } from '@/entities/testimonials/services/dal';
+import { Testimonials } from '@/entities/testimonials/ui';
 
 async function Page() {
   const { type, result: testimonials } = await getTestimonials();

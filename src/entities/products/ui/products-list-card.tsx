@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ProductPreviewType } from '@/src/entities/products/model';
-import { Card, CardContent, CardHeader } from '@/src/shared/ui/card';
-import { Price } from '@/src/shared/ui/price';
+import type { ProductPreviewType } from '@/entities/products/model';
+import { Card, CardContent, CardHeader } from '@/shared/ui/card';
+import { Price } from '@/shared/ui/price';
 
 
 interface Props {

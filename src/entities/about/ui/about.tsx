@@ -1,4 +1,4 @@
-import { RichTextImproved } from '@/src/shared/ui/rich-text-improved';
+import { RichTextImproved } from '@/shared/ui/rich-text-improved';
 import type { AboutType } from '../model/types';
 
 

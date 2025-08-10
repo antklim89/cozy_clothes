@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import type { ProductType } from '@/src/entities/products/model';
+import type { ProductType } from '@/entities/products/model';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/src/shared/ui/carousel';
+} from '@/shared/ui/carousel';
 
 
 interface Props {

@@ -1,6 +1,6 @@
 import 'server-only';
 import { cache } from 'react';
-import type { PromiseResult } from '@/src/shared/lib/result';
+import type { PromiseResult } from '@/shared/lib/result';
 import { getTestimonialsRepository } from './repositories/get-testimonials';
 import type { TestimonialType } from '../model/types';
 

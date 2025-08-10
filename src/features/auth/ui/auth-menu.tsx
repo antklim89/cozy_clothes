@@ -5,8 +5,8 @@ import {
   UserIcon,
   UserPlus,
 } from 'lucide-react';
-import { useUserQuery } from '@/src/entities/user/hooks';
-import { Button } from '@/src/shared/ui/button';
+import { useUserQuery } from '@/entities/user/hooks';
+import { Button } from '@/shared/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +14,8 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@/src/shared/ui/dropdown-menu';
-import { Separator } from '@/src/shared/ui/separator';
+} from '@/shared/ui/dropdown-menu';
+import { Separator } from '@/shared/ui/separator';
 import { AuthDialog } from './auth-dialog';
 import { LogoutButton } from './logout-button';
 

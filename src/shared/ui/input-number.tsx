@@ -10,7 +10,7 @@ import type {
   ReactNode,
   RefObject,
 } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { Button } from './button';
 import type { ButtonProps } from './button';
 import { Input } from './input';

@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import { Button } from '@/src/shared/ui/button';
-import { Carousel, CarouselContent, CarouselItem } from '@/src/shared/ui/carousel';
+import { Button } from '@/shared/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/shared/ui/carousel';
 import type { ProductCategoryType } from '../model/types';
 
 

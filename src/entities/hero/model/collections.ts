@@ -1,6 +1,6 @@
 import type { GlobalConfig } from 'payload';
 import type { CollectionConfig } from 'payload';
-import { MediaCollection } from '@/src/shared/model/media-collection';
+import { MediaCollection } from '@/shared/model/media-collection';
 
 
 export const Hero: GlobalConfig = {

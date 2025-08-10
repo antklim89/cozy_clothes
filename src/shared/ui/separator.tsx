@@ -1,7 +1,7 @@
 'use client';
 import { Root } from '@radix-ui/react-separator';
 import type { ComponentPropsWithoutRef, ComponentRef } from 'react';
-import { cn } from '@/src/shared/lib/utils';
+import { cn } from '@/shared/lib/utils';
 
 
 function Separator({

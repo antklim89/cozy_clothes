@@ -1,15 +1,15 @@
 'use client';
 import { type ReactNode, useState } from 'react';
-import { Auth } from '@/src/features/auth/ui';
-import { Button } from '@/src/shared/ui/button';
+import { Auth } from '@/features/auth/ui';
+import { Button } from '@/shared/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
   DialogTrigger,
-} from '@/src/shared/ui/dialog';
-import { DialogHeader } from '@/src/shared/ui/dialog';
+} from '@/shared/ui/dialog';
+import { DialogHeader } from '@/shared/ui/dialog';
 
 
 export function AuthDialog({ button, type: defaultType = 'login' }: { button?: ReactNode; type?: 'login' | 'register' }) {

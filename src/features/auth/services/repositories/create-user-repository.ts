@@ -1,8 +1,8 @@
 import 'server-only';
 import type { ValidationError } from 'payload';
-import type { AuthType, UserType } from '@/src/entities/user/model';
-import { getPayload } from '@/src/shared/lib/payload';
-import { err, ok, type PromiseResult } from '@/src/shared/lib/result';
+import type { AuthType, UserType } from '@/entities/user/model';
+import { getPayload } from '@/shared/lib/payload';
+import { err, ok, type PromiseResult } from '@/shared/lib/result';
 
 
 export async function createUserRepository({ email, password }: AuthType): PromiseResult<UserType, 'unexpected' | 'validation'> {

@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/src/shared/ui/card';
+import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import { ContactItem } from './contact-item';
 import type { ContactType } from '../model/types';
 

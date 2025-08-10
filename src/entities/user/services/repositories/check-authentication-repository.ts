@@ -1,6 +1,6 @@
 import 'server-only';
 import { headers } from 'next/headers';
-import { getPayload } from '@/src/shared/lib/payload';
+import { getPayload } from '@/shared/lib/payload';
 import { Users } from '../../model/collections';
 import type { UserType } from '../../model/types';
 

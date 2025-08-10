@@ -1,6 +1,6 @@
 import 'server-only';
-import type { Cart } from '@/payload-types';
-import placeholder from '@/src/shared/assets/placeholder.png';
+import type { Cart } from '@/shared/model/payload-types.generated';
+import placeholder from '@/shared/assets/placeholder.png';
 import type { CartItemType } from './types';
 
 export function cartDto(data: { id?: Cart['id']; product: Cart['product']; qty: Cart['qty'] }): CartItemType {
