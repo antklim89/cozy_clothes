@@ -4,20 +4,21 @@ import { sqliteAdapter } from '@payloadcms/db-sqlite';
 import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
-import { Admins } from './hidden/collections/Admins';
-import { ProductCountries } from './hidden/features/product-countries/collections/ProductCountries';
-import { About } from './src/entities/about/model';
-import { AboutMedia } from './src/entities/about/model';
-import { Cart } from './src/entities/cart/model';
-import { Contacts } from './src/entities/contacts/model';
-import { Hero } from './src/entities/hero/model';
-import { HeroMedia } from './src/entities/hero/model/collections';
-import { ProductCategories } from './src/entities/product-categories/model';
-import { ProductBases, ProductMedia, Products } from './src/entities/products/model';
-import { Seo } from './src/entities/seo/models';
-import { SeoMedia } from './src/entities/seo/models/collections';
-import { Testimonials, TestimonialsMedia } from './src/entities/testimonials/model';
-import { Users } from './src/entities/user/model';
+import { About } from '@/entities/about/model';
+import { AboutMedia } from '@/entities/about/model';
+import { Cart } from '@/entities/cart/model';
+import { Contacts } from '@/entities/contacts/model';
+import { Hero } from '@/entities/hero/model';
+import { HeroMedia } from '@/entities/hero/model/collections';
+import { ProductCategories } from '@/entities/product-categories/model';
+import { ProductBases, ProductMedia, Products } from '@/entities/products/model';
+import { Seo } from '@/entities/seo/models';
+import { SeoMedia } from '@/entities/seo/models/collections';
+import { Testimonials, TestimonialsMedia } from '@/entities/testimonials/model';
+import { Users } from '@/entities/user/model';
+// TODO: refactor this
+import { Admins } from '../../../hidden/collections/Admins';
+import { ProductCountries } from '../../../hidden/features/product-countries/collections/ProductCountries';
 
 
 const filename = fileURLToPath(import.meta.url);

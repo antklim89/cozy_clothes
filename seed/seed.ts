@@ -3,10 +3,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
 import type { CollectionSlug } from 'payload';
-import { getPayload } from 'payload';
 import { SIZES } from '@/shared/config';
+import { getPayload } from '@/shared/lib/payload';
 import type { ProductBase } from '@/shared/model/payload-types.generated';
-import config from '../payload.config';
 
 
 const CONTACTS_NUMBER = 6;
@@ -15,7 +14,7 @@ const COUNTRIES_NUMBER = 10;
 const PRODUCT_BASES_LENGTH = 20;
 const PRODUCTS_LENGTH = 100;
 
-const payload = await getPayload({ config });
+const payload = await getPayload();
 
 function getRandomItem<T>(arr: readonly T[]): T {
   const result = arr[faker.number.int({ min: 0, max: arr.length - 1 })];

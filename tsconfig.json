@@ -16,7 +16,7 @@
         "./src/*"
       ],
       "@payload-config": [
-        "./payload.config.ts"
+        "./src/app/config/payload.config.ts"
       ]
     },
     "resolveJsonModule": true,
