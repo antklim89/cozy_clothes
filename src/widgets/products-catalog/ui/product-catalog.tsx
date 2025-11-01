@@ -1,36 +1,31 @@
 import type { ReactNode } from 'react';
-import type { ProductPreviewType } from '@/entities/products/model';
-import { ProductsList, ProductsListCard } from '@/entities/products/ui';
-import type { PaginatedData } from '@/shared/model/types';
-import { ProductPagination } from './product-pagination';
-import { ProductSheet } from './product-sheet';
+import { PriceFilter, ProductSearch } from '@/entities/products/ui';
+import { ProductCatalogAside } from './product-catalog-aside';
+import { ProductCatalogSheet } from './product-catalog-sheet';
 
-export async function ProductCatalog({ products, filter }: { products: PaginatedData<ProductPreviewType>; filter?: ReactNode }) {
+export async function ProductCatalog({ products, filter }: { products: ReactNode; filter?: ReactNode }) {
   return (
-    <section className="my-4 grid lg:grid-cols-[2fr_5fr] gap-4">
-      {filter != null && (
-        <aside className="hidden lg:block">
+    <section className="m-4 grid lg:grid-cols-[2fr_5fr] gap-4">
+      <aside className="hidden lg:block">
+        <ProductCatalogAside>
+          <ProductSearch />
+          <PriceFilter />
           {filter}
-        </aside>
-      )}
+        </ProductCatalogAside>
+      </aside>
       <div className="flex flex-col gap-4">
-        {filter != null && (
-          <ProductSheet className="self-end lg:hidden">
+        <ProductCatalogSheet asChild className="self-end lg:hidden">
+          <ProductCatalogAside>
+            <ProductSearch />
+            <PriceFilter />
             {filter}
-          </ProductSheet>
-        )}
+          </ProductCatalogAside>
+        </ProductCatalogSheet>
 
         <div>
-          <ProductPagination page={products.page} totalPages={products.totalPages} />
-          <ProductsList>
-            {products.docs.map(product => (
-              <ProductsListCard key={product.id} product={product} />
-            ))}
-          </ProductsList>
-          <ProductPagination page={products.page} totalPages={products.totalPages} />
+          {products}
         </div>
       </div>
     </section>
   );
 }
-

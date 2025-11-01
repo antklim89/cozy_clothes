@@ -12,7 +12,7 @@ import {
 } from '@/shared/ui/sheet';
 
 
-export function ProductSheet({ children, ...props }: { children: ReactNode } & ButtonProps): ReactNode {
+export function ProductCatalogSheet({ children, ...props }: { children: ReactNode } & ButtonProps): ReactNode {
   return (
     <Sheet>
       <SheetTrigger asChild>
