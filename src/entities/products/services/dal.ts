@@ -3,7 +3,7 @@ import { cache } from 'react';
 import type { ProductType } from '@/entities/products/model';
 import type { ProductFilterType } from '@/entities/products/model';
 import { err } from '@/shared/lib/result';
-import type { PayloadOptions } from '@/shared/model/types';
+import type { PayloadOptions } from '@/shared/model/types/types';
 import { getManyProductsRepository } from './repositories/get-many-products-repository';
 import { getOneProductRepository } from './repositories/get-one-product-repository';
 import { FetchProductListInputSchema } from '../model/schemas';

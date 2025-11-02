@@ -4,7 +4,7 @@ import Image from 'next/image';
 import type { ComponentProps } from 'react';
 import type { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical';
 import { z } from 'zod';
-import type { ColumnsBlock } from '../model/payload-types.generated';
+import type { ColumnsBlock } from '../model/types/payload-types.generated';
 
 
 const MediaSchema = z.object({

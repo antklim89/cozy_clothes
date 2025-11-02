@@ -1,9 +1,9 @@
 import 'server-only';
 import type { Where } from 'payload';
-import { paginationDto } from '@/shared/dto/pagination-dto';
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
-import type { PayloadOptions } from '@/shared/model/types';
+import { paginationDto } from '@/shared/model/dto/pagination-dto';
+import type { PayloadOptions } from '@/shared/model/types/types';
 import { PRODUCTS_PER_PAGE } from '../../config';
 import type { ProductFilterType } from '../../model';
 import { productPreviewDto } from '../../model/dto';

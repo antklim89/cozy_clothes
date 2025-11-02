@@ -1,4 +1,4 @@
-import type { RichText } from '@/shared/model/types';
+import type { RichText } from '@/shared/model/types/types';
 
 
 export interface AboutType {

@@ -1,5 +1,7 @@
 import type { z } from 'zod/v4-mini';
-import type { MediaSchema, PayloadOptionsSchema, RichTextSchema } from './schemas';
+import type { MediaSchema } from '../schemas/media-schema';
+import type { PayloadOptionsSchema } from '../schemas/payload-options-schema';
+import type { RichTextSchema } from '../schemas/rich-text-schema';
 
 
 export type RichText = z.infer<typeof RichTextSchema>;

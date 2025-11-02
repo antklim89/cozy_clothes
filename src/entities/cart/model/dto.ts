@@ -1,5 +1,5 @@
 import 'server-only';
-import type { Cart } from '@/shared/model/payload-types.generated';
+import type { Cart } from '@/shared/model/types/payload-types.generated';
 import placeholder from '@/shared/assets/placeholder.png';
 import type { CartItemType } from './types';
 

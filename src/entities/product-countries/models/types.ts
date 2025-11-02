@@ -1,4 +1,4 @@
-import type { ProductCountry } from '@/shared/model/payload-types.generated';
+import type { ProductCountry } from '@/shared/model/types/payload-types.generated';
 
 
 export type ProductCountryType = ProductCountry;

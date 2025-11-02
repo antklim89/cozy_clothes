@@ -1,4 +1,4 @@
-import type { Seo } from '@/shared/model/payload-types.generated';
+import type { Seo } from '@/shared/model/types/payload-types.generated';
 import { SeoSchema } from './schemas';
 import type { SeoType } from './types';
 

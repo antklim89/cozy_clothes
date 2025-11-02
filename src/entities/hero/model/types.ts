@@ -1,4 +1,4 @@
-import type { Media, RichText } from '@/shared/model/types';
+import type { Media, RichText } from '@/shared/model/types/types';
 
 
 export interface HeroType {

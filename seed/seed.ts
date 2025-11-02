@@ -3,9 +3,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
 import type { CollectionSlug } from 'payload';
-import { SIZES } from '@/shared/config';
+import { SIZES } from '@/shared/config/sizes';
 import { getPayload } from '@/shared/lib/payload';
-import type { ProductBase } from '@/shared/model/payload-types.generated';
+import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
 
 const CONTACTS_NUMBER = 6;

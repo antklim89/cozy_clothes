@@ -16,8 +16,7 @@ import { Seo } from '@/entities/seo/models';
 import { SeoMedia } from '@/entities/seo/models/collections';
 import { Testimonials, TestimonialsMedia } from '@/entities/testimonials/model';
 import { Users } from '@/entities/user/model';
-// TODO: refactor this
-import { Admins } from '../../../hidden/collections/Admins';
+import { Admins } from '@/shared/model/collections/admins';
 
 
 const filename = fileURLToPath(import.meta.url);
@@ -82,7 +81,7 @@ export default buildConfig({
   }),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: {
-    outputFile: path.resolve(dirname, 'src/shared/model/payload-types.generated.ts'),
+    outputFile: path.resolve(dirname, 'src/shared/model/types/payload-types.generated.ts'),
   },
   db: sqliteAdapter({
     migrationDir: path.resolve('migrations'),

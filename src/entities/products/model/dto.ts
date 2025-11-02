@@ -4,7 +4,7 @@ import type {
   ProductCategory,
   ProductCountry,
   ProductMedia,
-} from '@/shared/model/payload-types.generated';
+} from '@/shared/model/types/payload-types.generated';
 import type { ProductPreviewType, ProductType } from './types';
 
 

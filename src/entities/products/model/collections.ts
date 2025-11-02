@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
-import { SIZES } from '@/shared/config';
-import { MediaCollection } from '@/shared/model/media-collection';
+import { SIZES } from '@/shared/config/sizes';
+import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 
 export const Products = {
