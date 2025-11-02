@@ -1,15 +1,16 @@
 'use client';
-import { type ReactNode, useState } from 'react';
+import { useState } from 'react';
+import type { ReactNode } from 'react';
 import { Auth } from '@/features/auth/ui';
 import { Button } from '@/shared/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/shared/ui/dialog';
-import { DialogHeader } from '@/shared/ui/dialog';
 
 
 export function AuthDialog({ button, type: defaultType = 'login' }: { button?: ReactNode; type?: 'login' | 'register' }) {

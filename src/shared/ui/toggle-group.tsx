@@ -1,14 +1,10 @@
 'use client';
 import { Item, Root } from '@radix-ui/react-toggle-group';
-import {
-  createContext,
-  use,
-  useMemo,
-} from 'react';
+import { createContext, use, useMemo } from 'react';
 import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
 import type { VariantProps } from 'class-variance-authority';
-import { toggleVariants } from '@/shared/ui/toggle';
 import { cn } from '@/shared/lib/utils';
+import { toggleVariants } from '@/shared/ui/toggle';
 
 
 const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({

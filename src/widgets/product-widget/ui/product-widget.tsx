@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react';
 import { AddToCartButton } from '@/entities/cart/ui';
 import type { ProductType } from '@/entities/products/model';
-import { Product, ProductImagesCarousel } from '@/entities/products/ui';
-import { ProductsVariantsSelect } from '@/entities/products/ui';
+import { Product, ProductImagesCarousel, ProductsVariantsSelect } from '@/entities/products/ui';
 import { cn } from '@/shared/lib/utils';
 import { Price } from '@/shared/ui/price';
 

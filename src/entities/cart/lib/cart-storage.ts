@@ -1,5 +1,6 @@
 import { z } from 'zod/v4-mini';
-import { LocalCartItemSchema, type LocalCartItemType } from '../model';
+import { LocalCartItemSchema } from '../model';
+import type { LocalCartItemType } from '../model';
 
 
 export function getCartFromLocalStorage(): LocalCartItemType[] {

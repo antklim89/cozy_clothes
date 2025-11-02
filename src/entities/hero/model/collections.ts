@@ -1,5 +1,4 @@
-import type { GlobalConfig } from 'payload';
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig, GlobalConfig } from 'payload';
 import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 

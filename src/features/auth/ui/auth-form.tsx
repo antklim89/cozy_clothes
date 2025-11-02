@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   LoginSchema,
-  type LoginType,
+
   RegisterSchema,
-  type RegisterType,
-  type UserType,
+
+
 } from '@/entities/user/model';
+import type { LoginType, RegisterType, UserType } from '@/entities/user/model';
 import type { PromiseResult } from '@/shared/lib/result';
 import { cn } from '@/shared/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';

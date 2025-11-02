@@ -11,13 +11,6 @@ const nextConfig = {
     URL: process.env.URL ?? 'http://localhost:3000',
     REPOSITORY_URL: process.env.REPOSITORY_URL,
   },
-  // TODO: remove later
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 };
 
 export default withPayload(nextConfig);
