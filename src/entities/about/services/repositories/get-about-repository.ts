@@ -1,7 +1,7 @@
 import 'server-only';
+
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
-
 
 export async function getAboutRepository() {
   try {

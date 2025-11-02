@@ -1,4 +1,5 @@
 import { z } from 'zod/v4-mini';
+
 import { fetchProduct } from '@/entities/products/services';
 import { ProductWidget } from '@/widgets/product/ui';
 
@@ -10,12 +11,7 @@ async function Page({ params }: { params: Promise<{ productId: string }> }) {
   const { type, result: product } = await fetchProduct(productId);
   if (type === 'error') return <p>Error</p>;
 
-
-  return (
-    <>
-      <ProductWidget product={product} />
-    </>
-  );
+  return <ProductWidget product={product} />;
 }
 
 export default Page;

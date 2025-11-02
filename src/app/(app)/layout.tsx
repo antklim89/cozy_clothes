@@ -3,15 +3,15 @@ import '@fontsource/poppins/400-italic.css';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/700-italic.css';
 import '@fontsource/poppins/700.css';
-import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { getSeo } from '@/entities/seo/services/dal';
+import type { Metadata } from 'next';
+
+import { getSeo } from '@/entities/seo/services';
 import { Footer } from '@/widgets/footer/ui';
 import { Header } from '@/widgets/header/ui';
 import NuqsProvider from '../providers/nuqs-provider';
 import { QueryProvider } from '../providers/query-provider';
 import { ThemeProvider } from '../providers/theme-provider';
-
 
 export async function generateMetadata(): Promise<Metadata> {
   const { type, error, result: seo } = await getSeo();
@@ -20,13 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     return {};
   }
 
-  const {
-    title,
-    creator,
-    description,
-    images,
-    keywords,
-  } = seo;
+  const { title, creator, description, images, keywords } = seo;
 
   return {
     metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
@@ -58,7 +52,7 @@ function Layout({ children }: { children: ReactNode }) {
       <head />
       <NuqsProvider>
         <QueryProvider>
-          <body className="grid grid-rows-[auto_1fr_auto] h-screen">
+          <body className="grid h-screen grid-rows-[auto_1fr_auto]">
             <ThemeProvider>
               <Header />
               <main>{children}</main>

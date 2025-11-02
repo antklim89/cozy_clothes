@@ -1,6 +1,5 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
 
-
 export const Seo: GlobalConfig = {
   slug: 'Seo',
   fields: [
@@ -54,4 +53,3 @@ export const SeoMedia = {
     },
   },
 } as const satisfies CollectionConfig;
-

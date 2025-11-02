@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-
 export const Cart: CollectionConfig = {
   slug: 'cart',
   timestamps: false,

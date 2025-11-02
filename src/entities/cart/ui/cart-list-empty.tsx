@@ -1,7 +1,7 @@
 import Link from 'next/link';
+
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader } from '@/shared/ui/card';
-
 
 export function CartListEmpty() {
   return (

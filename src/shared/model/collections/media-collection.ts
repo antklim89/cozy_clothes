@@ -2,7 +2,6 @@ import { randomUUID } from 'node:crypto';
 import type { CollectionConfig } from 'payload';
 import sharp from 'sharp';
 
-
 export const MediaCollection = {
   slug: 'media',
   hooks: {
@@ -16,7 +15,7 @@ export const MediaCollection = {
       },
     ],
     beforeOperation: [
-      async ({ req, operation }) => {
+      ({ req, operation }) => {
         if ((operation === 'create' || operation === 'update') && req.file) {
           req.file.name = `${randomUUID()}-${req.file.name}`;
         }
@@ -38,7 +37,8 @@ export const MediaCollection = {
       type: 'text',
       name: 'blurDataUrl',
       required: true,
-      defaultValue: 'data:image/webp;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPk4vpvDAACgQFIuAF96wAAAABJRU5ErkJggg==',
+      defaultValue:
+        'data:image/webp;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPk4vpvDAACgQFIuAF96wAAAABJRU5ErkJggg==',
       admin: {
         readOnly: true,
         hidden: true,

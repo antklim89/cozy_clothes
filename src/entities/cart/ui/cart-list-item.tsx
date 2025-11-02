@@ -2,6 +2,7 @@
 import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { getPrice } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
@@ -9,35 +10,19 @@ import { CartQtyInput } from './cart-qty-input';
 import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';
 import type { CartItemType } from '../model';
 
-
 export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
   const { mutateAsync: removeFromCart } = useRemoveCartMutation();
 
-  const {
-    qty,
-    title,
-    image,
-    price,
-    discount,
-    productId,
-    colorName,
-    size,
-  } = cartItem;
+  const { qty, title, image, price, discount, productId, colorName, size } = cartItem;
 
   async function handleRemoveFromCart() {
     await removeFromCart({ productId });
   }
 
   return (
-    <Card className="grid gap-4 grid-cols-[1fr_1fr] sm:grid-cols-[auto_1fr_auto] justify-between p-4">
+    <Card className="grid grid-cols-[1fr_1fr] justify-between gap-4 p-4 sm:grid-cols-[auto_1fr_auto]">
       <div className="row-span-2 hidden sm:block">
-        <Image
-          alt={title}
-          className="w-[100] h-[200] object-cover"
-          height={200}
-          src={image}
-          width={100}
-        />
+        <Image alt={title} className="h-[200] w-[100] object-cover" height={200} src={image} width={100} />
       </div>
 
       <div className="col-span-2">
@@ -50,30 +35,30 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
         </div>
       </div>
 
-      <div className="flex justify-between max-h-52">
+      <div className="flex max-h-52 justify-between">
         <div>
           <CartQtyInput className="my-8" productId={productId} />
 
           {qty > 1 && (
             <div className="flex items-center text-gray-600">
               <span className="text-sm">x</span>
-              <span className="px-4 w-20 border-none text-md">1</span>
+              <span className="w-20 border-none px-4 text-md">1</span>
               <span className="text-xl">{getPrice({ price, discount })}</span>
             </div>
           )}
 
-          <div className="flex items-center ">
+          <div className="flex items-center">
             <span className="text-sm">x</span>
-            <span className="px-4 w-20 border-none text-lg">{qty}</span>
+            <span className="w-20 border-none px-4 text-lg">{qty}</span>
             <span className="text-2xl">{getPrice({ qty, price, discount })}</span>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-end row-span-2">
+      <div className="row-span-2 flex justify-end">
         <Button
           aria-label={`delete ${title} from cart`}
-          className="self-end bg-transparent border border-red-600 hover:bg-slate-100 p-2"
+          className="self-end border border-red-600 bg-transparent p-2 hover:bg-slate-100"
           onClick={handleRemoveFromCart}
         >
           <Trash className="size-4 text-red-600" />

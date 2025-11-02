@@ -1,9 +1,10 @@
 import 'server-only';
-import { login as payloadLogin } from '@payloadcms/next/auth';
 import config from '@payload-config';
+import { login as payloadLogin } from '@payloadcms/next/auth';
+
 import type { AuthType, UserType } from '@/entities/user/model';
-import { err, ok } from '@/shared/lib/result';
 import type { PromiseResult } from '@/shared/lib/result';
+import { err, ok } from '@/shared/lib/result';
 import type { User } from '@/shared/model/types/payload-types.generated';
 
 export async function loginRepository({ email, password }: AuthType): PromiseResult<UserType, 'unexpected'> {

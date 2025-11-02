@@ -1,41 +1,23 @@
-import { Loader2 } from 'lucide-react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  LoginSchema,
+import { Loader2 } from 'lucide-react';
 
-  RegisterSchema,
-
-
-} from '@/entities/user/model';
 import type { LoginType, RegisterType, UserType } from '@/entities/user/model';
+import { LoginSchema, RegisterSchema } from '@/entities/user/model';
 import type { PromiseResult } from '@/shared/lib/result';
 import { cn } from '@/shared/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/shared/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
-
 
 interface Props extends Omit<React.ComponentPropsWithoutRef<'form'>, 'onSubmit'> {
   type: 'login' | 'register';
   onSubmit: (data: LoginType | RegisterType) => PromiseResult<UserType, 'validation' | string>;
-};
+}
 
-export function AuthForm({
-  className,
-  type,
-  onSubmit,
-  ...props
-}: Props) {
+export function AuthForm({ className, type, onSubmit, ...props }: Props) {
   const form = useForm<LoginType | RegisterType>({
     resolver: zodResolver(type === 'login' ? LoginSchema : RegisterSchema),
     defaultValues: {
@@ -71,16 +53,13 @@ export function AuthForm({
     }
   });
 
-
   return (
     <Form {...form}>
       <form className={cn('flex flex-col gap-6', className)} onSubmit={handleSubmit} {...props}>
         {form.formState.errors.root && (
           <Alert variant="destructive">
             <AlertTitle>Failed to {type}.</AlertTitle>
-            <AlertDescription>
-              {form.formState.errors.root.message}
-            </AlertDescription>
+            <AlertDescription>{form.formState.errors.root.message}</AlertDescription>
           </Alert>
         )}
         <div className="flex flex-col gap-6">
@@ -126,12 +105,8 @@ export function AuthForm({
             />
           )}
 
-          <Button
-            className="w-full space-x-4"
-            disabled={form.formState.isSubmitting}
-            type="submit"
-          >
-            {form.formState.isSubmitting && <Loader2 className="animate-spin size-4 mr-2" />}
+          <Button className="w-full space-x-4" disabled={form.formState.isSubmitting} type="submit">
+            {form.formState.isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" />}
             {type === 'login' ? 'Login' : 'Register'}
           </Button>
         </div>

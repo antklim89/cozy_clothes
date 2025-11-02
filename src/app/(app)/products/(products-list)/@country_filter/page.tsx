@@ -5,9 +5,7 @@ async function Page() {
   const { result: countries, type } = await getProductCountries();
   if (type === 'error') return null;
 
-  return (
-    <ProductCountrySelect countries={countries} />
-  );
+  return <ProductCountrySelect countries={countries} />;
 }
 
 export default Page;

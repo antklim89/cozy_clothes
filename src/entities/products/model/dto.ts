@@ -7,7 +7,6 @@ import type {
 } from '@/shared/model/types/payload-types.generated';
 import type { ProductPreviewType, ProductType } from './types';
 
-
 export function productDto(product: Product): ProductType {
   const productBase = product.productBase as ProductBase;
   const productVariants = (productBase.productVariants?.docs ?? []) as Product[];

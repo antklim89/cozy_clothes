@@ -5,17 +5,17 @@ import { HeaderSheet } from './header-sheet';
 import { Links } from './links';
 import { Logo } from './logo';
 
-export async function Header() {
+export function Header() {
   return (
     <header className="bg-primary text-primary-foreground">
-      <div className="container sm:flex hidden items-center">
+      <div className="container hidden items-center sm:flex">
         <Logo />
         <Links />
         <ThemeToggle />
         <AuthMenu />
         <CartButton />
       </div>
-      <div className="container sm:hidden flex items-center">
+      <div className="container flex items-center sm:hidden">
         <Logo />
         <CartButton />
         <AuthMenu />

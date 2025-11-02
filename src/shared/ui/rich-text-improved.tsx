@@ -1,11 +1,11 @@
+import type { ComponentProps } from 'react';
+import type { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical';
 import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react';
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
-import type { ComponentProps } from 'react';
-import type { DefaultNodeTypes, SerializedBlockNode } from '@payloadcms/richtext-lexical';
 import { z } from 'zod';
-import type { ColumnsBlock } from '../model/types/payload-types.generated';
 
+import type { ColumnsBlock } from '../model/types/payload-types.generated';
 
 const MediaSchema = z.object({
   url: z.string().default('/placeholder.jpg'),
@@ -14,12 +14,9 @@ const MediaSchema = z.object({
   alt: z.string().optional(),
 });
 
-
 type NodeTypes = DefaultNodeTypes | SerializedBlockNode<ColumnsBlock>;
 
-const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
-  defaultConverters,
-}) => ({
+const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   blocks: {
     ColumnsBlock: ({ node }) => {
@@ -36,19 +33,10 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({
     const { success, data } = MediaSchema.safeParse(node.value);
     if (!success) return null;
 
-    return (
-      <Image
-        alt={data.alt ?? data.url}
-        height={data.height}
-        src={data.url}
-        width={data.width}
-      />
-    );
+    return <Image alt={data.alt ?? data.url} height={data.height} src={data.url} width={data.width} />;
   },
 });
 
-export async function RichTextImproved({ ...props }: ComponentProps<typeof RichText>) {
-  return (
-    <RichText converters={jsxConverters} {...props} />
-  );
+export function RichTextImproved({ ...props }: ComponentProps<typeof RichText>) {
+  return <RichText converters={jsxConverters} {...props} />;
 }

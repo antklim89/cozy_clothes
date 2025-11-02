@@ -1,14 +1,14 @@
 import type { ComponentProps } from 'react';
-import { cn } from '@/shared/lib/utils';
 
+import { cn } from '@/shared/lib/utils';
 
 export function Spinner({ className, ...props }: ComponentProps<'svg'>) {
   return (
-    <div role="status">
+    <output>
       <svg
         {...props}
         aria-hidden="true"
-        className={cn('w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600', className)}
+        className={cn('h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600', className)}
         fill="none"
         viewBox="0 0 100 101"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,6 +23,6 @@ export function Spinner({ className, ...props }: ComponentProps<'svg'>) {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </div>
+    </output>
   );
 }

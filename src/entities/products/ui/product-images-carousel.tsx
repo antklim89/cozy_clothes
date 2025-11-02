@@ -1,19 +1,12 @@
 import Image from 'next/image';
-import type { ProductType } from '@/entities/products/model';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/shared/ui/carousel';
 
+import type { ProductType } from '@/entities/products/model';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel';
 
 interface Props {
   images: ProductType['images'];
   alt: string;
 }
-
 
 export function ProductImagesCarousel({ images, alt }: Props) {
   return (
@@ -24,7 +17,7 @@ export function ProductImagesCarousel({ images, alt }: Props) {
             <Image
               alt={alt}
               blurDataURL={image.blurDataUrl}
-              className="object-cover w-full supports-[height:80dvh]:h-[80dvh] h-80vh"
+              className="h-80vh w-full object-cover supports-[height:80dvh]:h-[80dvh]"
               height={image.height}
               placeholder="blur"
               src={image.url}
@@ -38,4 +31,3 @@ export function ProductImagesCarousel({ images, alt }: Props) {
     </Carousel>
   );
 }
-

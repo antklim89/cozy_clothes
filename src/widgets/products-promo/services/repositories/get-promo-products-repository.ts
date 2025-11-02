@@ -1,11 +1,10 @@
 import 'server-only';
+
 import { PRODUCTS_PER_PAGE } from '@/entities/products/config';
-import type { ProductType } from '@/entities/products/model';
-import { productPreviewDto } from '@/entities/products/model/dto';
+import { type ProductType, productPreviewDto } from '@/entities/products/model';
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
-
 
 export async function getPromoProductsRepository({ sort }: { sort: keyof ProductType }) {
   try {

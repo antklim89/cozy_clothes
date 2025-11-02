@@ -1,8 +1,8 @@
 import Link from 'next/link';
+
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 import { links } from '../model/links';
-
 
 export function Links({ className }: { className?: string }) {
   return (
@@ -19,5 +19,3 @@ export function Links({ className }: { className?: string }) {
     </nav>
   );
 }
-
-

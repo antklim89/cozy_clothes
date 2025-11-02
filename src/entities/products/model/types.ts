@@ -1,12 +1,12 @@
 import type { z } from 'zod/v4-mini';
+
 import type { SIZES } from '@/shared/config/sizes';
 import type { Media, RichText } from '@/shared/model/types/types';
 import type { ProductFilterSchema } from './schemas';
 
-
 export interface ProductVariantType {
   id: number;
-  size: typeof SIZES[number];
+  size: (typeof SIZES)[number];
   colorName: string;
   colorCode: string;
 }
@@ -28,7 +28,7 @@ export interface ProductType {
     name: string;
   };
   images: Media[];
-  size: typeof SIZES[number];
+  size: (typeof SIZES)[number];
   colorName: string;
   colorCode: string;
   productVariants: ProductVariantType[];
@@ -36,10 +36,11 @@ export interface ProductType {
   createdAt: string;
 }
 
-export interface ProductPreviewType extends Pick<
-  ProductType,
-  'id' | 'title' | 'baseTitle' | 'category' | 'country' | 'price' | 'discount' | 'createdAt' | 'updatedAt'
-> {
+export interface ProductPreviewType
+  extends Pick<
+    ProductType,
+    'id' | 'title' | 'baseTitle' | 'category' | 'country' | 'price' | 'discount' | 'createdAt' | 'updatedAt'
+  > {
   imagePreview: Media;
 }
 

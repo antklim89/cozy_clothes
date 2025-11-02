@@ -1,5 +1,6 @@
 import 'server-only';
 import { z } from 'zod/v4-mini';
+
 import { err } from '@/shared/lib/result';
 import { addCartItemRepository } from './repositories/add-cart-item-repository';
 import { getCartByProductIdsRepository } from './repositories/get-cart-by-product-ids-repository';
@@ -9,7 +10,6 @@ import { removeCartItemRepository } from './repositories/remove-cart-item-reposi
 import { updateCartQtyRepository } from './repositories/update-cart-qty-repository';
 import { checkAuthentication } from '../@x/user/services';
 import { CartQtySchema } from '../model';
-
 
 export async function getCart() {
   const user = await checkAuthentication();
@@ -29,9 +29,8 @@ export async function getCartItemByProductId({ productId }: { productId: number 
   return result;
 }
 
-
 export async function addCartItem({ productId, qty }: { productId: number; qty?: number }) {
-  const { success, data: validatedQty } = await z.optional((CartQtySchema)).safeParseAsync(qty);
+  const { success, data: validatedQty } = await z.optional(CartQtySchema).safeParseAsync(qty);
   if (!success) return err({ type: 'validation', message: 'Invalid quantity' });
 
   const user = await checkAuthentication();

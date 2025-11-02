@@ -1,7 +1,7 @@
 import { z } from 'zod/v4-mini';
-import { LocalCartItemSchema } from '../model';
-import type { LocalCartItemType } from '../model';
 
+import type { LocalCartItemType } from '../model';
+import { LocalCartItemSchema } from '../model';
 
 export function getCartFromLocalStorage(): LocalCartItemType[] {
   try {
@@ -34,9 +34,15 @@ export function removeCartItemFromLocalStorage({ productId }: { productId: numbe
   return newCart;
 }
 
-export function updateCartQtyInLocalStorage({ productId, qty }: { productId: number; qty: number }): LocalCartItemType[] {
+export function updateCartQtyInLocalStorage({
+  productId,
+  qty,
+}: {
+  productId: number;
+  qty: number;
+}): LocalCartItemType[] {
   const cart = getCartFromLocalStorage();
-  const newCart = cart.map(item => item.productId === productId ? { ...item, qty } : item);
+  const newCart = cart.map(item => (item.productId === productId ? { ...item, qty } : item));
   localStorage.setItem('cart', JSON.stringify(newCart));
 
   return newCart;

@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { cartQueryOptions } from './use-cart-query';
 import { useUserQuery } from '../@x/user/hooks';
 import { removeCartItemAction } from '../api/actions';
 import { removeCartItemFromLocalStorage } from '../lib/cart-storage';
-
 
 export function useRemoveCartMutation() {
   const queryClient = useQueryClient();
@@ -16,7 +16,9 @@ export function useRemoveCartMutation() {
       }
 
       removeCartItemFromLocalStorage(deletedCartItem);
-      queryClient.setQueryData(cartQueryOptions().queryKey, oldValue => oldValue?.filter(i => i.productId !== deletedCartItem.productId));
+      queryClient.setQueryData(cartQueryOptions().queryKey, oldValue =>
+        oldValue?.filter(i => i.productId !== deletedCartItem.productId),
+      );
     },
   });
 }

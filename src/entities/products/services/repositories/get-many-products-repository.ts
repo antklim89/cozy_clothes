@@ -1,5 +1,6 @@
 import 'server-only';
 import type { Where } from 'payload';
+
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
@@ -8,16 +9,9 @@ import { PRODUCTS_PER_PAGE } from '../../config';
 import type { ProductFilterType } from '../../model';
 import { productPreviewDto } from '../../model/dto';
 
-
 export async function getManyProductsRepository({
   options = {},
-  filter: {
-    category,
-    countries,
-    minPrice,
-    maxPrice,
-    search,
-  } = {},
+  filter: { category, countries, minPrice, maxPrice, search } = {},
 }: {
   options?: PayloadOptions;
   filter?: ProductFilterType;

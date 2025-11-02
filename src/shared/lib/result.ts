@@ -1,4 +1,3 @@
-
 export interface Ok<T> {
   type: 'ok';
   result: T;
@@ -21,7 +20,6 @@ interface ErrVariant<T extends string> {
 export type Result<T, E extends string = string> = Ok<T> | Err<E>;
 
 export type PromiseResult<T, E extends string = string> = Promise<Result<T, E>>;
-
 
 export const UNEXPECTED_ERROR = {
   type: 'unexpected',
@@ -49,7 +47,10 @@ export function err<T extends string>(error: ErrVariant<T>): Err<T> {
   };
 }
 
-export function errMap<OldErr extends string, NewErr extends string, R>(result: Result<R, OldErr>, errCb: (arg: ErrVariant<OldErr>) => ErrVariant<NewErr>): Result<R, NewErr> {
+export function errMap<OldErr extends string, NewErr extends string, R>(
+  result: Result<R, OldErr>,
+  errCb: (arg: ErrVariant<OldErr>) => ErrVariant<NewErr>,
+): Result<R, NewErr> {
   if (result.type === 'ok') return result;
   return err(errCb(result.error));
 }

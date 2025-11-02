@@ -1,13 +1,8 @@
-import {
-  createLoader,
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-} from 'nuqs/server';
+import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuqs/server';
+
 import type { ProductFilterType } from '@/entities/products/model';
 import { fetchProductList } from '@/entities/products/services';
 import { ProductCatalogProductList } from '@/widgets/products-catalog/ui';
-
 
 const loadSearchParams = createLoader({
   page: parseAsInteger.withDefault(1),

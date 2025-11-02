@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-
 export const ProductCountries: CollectionConfig = {
   slug: 'product-countries',
   admin: {

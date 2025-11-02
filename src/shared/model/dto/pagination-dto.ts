@@ -1,6 +1,6 @@
 import type { PaginatedDocs } from 'payload';
-import type { PaginatedData } from '../types/types';
 
+import type { PaginatedData } from '../types/types';
 
 export function paginationDto<T, U>(data: PaginatedDocs<U>, dto: (args: U) => T): PaginatedData<T> {
   return {

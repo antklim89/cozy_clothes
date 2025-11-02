@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 
-
 function Layout({
   new_products: newProducts,
   hero,

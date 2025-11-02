@@ -1,37 +1,27 @@
 'use client';
 
-import {
-  Close,
-  Content,
-  Description,
-  Overlay,
-  Portal,
-  Root,
-  Title,
-  Trigger,
-} from '@radix-ui/react-dialog';
-import { X } from 'lucide-react';
-import type {
-  ComponentPropsWithoutRef,
-  ComponentRef,
-  HTMLAttributes,
-  RefObject,
-} from 'react';
-import { cva } from 'class-variance-authority';
+import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes, RefObject } from 'react';
+import { Close, Content, Description, Overlay, Portal, Root, Title, Trigger } from '@radix-ui/react-dialog';
 import type { VariantProps } from 'class-variance-authority';
-import { cn } from '@/shared/lib/utils';
+import { cva } from 'class-variance-authority';
+import { X } from 'lucide-react';
 
+import { cn } from '@/shared/lib/utils';
 
 const Sheet = Root;
 const SheetTrigger = Trigger;
 const SheetClose = Close;
 const SheetPortal = Portal;
 
-function SheetOverlay({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Overlay> & { ref?: RefObject<ComponentRef<typeof Overlay> | null> }) {
+function SheetOverlay({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof Overlay> & { ref?: RefObject<ComponentRef<typeof Overlay> | null> }) {
   return (
     <Overlay
       className={cn(
-        'fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+        'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/80 data-[state=closed]:animate-out data-[state=open]:animate-in',
         className,
       )}
       {...props}
@@ -59,9 +49,7 @@ const sheetVariants = cva(
   },
 );
 
-interface SheetContentProps
-  extends ComponentPropsWithoutRef<typeof Content>,
-  VariantProps<typeof sheetVariants> {}
+interface SheetContentProps extends ComponentPropsWithoutRef<typeof Content>, VariantProps<typeof sheetVariants> {}
 
 function SheetContent({
   ref,
@@ -73,12 +61,8 @@ function SheetContent({
   return (
     <SheetPortal>
       <SheetOverlay />
-      <Content
-        className={cn(sheetVariants({ side }), className)}
-        ref={ref}
-        {...props}
-      >
-        <Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+      <Content className={cn(sheetVariants({ side }), className)} ref={ref} {...props}>
+        <Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
           <X className="h-4 w-4" />
           <span className="sr-only">Close</span>
         </Close>
@@ -88,54 +72,28 @@ function SheetContent({
   );
 }
 
-function SheetHeader({
+function SheetHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('flex flex-col space-y-2 text-center sm:text-left', className)} {...props} />;
+}
+
+function SheetFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)} {...props} />;
+}
+
+function SheetTitle({
+  ref,
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      className={cn(
-        'flex flex-col space-y-2 text-center sm:text-left',
-        className,
-      )}
-      {...props}
-    />
-  );
+}: ComponentPropsWithoutRef<typeof Title> & { ref?: RefObject<ComponentRef<typeof Title> | null> }) {
+  return <Title className={cn('font-semibold text-foreground text-lg', className)} ref={ref} {...props} />;
 }
 
-function SheetFooter({
+function SheetDescription({
+  ref,
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      className={cn(
-        'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-        className,
-      )}
-      {...props}
-    />
-  );
-}
-
-function SheetTitle({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Title> & { ref?: RefObject<ComponentRef<typeof Title> | null> }) {
-  return (
-    <Title
-      className={cn('text-lg font-semibold text-foreground', className)}
-      ref={ref}
-      {...props}
-    />
-  );
-}
-
-function SheetDescription({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Description> & { ref?: RefObject<ComponentRef<typeof Description> | null> }) {
-  return (
-    <Description
-      className={cn('text-sm text-muted-foreground', className)}
-      ref={ref}
-      {...props}
-    />
-  );
+}: ComponentPropsWithoutRef<typeof Description> & { ref?: RefObject<ComponentRef<typeof Description> | null> }) {
+  return <Description className={cn('text-muted-foreground text-sm', className)} ref={ref} {...props} />;
 }
 
 export {

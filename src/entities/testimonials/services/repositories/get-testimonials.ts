@@ -1,8 +1,8 @@
 import 'server-only';
+
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import type { TestimonialType } from '../../model/types';
-
 
 export async function getTestimonialsRepository() {
   try {

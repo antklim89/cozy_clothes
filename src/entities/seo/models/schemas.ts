@@ -6,9 +6,11 @@ export const SeoSchema = z.object({
   description: z.string(),
   keywords: z.array(z.string()),
   creator: z.string(),
-  images: z.array(z.object({
-    url: z.string(),
-    width: z.number(),
-    height: z.number(),
-  })),
+  images: z.array(
+    z.object({
+      url: z.string(),
+      width: z.number(),
+      height: z.number(),
+    }),
+  ),
 });

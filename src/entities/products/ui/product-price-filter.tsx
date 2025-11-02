@@ -1,11 +1,15 @@
 'use client';
 
 import { parseAsInteger, useQueryStates } from 'nuqs';
+
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import { Slider } from '@/shared/ui/slider';
 
-const queryStateOptions = parseAsInteger.withOptions({ shallow: false, limitUrlUpdates: { method: 'debounce', timeMs: 700 } });
+const queryStateOptions = parseAsInteger.withOptions({
+  shallow: false,
+  limitUrlUpdates: { method: 'debounce', timeMs: 700 },
+});
 const MAX_PRICE = 1000000;
 
 export function PriceFilter() {

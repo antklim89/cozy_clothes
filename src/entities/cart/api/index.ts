@@ -5,5 +5,4 @@ export {
   getCartItemByProductIdAction,
   removeCartItemAction,
   updateCartQtyAction,
-
 } from './actions';

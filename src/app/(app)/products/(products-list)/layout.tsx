@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
+
 import { ProductCatalog } from '@/widgets/products-catalog/ui';
 
-
-async function Layout({
+function Layout({
   category_filter: categoryFilter,
   country_filter: countryFilter,
   children,
@@ -12,7 +12,15 @@ async function Layout({
   country_filter: ReactNode;
 }) {
   return (
-    <ProductCatalog filter={<>{categoryFilter}{countryFilter}</>} products={children} />
+    <ProductCatalog
+      filter={
+        <>
+          {categoryFilter}
+          {countryFilter}
+        </>
+      }
+      products={children}
+    />
   );
 }
 

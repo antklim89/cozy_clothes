@@ -1,12 +1,15 @@
 import 'server-only';
 import type { ValidationError } from 'payload';
+
 import type { AuthType, UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
 import type { PromiseResult } from '@/shared/lib/result';
+import { err, ok } from '@/shared/lib/result';
 
-
-export async function createUserRepository({ email, password }: AuthType): PromiseResult<UserType, 'unexpected' | 'validation'> {
+export async function createUserRepository({
+  email,
+  password,
+}: AuthType): PromiseResult<UserType, 'unexpected' | 'validation'> {
   try {
     const payload = await getPayload();
 
@@ -24,10 +27,13 @@ export async function createUserRepository({ email, password }: AuthType): Promi
     });
   } catch (error) {
     if (error instanceof Error && error.name === 'ValidationError') {
-      const issues = (error as ValidationError).data.errors.reduce((acc, value) => {
-        acc[value.path] = value.message;
-        return acc;
-      }, {} as Record<string, string>);
+      const issues = (error as ValidationError).data.errors.reduce(
+        (acc, value) => {
+          acc[value.path] = value.message;
+          return acc;
+        },
+        {} as Record<string, string>,
+      );
 
       return err({ type: 'validation', message: error.message, errors: issues });
     }

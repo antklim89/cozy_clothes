@@ -1,2 +1,2 @@
 export { Testimonials, TestimonialsMedia } from './collections';
-export { type TestimonialType } from './types';
+export type { TestimonialType } from './types';

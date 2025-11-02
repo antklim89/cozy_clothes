@@ -1,6 +1,5 @@
 import { z } from 'zod/v4';
 
-
 export const MediaSchema = z.object({
   id: z.number(),
   blurDataUrl: z.string(),

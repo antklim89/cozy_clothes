@@ -1,9 +1,9 @@
-import { Slot } from '@radix-ui/react-slot';
 import type { ButtonHTMLAttributes, RefObject } from 'react';
-import { cva } from 'class-variance-authority';
+import { Slot } from '@radix-ui/react-slot';
 import type { VariantProps } from 'class-variance-authority';
-import { cn } from '@/shared/lib/utils';
+import { cva } from 'class-variance-authority';
 
+import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
   'inline-flex cursor-pointer items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -47,5 +47,4 @@ function Button({
   return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { Button, buttonVariants };

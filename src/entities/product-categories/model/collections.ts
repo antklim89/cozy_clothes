@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-
 export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
   admin: {

@@ -1,21 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
+
 import type { ProductPreviewType } from '@/entities/products/model';
 import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import { Price } from '@/shared/ui/price';
 
-
 interface Props {
   product: ProductPreviewType;
 }
-
 
 export function ProductsListCard({ product }: Props) {
   const title = product.title ? `${product.baseTitle} (${product.title})` : product.baseTitle;
 
   return (
     <Card className="group relative">
-      <div className="w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
+      <div className="w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
         <Image
           alt={product.baseTitle}
           blurDataURL={product.imagePreview.blurDataUrl}
@@ -42,4 +41,3 @@ export function ProductsListCard({ product }: Props) {
     </Card>
   );
 }
-

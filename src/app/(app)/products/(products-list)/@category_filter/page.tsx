@@ -5,9 +5,7 @@ async function Page() {
   const { result: categories, type } = await getProductCategories();
   if (type === 'error') return null;
 
-  return (
-    <CategoryFilter categories={categories} />
-  );
+  return <CategoryFilter categories={categories} />;
 }
 
 export default Page;

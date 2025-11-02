@@ -1,6 +1,6 @@
 import { z } from 'zod/v4';
-import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-schema';
 
+import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-schema';
 
 export const ProductFilterSchema = z.object({
   category: z.number().min(1).optional(),

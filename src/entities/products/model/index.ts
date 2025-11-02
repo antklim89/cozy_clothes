@@ -1,4 +1,5 @@
 export { ProductBases, ProductMedia, Products } from './collections';
+export { productPreviewDto } from './dto';
 export { ProductFilterSchema } from './schemas';
 export type {
   ProductFilterType,

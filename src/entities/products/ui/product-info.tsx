@@ -1,10 +1,10 @@
 import { RichText } from '@payloadcms/richtext-lexical/react';
+
 import type { ProductType } from '@/entities/products/model';
 
-
-export async function ProductInfo({ product }: { product: ProductType }) {
+export function ProductInfo({ product }: { product: ProductType }) {
   return (
-    <div className="prose dark:prose-invert px-4 flex flex-col">
+    <div className="prose dark:prose-invert flex flex-col px-4">
       <h1>{product.baseTitle}</h1>
       <h3>{product.category.name}</h3>
       <RichText data={product.baseDescription} />

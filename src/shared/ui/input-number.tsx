@@ -1,23 +1,14 @@
+import type { KeyboardEvent, ReactNode, RefObject } from 'react';
+import { createContext, use, useCallback, useMemo } from 'react';
 import { Minus, Plus } from 'lucide-react';
-import {
-  createContext,
-  use,
-  useCallback,
-  useMemo,
-} from 'react';
-import type {
-  KeyboardEvent,
-  ReactNode,
-  RefObject,
-} from 'react';
+
 import { cn } from '@/shared/lib/utils';
-import { Button } from './button';
 import type { ButtonProps } from './button';
-import { Input } from './input';
+import { Button } from './button';
 import type { InputProps } from './input';
+import { Input } from './input';
 
-
-export type InputNumberProps = { ref?: RefObject<HTMLDivElement> } & {
+export type InputNumberProps = { ref?: RefObject<HTMLButtonElement> } & {
   max?: number;
   min?: number;
   value: number;
@@ -38,15 +29,7 @@ const Context = createContext<ContextValue>({
   handleIncrement: () => null,
 });
 
-export function InputNumber({
-  max = 9999,
-  min = 1,
-  value,
-  onChange,
-  children,
-  className,
-  ...props
-}: InputNumberProps) {
+export function InputNumber({ max = 9999, min = 1, value, onChange, children, className, ...props }: InputNumberProps) {
   const handleDecrement = useCallback(() => {
     const newValue = Math.max(min, value - 1);
     onChange?.(newValue);
@@ -57,7 +40,7 @@ export function InputNumber({
     onChange?.(newValue);
   }, [max, value, onChange]);
 
-  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+  function handleKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
     switch (e.key) {
       case '+':
       case 'ArrowUp':
@@ -74,35 +57,27 @@ export function InputNumber({
     }
   }
 
-  const contextValue = useMemo(() => ({
-    value,
-    handleDecrement,
-    handleIncrement,
-  }), [handleDecrement, handleIncrement, value]);
+  const contextValue = useMemo(
+    () => ({
+      value,
+      handleDecrement,
+      handleIncrement,
+    }),
+    [handleDecrement, handleIncrement, value],
+  );
 
   return (
     <Context value={contextValue}>
-      <div
-        {...props}
-        className={cn('flex gap-1', className)}
-        onKeyDown={handleKeyDown}
-
-      >
+      <button {...props} tabIndex={-1} className={cn('flex gap-1', className)} onKeyDown={handleKeyDown}>
         {children}
-      </div>
+      </button>
     </Context>
   );
 }
 export function InputNumberContent({ className, ...props }: InputProps & { ref?: RefObject<HTMLInputElement> }) {
   const { value } = use(Context);
   return (
-    <Input
-      readOnly
-      tabIndex={-1}
-      value={value}
-      {...props}
-      className={cn('w-20 text-xl text-center', className)}
-    />
+    <Input readOnly tabIndex={-1} value={value} {...props} className={cn('w-20 text-center text-xl', className)} />
   );
 }
 
@@ -125,4 +100,3 @@ export function InputNumberDecrement(props: ButtonProps & { ref?: RefObject<HTML
     </Button>
   );
 }
-

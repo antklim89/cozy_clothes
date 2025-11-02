@@ -1,9 +1,9 @@
 import 'server-only';
+
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import type { ProductType } from '../../model';
 import { productDto } from '../../model/dto';
-
 
 export async function getOneProductRepository(id: ProductType['id']) {
   try {

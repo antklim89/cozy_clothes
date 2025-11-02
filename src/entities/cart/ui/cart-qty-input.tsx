@@ -1,14 +1,9 @@
 'use client';
-import {
-  InputNumber,
-  InputNumberContent,
-  InputNumberDecrement,
-  InputNumberIncrement,
-} from '@/shared/ui/input-number';
+
+import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
 import { useCartQuery } from '../hooks/use-cart-query';
 import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
 import type { LocalCartItemType } from '../model';
-
 
 interface Props {
   productId: LocalCartItemType['productId'];

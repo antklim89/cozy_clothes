@@ -1,16 +1,10 @@
 import 'server-only';
 import { cache } from 'react';
+
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 
-
-export const removeCartItemRepository = cache(async ({
-  productId,
-  userId,
-}: {
-  productId: number;
-  userId: number;
-}) => {
+export const removeCartItemRepository = cache(async ({ productId, userId }: { productId: number; userId: number }) => {
   try {
     const payload = await getPayload();
 

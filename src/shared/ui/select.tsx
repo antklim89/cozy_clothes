@@ -1,4 +1,5 @@
 'use client';
+import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
 import {
   Content,
   Group,
@@ -17,9 +18,8 @@ import {
   Viewport,
 } from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
-import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { cn } from '@/shared/lib/utils';
 
+import { cn } from '@/shared/lib/utils';
 
 const Select = Root;
 
@@ -50,7 +50,11 @@ function SelectTrigger({
   );
 }
 
-function SelectScrollUpButton({ ref, className, ...props }: ComponentPropsWithoutRef<typeof ScrollUpButton> & { ref?: RefObject<ComponentRef<typeof ScrollUpButton>> }) {
+function SelectScrollUpButton({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof ScrollUpButton> & { ref?: RefObject<ComponentRef<typeof ScrollUpButton>> }) {
   return (
     <ScrollUpButton
       className={cn('flex cursor-default items-center justify-center py-1', className)}
@@ -62,7 +66,11 @@ function SelectScrollUpButton({ ref, className, ...props }: ComponentPropsWithou
   );
 }
 
-function SelectScrollDownButton({ ref, className, ...props }: ComponentPropsWithoutRef<typeof ScrollDownButton> & { ref?: RefObject<ComponentRef<typeof ScrollDownButton>> }) {
+function SelectScrollDownButton({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof ScrollDownButton> & { ref?: RefObject<ComponentRef<typeof ScrollDownButton>> }) {
   return (
     <ScrollDownButton
       className={cn('flex cursor-default items-center justify-center py-1', className)}
@@ -85,9 +93,9 @@ function SelectContent({
     <Portal>
       <Content
         className={cn(
-          'relative z-50 max-h-96 min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
-          position === 'popper'
-          && 'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-96 min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=closed]:animate-out data-[state=open]:animate-in',
+          position === 'popper' &&
+            'data-[side=left]:-translate-x-1 data-[side=top]:-translate-y-1 data-[side=right]:translate-x-1 data-[side=bottom]:translate-y-1',
           className,
         )}
         position={position}
@@ -98,8 +106,7 @@ function SelectContent({
         <Viewport
           className={cn(
             'p-1',
-            position === 'popper'
-            && 'h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width)',
+            position === 'popper' && 'h-(--radix-select-trigger-height) w-full min-w-(--radix-select-trigger-width)',
           )}
         >
           {children}
@@ -110,8 +117,12 @@ function SelectContent({
   );
 }
 
-function SelectLabel({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Label> & { ref?: RefObject<ComponentRef<typeof Label>> }) {
-  return <Label className={cn('py-1.5 pl-8 pr-2 text-sm font-semibold', className)} ref={ref} {...props} />;
+function SelectLabel({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof Label> & { ref?: RefObject<ComponentRef<typeof Label>> }) {
+  return <Label className={cn('py-1.5 pr-2 pl-8 font-semibold text-sm', className)} ref={ref} {...props} />;
 }
 
 function SelectItem({
@@ -123,7 +134,7 @@ function SelectItem({
   return (
     <Item
       className={cn(
-        'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+        'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
         className,
       )}
       ref={ref}
@@ -140,7 +151,11 @@ function SelectItem({
   );
 }
 
-function SelectSeparator({ ref, className, ...props }: ComponentPropsWithoutRef<typeof Separator> & { ref?: RefObject<ComponentRef<typeof Separator>> }) {
+function SelectSeparator({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof Separator> & { ref?: RefObject<ComponentRef<typeof Separator>> }) {
   return <Separator className={cn('-mx-1 my-1 h-px bg-muted', className)} ref={ref} {...props} />;
 }
 

@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-
 export const Users = {
   slug: 'users',
   admin: {

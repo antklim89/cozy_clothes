@@ -1,21 +1,12 @@
-import { X } from 'lucide-react';
-import {
-  useCallback,
-  useRef,
-  useState,
-} from 'react';
 import type { KeyboardEvent } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
+import { X } from 'lucide-react';
+
 import { Badge } from '@/shared/ui/badge';
-import {
-  Command,
-  CommandGroup,
-  CommandItem,
-  CommandList,
-} from '@/shared/ui/command';
+import { Command, CommandGroup, CommandItem, CommandList } from '@/shared/ui/command';
 
 type Options = Record<'value' | 'label', string>;
-
 
 export function MultiSelect({
   id,
@@ -26,16 +17,18 @@ export function MultiSelect({
   id?: string;
   options: Options[];
   selectedOptions: Options[];
-  onSelectOptions: (value: Options[],
-  ) => void;
+  onSelectOptions: (value: Options[]) => void;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const handleUnselect = useCallback((option: Options) => {
-    onSelectOptions(selectedOptions.filter(s => s.value !== option.value));
-  }, [selectedOptions, onSelectOptions]);
+  const handleUnselect = useCallback(
+    (option: Options) => {
+      onSelectOptions(selectedOptions.filter(s => s.value !== option.value));
+    },
+    [selectedOptions, onSelectOptions],
+  );
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
@@ -58,17 +51,17 @@ export function MultiSelect({
 
   const filteredOptions = options?.filter(option => !selectedOptions?.includes(option));
 
-  const handleSelect = useCallback((selectableOption: Options) => {
-    setInputValue('');
-    onSelectOptions([...selectedOptions, selectableOption]);
-  }, [selectedOptions, onSelectOptions]);
+  const handleSelect = useCallback(
+    (selectableOption: Options) => {
+      setInputValue('');
+      onSelectOptions([...selectedOptions, selectableOption]);
+    },
+    [selectedOptions, onSelectOptions],
+  );
 
   return (
-    <Command
-      className="overflow-visible bg-transparent"
-      onKeyDown={handleKeyDown}
-    >
-      <div className="group flex items-center min-h-10 rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+    <Command className="overflow-visible bg-transparent" onKeyDown={handleKeyDown}>
+      <div className="group flex min-h-10 items-center rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
         <div className="flex flex-wrap gap-1">
           {selectedOptions?.map(option => (
             <Badge key={option.value} variant="outline">
@@ -77,12 +70,12 @@ export function MultiSelect({
                 className="ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 type="button"
                 onClick={() => handleUnselect(option)}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === 'Enter') {
                     handleUnselect(option);
                   }
                 }}
-                onMouseDown={(e) => {
+                onMouseDown={e => {
                   e.preventDefault();
                   e.stopPropagation();
                 }}
@@ -106,27 +99,25 @@ export function MultiSelect({
       </div>
       <div className="relative">
         <CommandList>
-          {open && filteredOptions.length > 0
-            ? (
-                <div className="absolute mt-2 top-0 z-10 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
-                  <CommandGroup className="h-full overflow-auto">
-                    {filteredOptions.map(selectableOption => (
-                      <CommandItem
-                        className="cursor-pointer"
-                        key={selectableOption.value}
-                        onMouseDown={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                        }}
-                        onSelect={() => handleSelect(selectableOption)}
-                      >
-                        {selectableOption.label}
-                      </CommandItem>
-                    ))}
-                  </CommandGroup>
-                </div>
-              )
-            : null}
+          {open && filteredOptions.length > 0 ? (
+            <div className="absolute top-0 z-10 mt-2 w-full animate-in rounded-md border bg-popover text-popover-foreground shadow-md outline-none">
+              <CommandGroup className="h-full overflow-auto">
+                {filteredOptions.map(selectableOption => (
+                  <CommandItem
+                    className="cursor-pointer"
+                    key={selectableOption.value}
+                    onMouseDown={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onSelect={() => handleSelect(selectableOption)}
+                  >
+                    {selectableOption.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </div>
+          ) : null}
         </CommandList>
       </div>
     </Command>

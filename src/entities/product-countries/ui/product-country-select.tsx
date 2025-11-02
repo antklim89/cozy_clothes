@@ -1,16 +1,11 @@
 'use client';
 
 import { useId } from 'react';
-import {
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-  useQueryStates,
-} from 'nuqs';
+import { parseAsArrayOf, parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
+
 import { Label } from '@/shared/ui/label';
 import { MultiSelect } from '@/shared/ui/multiselect';
 import type { ProductCountryType } from '../models/types';
-
 
 const querySelectOptions = parseAsArrayOf(parseAsString).withDefault([]).withOptions({ shallow: false });
 

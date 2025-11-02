@@ -1,6 +1,5 @@
 import type { CollectionConfig } from 'payload';
 
-
 export const Contacts: CollectionConfig = {
   slug: 'contacts',
   fields: [

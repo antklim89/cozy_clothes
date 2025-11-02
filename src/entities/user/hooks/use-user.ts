@@ -1,7 +1,7 @@
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+
 import { meQuery } from '../api/queries/me';
 import type { UserType } from '../model';
-
 
 export const userQueryOptions = queryOptions<UserType | null>({
   refetchOnMount: false,

@@ -1,6 +1,5 @@
 import type { Media } from '@/shared/model/types/types';
 
-
 export interface TestimonialType {
   id: number;
   image: Media;

@@ -1,6 +1,6 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
-import { MediaCollection } from '@/shared/model/collections/media-collection';
 
+import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 export const Hero: GlobalConfig = {
   slug: 'Hero',

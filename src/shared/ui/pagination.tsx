@@ -1,20 +1,13 @@
+import type { ComponentProps, RefObject } from 'react';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
 import Link from 'next/link';
-import type { ComponentProps, RefObject } from 'react';
-import { cn } from '@/shared/lib/utils';
-import { buttonVariants } from '@/shared/ui/button';
-import type { ButtonProps } from '@/shared/ui/button';
 
+import { cn } from '@/shared/lib/utils';
+import type { ButtonProps } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 
 function Pagination({ className, ...props }: ComponentProps<'nav'>) {
-  return (
-    <nav
-      aria-label="pagination"
-      className={cn('mx-auto flex w-full justify-center', className)}
-      role="navigation"
-      {...props}
-    />
-  );
+  return <nav aria-label="pagination" className={cn('mx-auto flex w-full justify-center', className)} {...props} />;
 }
 
 function PaginationContent({ ref, className, ...props }: ComponentProps<'ul'> & { ref?: RefObject<HTMLUListElement> }) {
@@ -27,15 +20,10 @@ function PaginationItem({ ref, className, ...props }: ComponentProps<'li'> & { r
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, 'size'>
-& ComponentProps<typeof Link>;
+} & Pick<ButtonProps, 'size'> &
+  ComponentProps<typeof Link>;
 
-function PaginationLink({
-  className,
-  isActive,
-  size = 'icon',
-  ...props
-}: PaginationLinkProps) {
+function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
   return (
     <Link
       aria-current={isActive ? 'page' : undefined}
@@ -67,12 +55,7 @@ function PaginationPrevious({ className, ...props }: ComponentProps<typeof Pagin
 
 function PaginationNext({ className, ...props }: ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink
-      aria-label="Go to next page"
-      className={cn('gap-1 pr-2.5', className)}
-      size="default"
-      {...props}
-    >
+    <PaginationLink aria-label="Go to next page" className={cn('gap-1 pr-2.5', className)} size="default" {...props}>
       <span>Next</span>
       <ChevronRight className="h-4 w-4" />
     </PaginationLink>

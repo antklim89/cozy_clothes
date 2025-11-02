@@ -1,23 +1,13 @@
 'use client';
+import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes, RefObject } from 'react';
+import { createContext, use, useId, useMemo } from 'react';
+import type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form';
+import { Controller, FormProvider, useFormContext } from 'react-hook-form';
 import type * as LabelPrimitive from '@radix-ui/react-label';
 import { Slot } from '@radix-ui/react-slot';
-import {
-  createContext,
-  use,
-  useId,
-  useMemo,
-} from 'react';
-import type {
-  ComponentPropsWithoutRef,
-  ComponentRef,
-  HTMLAttributes,
-  RefObject,
-} from 'react';
-import { Controller, FormProvider, useFormContext } from 'react-hook-form';
-import type { ControllerProps, FieldPath, FieldValues } from 'react-hook-form';
+
 import { cn } from '@/shared/lib/utils';
 import { Label } from '@/shared/ui/label';
-
 
 const Form = FormProvider;
 
@@ -33,9 +23,7 @@ const FormFieldContext = createContext<FormFieldContextValue>({} as FormFieldCon
 function FormField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({
-  ...props
-}: ControllerProps<TFieldValues, TName>) {
+>({ ...props }: ControllerProps<TFieldValues, TName>) {
   const value = useMemo(() => ({ name: props.name }), [props.name]);
 
   return (
@@ -74,7 +62,6 @@ interface FormItemContextValue {
   id: string;
 }
 
-
 function FormItem({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
   const id = useId();
   const value = useMemo(() => ({ id }), [id]);
@@ -85,31 +72,28 @@ function FormItem({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> &
   );
 }
 
-function FormLabel({ ref, className, ...props }: ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & { ref?: RefObject<ComponentRef<typeof LabelPrimitive.Root>> }) {
+function FormLabel({
+  ref,
+  className,
+  ...props
+}: ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
+  ref?: RefObject<ComponentRef<typeof LabelPrimitive.Root>>;
+}) {
   const { error, formItemId } = useFormField();
 
-  return (
-    <Label
-      className={cn(error && 'text-destructive', className)}
-      htmlFor={formItemId}
-      ref={ref}
-      {...props}
-    />
-  );
+  return <Label className={cn(error && 'text-destructive', className)} htmlFor={formItemId} ref={ref} {...props} />;
 }
 
-function FormControl({ ref, ...props }: ComponentPropsWithoutRef<typeof Slot> & { ref?: RefObject<ComponentRef<typeof Slot>> }) {
-  const {
-    error,
-    formItemId,
-    formDescriptionId,
-    formMessageId,
-  } = useFormField();
+function FormControl({
+  ref,
+  ...props
+}: ComponentPropsWithoutRef<typeof Slot> & { ref?: RefObject<ComponentRef<typeof Slot>> }) {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
   return (
     <Slot
       aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`}
-      aria-invalid={!!error}
+      aria-invalid={Boolean(error)}
       id={formItemId}
       ref={ref}
       {...props}
@@ -117,17 +101,14 @@ function FormControl({ ref, ...props }: ComponentPropsWithoutRef<typeof Slot> & 
   );
 }
 
-function FormDescription({ ref, className, ...props }: HTMLAttributes<HTMLParagraphElement> & { ref?: RefObject<HTMLParagraphElement> }) {
+function FormDescription({
+  ref,
+  className,
+  ...props
+}: HTMLAttributes<HTMLParagraphElement> & { ref?: RefObject<HTMLParagraphElement> }) {
   const { formDescriptionId } = useFormField();
 
-  return (
-    <p
-      className={cn('text-sm text-muted-foreground', className)}
-      id={formDescriptionId}
-      ref={ref}
-      {...props}
-    />
-  );
+  return <p className={cn('text-muted-foreground text-sm', className)} id={formDescriptionId} ref={ref} {...props} />;
 }
 
 function FormMessage({
@@ -142,23 +123,10 @@ function FormMessage({
   if (body == null) return null;
 
   return (
-    <p
-      className={cn('text-sm font-medium text-destructive', className)}
-      id={formMessageId}
-      ref={ref}
-      {...props}
-    >
+    <p className={cn('font-medium text-destructive text-sm', className)} id={formMessageId} ref={ref} {...props}>
       {body}
     </p>
   );
 }
 
-export {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-};
+export { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage };

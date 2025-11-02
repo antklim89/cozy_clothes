@@ -1,4 +1,5 @@
 'use server';
+
 import { login, logout, register } from '../services/dal';
 
 export const loginAction = login;

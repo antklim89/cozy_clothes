@@ -1,6 +1,5 @@
 import { Skeleton } from '@/shared/ui/skeleton';
 
-
 export function ProductsListCardFallback() {
   return (
     <section className="group relative">

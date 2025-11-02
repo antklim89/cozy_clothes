@@ -1,6 +1,6 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
-import { MediaCollection } from '@/shared/model/collections/media-collection';
 
+import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 export const About: GlobalConfig = {
   slug: 'About',
@@ -21,5 +21,3 @@ export const AboutMedia: CollectionConfig = {
     staticDir: 'media/about',
   },
 };
-
-

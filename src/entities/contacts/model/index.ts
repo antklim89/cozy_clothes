@@ -1,2 +1,2 @@
 export { Contacts } from './collections';
-export { type ContactType } from './types';
+export type { ContactType } from './types';

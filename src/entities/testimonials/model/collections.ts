@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
-import { MediaCollection } from '@/shared/model/collections/media-collection';
 
+import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
@@ -49,4 +49,3 @@ export const TestimonialsMedia: CollectionConfig = {
     },
   },
 };
-

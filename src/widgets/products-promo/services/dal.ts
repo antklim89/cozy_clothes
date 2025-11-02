@@ -1,7 +1,7 @@
 import 'server-only';
 import { cache } from 'react';
-import { getPromoProductsRepository } from './repositories/get-promo-products-repository';
 
+import { getPromoProductsRepository } from './repositories/get-promo-products-repository';
 
 export const fetchNewProducts = cache(async () => {
   const result = await getPromoProductsRepository({ sort: 'createdAt' });

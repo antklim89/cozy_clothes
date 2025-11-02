@@ -1,24 +1,12 @@
 'use client';
-import useEmblaCarousel from 'embla-carousel-react';
+import type { ComponentProps, HTMLAttributes, KeyboardEvent, RefObject } from 'react';
+import { createContext, use, useCallback, useEffect, useMemo, useState } from 'react';
 import type { UseEmblaCarouselType } from 'embla-carousel-react';
+import useEmblaCarousel from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import {
-  createContext,
-  use,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import type {
-  ComponentProps,
-  HTMLAttributes,
-  KeyboardEvent,
-  RefObject,
-} from 'react';
+
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
-
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -76,9 +64,7 @@ function Carousel({
   const onSelect = useCallback((carouselApi: CarouselApi) => {
     if (!carouselApi) return;
 
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCanScrollPrev(carouselApi.canScrollPrev());
-    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setCanScrollNext(carouselApi.canScrollNext());
   }, []);
 
@@ -123,34 +109,34 @@ function Carousel({
     };
   }, [api, onSelect]);
 
-  const contextValue = useMemo(() => ({
-    carouselRef,
-    api,
-    opts,
-    orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
-    scrollPrev,
-    scrollNext,
-    canScrollPrev,
-    canScrollNext,
-  }), [carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext]);
+  const contextValue = useMemo(
+    () => ({
+      carouselRef,
+      api,
+      opts,
+      orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+      scrollPrev,
+      scrollNext,
+      canScrollPrev,
+      canScrollNext,
+    }),
+    [carouselRef, api, opts, orientation, scrollPrev, scrollNext, canScrollPrev, canScrollNext],
+  );
 
   return (
     <CarouselContext value={contextValue}>
-      <div
-        aria-roledescription="carousel"
-        className={cn('relative', className)}
-        ref={ref}
-        role="region"
-        onKeyDownCapture={handleKeyDown}
-        {...props}
-      >
+      <section className={cn('relative', className)} ref={ref} onKeyDownCapture={handleKeyDown} {...props}>
         {children}
-      </div>
+      </section>
     </CarouselContext>
   );
 }
 
-function CarouselContent({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
+function CarouselContent({
+  ref,
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
@@ -164,15 +150,18 @@ function CarouselContent({ ref, className, ...props }: HTMLAttributes<HTMLDivEle
   );
 }
 
-function CarouselItem({ ref, className, ...props }: HTMLAttributes<HTMLDivElement> & { ref?: RefObject<HTMLDivElement> }) {
+function CarouselItem({
+  ref,
+  className,
+  ...props
+}: HTMLAttributes<HTMLFieldSetElement> & { ref?: RefObject<HTMLFieldSetElement> }) {
   const { orientation } = useCarousel();
 
   return (
-    <div
+    <fieldset
       aria-roledescription="slide"
       className={cn('min-w-0 shrink-0 grow-0 basis-full', orientation === 'horizontal' ? 'pl-4' : 'pt-4', className)}
       ref={ref}
-      role="group"
       {...props}
     />
   );
@@ -190,10 +179,10 @@ function CarouselPrevious({
   return (
     <Button
       className={cn(
-        'absolute  h-8 w-8 rounded-full',
+        'absolute h-8 w-8 rounded-full',
         orientation === 'horizontal'
-          ? 'left-0 top-1/2 -translate-y-1/2'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? '-translate-y-1/2 top-1/2 left-0'
+          : '-top-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollPrev}
@@ -223,8 +212,8 @@ function CarouselNext({
       className={cn(
         'absolute h-8 w-8 rounded-full',
         orientation === 'horizontal'
-          ? 'right-0 top-1/2 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? '-translate-y-1/2 top-1/2 right-0'
+          : '-bottom-12 -translate-x-1/2 left-1/2 rotate-90',
         className,
       )}
       disabled={!canScrollNext}
@@ -240,10 +229,4 @@ function CarouselNext({
   );
 }
 
-export {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-};
+export { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious };

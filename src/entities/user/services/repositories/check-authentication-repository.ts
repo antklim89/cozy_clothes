@@ -1,9 +1,9 @@
 import 'server-only';
 import { headers } from 'next/headers';
+
 import { getPayload } from '@/shared/lib/payload';
 import { Users } from '../../model/collections';
 import type { UserType } from '../../model/types';
-
 
 export async function checkAuthenticationRepository(): Promise<UserType | null> {
   try {

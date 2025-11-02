@@ -1,21 +1,16 @@
-import Link from 'next/link';
 import type { ComponentProps } from 'react';
+import Link from 'next/link';
+
 import type { ProductVariantType } from '@/entities/products/model';
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
-
 interface Props extends ComponentProps<'div'> {
   variants: ProductVariantType[];
   selectedVariant: ProductVariantType;
-};
+}
 
-export function ProductsVariantsSelect({
-  variants,
-  selectedVariant: variant,
-  className,
-  ...props
-}: Props) {
+export function ProductsVariantsSelect({ variants, selectedVariant: variant, className, ...props }: Props) {
   return (
     <div {...props} className={cn('flex flex-col gap-4', className)}>
       <ColorVariant selectedVariant={variant} variants={variants} />
@@ -24,11 +19,7 @@ export function ProductsVariantsSelect({
   );
 }
 
-
-function ColorVariant({
-  variants,
-  selectedVariant,
-}: Props) {
+function ColorVariant({ variants, selectedVariant }: Props) {
   const colors = Map.groupBy(variants, i => i.colorName);
 
   return (
@@ -36,25 +27,23 @@ function ColorVariant({
       <h4 className="text-lg">Colors:</h4>
       <div className="flex flex-wrap gap-1">
         {Array.from(colors, ([color, variant]) => {
-          const newVariant = (selectedVariant.colorName === color ? selectedVariant : null)
-            ?? variants.find(i => i.size === selectedVariant.size && i.colorName === color)
-            ?? variants.find(i => i.colorName === color);
+          const newVariant =
+            (selectedVariant.colorName === color ? selectedVariant : null) ??
+            variants.find(i => i.size === selectedVariant.size && i.colorName === color) ??
+            variants.find(i => i.colorName === color);
 
           if (newVariant == null) return null;
           return (
             <Button asChild key={color} variant="outline">
               <Link
-                className={cn(
-                  'uppercase text-md no-underline',
-                  {
-                    'outline-2 outline-primary': newVariant.id === selectedVariant.id,
-                    'opacity-40': !variant.some(i => i.size === selectedVariant.size),
-                  },
-                )}
+                className={cn('text-md uppercase no-underline', {
+                  'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                  'opacity-40': !variant.some(i => i.size === selectedVariant.size),
+                })}
                 href={`/products/${newVariant?.id}`}
                 scroll={false}
               >
-                <span className="rounded-full size-4 mr-2" style={{ backgroundColor: variant?.[0]?.colorCode }}></span>
+                <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.colorCode }} />
                 {color}
               </Link>
             </Button>
@@ -65,10 +54,7 @@ function ColorVariant({
   );
 }
 
-function SizeVariant({
-  variants,
-  selectedVariant,
-}: Props) {
+function SizeVariant({ variants, selectedVariant }: Props) {
   const sizes = Map.groupBy(variants, i => i.size);
 
   return (
@@ -76,21 +62,19 @@ function SizeVariant({
       <h4 className="text-lg">Sizes:</h4>
       <div className="flex flex-wrap gap-1">
         {Array.from(sizes, ([size, variant]) => {
-          const newVariant = (selectedVariant.size === size ? selectedVariant : null)
-            ?? variants.find(i => i.colorName === selectedVariant.colorName && i.size === size)
-            ?? variants.find(i => i.size === size);
+          const newVariant =
+            (selectedVariant.size === size ? selectedVariant : null) ??
+            variants.find(i => i.colorName === selectedVariant.colorName && i.size === size) ??
+            variants.find(i => i.size === size);
 
           if (newVariant == null) return null;
           return (
             <Button asChild key={size} variant="outline">
               <Link
-                className={cn(
-                  'uppercase text-md no-underline',
-                  {
-                    'outline-2 outline-primary': newVariant.id === selectedVariant.id,
-                    'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
-                  },
-                )}
+                className={cn('text-md uppercase no-underline', {
+                  'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                  'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
+                })}
                 href={`/products/${newVariant?.id}`}
                 scroll={false}
               >

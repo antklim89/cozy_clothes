@@ -1,16 +1,10 @@
 'use client';
 import Link from 'next/link';
-import { useCartQuery } from '@/entities/cart/hooks/use-cart-query';
-import {
-  CartList,
-  CartListEmpty,
-  CartListFallback,
-  CartListItem,
-  CartTotal,
-} from '@/entities/cart/ui';
+
+import { useCartQuery } from '@/entities/cart/hooks';
+import { CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
-
 
 function Page() {
   const { data: cartItems, isFetched } = useCartQuery();
@@ -20,20 +14,17 @@ function Page() {
 
   return (
     <CartList
-      checkoutSlot={(
-        <Card className="p-8 flex justify-center w-full">
+      checkoutSlot={
+        <Card className="flex w-full justify-center p-8">
           <Button asChild>
             <Link href="/checkout">Checkout</Link>
           </Button>
         </Card>
-      )}
+      }
       totalSlot={<CartTotal cartItems={cartItems} />}
     >
       {cartItems.map(cartItem => (
-        <CartListItem
-          cartItem={cartItem}
-          key={cartItem.productId}
-        />
+        <CartListItem cartItem={cartItem} key={cartItem.productId} />
       ))}
     </CartList>
   );

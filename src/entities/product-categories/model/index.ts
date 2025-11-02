@@ -1,2 +1,2 @@
 export { ProductCategories } from './collections';
-export { type ProductCategoryType } from './types';
+export type { ProductCategoryType } from './types';

@@ -1,4 +1,3 @@
-
 const config = {
   theme: {
     extend: {
