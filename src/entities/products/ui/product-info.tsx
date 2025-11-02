@@ -2,7 +2,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react';
 import type { ProductType } from '@/entities/products/model';
 
 
-export async function Product({ product }: { product: ProductType }) {
+export async function ProductInfo({ product }: { product: ProductType }) {
   return (
     <div className="prose dark:prose-invert px-4 flex flex-col">
       <h1>{product.baseTitle}</h1>

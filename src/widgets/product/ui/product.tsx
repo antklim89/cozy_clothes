@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { AddToCartButton } from '@/entities/cart/ui';
 import type { ProductType } from '@/entities/products/model';
-import { Product, ProductImagesCarousel, ProductsVariantsSelect } from '@/entities/products/ui';
+import { ProductImagesCarousel, ProductInfo, ProductsVariantsSelect } from '@/entities/products/ui';
 import { cn } from '@/shared/lib/utils';
 import { Price } from '@/shared/ui/price';
 
@@ -21,7 +21,7 @@ export async function ProductWidget({
         <ProductImagesCarousel alt={product.baseTitle} images={product.images} />
       </section>
       <aside className="px-4 flex flex-col gap-8">
-        <Product product={product} />
+        <ProductInfo product={product} />
         <ProductsVariantsSelect selectedVariant={product} variants={product.productVariants} />
         <Price
           className="items-end"
@@ -29,7 +29,6 @@ export async function ProductWidget({
           price={product.price}
           size="lg"
         />
-
         <AddToCartButton productId={product.id} />
       </aside>
     </div>

@@ -1,5 +1,5 @@
-export { Product } from './product';
 export { ProductImagesCarousel } from './product-images-carousel';
+export { ProductInfo } from './product-info';
 export { ProductPagination } from './product-pagination';
 export { PriceFilter } from './product-price-filter';
 export { ProductSearch } from './product-search';

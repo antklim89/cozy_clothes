@@ -1,6 +1,6 @@
 import { z } from 'zod/v4-mini';
 import { fetchProduct } from '@/entities/products/services';
-import { ProductWidget } from '@/widgets/product-widget/ui';
+import { ProductWidget } from '@/widgets/product/ui';
 
 async function Page({ params }: { params: Promise<{ productId: string }> }) {
   const { success, data } = await z.object({ productId: z.coerce.number() }).safeParseAsync(await params);

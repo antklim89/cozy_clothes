@@ -1,0 +1,1 @@
+export { ProductWidget } from './product';
