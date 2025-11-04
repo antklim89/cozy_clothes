@@ -21,10 +21,10 @@
   "scripts": {
     "dev": "bunx --bun run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
-    "dev:typecheck": "typecheck -w",
+    "dev:typecheck": "bun typecheck -w",
     "build": "run-s build:**",
     "build:lint": "bun lint",
-    "build:next": "next build",
+    "build:next": "bun next build",
     "start": "bunx --bun next start",
     "typecheck": "tsc --noEmit --preserveWatchOutput",
     "typegen": "payload generate:types",
