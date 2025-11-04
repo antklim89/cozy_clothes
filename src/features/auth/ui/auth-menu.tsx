@@ -1,7 +1,9 @@
 'use client';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { LogInIcon, LogOut, UserIcon, UserPlus } from 'lucide-react';
 
-import { useUserQuery } from '@/entities/user/hooks';
+import { meQueryOptions } from '@/entities/user/api';
 import { Button } from '@/shared/ui/button';
 import {
   DropdownMenu,
@@ -16,7 +18,7 @@ import { AuthDialog } from './auth-dialog';
 import { LogoutButton } from './logout-button';
 
 export function AuthMenu() {
-  const { user } = useUserQuery();
+  const { data: user } = useSuspenseQuery(meQueryOptions);
 
   return (
     <DropdownMenu>

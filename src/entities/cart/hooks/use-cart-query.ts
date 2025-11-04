@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { userQueryOptions } from '../@x/user/hooks';
+import { meQueryOptions } from '../@x/user/api';
 import { getCartAction, getCartByProductIdsAction } from '../api/actions';
 import { getCartFromLocalStorage } from '../lib/cart-storage';
 import { syncLocalAndServerCart } from '../lib/utils';
@@ -13,7 +13,7 @@ export function cartQueryOptions() {
       // TODO: refactor local and server cart syncing, clear local storage after syncing
       const localCart = getCartFromLocalStorage();
 
-      const isAuthenticated = client.getQueryData(userQueryOptions.queryKey) != null;
+      const isAuthenticated = client.getQueryData(meQueryOptions.queryKey) != null;
 
       let serverCart: CartItemType[] = [];
 

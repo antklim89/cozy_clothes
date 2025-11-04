@@ -1,7 +1,5 @@
 'use server';
 
-import { checkAuthentication } from '../services';
+import { getMe } from '../services';
 
-export function checkAuthenticationAction() {
-  return checkAuthentication();
-}
+export const getMeAction = getMe;

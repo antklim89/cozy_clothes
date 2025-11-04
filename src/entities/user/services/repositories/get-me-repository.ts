@@ -5,7 +5,7 @@ import { getPayload } from '@/shared/lib/payload';
 import { Users } from '../../model/collections';
 import type { UserType } from '../../model/types';
 
-export async function checkAuthenticationRepository(): Promise<UserType | null> {
+export async function getMeRepository(): Promise<UserType | null> {
   try {
     const payload = await getPayload();
     const result = await payload.auth({ headers: await headers() });

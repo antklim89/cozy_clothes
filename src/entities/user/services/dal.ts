@@ -1,8 +1,8 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { checkAuthenticationRepository } from './repositories/check-authentication-repository';
+import { getMeRepository } from './repositories/get-me-repository';
 
-export const checkAuthentication = cache(() => {
-  return checkAuthenticationRepository();
+export const getMe = cache(() => {
+  return getMeRepository();
 });

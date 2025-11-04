@@ -1,1 +1,1 @@
-export { checkAuthentication } from '@/entities/user/services';
+export { getMe } from '@/entities/user/services';

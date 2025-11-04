@@ -1,19 +1,19 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { useDebounce } from '@/shared/hooks/use-debounce';
 import { cartQueryOptions } from './use-cart-query';
-import { useUserQuery } from '../@x/user/hooks';
+import { meQueryOptions } from '../@x/user/api';
 import { updateCartQtyAction } from '../api/actions';
 import { updateCartQtyInLocalStorage } from '../lib/cart-storage';
 
 export function useUpdateCartMutation() {
   const queryClient = useQueryClient();
   const updateCartQtyActionDebounced = useDebounce(updateCartQtyAction);
-  const { isAuthenticated } = useUserQuery();
+  const { data: user } = useSuspenseQuery(meQueryOptions);
 
   return useMutation({
     mutationFn: async (updatedCartItem: { productId: number; qty: number }) => {
-      if (isAuthenticated) {
+      if (user != null) {
         await updateCartQtyActionDebounced(updatedCartItem);
       }
 

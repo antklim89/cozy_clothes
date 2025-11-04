@@ -1,17 +1,17 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
 import { cartQueryOptions } from './use-cart-query';
-import { useUserQuery } from '../@x/user/hooks';
+import { meQueryOptions } from '../@x/user/api';
 import { removeCartItemAction } from '../api/actions';
 import { removeCartItemFromLocalStorage } from '../lib/cart-storage';
 
 export function useRemoveCartMutation() {
   const queryClient = useQueryClient();
-  const { isAuthenticated } = useUserQuery();
+  const { data: user } = useSuspenseQuery(meQueryOptions);
 
   return useMutation({
     mutationFn: async (deletedCartItem: { productId: number }) => {
-      if (isAuthenticated) {
+      if (user != null) {
         await removeCartItemAction(deletedCartItem);
       }
 

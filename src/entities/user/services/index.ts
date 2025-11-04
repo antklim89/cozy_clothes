@@ -1,1 +1,1 @@
-export { checkAuthentication } from './dal';
+export { getMe } from './dal';
