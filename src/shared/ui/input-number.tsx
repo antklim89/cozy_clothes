@@ -8,7 +8,7 @@ import { Button } from './button';
 import type { InputProps } from './input';
 import { Input } from './input';
 
-export type InputNumberProps = { ref?: RefObject<HTMLButtonElement> } & {
+export type InputNumberProps = { ref?: RefObject<HTMLDivElement> } & {
   max?: number;
   min?: number;
   value: number;
@@ -21,12 +21,14 @@ interface ContextValue {
   value: number;
   handleDecrement: () => void;
   handleIncrement: () => void;
+  handleKeyDown: (e: KeyboardEvent<HTMLButtonElement | HTMLInputElement>) => void;
 }
 
 const Context = createContext<ContextValue>({
   value: 1,
   handleDecrement: () => null,
   handleIncrement: () => null,
+  handleKeyDown: () => null,
 });
 
 export function InputNumber({ max = 9999, min = 1, value, onChange, children, className, ...props }: InputNumberProps) {
@@ -40,62 +42,73 @@ export function InputNumber({ max = 9999, min = 1, value, onChange, children, cl
     onChange?.(newValue);
   }, [max, value, onChange]);
 
-  function handleKeyDown(e: KeyboardEvent<HTMLButtonElement>) {
-    switch (e.key) {
-      case '+':
-      case 'ArrowUp':
-      case 'ArrowRight':
-        handleIncrement();
-        break;
-      case '-':
-      case 'ArrowDown':
-      case 'ArrowLeft':
-        handleDecrement();
-        break;
-      default:
-        break;
-    }
-  }
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLButtonElement | HTMLInputElement>) => {
+      switch (e.key) {
+        case '+':
+        case 'ArrowUp':
+        case 'ArrowRight':
+          handleIncrement();
+          break;
+        case '-':
+        case 'ArrowDown':
+        case 'ArrowLeft':
+          handleDecrement();
+          break;
+        default:
+          break;
+      }
+    },
+    [handleDecrement, handleIncrement],
+  );
 
   const contextValue = useMemo(
     () => ({
       value,
       handleDecrement,
       handleIncrement,
+      handleKeyDown,
     }),
-    [handleDecrement, handleIncrement, value],
+    [handleDecrement, handleIncrement, handleKeyDown, value],
   );
 
   return (
     <Context value={contextValue}>
-      <button {...props} tabIndex={-1} className={cn('flex gap-1', className)} onKeyDown={handleKeyDown}>
+      <div {...props} className={cn('flex gap-1', className)}>
         {children}
-      </button>
+      </div>
     </Context>
   );
 }
 export function InputNumberContent({ className, ...props }: InputProps & { ref?: RefObject<HTMLInputElement> }) {
-  const { value } = use(Context);
+  const { value, handleKeyDown } = use(Context);
   return (
-    <Input readOnly tabIndex={-1} value={value} {...props} className={cn('w-20 text-center text-xl', className)} />
+    <Input
+      readOnly
+      tabIndex={-1}
+      value={value}
+      {...props}
+      className={cn('w-20 text-center text-xl', className)}
+      onKeyDown={handleKeyDown}
+    />
   );
 }
 
 export function InputNumberIncrement(props: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
-  const { handleIncrement } = use(Context);
+  const { handleIncrement, handleKeyDown } = use(Context);
 
   return (
-    <Button onClick={handleIncrement} {...props}>
+    <Button onClick={handleIncrement} onKeyDown={handleKeyDown} {...props}>
       <Plus />
     </Button>
   );
 }
 
 export function InputNumberDecrement(props: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
-  const { handleDecrement } = use(Context);
+  const { handleDecrement, handleKeyDown } = use(Context);
 
   return (
-    <Button onClick={handleDecrement} {...props}>
+    <Button onClick={handleDecrement} onKeyDown={handleKeyDown} {...props}>
       <Minus />
     </Button>
   );
