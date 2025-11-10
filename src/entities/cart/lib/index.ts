@@ -1,2 +1,6 @@
-export { getCartFromLocalStorage } from './cart-storage';
-export { syncLocalAndServerCart } from './utils';
+export {
+  addCartItemToLocalStorage,
+  getCartFromLocalStorage,
+  removeCartItemFromLocalStorage,
+  updateCartQtyInLocalStorage,
+} from './cart-storage';

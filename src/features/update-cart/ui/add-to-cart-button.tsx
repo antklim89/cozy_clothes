@@ -1,26 +1,30 @@
 'use client';
 
+import { useQuery } from '@tanstack/react-query';
+
+import { cartQueryOptions } from '@/entities/cart/api';
 import { Button } from '@/shared/ui/button';
 import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
-import { useAddCartMutation } from '../hooks/use-add-cart-mutation';
-import { useCartQuery } from '../hooks/use-cart-query';
-import { useRemoveCartMutation } from '../hooks/use-remove-cart-mutation';
-import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
+import { useAddCartMutation } from '../api/mutations/use-add-cart-mutation';
+import { useRemoveCartMutation } from '../api/mutations/use-remove-cart-mutation';
+import { useUpdateCartMutation } from '../api/mutations/use-update-cart-mutation';
 
 export function AddToCartButton({ productId }: { productId: number }) {
   const addCartMutation = useAddCartMutation();
   const removeCartMutation = useRemoveCartMutation();
   const updateCartMutation = useUpdateCartMutation();
-  const cartQuery = useCartQuery();
-  const currentCartItem = cartQuery.data.find(item => item.productId === productId);
+  const cartQuery = useQuery(cartQueryOptions());
+
+  const currentCartItem = cartQuery.data?.find(item => item.productId === productId);
   const qty = currentCartItem?.qty ?? 1;
-  const hasCartItem = cartQuery.data.some(i => i.productId === productId);
+  const hasCartItem = cartQuery.data?.some(i => i.productId === productId) ?? false;
 
   async function handleRemoveCartItem() {
     await removeCartMutation.mutateAsync({
       productId,
     });
   }
+
   async function handleAddCartItem() {
     await addCartMutation.mutateAsync({
       productId,

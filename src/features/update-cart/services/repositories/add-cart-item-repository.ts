@@ -1,9 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
 
+import { cartDto } from '@/entities/cart/model';
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
-import { cartDto } from '../../model/dto';
 
 export const addCartItemRepository = cache(
   async ({ productId, userId, qty = 1 }: { productId: number; userId: number; qty?: number }) => {

@@ -1,16 +1,17 @@
 'use client';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 
-import { useCartQuery } from '@/entities/cart/hooks';
+import { cartQueryOptions } from '@/entities/cart/api';
 import { CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
 import { Button } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 
 function Page() {
-  const { data: cartItems, isFetched } = useCartQuery();
+  const { data: cartItems, isFetched } = useQuery(cartQueryOptions());
 
   if (!isFetched) return <CartListFallback />;
-  if (cartItems.length === 0) return <CartListEmpty />;
+  if (!cartItems) return <CartListEmpty />;
 
   return (
     <CartList

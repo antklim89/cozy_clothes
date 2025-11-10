@@ -1,9 +1,11 @@
 'use client';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { cartQueryOptions } from '@/entities/cart/api';
+import type { LocalCartItemType } from '@/entities/cart/model';
 import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
-import { useCartQuery } from '../hooks/use-cart-query';
-import { useUpdateCartMutation } from '../hooks/use-update-cart-mutation';
-import type { LocalCartItemType } from '../model';
+import { useUpdateCartMutation } from '../api/mutations/use-update-cart-mutation';
 
 interface Props {
   productId: LocalCartItemType['productId'];
@@ -11,21 +13,21 @@ interface Props {
 }
 
 export function CartQtyInput({ productId, className }: Props) {
-  const { data: currentCart, isFetched } = useCartQuery();
+  const cartQuery = useSuspenseQuery(cartQueryOptions());
   const { mutateAsync: updateQty } = useUpdateCartMutation();
-  if (currentCart == null) return null;
-  const currentCartItem = currentCart.find(item => item.productId === productId);
+  if (cartQuery.data == null) return null;
+  const currentCartItem = cartQuery.data.find(item => item.productId === productId);
   const qty = currentCartItem?.qty ?? 1;
 
   async function handleChange(newQty: number) {
-    if (currentCart == null) return;
+    if (cartQuery.data == null) return;
     await updateQty({
       productId,
       qty: newQty,
     });
   }
 
-  if (currentCartItem == null || !isFetched) {
+  if (currentCartItem == null || !cartQuery.isFetched) {
     return (
       <InputNumber className="opacity-0" value={0}>
         <InputNumberContent />

@@ -28,4 +28,5 @@ export const Cart: CollectionConfig = {
       max: 100,
     },
   ],
+  indexes: [{ unique: true, fields: ['user', 'product'] }],
 };
