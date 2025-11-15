@@ -34,6 +34,7 @@ export async function getManyProductsRepository({
       where,
       collection: 'products',
       depth: 2,
+      sort: options.sort ?? 'createdAt',
     });
 
     const productsResult = paginationDto(productsPayloadResult, productPreviewDto);

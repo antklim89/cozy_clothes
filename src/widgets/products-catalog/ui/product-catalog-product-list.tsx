@@ -1,11 +1,14 @@
 import type { ProductPreviewType } from '@/entities/products/model';
-import { ProductPagination, ProductsList, ProductsListCard } from '@/entities/products/ui';
+import { ProductPagination, ProductsList, ProductsListCard, ProductsListSort } from '@/entities/products/ui';
 import type { PaginatedData } from '@/shared/model/types/types';
 
 export function ProductCatalogProductList({ products }: { products: PaginatedData<ProductPreviewType> }) {
   return (
     <>
-      <ProductPagination page={products.page} totalPages={products.totalPages} />
+      <div className="flex flex-col sm:flex-row">
+        <ProductPagination page={products.page} totalPages={products.totalPages} />
+        <ProductsListSort className="self-end" />
+      </div>
       <ProductsList>
         {products.docs.map(product => (
           <ProductsListCard key={product.id} product={product} />

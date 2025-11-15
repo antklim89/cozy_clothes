@@ -11,6 +11,7 @@ const loadSearchParams = createLoader({
   countries: parseAsArrayOf(parseAsInteger),
   minPrice: parseAsInteger,
   maxPrice: parseAsInteger,
+  sort: parseAsString,
 });
 
 async function Page({ searchParams }: { searchParams: Promise<{ page: string }> }) {
@@ -22,7 +23,10 @@ async function Page({ searchParams }: { searchParams: Promise<{ page: string }> 
   if (params.category != null) filter.category = params.category;
   if (params.countries != null) filter.countries = params.countries;
 
-  const { type, result: products } = await fetchProductList({ filter, options: { page: params.page } });
+  const { type, result: products } = await fetchProductList({
+    filter,
+    options: { page: params.page, sort: params.sort ?? undefined },
+  });
   if (type === 'error') return <p>Error</p>;
 
   return <ProductCatalogProductList products={products} />;
