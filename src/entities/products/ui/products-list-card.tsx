@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import type { ProductPreviewType } from '@/entities/products/model';
+import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import { Price } from '@/shared/ui/price';
 
@@ -14,6 +15,14 @@ export function ProductsListCard({ product }: Props) {
 
   return (
     <Card className="group relative">
+      <Link className="w-full" href={`/products/${product.id}`} title={title} aria-label={product.title}>
+        <span aria-hidden="true" className="absolute inset-0 z-10" />
+      </Link>
+      <FavoritesToggleButton
+        productId={product.id}
+        isFavorite={product.isFavorite}
+        className="absolute top-0.5 right-0.5 z-20"
+      />
       <div className="w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
         <Image
           alt={product.baseTitle}
@@ -25,12 +34,7 @@ export function ProductsListCard({ product }: Props) {
           width={product.imagePreview.width}
         />
       </div>
-      <CardHeader>
-        <Link className="w-full" href={`/products/${product.id}`} title={title}>
-          <span aria-hidden="true" className="absolute inset-0" />
-          {title}
-        </Link>
-      </CardHeader>
+      <CardHeader>{title}</CardHeader>
       <CardContent className="flex justify-between">
         <div>
           <p className="mt-1 text-sm">{product.country.name}</p>

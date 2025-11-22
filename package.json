@@ -19,13 +19,13 @@
     "tailwindcss"
   ],
   "scripts": {
-    "dev": "bunx --bun run-p dev:**",
+    "dev": "bunx run-p dev:**",
     "dev:next": "next dev -H 0.0.0.0",
     "dev:typecheck": "bun typecheck -w",
     "build": "run-s build:**",
     "build:lint": "bun lint",
     "build:next": "bun next build",
-    "start": "bunx --bun next start",
+    "start": "bunx next start",
     "typecheck": "tsc --noEmit --preserveWatchOutput",
     "typegen": "payload generate:types",
     "seed": "bun payload run seed/seed.ts",

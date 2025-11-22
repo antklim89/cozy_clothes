@@ -8,7 +8,7 @@ export function Spinner({ className, ...props }: ComponentProps<'svg'>) {
       <svg
         {...props}
         aria-hidden="true"
-        className={cn('h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-600', className)}
+        className={cn('h-8 w-8 animate-spin fill-gray-200 text-gray-200 dark:text-gray-600', className)}
         fill="none"
         viewBox="0 0 100 101"
         xmlns="http://www.w3.org/2000/svg"

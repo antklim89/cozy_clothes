@@ -2,6 +2,7 @@ import 'server-only';
 
 import { PRODUCTS_PER_PAGE } from '@/entities/products/config';
 import { type ProductType, productPreviewDto } from '@/entities/products/model';
+import { getMe } from '@/entities/user/services';
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
@@ -9,6 +10,7 @@ import { paginationDto } from '@/shared/model/dto/pagination-dto';
 export async function getPromoProductsRepository({ sort }: { sort: keyof ProductType }) {
   try {
     const payload = await getPayload();
+    const user = await getMe();
 
     const productsPayloadResult = await payload.find({
       limit: PRODUCTS_PER_PAGE,
@@ -16,6 +18,9 @@ export async function getPromoProductsRepository({ sort }: { sort: keyof Product
       depth: 2,
       pagination: false,
       sort: `-${sort}`,
+      joins: {
+        favorites: user ? { limit: 1, where: { authorId: { equals: user.id } } } : false,
+      },
     });
 
     const productsResult = paginationDto(productsPayloadResult, productPreviewDto);

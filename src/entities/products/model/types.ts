@@ -14,6 +14,7 @@ export interface ProductVariantType {
 export interface ProductType {
   id: number;
   baseTitle: string;
+  isFavorite: boolean;
   title: string;
   baseDescription: RichText;
   description?: RichText;
@@ -39,7 +40,16 @@ export interface ProductType {
 export interface ProductPreviewType
   extends Pick<
     ProductType,
-    'id' | 'title' | 'baseTitle' | 'category' | 'country' | 'price' | 'discount' | 'createdAt' | 'updatedAt'
+    | 'id'
+    | 'title'
+    | 'baseTitle'
+    | 'category'
+    | 'country'
+    | 'price'
+    | 'discount'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'isFavorite'
   > {
   imagePreview: Media;
 }

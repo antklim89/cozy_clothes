@@ -9,7 +9,7 @@ import { updateCartQtyAction } from '../actions';
 export function useUpdateCartMutation() {
   const queryClient = useQueryClient();
   const { data: user } = useSuspenseQuery(meQueryOptions);
-  const updateCartQtyActionDebounced = useDebounce(updateCartQtyAction);
+  const [updateCartQtyActionDebounced] = useDebounce(updateCartQtyAction);
 
   return useMutation({
     mutationFn: async (updatedCartItem: { productId: number; qty: number }) => {

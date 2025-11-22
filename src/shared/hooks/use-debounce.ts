@@ -16,5 +16,12 @@ export function useDebounce<T, U>(callback: (...args: U[]) => Promise<T>, delay 
     [callback, delay],
   );
 
-  return debouncedCallback;
+  const clear = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
+  return [debouncedCallback, clear] as const;
 }

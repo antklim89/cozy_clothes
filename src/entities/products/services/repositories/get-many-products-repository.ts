@@ -5,6 +5,7 @@ import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
 import type { PayloadOptions } from '@/shared/model/types/types';
+import { getMe } from '../../@x/user/services';
 import { PRODUCTS_PER_PAGE } from '../../config';
 import type { ProductFilterType } from '../../model';
 import { productPreviewDto } from '../../model/dto';
@@ -18,6 +19,7 @@ export async function getManyProductsRepository({
 }) {
   try {
     const payload = await getPayload();
+    const user = await getMe();
 
     const where: Where = {};
     if (countries != null) where['productBase.country'] = { in: countries };
@@ -35,6 +37,9 @@ export async function getManyProductsRepository({
       collection: 'products',
       depth: 2,
       sort: options.sort ?? 'createdAt',
+      joins: {
+        favorites: user ? { limit: 1, where: { authorId: { equals: user.id } } } : false,
+      },
     });
 
     const productsResult = paginationDto(productsPayloadResult, productPreviewDto);

@@ -77,6 +77,7 @@ export interface Config {
     'about-media': AboutMedia;
     products: Product;
     'product-bases': ProductBase;
+    'product-favorites': ProductFavorite;
     'product-media': ProductMedia;
     'product-categories': ProductCategory;
     'product-countries': ProductCountry;
@@ -84,11 +85,15 @@ export interface Config {
     testimonials: Testimonial;
     'testimonials-media': TestimonialsMedia;
     users: User;
+    'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
+    products: {
+      favorites: 'product-favorites';
+    };
     'product-bases': {
       productVariants: 'products';
     };
@@ -101,6 +106,7 @@ export interface Config {
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     'product-bases': ProductBasesSelect<false> | ProductBasesSelect<true>;
+    'product-favorites': ProductFavoritesSelect<false> | ProductFavoritesSelect<true>;
     'product-media': ProductMediaSelect<false> | ProductMediaSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
@@ -108,6 +114,7 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -184,7 +191,7 @@ export interface ColumnsBlock {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -216,6 +223,13 @@ export interface Admin {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -257,7 +271,7 @@ export interface Product {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -276,6 +290,11 @@ export interface Product {
   imagePreview: number | ProductMedia;
   images?: (number | ProductMedia)[] | null;
   productBase: number | ProductBase;
+  favorites?: {
+    docs?: (number | ProductFavorite)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -309,7 +328,7 @@ export interface ProductBase {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -355,6 +374,15 @@ export interface ProductCountry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-favorites".
+ */
+export interface ProductFavorite {
+  id: number;
+  productId?: (number | null) | Product;
+  authorId?: (number | null) | User;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -368,6 +396,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -453,6 +488,23 @@ export interface TestimonialsMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -487,6 +539,10 @@ export interface PayloadLockedDocument {
         value: number | ProductBase;
       } | null)
     | ({
+        relationTo: 'product-favorites';
+        value: number | ProductFavorite;
+      } | null)
+    | ({
         relationTo: 'product-media';
         value: number | ProductMedia;
       } | null)
@@ -513,6 +569,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'payload-kv';
+        value: number | PayloadKv;
       } | null);
   globalSlug?: string | null;
   user:
@@ -580,6 +640,13 @@ export interface AdminsSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -651,6 +718,7 @@ export interface ProductsSelect<T extends boolean = true> {
   imagePreview?: T;
   images?: T;
   productBase?: T;
+  favorites?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -669,6 +737,14 @@ export interface ProductBasesSelect<T extends boolean = true> {
   productVariants?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-favorites_select".
+ */
+export interface ProductFavoritesSelect<T extends boolean = true> {
+  productId?: T;
+  authorId?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -767,6 +843,21 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -810,7 +901,7 @@ export interface About {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -834,7 +925,7 @@ export interface Hero {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];

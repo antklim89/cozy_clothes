@@ -15,6 +15,7 @@ export const fetchProductList = cache(
     if (!validatedInput.success) return err({ type: 'validation', message: validatedInput.error.message });
 
     const result = await getManyProductsRepository(validatedInput.data);
+
     return result;
   },
 );

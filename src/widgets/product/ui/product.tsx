@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { ProductType } from '@/entities/products/model';
 import { ProductImagesCarousel, ProductInfo, ProductsVariantsSelect } from '@/entities/products/ui';
+import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { AddToCartButton } from '@/features/update-cart/ui';
 import { cn } from '@/shared/lib/utils';
 import { Price } from '@/shared/ui/price';
@@ -16,11 +17,14 @@ export function Product({ product, className, ...props }: Props) {
       <section>
         <ProductImagesCarousel alt={product.baseTitle} images={product.images} />
       </section>
-      <aside className="flex flex-col gap-8 px-4">
+      <aside className="flex w-full flex-col gap-8 px-4">
         <ProductInfo product={product} />
         <ProductsVariantsSelect selectedVariant={product} variants={product.productVariants} />
         <Price className="items-end" discount={product.discount} price={product.price} size="lg" />
-        <AddToCartButton productId={product.id} />
+        <div className="flex gap-2">
+          <FavoritesToggleButton productId={product.id} isFavorite={product.isFavorite} />
+          <AddToCartButton productId={product.id} />
+        </div>
       </aside>
     </div>
   );

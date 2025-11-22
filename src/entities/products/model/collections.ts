@@ -70,6 +70,13 @@ export const Products = {
       relationTo: 'product-bases',
       required: true,
     },
+    {
+      name: 'favorites',
+      type: 'join',
+      collection: 'product-favorites',
+      on: 'productId',
+      hasMany: false,
+    },
   ],
 } as const satisfies CollectionConfig;
 
@@ -139,6 +146,24 @@ export const ProductBases = {
     },
   ],
 } as const satisfies CollectionConfig;
+
+export const ProductFavorites: CollectionConfig = {
+  slug: 'product-favorites',
+  fields: [
+    {
+      name: 'productId',
+      type: 'relationship',
+      relationTo: 'products',
+    },
+    {
+      name: 'authorId',
+      type: 'relationship',
+      relationTo: 'users',
+    },
+  ],
+  indexes: [{ unique: true, fields: ['productId', 'authorId'] }],
+  timestamps: false,
+};
 
 export const ProductMedia = {
   ...MediaCollection,
