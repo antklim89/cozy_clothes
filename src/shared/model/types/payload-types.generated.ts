@@ -569,10 +569,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: number | User;
-      } | null)
-    | ({
-        relationTo: 'payload-kv';
-        value: number | PayloadKv;
       } | null);
   globalSlug?: string | null;
   user:
