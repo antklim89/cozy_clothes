@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { SunMoonIcon, UserIcon } from 'lucide-react';
+import { UserIcon } from 'lucide-react';
 
 import { CartButton } from '@/entities/cart/ui';
 import { AuthMenu } from '@/features/auth/ui';
@@ -25,39 +25,23 @@ export function Header() {
     </Suspense>
   );
 
-  const themeToggle = (
-    <Suspense
-      fallback={
-        <Skeleton>
-          <Button variant="ghost">
-            <SunMoonIcon />
-          </Button>
-        </Skeleton>
-      }
-    >
-      <ThemeToggle />
-    </Suspense>
-  );
-
-  const cartButton = <CartButton />;
-
   return (
     <header className="bg-primary text-primary-foreground">
       <div className="container hidden items-center sm:flex">
         <Logo />
         <Links />
 
-        {themeToggle}
+        <ThemeToggle />
         {authMenu}
-        {cartButton}
+        <CartButton />
       </div>
       <div className="container flex items-center sm:hidden">
         <Logo />
-        {cartButton}
+        <CartButton />
         {authMenu}
 
         <HeaderSheet>
-          {themeToggle}
+          <ThemeToggle />
           <Links className="flex-col gap-4" />
 
           <div className="flex-1" />
