@@ -1,9 +1,15 @@
+import { revalidateTag } from 'next/cache';
 import type { CollectionConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import { TESTIMONIALS_CACHE_TAG } from '../config/cache-tag';
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
+  hooks: {
+    afterChange: [() => revalidateTag(TESTIMONIALS_CACHE_TAG, 'max')],
+    afterDelete: [() => revalidateTag(TESTIMONIALS_CACHE_TAG, 'max')],
+  },
   admin: {
     useAsTitle: 'name',
   },

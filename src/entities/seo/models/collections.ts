@@ -1,7 +1,14 @@
+import { revalidateTag } from 'next/cache';
 import type { CollectionConfig, GlobalConfig } from 'payload';
+
+import { SEO_CACHE_TAG } from '../config/cache-tag';
 
 export const Seo: GlobalConfig = {
   slug: 'Seo',
+  hooks: {
+    afterChange: [() => revalidateTag(SEO_CACHE_TAG, 'max')],
+  },
+
   fields: [
     {
       name: 'title',
