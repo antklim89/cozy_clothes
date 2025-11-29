@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { ProductType } from '@/entities/products/model';
 import { ProductImagesCarousel, ProductInfo, ProductsVariantsSelect } from '@/entities/products/ui';
+import { getMe } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { AddToCartButton } from '@/features/update-cart/ui';
 import { cn } from '@/shared/lib/utils';
@@ -11,7 +12,9 @@ interface Props extends ComponentProps<'div'> {
   product: ProductType;
 }
 
-export function Product({ product, className, ...props }: Props) {
+export async function Product({ product, className, ...props }: Props) {
+  const user = await getMe();
+
   return (
     <div {...props} className={cn('container my-4 grid grid-cols-1 gap-4 lg:grid-cols-2', className)}>
       <section>
@@ -22,7 +25,11 @@ export function Product({ product, className, ...props }: Props) {
         <ProductsVariantsSelect selectedVariant={product} variants={product.productVariants} />
         <Price className="items-end" discount={product.discount} price={product.price} size="lg" />
         <div className="flex gap-2">
-          <FavoritesToggleButton productId={product.id} isFavorite={product.isFavorite} />
+          <FavoritesToggleButton
+            isAuthenticated={user != null}
+            productId={product.id}
+            isFavorite={product.isFavorite}
+          />
           <AddToCartButton productId={product.id} />
         </div>
       </aside>

@@ -39,7 +39,7 @@ export function AddToCartButton({ productId }: { productId: number }) {
     });
   }
 
-  const isLoading = cartQuery.isPending || addCartMutation.isPending || removeCartMutation.isPending;
+  const isLoading = addCartMutation.isPending || removeCartMutation.isPending;
 
   if (hasCartItem) {
     return (

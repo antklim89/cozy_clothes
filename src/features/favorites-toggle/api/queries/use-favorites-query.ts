@@ -1,8 +1,10 @@
 import { useRef } from 'react';
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { useDebounce } from '@/shared/hooks/use-debounce';
 import { toggleFavoritesAction } from '../actions';
+
+const FAVORITES_QUERY_KEY = 'favorites';
 
 export function useFavoritesQuery({
   productId,
@@ -16,23 +18,22 @@ export function useFavoritesQuery({
   const isFavoriteCurr = useRef(isFavoriteDefault);
   const queryClient = useQueryClient();
 
-  const { data: isFavorite = isFavoriteDefault } = useSuspenseQuery({
-    queryKey: ['favorites', { productId }],
-    initialData: isFavoriteDefault,
+  const { data: isFavorite = isFavoriteDefault } = useQuery({
+    queryKey: [FAVORITES_QUERY_KEY, { productId }],
     queryFn: async () => isFavoriteDefault,
   });
 
   const { mutateAsync: toggleFavorites } = useMutation({
     onMutate() {
       isFavoriteCurr.current = !isFavoriteCurr.current;
-      queryClient.setQueryData<boolean>(['favorites', { productId }], oldData => !oldData);
+      queryClient.setQueryData<boolean>([FAVORITES_QUERY_KEY, { productId }], oldData => !oldData);
     },
     mutationFn: async () => {
       if (isFavoritePrev.current === isFavoriteCurr.current) return clear();
       const result = await toggleFavoritesActionDebounced({ productId, isFavorite });
       if (result.type === 'ok') {
         isFavoritePrev.current = result.result;
-        queryClient.setQueryData<boolean>(['favorites', { productId }], () => result.result);
+        queryClient.setQueryData<boolean>([FAVORITES_QUERY_KEY, { productId }], () => result.result);
       }
     },
   });

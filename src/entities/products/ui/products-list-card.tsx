@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import type { ProductPreviewType } from '@/entities/products/model';
+import { getMe } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import { Price } from '@/shared/ui/price';
@@ -10,8 +11,9 @@ interface Props {
   product: ProductPreviewType;
 }
 
-export function ProductsListCard({ product }: Props) {
+export async function ProductsListCard({ product }: Props) {
   const title = product.title ? `${product.baseTitle} (${product.title})` : product.baseTitle;
+  const user = await getMe();
 
   return (
     <Card className="group relative">
@@ -19,6 +21,7 @@ export function ProductsListCard({ product }: Props) {
         <span aria-hidden="true" className="absolute inset-0 z-10" />
       </Link>
       <FavoritesToggleButton
+        isAuthenticated={user != null}
         productId={product.id}
         isFavorite={product.isFavorite}
         className="absolute top-0.5 right-0.5 z-20"
