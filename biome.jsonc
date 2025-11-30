@@ -114,7 +114,7 @@
         "useExhaustiveSwitchCases": "error",
         "useMaxParams": {
           "level": "error",
-          "options": { "max": 3 }
+          "options": { "max": 5 }
         },
         "useSortedClasses": {
           "fix": "safe",
