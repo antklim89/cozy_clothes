@@ -1,6 +1,5 @@
 import { queryOptions } from '@tanstack/react-query';
 
-import { meQueryOptions } from '../../@x/user/api';
 import { getCartFromLocalStorage } from '../../lib';
 import { clearCartLocalStorage } from '../../lib/cart-storage';
 import { getCartAction, getCartByProductIdsAction } from '../actions';
@@ -8,8 +7,8 @@ import { getCartAction, getCartByProductIdsAction } from '../actions';
 export function cartQueryOptions() {
   return queryOptions({
     queryKey: ['cart'],
-    async queryFn({ client }) {
-      const isAuthenticated = client.getQueryData(meQueryOptions.queryKey) != null;
+    async queryFn({ meta }) {
+      const isAuthenticated = meta?.user != null;
       const localCart = getCartFromLocalStorage();
 
       if (isAuthenticated) {
