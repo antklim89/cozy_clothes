@@ -27,7 +27,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
 
       <div className="col-span-2">
         <h3 className="text-xl">
-          <Link href={`/products/${productId}?v=${productId}`}>{title}</Link>
+          <Link href={`/products/${productId}`}>{title}</Link>
         </h3>
         <div className="flex gap-4">
           <span className="text-gray-600 uppercase">{colorName}</span>

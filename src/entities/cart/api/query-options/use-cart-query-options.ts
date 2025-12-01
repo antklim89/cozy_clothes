@@ -7,6 +7,7 @@ import { getCartAction, getCartByProductIdsAction } from '../actions';
 export function cartQueryOptions() {
   return queryOptions({
     queryKey: ['cart'],
+    enabled: typeof window !== 'undefined',
     async queryFn({ meta }) {
       const isAuthenticated = meta?.user != null;
       const localCart = getCartFromLocalStorage();

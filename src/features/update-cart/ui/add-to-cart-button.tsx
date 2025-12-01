@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cartQueryOptions } from '@/entities/cart/api';
 import { Button } from '@/shared/ui/button';
 import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
+import { AddToCartButtonFallback } from './add-to-cart-button-fallback';
 import { useAddCartMutation } from '../api/mutations/use-add-cart-mutation';
 import { useRemoveCartMutation } from '../api/mutations/use-remove-cart-mutation';
 import { useUpdateCartMutation } from '../api/mutations/use-update-cart-mutation';
@@ -41,9 +42,11 @@ export function AddToCartButton({ productId }: { productId: number }) {
 
   const isLoading = addCartMutation.isPending || removeCartMutation.isPending;
 
+  if (!cartQuery.isFetchedAfterMount || cartQuery.isPending) return <AddToCartButtonFallback />;
+
   if (hasCartItem) {
     return (
-      <div className="flex gap-4">
+      <div className="flex w-full gap-4">
         <Button className="w-full" disabled={isLoading} onClick={handleRemoveCartItem}>
           Remove From Cart
         </Button>
