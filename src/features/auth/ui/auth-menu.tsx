@@ -1,4 +1,5 @@
-import { LogInIcon, LogOut, UserIcon, UserPlus } from 'lucide-react';
+import { HeartIcon, LogInIcon, LogOut, UserIcon, UserPlus } from 'lucide-react';
+import Link from 'next/link';
 
 import { getMe } from '@/entities/user/services';
 import { Button } from '@/shared/ui/button';
@@ -30,8 +31,17 @@ export async function AuthMenu() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">{user.email}</div>
             </DropdownMenuLabel>
+
             <Separator />
+
             <DropdownMenuGroup>
+              <DropdownMenuItem asChild>
+                <Link href="/favorites" className="w-full justify-start space-x-4">
+                  <HeartIcon className="size-8" />
+                  <span>Favorites</span>
+                </Link>
+              </DropdownMenuItem>
+
               <DropdownMenuItem asChild>
                 <LogoutButton className="w-full justify-start space-x-4" variant="ghost">
                   <LogOut className="size-8" />
