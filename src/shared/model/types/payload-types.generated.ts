@@ -66,9 +66,7 @@ export interface Config {
     admins: AdminAuthOperations;
     users: UserAuthOperations;
   };
-  blocks: {
-    ColumnsBlock: ColumnsBlock;
-  };
+  blocks: {};
   collections: {
     admins: Admin;
     'seo-media': SeoMedia;
@@ -180,33 +178,6 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ColumnsBlock".
- */
-export interface ColumnsBlock {
-  columns: {
-    column: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'ColumnsBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

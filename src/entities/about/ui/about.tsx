@@ -1,10 +1,11 @@
-import { RichTextImproved } from '@/shared/ui/rich-text-improved';
+import { RichText } from '@payloadcms/richtext-lexical/react';
+
 import type { AboutType } from '../model/types';
 
 export function About({ about }: { about: AboutType }) {
   return (
     <section className="prose dark:prose-invert container my-8">
-      <RichTextImproved data={about.text} />
+      <RichText data={about.text} />
     </section>
   );
 }

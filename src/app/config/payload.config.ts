@@ -2,7 +2,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sqliteAdapter } from '@payloadcms/db-sqlite';
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
@@ -28,27 +28,6 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  blocks: [
-    {
-      slug: 'ColumnsBlock',
-      fields: [
-        {
-          name: 'columns',
-          type: 'array',
-          required: true,
-          defaultValue: [],
-          fields: [
-            {
-              editor: lexicalEditor(),
-              name: 'column',
-              type: 'richText',
-              required: true,
-            },
-          ],
-        },
-      ],
-    },
-  ],
   globals: [About, Hero, Seo],
   collections: [
     Admins,
@@ -67,15 +46,7 @@ export default buildConfig({
     TestimonialsMedia,
     Users,
   ],
-  editor: lexicalEditor({
-    features: ({ defaultFeatures, rootFeatures }) => [
-      ...rootFeatures,
-      ...defaultFeatures,
-      BlocksFeature({
-        blocks: ['ColumnsBlock'],
-      }),
-    ],
-  }),
+  editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: {
     outputFile: path.resolve('src/shared/model/types/payload-types.generated.ts'),
