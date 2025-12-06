@@ -41,10 +41,9 @@ export function Header() {
         {authMenu}
 
         <HeaderSheet>
-          <ThemeToggle />
           <Links className="flex-col gap-4" />
-
           <div className="flex-1" />
+          <ThemeToggle />
         </HeaderSheet>
       </div>
     </header>
