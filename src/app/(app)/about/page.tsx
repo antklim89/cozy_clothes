@@ -1,9 +1,10 @@
 import { getAbout } from '@/entities/about/services';
 import { About } from '@/entities/about/ui';
+import { ErrorComponent } from '@/shared/ui/error-component';
 
 async function Page() {
-  const { type, result: about } = await getAbout();
-  if (type === 'error') return <p>Error</p>;
+  const { type, result: about, error } = await getAbout();
+  if (type === 'error') return <ErrorComponent error={error} />;
 
   return <About about={about} />;
 }

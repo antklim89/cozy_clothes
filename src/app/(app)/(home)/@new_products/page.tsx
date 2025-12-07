@@ -1,9 +1,11 @@
+import { ErrorComponent } from '@/shared/ui/error-component';
 import { fetchNewProducts } from '@/widgets/products-promo/services';
 import { ProductsPromo } from '@/widgets/products-promo/ui';
 
 async function Page() {
-  const { type, result: products } = await fetchNewProducts();
-  if (type === 'error') return <p>Error</p>;
+  const { type, result: products, error } = await fetchNewProducts();
+  if (type === 'error') return <ErrorComponent error={error} />;
+
   return <ProductsPromo products={products} title="New Products" />;
 }
 

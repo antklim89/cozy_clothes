@@ -2,6 +2,7 @@ import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuq
 
 import type { ProductFilterType } from '@/entities/products/model';
 import { fetchProductList } from '@/entities/products/services';
+import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductCatalogProductList } from '@/widgets/products-catalog/ui';
 
 const loadSearchParams = createLoader({
@@ -23,11 +24,15 @@ async function Page({ searchParams }: { searchParams: Promise<{ page: string }> 
   if (params.category != null) filter.category = params.category;
   if (params.countries != null) filter.countries = params.countries;
 
-  const { type, result: products } = await fetchProductList({
+  const {
+    type,
+    result: products,
+    error,
+  } = await fetchProductList({
     filter,
     options: { page: params.page, sort: params.sort ?? undefined },
   });
-  if (type === 'error') return <p>Error</p>;
+  if (type === 'error') return <ErrorComponent error={error} />;
 
   return <ProductCatalogProductList products={products} />;
 }
