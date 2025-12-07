@@ -25,7 +25,7 @@ export function CartButton({ className, ...props }: ComponentProps<'a'>) {
 
   return (
     <Button asChild variant="ghost" className="relative">
-      <Link href="/cart" {...props} className={cn('flex flex-nowrap', className)}>
+      <Link {...props} href="/cart" className={cn('flex flex-nowrap', className)}>
         <ShoppingCartIcon />
         {cartQuery.data?.length != null && cartQuery.data.length > 0 && (
           <span className="absolute top-0 right-1 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 p-1 text-xs">

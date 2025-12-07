@@ -1,5 +1,5 @@
-import { Suspense } from "react";
+import { ReactNode, Suspense } from "react";
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+export default function Layout({ children }: { children: ReactNode }) {
   return <Suspense>{children}</Suspense>
 };

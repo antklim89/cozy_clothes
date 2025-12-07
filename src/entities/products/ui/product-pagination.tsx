@@ -1,5 +1,6 @@
 'use client';
 import type { ComponentProps } from 'react';
+import type { Route } from 'next';
 import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@/shared/lib/utils';
@@ -43,7 +44,7 @@ export function ProductPagination({
             className={cn({
               'cursor-default bg-transparent text-gray-200 hover:bg-transparent hover:text-gray-200': !hasPrev,
             })}
-            href={hasPrev ? getSearchParamsLink(Math.max(1, page - 1)) : ''}
+            href={hasPrev ? (getSearchParamsLink(Math.max(1, page - 1)) as Route) : ('' as Route)}
             tabIndex={hasPrev ? 0 : -1}
           />
         </PaginationItem>
@@ -52,7 +53,7 @@ export function ProductPagination({
           .filter(i => i > 0 && i <= totalPages)
           .map(i => (
             <PaginationItem key={i}>
-              <PaginationLink href={getSearchParamsLink(i)} isActive={i === page}>
+              <PaginationLink href={getSearchParamsLink(i) as Route} isActive={i === page}>
                 {i}
               </PaginationLink>
             </PaginationItem>
@@ -64,7 +65,7 @@ export function ProductPagination({
             className={cn({
               'cursor-default bg-transparent text-gray-200 hover:bg-transparent hover:text-gray-200': !hasNext,
             })}
-            href={hasNext ? getSearchParamsLink(Math.min(totalPages, page + 1)) : ''}
+            href={hasNext ? (getSearchParamsLink(Math.min(totalPages, page + 1)) as Route) : ('' as Route)}
             tabIndex={hasNext ? 0 : -1}
           />
         </PaginationItem>

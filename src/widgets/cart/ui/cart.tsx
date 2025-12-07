@@ -18,7 +18,7 @@ export function Cart() {
       checkoutSlot={
         <Card className="flex w-full justify-center p-8">
           <Button asChild>
-            <Link href="/checkout">Checkout</Link>
+            <Link href="#">Checkout</Link>
           </Button>
         </Card>
       }
