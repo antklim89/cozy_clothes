@@ -1,8 +1,8 @@
 function Layout({
-  'new-products': newProducts,
+  new_products: newProducts,
   hero,
   testimonials,
-  'categories-nav-bar': categoriesNavBar,
+  categories_nav_bar: categoriesNavBar,
   contacts,
 }: LayoutProps<'/'>) {
   return (
