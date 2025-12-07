@@ -7,7 +7,7 @@ import { removeCartItemAction } from '../actions';
 export function useRemoveCartMutation() {
   return useMutation({
     mutationFn: async (deletedCartItem: { productId: number }, { meta }) => {
-      if (meta?.user != null) {
+      if (await meta?.isAuthenticated()) {
         const removeCartItemResult = await removeCartItemAction(deletedCartItem);
         if (removeCartItemResult.type === 'error') throw new Error(removeCartItemResult.error.message);
       } else {

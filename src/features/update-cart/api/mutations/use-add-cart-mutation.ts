@@ -7,7 +7,7 @@ import { addCartItemAction } from '../actions';
 export function useAddCartMutation() {
   return useMutation({
     mutationFn: async (newLocalCartItem: { productId: number; qty: number }, { meta }) => {
-      if (meta?.user != null) {
+      if (await meta?.isAuthenticated()) {
         const addCartItemResult = await addCartItemAction(newLocalCartItem);
         if (addCartItemResult.type === 'error') throw new Error(addCartItemResult.error.message);
       } else {

@@ -10,7 +10,7 @@ export function useUpdateCartMutation() {
 
   return useMutation({
     mutationFn: async (updatedCartItem: { productId: number; qty: number }, { meta }) => {
-      if (meta?.user) {
+      if (await meta?.isAuthenticated()) {
         const updateCartQtyResult = await updateCartQtyActionDebounced(updatedCartItem);
         if (updateCartQtyResult.type === 'error') throw new Error(updateCartQtyResult.error.message);
       } else {

@@ -9,7 +9,7 @@ export function cartQueryOptions() {
     queryKey: ['cart'],
     enabled: typeof window !== 'undefined',
     async queryFn({ meta }) {
-      const isAuthenticated = meta?.user != null;
+      const isAuthenticated = await meta?.isAuthenticated();
       const localCart = getCartFromLocalStorage();
 
       if (isAuthenticated) {
