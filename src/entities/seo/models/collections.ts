@@ -50,13 +50,16 @@ export const Seo: GlobalConfig = {
 export const SeoMedia = {
   slug: 'seo-media',
   fields: [],
+  access: {
+    read: () => true,
+  },
   upload: {
     staticDir: 'media/seo',
     resizeOptions: {
       position: 'center',
       fit: 'cover',
-      width: 800,
-      height: 600,
+      width: 1200,
+      height: 630,
     },
   },
 } as const satisfies CollectionConfig;
