@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
+import { AlertCircleIcon, Loader2 } from 'lucide-react';
 
 import type { LoginType, RegisterType, UserType } from '@/entities/user/model';
 import { LoginSchema, RegisterSchema } from '@/entities/user/model';
@@ -58,6 +58,7 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
       <form className={cn('flex flex-col gap-6', className)} onSubmit={handleSubmit} {...props}>
         {form.formState.errors.root && (
           <Alert variant="destructive">
+            <AlertCircleIcon />
             <AlertTitle>Failed to {type}.</AlertTitle>
             <AlertDescription>{form.formState.errors.root.message}</AlertDescription>
           </Alert>
