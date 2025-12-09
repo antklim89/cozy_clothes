@@ -16,6 +16,7 @@ import { ProductBases, ProductFavorites, ProductMedia, Products } from '@/entiti
 import { Seo, SeoMedia } from '@/entities/seo/models/collections';
 import { Testimonials, TestimonialsMedia } from '@/entities/testimonials/model/collections';
 import { Users } from '@/entities/user/model/collections';
+import { envServer } from '@/shared/lib/env-server';
 import { Admins } from '@/shared/model/collections/admins';
 
 const filename = fileURLToPath(import.meta.url);
@@ -47,7 +48,7 @@ export default buildConfig({
     Users,
   ],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET ?? '',
+  secret: envServer.PAYLOAD_SECRET,
   typescript: {
     outputFile: path.resolve('src/shared/model/types/payload-types.generated.ts'),
   },

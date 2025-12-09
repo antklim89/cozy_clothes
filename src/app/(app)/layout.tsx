@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import '../style/main.css';
 
 import { getSeo } from '@/entities/seo/services';
+import { env } from '@/shared/lib/env';
 import { Footer } from '@/widgets/footer/ui';
 import { Header } from '@/widgets/header/ui';
 import NuqsProvider from '../providers/nuqs-provider';
@@ -19,11 +20,10 @@ export async function generateMetadata(): Promise<Metadata> {
     console.error(error?.message);
     return {};
   }
-
   const { title, creator, description, images, keywords } = seo;
 
   return {
-    metadataBase: new URL(process.env.URL ?? 'http://localhost:3000'),
+    metadataBase: env.URL,
     authors: [{ name: creator }],
     title: {
       default: title,
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords,
     openGraph: {
       type: 'website',
-      url: process.env.URL,
+      url: env.URL,
       title,
       description,
       images,

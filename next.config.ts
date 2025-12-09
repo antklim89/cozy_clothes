@@ -1,7 +1,7 @@
+import { env } from '@/shared/lib/env';
+import '@/shared/lib/env-server';
 import { withPayload } from '@payloadcms/next/withPayload';
 import type { NextConfig } from 'next';
-import process from 'node:process';
-
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -9,10 +9,7 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   cacheComponents: true,
   typedRoutes: true,
-  env: {
-    URL: process.env.URL ?? 'http://localhost:3000',
-    REPOSITORY_URL: process.env.REPOSITORY_URL,
-  },
+  env,
   turbopack: {},
 };
 
