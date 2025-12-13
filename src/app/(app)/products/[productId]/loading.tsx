@@ -1,5 +1,7 @@
+import { ProductFallback } from '@/widgets/product/ui';
+
 function Loading() {
-  return <div>LOADING...</div>;
+  return <ProductFallback />;
 }
 
 export default Loading;
