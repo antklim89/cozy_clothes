@@ -15,7 +15,7 @@ const loadSearchParams = createLoader({
   sort: parseAsString,
 });
 
-async function Page({ searchParams }: { searchParams: Promise<{ page: string }> }) {
+async function Page({ searchParams }: PageProps<'/products'>) {
   const params = loadSearchParams(await searchParams);
   const filter: ProductFilterType = {};
   if (params.search != null) filter.search = params.search;
@@ -38,3 +38,5 @@ async function Page({ searchParams }: { searchParams: Promise<{ page: string }> 
 }
 
 export default Page;
+
+export { generateMetadata } from './seo';

@@ -5,7 +5,7 @@ import { fetchProduct } from '@/entities/products/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductWidget } from '@/widgets/product/ui';
 
-async function Page({ params }: { params: Promise<{ productId: string }> }) {
+async function Page({ params }: PageProps<'/products/[productId]'>) {
   const { success, data } = await z.object({ productId: z.coerce.number() }).safeParseAsync(await params);
   if (!success) return redirect('/products');
   const { productId } = data;
@@ -17,3 +17,5 @@ async function Page({ params }: { params: Promise<{ productId: string }> }) {
 }
 
 export default Page;
+
+export { generateMetadata } from './seo';
