@@ -5,7 +5,7 @@ import type { PaginatedData } from '@/shared/model/types/types';
 export function ProductCatalogProductList({ products }: { products: PaginatedData<ProductPreviewType> }) {
   return (
     <>
-      <div className="flex flex-col sm:flex-row">
+      <div className="flex flex-col gap-8 sm:flex-row">
         <ProductPagination page={products.page} totalPages={products.totalPages} />
         <ProductsListSort className="self-end" />
       </div>

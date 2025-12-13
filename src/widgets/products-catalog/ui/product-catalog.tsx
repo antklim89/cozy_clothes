@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 
-import { PriceFilter, ProductSearch } from '@/entities/products/ui';
 import { ProductCatalogAside } from './product-catalog-aside';
 import { ProductCatalogSheet } from './product-catalog-sheet';
 
@@ -8,21 +7,12 @@ export function ProductCatalog({ products, filter }: { products: ReactNode; filt
   return (
     <section className="m-4 grid gap-4 lg:grid-cols-[2fr_5fr]">
       <aside className="hidden lg:block">
-        <ProductCatalogAside>
-          <ProductSearch />
-          <PriceFilter />
-          {filter}
-        </ProductCatalogAside>
+        <ProductCatalogAside>{filter}</ProductCatalogAside>
       </aside>
-      <div className="flex flex-col gap-4">
-        <ProductCatalogSheet asChild className="self-end lg:hidden">
-          <ProductCatalogAside>
-            <ProductSearch />
-            <PriceFilter />
-            {filter}
-          </ProductCatalogAside>
+      <div className="flex flex-col gap-8">
+        <ProductCatalogSheet className="self-end lg:hidden">
+          <ProductCatalogAside>{filter}</ProductCatalogAside>
         </ProductCatalogSheet>
-
         <div>{products}</div>
       </div>
     </section>
