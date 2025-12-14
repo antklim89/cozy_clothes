@@ -22,7 +22,7 @@ export async function AuthMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button aria-label="User Menu" variant="ghost">
-          <UserIcon className="size-8" />
+          <UserIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56" side="bottom" sideOffset={4}>
@@ -37,7 +37,7 @@ export async function AuthMenu() {
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
                 <Link href="/favorites" className="w-full justify-start space-x-4">
-                  <HeartIcon className="size-8" />
+                  <HeartIcon />
                   <span>Favorites</span>
                 </Link>
               </DropdownMenuItem>
