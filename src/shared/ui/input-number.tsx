@@ -74,7 +74,7 @@ export function InputNumber({ max = 9999, min = 1, value, onChange, children, cl
 
   return (
     <Context value={contextValue}>
-      <div {...props} className={cn('flex gap-1', className)}>
+      <div {...props} className={cn('grid w-full grid-cols-[repeat(auto-fit,minmax(12px,1fr))] gap-1', className)}>
         {children}
       </div>
     </Context>
@@ -88,28 +88,36 @@ export function InputNumberContent({ className, ...props }: InputProps & { ref?:
       tabIndex={-1}
       value={value}
       {...props}
-      className={cn('w-20 text-center text-xl', className)}
+      className={cn('h-9 text-center text-xl', className)}
       onKeyDown={handleKeyDown}
     />
   );
 }
 
-export function InputNumberIncrement(props: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
+export function InputNumberIncrement({
+  className,
+  children,
+  ...props
+}: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
   const { handleIncrement, handleKeyDown } = use(Context);
 
   return (
-    <Button onClick={handleIncrement} onKeyDown={handleKeyDown} {...props}>
-      <Plus />
+    <Button className={cn('px-2', className)} onClick={handleIncrement} onKeyDown={handleKeyDown} {...props}>
+      {children ? children : <Plus />}
     </Button>
   );
 }
 
-export function InputNumberDecrement(props: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
+export function InputNumberDecrement({
+  className,
+  children,
+  ...props
+}: ButtonProps & { ref?: RefObject<HTMLButtonElement> }) {
   const { handleDecrement, handleKeyDown } = use(Context);
 
   return (
-    <Button onClick={handleDecrement} onKeyDown={handleKeyDown} {...props}>
-      <Minus />
+    <Button className={cn('px-2', className)} onClick={handleDecrement} onKeyDown={handleKeyDown} {...props}>
+      {children ? children : <Minus />}
     </Button>
   );
 }
