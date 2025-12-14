@@ -21,17 +21,17 @@ export async function Product({ product, className, ...props }: Props) {
         <ProductImagesCarousel alt={product.baseTitle} images={product.images} />
       </section>
       <aside className="flex w-full flex-col gap-8 px-4">
+        <FavoritesToggleButton
+          size="icon-lg"
+          className="self-end"
+          isAuthenticated={user != null}
+          productId={product.id}
+          isFavorite={product.isFavorite}
+        />
         <ProductInfo product={product} />
         <ProductsVariantsSelect selectedVariant={product} variants={product.productVariants} />
         <Price className="items-end" discount={product.discount} price={product.price} size="lg" />
-        <div className="flex gap-2">
-          <FavoritesToggleButton
-            isAuthenticated={user != null}
-            productId={product.id}
-            isFavorite={product.isFavorite}
-          />
-          <AddToCartButton productId={product.id} />
-        </div>
+        <AddToCartButton productId={product.id} />
       </aside>
     </div>
   );
