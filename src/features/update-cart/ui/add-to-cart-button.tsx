@@ -1,6 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
+import { ShoppingCartIcon, Trash2Icon } from 'lucide-react';
+import Link from 'next/link';
 
 import { cartQueryOptions } from '@/entities/cart/api';
 import { Button } from '@/shared/ui/button';
@@ -46,9 +48,14 @@ export function AddToCartButton({ productId }: { productId: number }) {
 
   if (hasCartItem) {
     return (
-      <div className="flex w-full gap-4">
-        <Button className="w-full" disabled={isLoading} onClick={handleRemoveCartItem}>
-          Remove From Cart
+      <div className="grid grid-cols-2 gap-2">
+        <Button asChild>
+          <Link href="/cart">
+            <ShoppingCartIcon /> Go To Cart
+          </Link>
+        </Button>
+        <Button variant="destructive" disabled={isLoading} onClick={handleRemoveCartItem}>
+          <Trash2Icon /> Remove From Cart
         </Button>
         <InputNumber value={qty} onChange={handleChange}>
           <InputNumberDecrement aria-label="Decrement product quantity" />
@@ -59,8 +66,8 @@ export function AddToCartButton({ productId }: { productId: number }) {
     );
   }
   return (
-    <Button className="w-full" disabled={isLoading} onClick={handleAddCartItem}>
-      Add To Cart
+    <Button disabled={isLoading} onClick={handleAddCartItem}>
+      <ShoppingCartIcon /> Add To Cart
     </Button>
   );
 }
