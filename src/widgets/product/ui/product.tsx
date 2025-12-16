@@ -22,7 +22,7 @@ export async function Product({ product, className, ...props }: Props) {
       </section>
       <aside className="flex w-full flex-col gap-8 px-4">
         <FavoritesToggleButton
-          size="icon-lg"
+          size="icon"
           className="self-end"
           isAuthenticated={user != null}
           productId={product.id}
