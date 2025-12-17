@@ -37,7 +37,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
 
       <div className="flex max-h-52 justify-between">
         <div>
-          <CartQtyInput className="my-8" productId={productId} />
+          <CartQtyInput className="my-8 max-w-3xs" productId={productId} />
 
           {qty > 1 && (
             <div className="flex items-center text-gray-600">
