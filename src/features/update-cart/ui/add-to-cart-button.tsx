@@ -51,17 +51,17 @@ export function AddToCartButton({ productId }: { productId: number }) {
       <div className="grid grid-cols-2 gap-2">
         <Button asChild>
           <Link href="/cart">
-            <ShoppingCartIcon /> Go To Cart
+            <ShoppingCartIcon /> Go to Cart
           </Link>
-        </Button>
-        <Button variant="destructive" disabled={isLoading} onClick={handleRemoveCartItem}>
-          <Trash2Icon /> Remove From Cart
         </Button>
         <InputNumber value={qty} onChange={handleChange}>
           <InputNumberDecrement aria-label="Decrement product quantity" />
           <InputNumberContent />
           <InputNumberIncrement aria-label="Increment product quantity" />
         </InputNumber>
+        <Button variant="destructive" disabled={isLoading} onClick={handleRemoveCartItem}>
+          <Trash2Icon /> Remove
+        </Button>
       </div>
     );
   }
