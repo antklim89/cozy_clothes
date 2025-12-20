@@ -1,25 +1,16 @@
-'use client';
-import type { ReactNode } from 'react';
-import { useState } from 'react';
-
 import { Button } from '@/shared/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/shared/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/shared/ui/dialog';
 import { Auth } from './auth';
 
 export function AuthDialog({
-  button,
-  type: defaultType = 'login',
+  type = 'login',
+  setType,
 }: {
-  button?: ReactNode;
-  type?: 'login' | 'register';
+  setType: (type: 'login' | 'register' | null) => void;
+  type: 'login' | 'register' | null;
 }) {
-  const [type, setType] = useState(defaultType);
-
   return (
-    <Dialog>
-      <DialogTrigger asChild onClick={() => setType(defaultType)}>
-        {button}
-      </DialogTrigger>
+    <Dialog open={type != null} onOpenChange={v => (v ? null : setType(null))}>
       <DialogContent className="max-w-md">
         <DialogHeader className="flex flex-col items-center gap-2 text-center">
           <DialogTitle className="font-bold text-2xl">
@@ -31,7 +22,7 @@ export function AuthDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <Auth type={type} />
+        <Auth type={type ?? 'login'} />
 
         {type === 'login' ? (
           <div className="flex items-center justify-center">
