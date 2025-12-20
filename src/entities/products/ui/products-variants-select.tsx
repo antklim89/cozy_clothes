@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import type { ProductVariantType } from '@/entities/products/model';
 import { cn } from '@/shared/lib/utils';
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 
 interface Props extends ComponentProps<'div'> {
   variants: ProductVariantType[];
@@ -34,19 +34,18 @@ function ColorVariant({ variants, selectedVariant }: Props) {
 
           if (newVariant == null) return null;
           return (
-            <Button asChild key={color} variant="outline">
-              <Link
-                className={cn('text-md uppercase no-underline', {
-                  'outline-2 outline-primary': newVariant.id === selectedVariant.id,
-                  'opacity-40': !variant.some(i => i.size === selectedVariant.size),
-                })}
-                href={`/products/${newVariant?.id}`}
-                scroll={false}
-              >
-                <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.colorCode }} />
-                {color}
-              </Link>
-            </Button>
+            <Link
+              key={color}
+              className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
+                'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                'opacity-40': !variant.some(i => i.size === selectedVariant.size),
+              })}
+              href={`/products/${newVariant?.id}`}
+              scroll={false}
+            >
+              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.colorCode }} />
+              {color}
+            </Link>
           );
         })}
       </div>
@@ -69,18 +68,17 @@ function SizeVariant({ variants, selectedVariant }: Props) {
 
           if (newVariant == null) return null;
           return (
-            <Button asChild key={size} variant="outline">
-              <Link
-                className={cn('text-md uppercase no-underline', {
-                  'outline-2 outline-primary': newVariant.id === selectedVariant.id,
-                  'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
-                })}
-                href={`/products/${newVariant?.id}`}
-                scroll={false}
-              >
-                {size}
-              </Link>
-            </Button>
+            <Link
+              key={size}
+              className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
+                'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
+              })}
+              href={`/products/${newVariant?.id}`}
+              scroll={false}
+            >
+              {size}
+            </Link>
           );
         })}
       </div>

@@ -2,7 +2,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 import type { HeroType } from '../model/types';
 
 export function Hero({ hero: { text, image } }: { hero: HeroType }) {
@@ -15,9 +15,9 @@ export function Hero({ hero: { text, image } }: { hero: HeroType }) {
               <RichText className="prose md:p-1" data={text} />
             </div>
             <div className="flex flex-col items-center md:flex-row">
-              <Button asChild>
-                <Link href="/products">Show more</Link>
-              </Button>
+              <Link className={buttonVariants()} href="/products">
+                Show more
+              </Link>
             </div>
           </div>
         </div>

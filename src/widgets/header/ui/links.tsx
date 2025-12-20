@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { cn } from '@/shared/lib/utils';
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 import { links } from '../model/links';
 
 export function Links({ className }: { className?: string }) {
@@ -10,9 +10,9 @@ export function Links({ className }: { className?: string }) {
       <ul className={cn('flex items-center', className)}>
         {links.map(({ href, label }) => (
           <li className="w-full" key={label}>
-            <Button asChild className="w-full" variant="ghost">
-              <Link href={href}>{label}</Link>
-            </Button>
+            <Link className={buttonVariants({ variant: 'ghost', className: 'w-full' })} href={href}>
+              {label}
+            </Link>
           </li>
         ))}
       </ul>

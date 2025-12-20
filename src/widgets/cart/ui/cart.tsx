@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { cartQueryOptions } from '@/entities/cart/api';
 import { CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 import { Card } from '@/shared/ui/card';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
@@ -19,9 +19,9 @@ export function Cart() {
     <CartList
       checkoutSlot={
         <Card className="flex w-full justify-center p-8">
-          <Button asChild>
-            <Link href="#">Checkout</Link>
-          </Button>
+          <Link className={buttonVariants()} href="#">
+            Checkout
+          </Link>
         </Card>
       }
       totalSlot={<CartTotal cartItems={cartQuery.data} />}

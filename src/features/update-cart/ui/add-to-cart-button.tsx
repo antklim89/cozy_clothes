@@ -5,7 +5,7 @@ import { ShoppingCartIcon, Trash2Icon } from 'lucide-react';
 import Link from 'next/link';
 
 import { cartQueryOptions } from '@/entities/cart/api';
-import { Button } from '@/shared/ui/button';
+import { Button, buttonVariants } from '@/shared/ui/button';
 import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
 import { AddToCartButtonFallback } from './add-to-cart-button-fallback';
 import { useAddCartMutation } from '../api/mutations/use-add-cart-mutation';
@@ -49,11 +49,9 @@ export function AddToCartButton({ productId }: { productId: number }) {
   if (hasCartItem) {
     return (
       <div className="grid grid-cols-2 gap-2">
-        <Button asChild>
-          <Link href="/cart">
-            <ShoppingCartIcon /> Go to Cart
-          </Link>
-        </Button>
+        <Link className={buttonVariants()} href="/cart">
+          <ShoppingCartIcon /> Go to Cart
+        </Link>
         <InputNumber value={qty} onChange={handleChange}>
           <InputNumberDecrement aria-label="Decrement product quantity" />
           <InputNumberContent />

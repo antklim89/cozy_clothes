@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
-import { Button } from '@/shared/ui/button';
+import { cn } from '@/shared/lib/utils';
+import { buttonVariants } from '@/shared/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/shared/ui/carousel';
 import type { ProductCategoryType } from '../model/types';
 
@@ -13,15 +14,18 @@ export function ProductCategoryNavBar({ categories }: { categories: ProductCateg
       >
         <CarouselContent className="">
           <CarouselItem className="basis-auto">
-            <Button asChild className="p-8" variant="outline">
-              <Link href="/products">ALL</Link>
-            </Button>
+            <Link className={cn(buttonVariants({ variant: 'outline' }), 'p-8')} href="/products">
+              ALL
+            </Link>
           </CarouselItem>
           {categories.map(category => (
             <CarouselItem className="basis-auto" key={category.id}>
-              <Button asChild className="p-8" variant="outline">
-                <Link href={`/products?category=${category.id}`}>{category.name}</Link>
-              </Button>
+              <Link
+                className={cn(buttonVariants({ variant: 'outline' }), 'p-8')}
+                href={`/products?category=${category.id}`}
+              >
+                {category.name}
+              </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

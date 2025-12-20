@@ -1,7 +1,7 @@
 import { ShirtIcon } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/shared/ui/empty';
 
 export function ProductsFavoritesEmpty() {
@@ -15,9 +15,9 @@ export function ProductsFavoritesEmpty() {
         <EmptyDescription>You don&apos;t have any favorite products yet. Start adding some.</EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
-        <Button size="sm" asChild>
-          <Link href="/products">Catalog</Link>
-        </Button>
+        <Link className={buttonVariants()} href="/products">
+          Catalog
+        </Link>
       </EmptyContent>
     </Empty>
   );
