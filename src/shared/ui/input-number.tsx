@@ -1,11 +1,10 @@
-import type { KeyboardEvent, ReactNode, RefObject } from 'react';
+import type { ComponentPropsWithRef, KeyboardEvent, ReactNode, RefObject } from 'react';
 import { createContext, use, useCallback, useMemo } from 'react';
 import { Minus, Plus } from 'lucide-react';
 
 import { cn } from '@/shared/lib/utils';
 import type { ButtonProps } from './button';
 import { Button } from './button';
-import type { InputProps } from './input';
 import { Input } from './input';
 
 export type InputNumberProps = { ref?: RefObject<HTMLDivElement> } & {
@@ -80,8 +79,9 @@ export function InputNumber({ max = 9999, min = 1, value, onChange, children, cl
     </Context>
   );
 }
-export function InputNumberContent({ className, ...props }: InputProps & { ref?: RefObject<HTMLInputElement> }) {
+export function InputNumberContent({ className, ...props }: ComponentPropsWithRef<typeof Input>) {
   const { value, handleKeyDown } = use(Context);
+
   return (
     <Input
       readOnly
