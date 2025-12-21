@@ -1,49 +1,55 @@
 'use client';
 
-import type { SelectTriggerProps } from '@radix-ui/react-select';
+import type { ComponentProps } from 'react';
 import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 
 import { cn } from '@/shared/lib/utils';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 const sortOptions = [
   {
-    key: 'createdAt',
+    value: 'createdAt',
     label: 'new',
   },
   {
-    key: '-createdAt',
+    value: '-createdAt',
     label: 'old',
   },
   {
-    key: 'price',
+    value: 'price',
     label: 'cheaper',
   },
   {
-    key: '-price',
+    value: '-price',
     label: 'expensive',
   },
   {
-    key: '-discount',
+    value: '-discount',
     label: 'big discounts',
   },
-] as const;
+] as const satisfies Option[];
 
-export function ProductsListSort(props: SelectTriggerProps) {
+export function ProductsListSort(props: ComponentProps<typeof SelectTrigger>) {
   const [query, setQuery] = useQueryStates({
-    sort: parseAsString.withOptions({ shallow: false }).withDefault(sortOptions[0].key),
+    sort: parseAsString.withOptions({ shallow: false }).withDefault(sortOptions[0].value),
     page: parseAsInteger,
   });
+  const selectedOptions = sortOptions.find(i => i.value === query.sort) ?? sortOptions[0];
 
   return (
-    <Select value={query.sort} onValueChange={v => setQuery({ sort: v, page: null })}>
+    <Select value={selectedOptions.value} onValueChange={v => setQuery({ sort: v, page: null })}>
       <SelectTrigger {...props} className={cn('w-48 uppercase', props.className)}>
-        <SelectValue placeholder="Sort Products" />
+        <SelectValue>{selectedOptions.label}</SelectValue>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="z-50">
         <SelectGroup>
           {sortOptions.map(option => (
-            <SelectItem className="uppercase" key={option.key} value={option.key}>
+            <SelectItem className="uppercase" key={option.value} value={option.value}>
               {option.label}
             </SelectItem>
           ))}

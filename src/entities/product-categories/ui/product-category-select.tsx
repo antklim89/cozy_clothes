@@ -1,43 +1,46 @@
 'use client';
 
 import { useId } from 'react';
-import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
+import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
 import type { ProductCategoryType } from '@/entities/product-categories/model';
-import { Label } from '@/shared/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/shared/ui/select';
+import { Field, FieldLabel } from '@/shared/ui/field';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 
-const DEFAULT_OPTION = 'Select category';
-const queryStateOptions = parseAsString.withDefault(DEFAULT_OPTION).withOptions({ shallow: false });
+const queryStateOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
 export function CategoryFilter({ categories }: { categories: ProductCategoryType[] }) {
-  const [selectedCategory, setSelectedCategory] = useQueryStates({
+  const id = useId();
+  const [query, setQuery] = useQueryStates({
     category: queryStateOptions,
     page: parseAsInteger,
   });
-  const id = useId();
+
+  const selectedCategories = categories.filter(i => query.category.includes(i.id));
 
   return (
-    <div>
-      <Label htmlFor={id}>Category</Label>
-      <Select
-        value={selectedCategory.category}
-        onValueChange={async v => setSelectedCategory({ category: v, page: null })}
-      >
-        <SelectTrigger id={id}>
-          <SelectValue placeholder="Product category" />
+    <Field>
+      <FieldLabel htmlFor={id}>Category</FieldLabel>
+      <Select value={query.category} onValueChange={async v => setQuery({ category: v, page: null })} multiple>
+        <SelectTrigger id={id} className="w-full">
+          <SelectMultipleValue
+            items={selectedCategories}
+            render={i => <span key={i.id}>{i.name}</span>}
+            placeholder="Select Category"
+          />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value={DEFAULT_OPTION}>{DEFAULT_OPTION}</SelectItem>
           <SelectGroup>
-            {categories.map(category => (
-              <SelectItem key={category.id} value={category.id.toString()}>
-                {category.name}
-              </SelectItem>
-            ))}
+            {categories
+              .toSorted(a => (query.category.includes(a.id) ? -1 : 1))
+              .map(category => (
+                <SelectItem key={category.id} value={category.id}>
+                  {category.name}
+                </SelectItem>
+              ))}
           </SelectGroup>
         </SelectContent>
       </Select>
-    </div>
+    </Field>
   );
 }

@@ -1,32 +1,50 @@
 'use client';
 
 import { useId } from 'react';
-import { parseAsArrayOf, parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
+import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
-import { Label } from '@/shared/ui/label';
-import { MultiSelect } from '@/shared/ui/multiselect';
+import { Field, FieldLabel } from '@/shared/ui/field';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 import type { ProductCountryType } from '../models/types';
 
-const querySelectOptions = parseAsArrayOf(parseAsString).withDefault([]).withOptions({ shallow: false });
+const querySelectOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
 export function ProductCountrySelect({ countries }: { countries: ProductCountryType[] }) {
   const id = useId();
-  const [selectedCountries, setSelectedCountries] = useQueryStates({
+  const [query, setQuery] = useQueryStates({
     countries: querySelectOptions,
     page: parseAsInteger,
   });
-  const options = countries.map(i => ({ label: i.name, value: i.id.toString() }));
-  const selectedOptions = options.filter(i => selectedCountries.countries.includes(i.value));
+
+  const selectedCountries = countries.filter(i => query.countries.includes(i.id));
 
   return (
-    <div className="flex flex-col gap-2">
-      <Label htmlFor={id}>Countries</Label>
-      <MultiSelect
-        id={id}
-        options={options}
-        selectedOptions={selectedOptions}
-        onSelectOptions={async v => setSelectedCountries({ countries: v.map(i => i.value), page: null })}
-      />
-    </div>
+    <Field>
+      <FieldLabel htmlFor={id}>Countries</FieldLabel>
+      <Select
+        value={selectedCountries.map(i => i.id)}
+        onValueChange={async v => setQuery({ countries: v, page: null })}
+        multiple
+      >
+        <SelectTrigger id={id} className="w-full">
+          <SelectMultipleValue
+            items={selectedCountries}
+            render={i => <span key={i.id}>{i.name}</span>}
+            placeholder="Select Country"
+          />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {countries
+              .toSorted(a => (query.countries.includes(a.id) ? -1 : 1))
+              .map(country => (
+                <SelectItem key={country.id} value={country.id}>
+                  {country.name}
+                </SelectItem>
+              ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Field>
   );
 }

@@ -1,22 +1,16 @@
-'use client';
-import type { ComponentPropsWithoutRef, ComponentRef } from 'react';
-import { Root } from '@radix-ui/react-separator';
+import { Separator as SeparatorPrimitive } from '@base-ui/react/separator';
 
 import { cn } from '@/shared/lib/utils';
 
-function Separator({
-  ref,
-  className,
-  orientation = 'horizontal',
-  decorative = true,
-  ...props
-}: ComponentPropsWithoutRef<typeof Root> & { ref?: React.RefObject<ComponentRef<typeof Root> | null> }) {
+function Separator({ className, orientation = 'horizontal', ...props }: SeparatorPrimitive.Props) {
   return (
-    <Root
-      className={cn('shrink-0 bg-border', orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px', className)}
-      decorative={decorative}
+    <SeparatorPrimitive
+      data-slot="separator"
       orientation={orientation}
-      ref={ref}
+      className={cn(
+        'shrink-0 bg-border data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:w-px data-[orientation=vertical]:self-stretch',
+        className,
+      )}
       {...props}
     />
   );
