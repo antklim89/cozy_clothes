@@ -7,6 +7,7 @@ import '../style/main.css';
 
 import { Footer } from '@/widgets/footer/ui';
 import { Header } from '@/widgets/header/ui';
+import ZodConfig from '../config/zod-config';
 import NuqsProvider from '../providers/nuqs-provider';
 import { QueryProvider } from '../providers/query-provider';
 import { ThemeProvider } from '../providers/theme-provider';
@@ -15,6 +16,7 @@ function Layout({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <head />
+      <ZodConfig />
       <NuqsProvider>
         <QueryProvider>
           <body className="grid h-screen grid-rows-[auto_1fr_auto]">
