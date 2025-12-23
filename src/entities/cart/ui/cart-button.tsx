@@ -28,7 +28,9 @@ export function CartButton({ className, ...props }: ComponentProps<'a'>) {
     <Link {...props} href="/cart" className={cn(buttonVariants({ variant: 'ghost' }), className)}>
       <ShoppingCartIcon />
       {cartQuery.data != null && cartQuery.data.length > 0 && (
-        <Badge variant="destructive">{cartQuery.data.length}</Badge>
+        <Badge variant="destructive" className="text-white shadow">
+          {cartQuery.data.length}
+        </Badge>
       )}
     </Link>
   );

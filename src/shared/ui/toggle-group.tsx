@@ -1,60 +1,86 @@
 'use client';
-import type { ComponentPropsWithoutRef, ComponentRef, RefObject } from 'react';
-import { createContext, use, useMemo } from 'react';
-import { Item, Root } from '@radix-ui/react-toggle-group';
+
+import { type CSSProperties, createContext, useContext } from 'react';
+import { Toggle as TogglePrimitive } from '@base-ui/react/toggle';
+import { ToggleGroup as ToggleGroupPrimitive } from '@base-ui/react/toggle-group';
 import type { VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/shared/lib/utils';
 import { toggleVariants } from '@/shared/ui/toggle';
 
-const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
+const ToggleGroupContext = createContext<
+  VariantProps<typeof toggleVariants> & {
+    spacing?: number;
+    orientation?: 'horizontal' | 'vertical';
+  }
+>({
   size: 'default',
   variant: 'default',
+  spacing: 0,
+  orientation: 'horizontal',
 });
 
 function ToggleGroup({
-  ref,
   className,
   variant,
   size,
+  spacing = 0,
+  orientation = 'horizontal',
   children,
   ...props
-}: ComponentPropsWithoutRef<typeof Root> &
-  VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Root>> }) {
-  const values = useMemo(() => ({ variant, size }), [variant, size]);
+}: ToggleGroupPrimitive.Props &
+  VariantProps<typeof toggleVariants> & {
+    spacing?: number;
+    orientation?: 'horizontal' | 'vertical';
+  }) {
   return (
-    <Root className={cn('flex flex-wrap gap-1', className)} ref={ref} {...props}>
-      <ToggleGroupContext value={values}>{children}</ToggleGroupContext>
-    </Root>
+    <ToggleGroupPrimitive
+      data-slot="toggle-group"
+      data-variant={variant}
+      data-size={size}
+      data-spacing={spacing}
+      data-orientation={orientation}
+      style={{ '--gap': spacing } as CSSProperties}
+      className={cn(
+        'group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-md data-[spacing=0]:data-[variant=outline]:shadow-xs data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-stretch',
+        className,
+      )}
+      {...props}
+    >
+      <ToggleGroupContext.Provider value={{ variant, size, spacing, orientation }}>
+        {children}
+      </ToggleGroupContext.Provider>
+    </ToggleGroupPrimitive>
   );
 }
 
 function ToggleGroupItem({
-  ref,
   className,
   children,
-  variant,
-  size,
+  variant = 'default',
+  size = 'default',
   ...props
-}: ComponentPropsWithoutRef<typeof Item> &
-  VariantProps<typeof toggleVariants> & { ref?: RefObject<ComponentRef<typeof Item>> }) {
-  const context = use(ToggleGroupContext);
+}: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
+  const context = useContext(ToggleGroupContext);
 
   return (
-    <Item
+    <TogglePrimitive
+      data-slot="toggle-group-item"
+      data-variant={context.variant || variant}
+      data-size={context.size || size}
+      data-spacing={context.spacing}
       className={cn(
-        'data-[state=on]:border-primary',
+        'shrink-0 focus:z-10 focus-visible:z-10 data-[state=on]:bg-muted group-data-[spacing=0]/toggle-group:rounded-none group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-0 group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:border-l-0 group-data-[spacing=0]/toggle-group:px-2 group-data-[spacing=0]/toggle-group:shadow-none group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-r-md group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-md group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-l group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-md group-data-horizontal/toggle-group:data-[spacing=0]:first:rounded-l-md',
         toggleVariants({
           variant: context.variant || variant,
           size: context.size || size,
         }),
         className,
       )}
-      ref={ref}
       {...props}
     >
       {children}
-    </Item>
+    </TogglePrimitive>
   );
 }
 

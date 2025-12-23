@@ -47,7 +47,9 @@ export function PriceFilter() {
         min={0}
         step={10}
         value={[price.minPrice, price.maxPrice]}
-        onValueChange={([minValue, maxValue]) => {
+        onValueChange={value => {
+          if (!Array.isArray(value)) return;
+          const [minValue, maxValue] = value;
           if (minValue != null) void setPrice({ minPrice: minValue, page: null });
           if (maxValue != null) void setPrice({ maxPrice: maxValue, page: null });
         }}
