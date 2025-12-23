@@ -16,16 +16,7 @@ export async function ProductsListCard({ product }: Props) {
   const user = await getMe();
 
   return (
-    <Card className="group relative">
-      <Link className="w-full" href={`/products/${product.id}`} title={title} aria-label={product.title}>
-        <span aria-hidden="true" className="absolute inset-0 z-10" />
-      </Link>
-      <FavoritesToggleButton
-        isAuthenticated={user != null}
-        productId={product.id}
-        isFavorite={product.isFavorite}
-        className="absolute top-0.5 right-0.5 z-20"
-      />
+    <Card className="group relative pt-0">
       <div className="w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
         <Image
           alt={product.baseTitle}
@@ -45,6 +36,13 @@ export async function ProductsListCard({ product }: Props) {
         </div>
         <Price className="items-end" discount={product.discount} price={product.price} />
       </CardContent>
+      <FavoritesToggleButton
+        isAuthenticated={user != null}
+        productId={product.id}
+        isFavorite={product.isFavorite}
+        className="absolute top-0.5 right-0.5 z-20"
+      />
+      <Link className="absolute inset-0" href={`/products/${product.id}`} title={title} aria-label={product.title} />
     </Card>
   );
 }
