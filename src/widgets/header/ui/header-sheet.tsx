@@ -1,24 +1,22 @@
 import type { ReactNode } from 'react';
 import { MenuIcon } from 'lucide-react';
 
-import { Button } from '@/shared/ui/button';
+import { buttonVariants } from '@/shared/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/shared/ui/sheet';
 
 export function HeaderSheet({ children }: { children: ReactNode }) {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="ghost">
-          <MenuIcon />
-        </Button>
+      <SheetTrigger className={buttonVariants({ variant: 'ghost' })}>
+        <MenuIcon />
       </SheetTrigger>
 
       <SheetContent className="flex flex-col">
         <SheetHeader className="mt-4">
-          <SheetTitle>Cozy Clothes</SheetTitle>
-          <SheetDescription className="invisible">Navigation menu.</SheetDescription>
+          <SheetTitle className="text-center text-2xl">Navigation menu</SheetTitle>
+          <SheetDescription className="invisible">Navigation menu</SheetDescription>
         </SheetHeader>
-        {children}
+        <div className="flex h-full flex-col gap-6 px-4 py-8">{children}</div>
       </SheetContent>
     </Sheet>
   );

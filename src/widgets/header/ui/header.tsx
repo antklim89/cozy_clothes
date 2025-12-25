@@ -24,7 +24,7 @@ export function Header() {
         <HeaderSheet>
           <Links className="flex-col gap-4" />
           <div className="flex-1" />
-          <ThemeToggle />
+          <ThemeToggle className="self-end" />
         </HeaderSheet>
       </div>
     </header>
