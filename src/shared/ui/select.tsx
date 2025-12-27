@@ -180,6 +180,7 @@ function SelectContent({
         side={side}
         align={align}
         alignOffset={alignOffset}
+        className="z-60"
       >
         <SelectScrollUpButton />
         <SelectPrimitive.Popup
