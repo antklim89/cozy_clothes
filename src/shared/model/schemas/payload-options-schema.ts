@@ -1,8 +1,8 @@
-import { z } from 'zod/v4';
+import { z } from 'zod/v4-mini';
 
 export const PayloadOptionsSchema = z.object({
-  sort: z.string().optional(),
-  pagination: z.boolean().optional(),
-  limit: z.number().positive().optional(),
-  page: z.number().min(1).optional(),
+  sort: z.optional(z.string()),
+  pagination: z.optional(z.boolean()),
+  limit: z.optional(z.number().check(z.minimum(0))),
+  page: z.optional(z.number().check(z.minimum(1))),
 });
