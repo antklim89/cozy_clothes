@@ -8,7 +8,7 @@ import { ProductCatalogProductList } from '@/widgets/products-catalog/ui';
 const loadSearchParams = createLoader({
   page: parseAsInteger.withDefault(1),
   search: parseAsString,
-  category: parseAsInteger,
+  category: parseAsArrayOf(parseAsInteger),
   countries: parseAsArrayOf(parseAsInteger),
   minPrice: parseAsInteger,
   maxPrice: parseAsInteger,
