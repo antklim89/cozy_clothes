@@ -37,7 +37,7 @@ function ColorVariant({ variants, selectedVariant }: Props) {
             <Link
               key={color}
               className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
-                'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                'border-2 border-primary dark:border-primary': newVariant.id === selectedVariant.id,
                 'opacity-40': !variant.some(i => i.size === selectedVariant.size),
               })}
               href={`/products/${newVariant?.id}`}
@@ -71,7 +71,7 @@ function SizeVariant({ variants, selectedVariant }: Props) {
             <Link
               key={size}
               className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
-                'outline-2 outline-primary': newVariant.id === selectedVariant.id,
+                'border-2 border-primary dark:border-primary': newVariant.id === selectedVariant.id,
                 'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
               })}
               href={`/products/${newVariant?.id}`}
