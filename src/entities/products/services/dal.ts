@@ -1,5 +1,5 @@
-import 'server-only';
 import { cache } from 'react';
+import 'server-only';
 
 import type { ProductFilterType, ProductType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
@@ -8,16 +8,15 @@ import type { PayloadOptions } from '@/shared/model/types/types';
 import { getManyProductsRepository } from './repositories/get-many-products-repository';
 import { getOneProductRepository } from './repositories/get-one-product-repository';
 import { getProductsFavoritesRepository } from './repositories/get-products-favorites-repository';
-import { FetchProductListInputSchema } from '../model/schemas';
+import { FetchProductListInputSchema, GetProductsFavoritesInputSchema } from '../model/schemas';
 
 export const fetchProductList = cache(
-  async ({ filter, options }: { filter: ProductFilterType; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
-    const validatedInput = await FetchProductListInputSchema.safeParseAsync({ filter, options });
-
+  async (input: { filter: ProductFilterType; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
+    const validatedInput = await FetchProductListInputSchema.safeParseAsync(input);
     if (!validatedInput.success) return err({ type: 'validation', message: validatedInput.error.message });
+    const { filter, options } = validatedInput.data;
 
-    const result = await getManyProductsRepository(validatedInput.data);
-
+    const result = await getManyProductsRepository({ filter, options });
     return result;
   },
 );
@@ -27,7 +26,11 @@ export const fetchProduct = cache(async (id: ProductType['id']) => {
   return result;
 });
 
-export const getProductsFavorites = cache(async ({ options }: { options: Pick<PayloadOptions, 'page'> }) => {
+export const getProductsFavorites = cache(async (input: { options: Pick<PayloadOptions, 'page'> }) => {
+  const validatedInput = await GetProductsFavoritesInputSchema.safeParseAsync(input);
+  if (!validatedInput.success) return err({ type: 'validation', message: validatedInput.error.message });
+  const { options } = validatedInput.data;
+
   const user = await getMe();
   if (!user) return err({ type: 'unauthenticated', message: 'You are not authenticated.' });
 

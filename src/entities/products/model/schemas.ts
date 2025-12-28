@@ -12,8 +12,9 @@ export const ProductFilterSchema = z.object({
 
 export const FetchProductListInputSchema = z.object({
   filter: ProductFilterSchema,
-  options: z.object({
-    page: PayloadOptionsSchema.shape.page,
-    sort: PayloadOptionsSchema.shape.sort,
-  }),
+  options: z.pick(PayloadOptionsSchema, { page: true, sort: true }),
+});
+
+export const GetProductsFavoritesInputSchema = z.object({
+  options: z.pick(PayloadOptionsSchema, { page: true }),
 });
