@@ -12,7 +12,7 @@ interface Props extends ComponentProps<'section'> {
 export function ProductsPromo({ products, title, children, className, ...props }: Props) {
   return (
     <section className={cn('container my-8', className)} {...props}>
-      <h2 className="mb-4 text-2xl">{title}</h2>
+      <h2 className="mb-4 font-bold text-4xl">{title}</h2>
       <ProductsList>
         {products.map(product => (
           <ProductsListCard key={product.id} product={product} />
