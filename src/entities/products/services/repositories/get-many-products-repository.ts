@@ -23,7 +23,7 @@ export async function getManyProductsRepository({
 
     const where: Where = {};
     if (countries != null) where['productBase.country'] = { in: countries };
-    if (category != null) where['productBase.category'] = { equals: category };
+    if (category != null) where['productBase.category'] = { in: category };
     if (search != null) where.or = [{ title: { contains: search } }, { description: { contains: search } }];
 
     if (minPrice != null && maxPrice != null) where.price = { greater_than_equal: minPrice, less_than_equal: maxPrice };
