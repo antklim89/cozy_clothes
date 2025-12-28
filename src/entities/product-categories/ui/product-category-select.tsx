@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, Se
 
 const queryStateOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
-export function CategoryFilter({ categories }: { categories: ProductCategoryType[] }) {
+export function ProductCategorySelect({ categories }: { categories: ProductCategoryType[] }) {
   const id = useId();
   const [query, setQuery] = useQueryStates({
     category: queryStateOptions,
