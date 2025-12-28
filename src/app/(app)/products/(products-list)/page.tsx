@@ -1,12 +1,20 @@
+import { Suspense } from 'react';
+import { cacheLife, cacheTag } from 'next/cache';
 import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuqs/server';
 
-import type { ProductFilterType } from '@/entities/products/model';
+import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
+import { getProductCategories } from '@/entities/product-categories/services';
+import { ProductCategorySelect, ProductCategorySelectFallback } from '@/entities/product-categories/ui';
+import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
+import { getProductCountries } from '@/entities/product-countries/services';
+import { ProductCountrySelect, ProductCountrySelectFallback } from '@/entities/product-countries/ui';
 import { fetchProductList } from '@/entities/products/services';
+import { ProductsListFallback } from '@/entities/products/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
-import { ProductCatalogProductList } from '@/widgets/products-catalog/ui';
+import { ProductCatalog, ProductCatalogAside, ProductCatalogList } from '@/widgets/products-catalog/ui';
 
 const loadSearchParams = createLoader({
-  page: parseAsInteger.withDefault(1),
+  page: parseAsInteger,
   search: parseAsString,
   category: parseAsArrayOf(parseAsInteger),
   countries: parseAsArrayOf(parseAsInteger),
@@ -15,26 +23,66 @@ const loadSearchParams = createLoader({
   sort: parseAsString,
 });
 
-async function Page({ searchParams }: PageProps<'/products'>) {
-  const params = loadSearchParams(await searchParams);
-  const filter: ProductFilterType = {};
-  if (params.search != null) filter.search = params.search;
-  if (params.minPrice != null) filter.minPrice = params.minPrice;
-  if (params.maxPrice != null) filter.maxPrice = params.maxPrice;
-  if (params.category != null) filter.category = params.category;
-  if (params.countries != null) filter.countries = params.countries;
-
-  const {
-    type,
-    result: products,
-    error,
-  } = await fetchProductList({
-    filter,
-    options: { page: params.page, sort: params.sort ?? undefined },
-  });
+async function CategoryFilterPageSection() {
+  'use cache';
+  cacheLife('max');
+  cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
+  const { result: categories, type, error } = await getProductCategories();
   if (type === 'error') return <ErrorComponent error={error} />;
 
-  return <ProductCatalogProductList products={products} />;
+  return <ProductCategorySelect categories={categories} />;
+}
+async function CountryFilterPageSection() {
+  'use cache';
+  cacheLife('max');
+  cacheTag(PRODUCT_COUNTRIES_CACHE_TAG);
+  const { result: countries, type, error } = await getProductCountries();
+  if (type === 'error') return <ErrorComponent error={error} />;
+
+  return <ProductCountrySelect countries={countries} />;
+}
+
+async function ProductCatalogListPageSection({ searchParams }: PageProps<'/products'>) {
+  const params = loadSearchParams(await searchParams);
+
+  const fetchProductListResult = await fetchProductList({
+    filter: {
+      search: params.search ?? undefined,
+      minPrice: params.minPrice ?? undefined,
+      maxPrice: params.maxPrice ?? undefined,
+      category: params.category ?? undefined,
+      countries: params.countries ?? undefined,
+    },
+    options: {
+      page: params.page ?? undefined,
+      sort: params.sort ?? undefined,
+    },
+  });
+  if (fetchProductListResult.type === 'error') return <ErrorComponent error={fetchProductListResult.error} />;
+
+  return <ProductCatalogList products={fetchProductListResult.result} />;
+}
+
+function Page(props: PageProps<'/products'>) {
+  return (
+    <ProductCatalog
+      filter={
+        <ProductCatalogAside>
+          <Suspense fallback={<ProductCountrySelectFallback />}>
+            <CategoryFilterPageSection />
+          </Suspense>
+          <Suspense fallback={<ProductCategorySelectFallback />}>
+            <CountryFilterPageSection />
+          </Suspense>
+        </ProductCatalogAside>
+      }
+      products={
+        <Suspense fallback={<ProductsListFallback />}>
+          <ProductCatalogListPageSection {...props} />
+        </Suspense>
+      }
+    />
+  );
 }
 
 export default Page;
