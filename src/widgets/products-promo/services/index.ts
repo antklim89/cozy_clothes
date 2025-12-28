@@ -1,1 +1,1 @@
-export { fetchDiscountProducts, fetchNewProducts } from './dal';
+export { getDiscountProducts, getNewProducts } from './dal';

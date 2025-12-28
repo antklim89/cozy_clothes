@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod/v4-mini';
 
-import { fetchProduct } from '@/entities/products/services';
+import { getProduct } from '@/entities/products/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { Product } from '@/widgets/product/ui';
 
@@ -10,7 +10,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
   if (!success) return redirect('/products');
   const { productId } = data;
 
-  const { type, result: product, error } = await fetchProduct(productId);
+  const { type, result: product, error } = await getProduct(productId);
   if (type === 'error') return <ErrorComponent error={error} />;
 
   return <Product product={product} />;

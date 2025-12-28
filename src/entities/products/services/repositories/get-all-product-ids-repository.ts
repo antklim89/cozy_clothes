@@ -22,6 +22,6 @@ export async function getAllProductIdsRepository() {
     return ok(ids);
   } catch (error) {
     console.error('[Error getAllProductIdsService]:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch product ids. Try again later.' });
+    return err({ type: 'unexpected', message: 'Failed to get product ids. Try again later.' });
   }
 }

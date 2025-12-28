@@ -8,7 +8,7 @@ import { ProductCategorySelect, ProductCategorySelectFallback } from '@/entities
 import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
 import { getProductCountries } from '@/entities/product-countries/services';
 import { ProductCountrySelect, ProductCountrySelectFallback } from '@/entities/product-countries/ui';
-import { fetchProductList } from '@/entities/products/services';
+import { getProductList } from '@/entities/products/services';
 import { ProductsListFallback } from '@/entities/products/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductCatalog, ProductCatalogAside, ProductCatalogList } from '@/widgets/products-catalog/ui';
@@ -45,7 +45,7 @@ async function CountryFilterPageSection() {
 async function ProductCatalogListPageSection({ searchParams }: PageProps<'/products'>) {
   const params = loadSearchParams(await searchParams);
 
-  const fetchProductListResult = await fetchProductList({
+  const getProductListResult = await getProductList({
     filter: {
       search: params.search ?? undefined,
       minPrice: params.minPrice ?? undefined,
@@ -58,9 +58,9 @@ async function ProductCatalogListPageSection({ searchParams }: PageProps<'/produ
       sort: params.sort ?? undefined,
     },
   });
-  if (fetchProductListResult.type === 'error') return <ErrorComponent error={fetchProductListResult.error} />;
+  if (getProductListResult.type === 'error') return <ErrorComponent error={getProductListResult.error} />;
 
-  return <ProductCatalogList products={fetchProductListResult.result} />;
+  return <ProductCatalogList products={getProductListResult.result} />;
 }
 
 function Page(props: PageProps<'/products'>) {

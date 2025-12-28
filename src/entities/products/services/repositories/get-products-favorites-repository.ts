@@ -39,6 +39,6 @@ export async function getProductsFavoritesRepository({
     return ok(productsResult);
   } catch (error) {
     console.error('[Error getFavoritesProductsRepository]:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch product list. Try again later.' });
+    return err({ type: 'unexpected', message: 'Failed to get product list. Try again later.' });
   }
 }

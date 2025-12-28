@@ -10,7 +10,7 @@ export const ProductFilterSchema = z.object({
   maxPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),
 });
 
-export const FetchProductListInputSchema = z.object({
+export const GetProductListInputSchema = z.object({
   filter: ProductFilterSchema,
   options: z.pick(PayloadOptionsSchema, { page: true, sort: true }),
 });

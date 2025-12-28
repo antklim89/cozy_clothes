@@ -47,6 +47,6 @@ export async function getManyProductsRepository({
     return ok(productsResult);
   } catch (error) {
     console.error('[Error getManyProductsService]:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch product list. Try again later.' });
+    return err({ type: 'unexpected', message: 'Failed to get product list. Try again later.' });
   }
 }

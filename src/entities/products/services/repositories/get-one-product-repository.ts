@@ -29,6 +29,6 @@ export async function getOneProductRepository(id: ProductType['id']) {
     if (error instanceof Error && error.name === 'NotFound') {
       return err({ type: 'not-found', message: 'Product not found.' });
     }
-    return err({ type: 'unexpected', message: 'Failed to fetch product. Try again later.' });
+    return err({ type: 'unexpected', message: 'Failed to get product. Try again later.' });
   }
 }
