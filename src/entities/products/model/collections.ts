@@ -5,6 +5,9 @@ import { MediaCollection } from '@/shared/model/collections/media-collection';
 
 export const Products = {
   slug: 'products',
+  versions: {
+    drafts: false,
+  },
   fields: [
     {
       name: 'title',
@@ -82,6 +85,9 @@ export const Products = {
 
 export const ProductBases = {
   slug: 'product-bases',
+  versions: {
+    drafts: false,
+  },
   labels: {
     singular: 'Product Base',
     plural: 'Product Bases',
@@ -143,6 +149,7 @@ export const ProductBases = {
       on: 'productBase',
       hasMany: true,
       maxDepth: 2,
+      defaultLimit: 500,
     },
   ],
 } as const satisfies CollectionConfig;
