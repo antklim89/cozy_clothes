@@ -1,24 +1,32 @@
-/* eslint-disable antfu/no-top-level-await */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
-import type { CollectionSlug } from 'payload';
-import { SIZES } from '@/shared/config/sizes';
-import { getPayload } from '@/shared/lib/payload';
-import type { ProductBase } from '@/shared/model/types/payload-types.generated';
+import configPromise from '@payload-config';
+import { type CollectionSlug, getPayload } from 'payload';
 
+import { SIZES } from '@/shared/config/sizes';
+import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const PRODUCT_BASES_LENGTH = 20;
-const PRODUCTS_LENGTH = 100;
+const PRODUCT_BASES_LENGTH = 50;
 
-const payload = await getPayload();
+const config = await configPromise;
+config.collections.forEach(collection => {
+  if (collection.slug.includes('media')) return;
+  collection.hooks.afterChange = [];
+  collection.hooks.afterDelete = [];
+});
+config.globals.forEach(global => {
+  if (global.slug.includes('media')) return;
+  global.hooks.afterChange = [];
+});
+const payload = await getPayload({ config });
 
 function getRandomItem<T>(arr: readonly T[]): T {
   const result = arr[faker.number.int({ min: 0, max: arr.length - 1 })];
-  if (result == null) throw new Error(`An array in getRandomItem is empty.`);
+  if (result == null) throw new Error('An array in getRandomItem is empty.');
   return result;
 }
 
@@ -55,29 +63,31 @@ function createRichText(textArr: string[]): ProductBase['description'] {
   };
 }
 
-const colors = Array.from({ length: 20 }, () => ({
+const COLORS = Array.from({ length: 7 }, () => ({
   name: faker.color.human(),
   code: faker.color.rgb(),
 }));
-
-async function getImages<T extends CollectionSlug>(collection: T, imagesPath: string) {
-  const imagesDir = path.resolve('seed/placeholders', imagesPath);
-  const imagesNames = await fs.readdir(imagesDir);
-
-  const images = await Promise.all(imagesNames.map(async (imageName) => {
-    return payload.create({
-      collection,
-      data: {} as never,
-      filePath: path.resolve(imagesDir, imageName),
-    });
-  }));
-  return images;
-}
 
 async function clear() {
   // await payload.db.migrateFresh({ forceAcceptWarning: true });
   await fs.rm(path.resolve('media'), { force: true, recursive: true });
   await fs.mkdir(path.resolve('media'));
+}
+
+async function getImages<T extends CollectionSlug>(collection: T, imagesPath: string) {
+  const imagesDir = path.resolve('seed/placeholders', imagesPath);
+  const imagesNames = await fs.readdir(imagesDir);
+
+  const images = await Promise.all(
+    imagesNames.map(imageName => {
+      return payload.create({
+        collection,
+        data: {} as never,
+        filePath: path.resolve(imagesDir, imageName),
+      });
+    }),
+  );
+  return images;
 }
 
 async function createAbout() {
@@ -119,53 +129,65 @@ async function createHero() {
   });
 }
 
-async function createCategories() {
-  return Promise.all(Array.from({ length: CATEGORIES_NUMBER }, async () => {
-    return payload.create({
-      collection: 'product-categories',
-      data: {
-        name: faker.commerce.productMaterial(),
-      },
-    });
-  }));
+function createCategories() {
+  return Promise.all(
+    Array.from({ length: CATEGORIES_NUMBER }, () => {
+      return payload.create({
+        collection: 'product-categories',
+        data: {
+          name: faker.commerce.productMaterial(),
+        },
+      });
+    }),
+  );
 }
 
-async function createCountries() {
-  return Promise.all(Array.from({ length: COUNTRIES_NUMBER }, async () => {
-    return payload.create({
-      collection: 'product-countries',
-      data: {
-        name: faker.location.country(),
-      },
-    });
-  }));
+function createCountries() {
+  return Promise.all(
+    Array.from({ length: COUNTRIES_NUMBER }, () => {
+      return payload.create({
+        collection: 'product-countries',
+        data: {
+          name: faker.location.country(),
+        },
+      });
+    }),
+  );
 }
 
 async function createProducts(productBases: ProductBase[]) {
   const images = await getImages('product-media', 'products');
 
-  return Promise.all(productBases.map(async (productBase) => {
-    return Promise.all(Array.from({ length: faker.number.int({ min: 1, max: PRODUCTS_LENGTH }) }, async () => {
-      const { name: colorName, code: colorCode } = getRandomItem(colors);
-      const size = getRandomItem(SIZES);
+  return Promise.all(
+    productBases.map(productBase => {
+      return Promise.all(
+        COLORS.map(color => {
+          return Promise.all(
+            SIZES.map(size => {
+              if (Math.random() > 0.2) return null;
 
-      return payload.create({
-        collection: 'products',
-        data: {
-          title: faker.commerce.productName(),
-          description: createRichText([faker.lorem.text()]),
-          discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
-          price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
-          imagePreview: getRandomItem(images).id,
-          images: sliceRandom(shuffle(images)).map(i => i.id),
-          colorName,
-          colorCode,
-          size,
-          productBase: productBase.id,
-        },
-      });
-    }));
-  }));
+              return payload.create({
+                collection: 'products',
+                data: {
+                  _status: 'published',
+                  title: faker.commerce.productName(),
+                  description: createRichText([faker.lorem.text()]),
+                  discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
+                  price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
+                  imagePreview: getRandomItem(images).id,
+                  images: sliceRandom(shuffle(images)).map(i => i.id),
+                  colorName: color.name,
+                  colorCode: color.code,
+                  size,
+                  productBase: productBase.id,
+                },
+              });
+            }),
+          );
+        }),
+      );
+    }),
+  );
 }
 
 async function createProductBases() {
@@ -173,23 +195,26 @@ async function createProductBases() {
   const countries = await createCountries();
   const images = await getImages('product-media', 'products');
 
-  const products = await Promise.all(Array.from({ length: PRODUCT_BASES_LENGTH }, async () => {
-    const category = getRandomItem(categories);
-    const country = getRandomItem(countries);
+  const products = await Promise.all(
+    Array.from({ length: PRODUCT_BASES_LENGTH }, () => {
+      const category = getRandomItem(categories);
+      const country = getRandomItem(countries);
 
-    return payload.create({
-      collection: 'product-bases',
-      data: {
-        title: faker.commerce.productName(),
-        description: createRichText([faker.lorem.text()]),
-        category: category.id,
-        country: country.id,
-        discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
-        price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
-        images: sliceRandom(shuffle(images)).map(i => i.id),
-      },
-    });
-  }));
+      return payload.create({
+        collection: 'product-bases',
+        data: {
+          _status: 'published',
+          title: faker.commerce.productName(),
+          description: createRichText([faker.lorem.text()]),
+          category: category.id,
+          country: country.id,
+          discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
+          price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
+          images: sliceRandom(shuffle(images)).map(i => i.id),
+        },
+      });
+    }),
+  );
 
   await createProducts(products);
 }
@@ -197,31 +222,34 @@ async function createProductBases() {
 async function createTestimonials() {
   const images = await getImages('testimonials-media', 'testimonials');
 
-  return Promise.all(images.map(async (image) => {
-    return payload.create({
-      collection: 'testimonials',
-      data: {
-        image: image.id,
-        text: faker.lorem.text(),
-        name: faker.person.fullName(),
-      },
-    });
-  }));
+  return Promise.all(
+    images.map(image => {
+      return payload.create({
+        collection: 'testimonials',
+        data: {
+          image: image.id,
+          text: faker.lorem.text(),
+          name: faker.person.fullName(),
+        },
+      });
+    }),
+  );
 }
 
-async function createContacts() {
-  return Promise.all(Array.from({ length: CONTACTS_NUMBER }, async () => {
-    return payload.create({
-      collection: 'contacts',
-      data: {
-        email: faker.internet.email(),
-        phone: faker.phone.number({ style: 'national' }),
-        title: faker.lorem.words(3),
-      },
-    });
-  }));
+function createContacts() {
+  return Promise.all(
+    Array.from({ length: CONTACTS_NUMBER }, () => {
+      return payload.create({
+        collection: 'contacts',
+        data: {
+          email: faker.internet.email(),
+          phone: faker.phone.number({ style: 'national' }),
+          title: faker.lorem.words(3),
+        },
+      });
+    }),
+  );
 }
-
 await clear();
 
 await Promise.all([

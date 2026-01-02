@@ -41,7 +41,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["src/**/*", "!**/*.generated.*", "!src/app/(payload)/**/*"]
+    "includes": ["src/**/*", "seed/seed.ts", "!**/*.generated.*", "!src/app/(payload)/**/*"]
   },
   "formatter": {
     "attributePosition": "auto",
