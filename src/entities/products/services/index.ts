@@ -1,3 +1,3 @@
 import 'server-only';
 
-export { getProduct, getProductList, getProductsFavorites } from './dal';
+export { getFavoriteProduct, getProduct, getProductList, getProductsFavorites } from './dal';

@@ -1,10 +1,12 @@
-import { cache } from 'react';
 import 'server-only';
+
+import { cache } from 'react';
 
 import type { ProductFilterType, ProductType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
 import { err } from '@/shared/lib/result';
 import type { PayloadOptions } from '@/shared/model/types/types';
+import { getFavoriteProductRepository } from './repositories/get-favorite-product-repository';
 import { getManyProductsRepository } from './repositories/get-many-products-repository';
 import { getOneProductRepository } from './repositories/get-one-product-repository';
 import { getProductsFavoritesRepository } from './repositories/get-products-favorites-repository';
@@ -23,6 +25,14 @@ export const getProductList = cache(
 
 export const getProduct = cache(async (id: ProductType['id']) => {
   const result = await getOneProductRepository(id);
+  return result;
+});
+
+export const getFavoriteProduct = cache(async (id: ProductType['id']) => {
+  const user = await getMe();
+  if (!user) return err({ type: 'unauthenticated', message: 'You are not authenticated.' });
+
+  const result = await getFavoriteProductRepository(id, user.id);
   return result;
 });
 

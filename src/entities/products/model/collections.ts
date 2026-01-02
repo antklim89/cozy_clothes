@@ -1,12 +1,23 @@
-import type { CollectionConfig } from 'payload';
+import { revalidateTag } from 'next/cache';
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig } from 'payload';
 
 import { SIZES } from '@/shared/config/sizes';
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import type { Product, ProductBase } from '@/shared/model/types/payload-types.generated';
+import { PRODUCT_CACHE_TAG } from '../config';
 
 export const Products = {
   slug: 'products',
   versions: {
     drafts: false,
+  },
+  hooks: {
+    afterChange: [
+      ({ data }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${data.id}`, 'max'),
+    ] satisfies CollectionAfterChangeHook<Product>[],
+    afterDelete: [
+      ({ id }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${id}`, 'max'),
+    ] satisfies CollectionAfterDeleteHook<Product>[],
   },
   fields: [
     {
@@ -88,6 +99,24 @@ export const ProductBases = {
   versions: {
     drafts: false,
   },
+  hooks: {
+    afterChange: [
+      args => {
+        args.data.productVariants?.docs?.forEach(doc => {
+          if (typeof doc === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${doc}`, 'max');
+          else revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max');
+        });
+      },
+    ] satisfies CollectionAfterChangeHook<ProductBase>[],
+    afterDelete: [
+      args => {
+        args.doc.productVariants?.docs?.forEach(doc => {
+          if (typeof doc === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${doc}`, 'max');
+          else revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max');
+        });
+      },
+    ] satisfies CollectionAfterDeleteHook<ProductBase>[],
+  },
   labels: {
     singular: 'Product Base',
     plural: 'Product Bases',
@@ -156,6 +185,9 @@ export const ProductBases = {
 
 export const ProductFavorites: CollectionConfig = {
   slug: 'product-favorites',
+  admin: {
+    hidden: true,
+  },
   fields: [
     {
       name: 'productId',
