@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
+import { cacheLife, cacheTag } from 'next/cache';
 
+import { SEO_CACHE_TAG } from '@/entities/seo/config';
 import { getSeo } from '@/entities/seo/services';
 import { env } from '@/shared/lib/env';
 
 export async function generateMetadata(): Promise<Metadata> {
+  'use cache';
+  cacheLife('max');
+  cacheTag(SEO_CACHE_TAG);
   const { type, error, result: seo } = await getSeo();
   if (type === 'error') throw new Error(error.message);
 
