@@ -44,6 +44,10 @@ export const Testimonials: CollectionConfig = {
 export const TestimonialsMedia: CollectionConfig = {
   ...MediaCollection,
   slug: 'testimonials-media',
+  labels: {
+    singular: 'Testimonials Media',
+    plural: 'Testimonials Media',
+  },
   upload: {
     ...MediaCollection.upload,
     staticDir: 'media/testimonials',

@@ -49,6 +49,10 @@ export const Seo: GlobalConfig = {
 
 export const SeoMedia = {
   slug: 'seo-media',
+  labels: {
+    singular: 'Seo Media',
+    plural: 'Seo Media',
+  },
   fields: [],
   access: {
     read: () => true,

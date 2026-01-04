@@ -8,6 +8,14 @@ import { PRODUCT_CACHE_TAG } from '../config';
 
 export const Products = {
   slug: 'products',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['id', '_status', 'title', 'price', 'colorName', 'size', 'category', 'country'],
+  },
+  labels: {
+    singular: 'Product',
+    plural: 'Products',
+  },
   versions: {
     drafts: true,
   },
@@ -18,9 +26,6 @@ export const Products = {
     afterDelete: [
       ({ id }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${id}`, 'max'),
     ] satisfies CollectionAfterDeleteHook<Product>[],
-  },
-  access: {
-    read: ({ req }) => req.user?.collection === 'admins' || { _status: { equals: 'published' } },
   },
   fields: [
     {
@@ -93,12 +98,23 @@ export const Products = {
       collection: 'product-favorites',
       on: 'productId',
       hasMany: false,
+      admin: {
+        hidden: true,
+      },
     },
   ],
 } as const satisfies CollectionConfig;
 
 export const ProductBases = {
   slug: 'product-bases',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['id', '_status', 'title', 'price', 'category', 'country'],
+  },
+  labels: {
+    singular: 'Product Base',
+    plural: 'Product Bases',
+  },
   versions: {
     drafts: true,
   },
@@ -119,9 +135,6 @@ export const ProductBases = {
         });
       },
     ] satisfies CollectionAfterDeleteHook<ProductBase>[],
-  },
-  access: {
-    read: ({ req }) => req.user?.collection === 'admins' || { _status: { equals: 'published' } },
   },
   fields: [
     {
@@ -184,12 +197,6 @@ export const ProductBases = {
 
 export const ProductFavorites: CollectionConfig = {
   slug: 'product-favorites',
-  admin: {
-    hidden: true,
-  },
-  access: {
-    read: () => true,
-  },
   fields: [
     {
       name: 'productId',
@@ -208,6 +215,10 @@ export const ProductFavorites: CollectionConfig = {
 
 export const ProductMedia = {
   ...MediaCollection,
+  labels: {
+    singular: 'Product Media',
+    plural: 'Product Media',
+  },
   slug: 'product-media',
   upload: {
     ...MediaCollection.upload,

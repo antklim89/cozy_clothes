@@ -16,6 +16,10 @@ export const About: GlobalConfig = {
 export const AboutMedia: CollectionConfig = {
   ...MediaCollection,
   slug: 'about-media',
+  labels: {
+    singular: 'About Media',
+    plural: 'About Media',
+  },
   upload: {
     ...MediaCollection.upload,
     staticDir: 'media/about',

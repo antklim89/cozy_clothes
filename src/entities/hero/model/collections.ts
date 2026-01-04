@@ -29,6 +29,10 @@ export const Hero: GlobalConfig = {
 export const HeroMedia: CollectionConfig = {
   ...MediaCollection,
   slug: 'hero-media',
+  labels: {
+    singular: 'Hero Media',
+    plural: 'Hero Media',
+  },
   upload: {
     ...MediaCollection.upload,
     staticDir: 'media/hero',
