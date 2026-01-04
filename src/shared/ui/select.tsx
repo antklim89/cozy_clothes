@@ -256,7 +256,7 @@ function SelectIndicator({ children, className, ...props }: ComponentProps<typeo
     <span
       data-slot="select-indicator"
       className={cn(
-        '-translate-y-1/2 absolute top-1/2 flex items-center justify-center',
+        'absolute top-1/2 flex -translate-y-1/2 items-center justify-center',
         indicatorPosition === 'left' ? 'start-2' : 'end-2',
         className,
       )}
@@ -271,7 +271,7 @@ function SelectSeparator({ className, ...props }: ComponentProps<typeof SelectPr
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
-      className={cn('-mx-1 pointer-events-none my-1 h-px bg-border', className)}
+      className={cn('pointer-events-none -mx-1 my-1 h-px bg-border', className)}
       {...props}
     />
   );
