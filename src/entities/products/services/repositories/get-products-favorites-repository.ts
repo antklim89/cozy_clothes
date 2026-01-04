@@ -27,6 +27,7 @@ export async function getProductsFavoritesRepository({
       page: options.page,
       where: {
         authorId: { equals: user.id },
+        'productId._status': { equals: 'published' },
       },
     });
     const products = {

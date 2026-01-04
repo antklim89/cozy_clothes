@@ -14,6 +14,7 @@ export async function getOneProductRepository(id: ProductType['id']) {
       id,
       depth: 2,
     });
+    if (productPayloadResult._status !== 'published') return err({ type: 'not-found', message: 'Product not found.' });
 
     const productResult = productDto(productPayloadResult);
 

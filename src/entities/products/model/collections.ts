@@ -9,15 +9,18 @@ import { PRODUCT_CACHE_TAG } from '../config';
 export const Products = {
   slug: 'products',
   versions: {
-    drafts: false,
+    drafts: true,
   },
   hooks: {
     afterChange: [
-      ({ data }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${data.id}`, 'max'),
+      ({ doc }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max'),
     ] satisfies CollectionAfterChangeHook<Product>[],
     afterDelete: [
       ({ id }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${id}`, 'max'),
     ] satisfies CollectionAfterDeleteHook<Product>[],
+  },
+  access: {
+    read: ({ req }) => req.user?.collection === 'admins' || { _status: { equals: 'published' } },
   },
   fields: [
     {
@@ -97,32 +100,28 @@ export const Products = {
 export const ProductBases = {
   slug: 'product-bases',
   versions: {
-    drafts: false,
+    drafts: true,
   },
   hooks: {
     afterChange: [
-      args => {
-        args.data.productVariants?.docs?.forEach(doc => {
-          if (typeof doc === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${doc}`, 'max');
-          else revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max');
+      ({ doc }) => {
+        doc.productVariants?.docs?.forEach(variant => {
+          if (typeof variant === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${variant}`, 'max');
+          else revalidateTag(`${PRODUCT_CACHE_TAG}:${variant.id}`, 'max');
         });
       },
     ] satisfies CollectionAfterChangeHook<ProductBase>[],
     afterDelete: [
-      args => {
-        args.doc.productVariants?.docs?.forEach(doc => {
-          if (typeof doc === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${doc}`, 'max');
-          else revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max');
+      ({ doc }) => {
+        doc.productVariants?.docs?.forEach(variant => {
+          if (typeof variant === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${variant}`, 'max');
+          else revalidateTag(`${PRODUCT_CACHE_TAG}:${variant.id}`, 'max');
         });
       },
     ] satisfies CollectionAfterDeleteHook<ProductBase>[],
   },
-  labels: {
-    singular: 'Product Base',
-    plural: 'Product Bases',
-  },
-  admin: {
-    useAsTitle: 'title',
+  access: {
+    read: ({ req }) => req.user?.collection === 'admins' || { _status: { equals: 'published' } },
   },
   fields: [
     {
@@ -187,6 +186,9 @@ export const ProductFavorites: CollectionConfig = {
   slug: 'product-favorites',
   admin: {
     hidden: true,
+  },
+  access: {
+    read: () => true,
   },
   fields: [
     {

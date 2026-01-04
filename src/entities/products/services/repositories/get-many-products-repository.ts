@@ -21,7 +21,7 @@ export async function getManyProductsRepository({
     const payload = await getPayload();
     const user = await getMe();
 
-    const where: Where = {};
+    const where: Where = { _status: { equals: 'published' } };
     if (countries != null) where['productBase.country'] = { in: countries };
     if (category != null) where['productBase.category'] = { in: category };
     if (search != null) where.or = [{ title: { contains: search } }, { description: { contains: search } }];
@@ -34,6 +34,7 @@ export async function getManyProductsRepository({
       ...options,
       limit: options.limit ?? PRODUCTS_PER_PAGE,
       where,
+
       collection: 'products',
       depth: 2,
       sort: options.sort ?? 'createdAt',

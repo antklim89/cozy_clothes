@@ -14,11 +14,13 @@ export async function getFavoriteProductRepository(id: ProductType['id'], userId
       depth: 0,
       select: {
         favorites: true,
+        _status: true,
       },
       joins: {
         favorites: { limit: 1, where: { authorId: { equals: userId } } },
       },
     });
+    if (productPayloadResult._status !== 'published') return err({ type: 'not-found', message: 'Product not found.' });
 
     return ok({
       id: productPayloadResult.id,
