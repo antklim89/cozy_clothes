@@ -5,6 +5,7 @@ import '@fontsource/poppins/700.css';
 import type { ReactNode } from 'react';
 import '../style/main.css';
 
+import { Toaster } from '@/shared/ui/sonner';
 import { Footer } from '@/widgets/footer/ui';
 import { Header } from '@/widgets/header/ui';
 import ZodConfig from '../config/zod-config';
@@ -24,6 +25,7 @@ function Layout({ children }: { children: ReactNode }) {
               <Header />
               <main>{children}</main>
               <Footer />
+              <Toaster />
             </ThemeProvider>
           </body>
         </QueryProvider>

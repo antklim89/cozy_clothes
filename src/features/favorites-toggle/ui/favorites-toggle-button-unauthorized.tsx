@@ -8,7 +8,7 @@ export function FavoritesToggleButtonUnauthorized(props: ButtonProps) {
   return (
     <Button
       aria-label="Authenticate to add favorites"
-      onClick={() => toast.error('Authenticate to add favorites')}
+      onClick={() => toast.error('Authenticate to add favorites', { id: 'FavoritesToggleButtonUnauthorized' })}
       {...props}
     >
       <HeartIcon />

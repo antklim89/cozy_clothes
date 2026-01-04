@@ -41,12 +41,12 @@ async function FavoriteButtonPageSection({
   const user = await userPromise;
 
   const { result: product, type, error } = await favoriteProductPromise;
-  if (type === 'error' && error.type === 'unauthenticated') return <FavoritesToggleButtonUnauthorized />;
+  if (type === 'error' && error.type === 'unauthenticated') return <FavoritesToggleButtonUnauthorized size="icon-lg" />;
   if (type === 'error') return <ErrorComponent error={error} />;
 
   return (
     <FavoritesToggleButton
-      size="icon"
+      size="icon-lg"
       isAuthenticated={user != null}
       productId={product.id}
       isFavorite={product.isFavorite}
