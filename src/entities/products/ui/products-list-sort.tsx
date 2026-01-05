@@ -13,11 +13,11 @@ interface Option {
 
 const sortOptions = [
   {
-    value: 'createdAt',
+    value: '-createdAt',
     label: 'new',
   },
   {
-    value: '-createdAt',
+    value: 'createdAt',
     label: 'old',
   },
   {

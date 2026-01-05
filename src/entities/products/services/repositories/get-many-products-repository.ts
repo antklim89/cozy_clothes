@@ -37,7 +37,7 @@ export async function getManyProductsRepository({
 
       collection: 'products',
       depth: 2,
-      sort: options.sort ?? 'createdAt',
+      sort: options.sort ?? '-createdAt',
       joins: {
         favorites: user ? { limit: 1, where: { authorId: { equals: user.id } } } : false,
       },
