@@ -2,9 +2,13 @@ import type * as React from 'react';
 
 import { cn } from '@/shared/lib/utils';
 
-function Card({ className, size = 'default', ...props }: React.ComponentProps<'div'> & { size?: 'default' | 'sm' }) {
+function Card({
+  className,
+  size = 'default',
+  ...props
+}: React.ComponentProps<'section'> & { size?: 'default' | 'sm' }) {
   return (
-    <div
+    <section
       data-slot="card"
       data-size={size}
       className={cn(
@@ -29,9 +33,9 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
+function CardTitle({ className, ...props }: React.ComponentProps<'h3'>) {
   return (
-    <div
+    <h3
       data-slot="card-title"
       className={cn('font-medium text-base leading-normal group-data-[size=sm]/card:text-sm', className)}
       {...props}
