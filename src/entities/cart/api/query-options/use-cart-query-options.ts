@@ -1,8 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
 
 import { getCartFromLocalStorage } from '../../lib';
-import { clearCartLocalStorage } from '../../lib/cart-storage';
-import { getCartAction, getCartByProductIdsAction } from '../actions';
+import { setCartToLocalStorage } from '../../lib/cart-storage';
+import { getAndSyncCartAction, getLocalCartAction } from '../actions';
 
 export function cartQueryOptions() {
   return queryOptions({
@@ -13,12 +13,14 @@ export function cartQueryOptions() {
       const localCart = getCartFromLocalStorage();
 
       if (isAuthenticated) {
-        const cartResult = await getCartAction({ localCart });
-        if (localCart) clearCartLocalStorage();
+        const cartResult = await getAndSyncCartAction({ localCart });
+        if (cartResult.result) {
+          setCartToLocalStorage(cartResult.result?.map(item => ({ productId: item.productId, qty: item.qty })));
+        }
         return cartResult.result;
       }
 
-      const cartResult = await getCartByProductIdsAction({ localCart });
+      const cartResult = await getLocalCartAction({ localCart });
       return cartResult.result;
     },
   });

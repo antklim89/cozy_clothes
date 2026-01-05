@@ -6,7 +6,7 @@ import { err, ok } from '@/shared/lib/result';
 import { cartDto } from '../../model/dto';
 import type { CartItemType, LocalCartItemType } from '../../model/types';
 
-export const getCartByLocalCartRepository = cache(async ({ localCart }: { localCart: LocalCartItemType[] }) => {
+export const getLocalCartRepository = cache(async ({ localCart }: { localCart: LocalCartItemType[] }) => {
   try {
     const payload = await getPayload();
     const productIds = localCart.map(item => item.productId);

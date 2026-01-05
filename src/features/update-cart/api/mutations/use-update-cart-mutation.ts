@@ -10,12 +10,13 @@ export function useUpdateCartMutation() {
 
   return useMutation({
     mutationFn: async (updatedCartItem: { productId: number; qty: number }, { meta }) => {
-      if (await meta?.isAuthenticated()) {
+      const isAuthenticated = await meta?.isAuthenticated();
+      if (isAuthenticated) {
         const updateCartQtyResult = await updateCartQtyActionDebounced(updatedCartItem);
         if (updateCartQtyResult.type === 'error') throw new Error(updateCartQtyResult.error.message);
-      } else {
-        updateCartQtyInLocalStorage(updatedCartItem);
       }
+
+      updateCartQtyInLocalStorage(updatedCartItem);
     },
     onMutate(variables, { client }) {
       client.setQueryData(cartQueryOptions().queryKey, oldValue =>

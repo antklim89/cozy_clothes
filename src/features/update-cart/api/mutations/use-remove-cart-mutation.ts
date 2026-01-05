@@ -7,12 +7,13 @@ import { removeCartItemAction } from '../actions';
 export function useRemoveCartMutation() {
   return useMutation({
     mutationFn: async (deletedCartItem: { productId: number }, { meta }) => {
-      if (await meta?.isAuthenticated()) {
+      const isAuthenticated = await meta?.isAuthenticated();
+      if (isAuthenticated) {
         const removeCartItemResult = await removeCartItemAction(deletedCartItem);
         if (removeCartItemResult.type === 'error') throw new Error(removeCartItemResult.error.message);
-      } else {
-        removeCartItemFromLocalStorage(deletedCartItem);
       }
+
+      removeCartItemFromLocalStorage(deletedCartItem);
     },
     onSettled(_data, _error, _variables, _onMutateResult, { client }) {
       client.invalidateQueries({ queryKey: cartQueryOptions().queryKey });
