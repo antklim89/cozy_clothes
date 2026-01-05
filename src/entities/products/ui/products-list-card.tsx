@@ -4,7 +4,8 @@ import Link from 'next/link';
 import type { ProductPreviewType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
-import { Card, CardContent, CardHeader } from '@/shared/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Price } from '@/shared/ui/price';
 
 interface Props {
@@ -12,12 +13,14 @@ interface Props {
 }
 
 export async function ProductsListCard({ product }: Props) {
-  const title = product.title ? `${product.baseTitle} (${product.title})` : product.baseTitle;
   const user = await getMe();
 
   return (
     <Card className="group relative pt-0">
-      <div className="w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80">
+      <Link
+        href={`/products/${product.id}`}
+        className="w-full overflow-hidden rounded-md group-hover:opacity-75 lg:aspect-none lg:h-80"
+      >
         <Image
           alt={product.baseTitle}
           blurDataURL={product.imagePreview.blurDataUrl}
@@ -27,22 +30,41 @@ export async function ProductsListCard({ product }: Props) {
           src={product.imagePreview.url}
           width={product.imagePreview.width}
         />
-      </div>
-      <CardHeader>{title}</CardHeader>
-      <CardContent className="flex justify-between">
-        <div>
-          <p className="mt-1 text-sm">{product.country.name}</p>
-          <p className="mt-1 text-sm">{product.category.name}</p>
+      </Link>
+
+      <CardHeader className="flex flex-row justify-between">
+        <CardTitle className="leading-tight hover:underline">
+          <Link href={`/products/${product.id}`}>
+            <span className="font-bold text-xl">{product.baseTitle}</span>
+            <br />
+            <span className="font-sm opacity-70">{product.title}</span>
+          </Link>
+        </CardTitle>
+        <FavoritesToggleButton isAuthenticated={user != null} productId={product.id} isFavorite={product.isFavorite} />
+      </CardHeader>
+
+      <CardContent className="flex flex-col gap-4">
+        <p className="mt-1 text-sm">
+          <Link className="underline" href={`/products?category=${product.category.id}`}>
+            {product.category.name}
+          </Link>{' '}
+          from{' '}
+          <Link className="underline" href={`/products?countries=${product.country.id}`}>
+            {product.country.name}
+          </Link>
+        </p>
+
+        <div className="flex gap-6">
+          <Badge variant="outline" className="w-24 p-4 text-md uppercase">
+            {product.size}
+          </Badge>
+          <Badge variant="outline" className="min-w-24 p-4 text-md uppercase">
+            <span className="size-4 rounded-full" style={{ backgroundColor: product.colorCode }} />
+            {product.colorName}
+          </Badge>
         </div>
         <Price className="items-end" discount={product.discount} price={product.price} />
       </CardContent>
-      <FavoritesToggleButton
-        isAuthenticated={user != null}
-        productId={product.id}
-        isFavorite={product.isFavorite}
-        className="absolute top-0.5 right-0.5 z-20"
-      />
-      <Link className="absolute inset-0" href={`/products/${product.id}`} title={title} aria-label={product.title} />
     </Card>
   );
 }
