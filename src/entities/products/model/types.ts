@@ -39,7 +39,18 @@ export interface ProductType {
 export interface ProductPreviewType
   extends Pick<
     ProductType,
-    'id' | 'title' | 'baseTitle' | 'category' | 'country' | 'price' | 'discount' | 'createdAt' | 'updatedAt'
+    | 'id'
+    | 'title'
+    | 'baseTitle'
+    | 'category'
+    | 'country'
+    | 'price'
+    | 'discount'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'size'
+    | 'colorName'
+    | 'colorCode'
   > {
   isFavorite: boolean;
   imagePreview: Media;
