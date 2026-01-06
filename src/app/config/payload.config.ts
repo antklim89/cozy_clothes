@@ -11,6 +11,7 @@ import { Cart } from '@/entities/cart/model/collections';
 import { Contacts } from '@/entities/contacts/model/collections';
 import { Hero, HeroMedia } from '@/entities/hero/model/collections';
 import { ProductCategories } from '@/entities/product-categories/model/collections';
+import { ProductColors } from '@/entities/product-colors/models/collections';
 import { ProductCountries } from '@/entities/product-countries/models/collections';
 import { ProductBases, ProductFavorites, ProductMedia, Products } from '@/entities/products/model/collections';
 import { Seo, SeoMedia } from '@/entities/seo/models/collections';
@@ -42,6 +43,7 @@ export default buildConfig({
     ProductMedia,
     ProductCategories,
     ProductCountries,
+    ProductColors,
     HeroMedia,
     Testimonials,
     TestimonialsMedia,

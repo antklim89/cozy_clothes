@@ -79,6 +79,7 @@ export interface Config {
     'product-media': ProductMedia;
     'product-categories': ProductCategory;
     'product-countries': ProductCountry;
+    'product-colors': ProductColor;
     'hero-media': HeroMedia;
     testimonials: Testimonial;
     'testimonials-media': TestimonialsMedia;
@@ -108,6 +109,7 @@ export interface Config {
     'product-media': ProductMediaSelect<false> | ProductMediaSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
+    'product-colors': ProductColorsSelect<false> | ProductColorsSelect<true>;
     'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
@@ -412,6 +414,15 @@ export interface AboutMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-colors".
+ */
+export interface ProductColor {
+  id: number;
+  name: string;
+  code: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
@@ -527,6 +538,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'product-countries';
         value: number | ProductCountry;
+      } | null)
+    | ({
+        relationTo: 'product-colors';
+        value: number | ProductColor;
       } | null)
     | ({
         relationTo: 'hero-media';
@@ -753,6 +768,14 @@ export interface ProductCountriesSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-colors_select".
+ */
+export interface ProductColorsSelect<T extends boolean = true> {
+  name?: T;
+  code?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

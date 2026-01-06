@@ -1,0 +1,1 @@
+export { getProductColors } from './dal';

@@ -5,6 +5,9 @@ import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuq
 import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
 import { getProductCategories } from '@/entities/product-categories/services';
 import { ProductCategorySelect, ProductCategorySelectFallback } from '@/entities/product-categories/ui';
+import { PRODUCT_COLORS_CACHE_TAG } from '@/entities/product-colors/config';
+import { getProductColors } from '@/entities/product-colors/services';
+import { ProductColorSelect, ProductColorSelectFallback } from '@/entities/product-colors/ui';
 import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
 import { getProductCountries } from '@/entities/product-countries/services';
 import { ProductCountrySelect, ProductCountrySelectFallback } from '@/entities/product-countries/ui';
@@ -42,6 +45,16 @@ async function CountryFilterPageSection() {
   return <ProductCountrySelect countries={countries} />;
 }
 
+async function ColorFilterPageSection() {
+  'use cache';
+  cacheLife('max');
+  cacheTag(PRODUCT_COLORS_CACHE_TAG);
+  const { result: colors, type, error } = await getProductColors();
+  if (type === 'error') return <ErrorComponent error={error} />;
+
+  return <ProductColorSelect colors={colors} />;
+}
+
 async function ProductCatalogListPageSection({ searchParams }: PageProps<'/products'>) {
   const params = loadSearchParams(await searchParams);
 
@@ -73,6 +86,9 @@ function Page(props: PageProps<'/products'>) {
           </Suspense>
           <Suspense fallback={<ProductCategorySelectFallback />}>
             <CountryFilterPageSection />
+          </Suspense>
+          <Suspense fallback={<ProductColorSelectFallback />}>
+            <ColorFilterPageSection />
           </Suspense>
         </ProductCatalogAside>
       }
