@@ -20,7 +20,7 @@ export function CartQtyInput({ productId, className }: Props) {
   if (!cartQuery.isFetchedAfterMount || cartQuery.isPending) return <CartQtyInputFallback />;
   if (cartQuery.data == null) return null;
 
-  const currentCartItem = cartQuery.data.find(item => item.productId === productId);
+  const currentCartItem = cartQuery.data.find(item => item.product.id === productId);
   const qty = currentCartItem?.qty ?? 1;
 
   async function handleChange(newQty: number) {

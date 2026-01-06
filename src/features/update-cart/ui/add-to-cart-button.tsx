@@ -18,9 +18,9 @@ export function AddToCartButton({ productId }: { productId: number }) {
   const updateCartMutation = useUpdateCartMutation();
   const cartQuery = useQuery(cartQueryOptions());
 
-  const currentCartItem = cartQuery.data?.find(item => item.productId === productId);
+  const currentCartItem = cartQuery.data?.find(item => item.product.id === productId);
   const qty = currentCartItem?.qty ?? 1;
-  const hasCartItem = cartQuery.data?.some(i => i.productId === productId) ?? false;
+  const hasCartItem = cartQuery.data?.some(i => i.product.id === productId) ?? false;
 
   async function handleRemoveCartItem() {
     await removeCartMutation.mutateAsync({

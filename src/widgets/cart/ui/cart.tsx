@@ -27,7 +27,7 @@ export function Cart() {
       totalSlot={<CartTotal cartItems={cartQuery.data} />}
     >
       {cartQuery.data.map(cartItem => (
-        <CartListItem cartItem={cartItem} key={cartItem.productId} />
+        <CartListItem cartItem={cartItem} key={cartItem.product.id} />
       ))}
     </CartList>
   );

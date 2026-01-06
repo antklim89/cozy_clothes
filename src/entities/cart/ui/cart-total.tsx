@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import type { CartItemType } from '../model';
 
 export function CartTotal({ cartItems }: { cartItems: CartItemType[] }) {
-  const totalPrice = cartItems.reduce((total, { qty, price, discount }) => {
-    return total + calculatePrice({ qty, price, discount });
+  const totalPrice = cartItems.reduce((total, { qty, product }) => {
+    return total + calculatePrice({ qty, price: product.price, discount: product.discount });
   }, 0);
 
   return (

@@ -20,12 +20,12 @@ export function useUpdateCartMutation() {
     },
     onMutate(variables, { client }) {
       client.setQueryData(cartQueryOptions().queryKey, oldValue =>
-        oldValue?.map(i => (i.productId === variables.productId ? { ...i, qty: variables.qty } : i)),
+        oldValue?.map(i => (i.product.id === variables.productId ? { ...i, qty: variables.qty } : i)),
       );
     },
     onSuccess(_data, variables, _onMutateResult, { client }) {
       client.setQueryData(cartQueryOptions().queryKey, oldValue =>
-        oldValue?.map(i => (i.productId === variables.productId ? { ...i, qty: variables.qty } : i)),
+        oldValue?.map(i => (i.product.id === variables.productId ? { ...i, qty: variables.qty } : i)),
       );
     },
   });
