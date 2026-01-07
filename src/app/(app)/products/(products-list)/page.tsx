@@ -11,6 +11,9 @@ import { ProductColorSelect, ProductColorSelectFallback } from '@/entities/produ
 import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
 import { getProductCountries } from '@/entities/product-countries/services';
 import { ProductCountrySelect, ProductCountrySelectFallback } from '@/entities/product-countries/ui';
+import { PRODUCT_SIZES_CACHE_TAG } from '@/entities/product-sizes/config';
+import { getProductSizes } from '@/entities/product-sizes/services';
+import { ProductSizeSelect, ProductSizesSelectFallback } from '@/entities/product-sizes/ui';
 import { getProductList } from '@/entities/products/services';
 import { ProductsListFallback } from '@/entities/products/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
@@ -55,6 +58,16 @@ async function ColorFilterPageSection() {
   return <ProductColorSelect colors={colors} />;
 }
 
+async function SizeFilterPageSection() {
+  'use cache';
+  cacheLife('max');
+  cacheTag(PRODUCT_SIZES_CACHE_TAG);
+  const { result: sizes, type, error } = await getProductSizes();
+  if (type === 'error') return <ErrorComponent error={error} />;
+
+  return <ProductSizeSelect sizes={sizes} />;
+}
+
 async function ProductCatalogListPageSection({ searchParams }: PageProps<'/products'>) {
   const params = loadSearchParams(await searchParams);
 
@@ -89,6 +102,9 @@ function Page(props: PageProps<'/products'>) {
           </Suspense>
           <Suspense fallback={<ProductColorSelectFallback />}>
             <ColorFilterPageSection />
+          </Suspense>
+          <Suspense fallback={<ProductSizesSelectFallback />}>
+            <SizeFilterPageSection />
           </Suspense>
         </ProductCatalogAside>
       }

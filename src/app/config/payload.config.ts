@@ -13,6 +13,7 @@ import { Hero, HeroMedia } from '@/entities/hero/model/collections';
 import { ProductCategories } from '@/entities/product-categories/model/collections';
 import { ProductColors } from '@/entities/product-colors/models/collections';
 import { ProductCountries } from '@/entities/product-countries/models/collections';
+import { ProductSizes } from '@/entities/product-sizes/models/collections';
 import { ProductBases, ProductFavorites, ProductMedia, Products } from '@/entities/products/model/collections';
 import { Seo, SeoMedia } from '@/entities/seo/models/collections';
 import { Testimonials, TestimonialsMedia } from '@/entities/testimonials/model/collections';
@@ -44,6 +45,7 @@ export default buildConfig({
     ProductCategories,
     ProductCountries,
     ProductColors,
+    ProductSizes,
     HeroMedia,
     Testimonials,
     TestimonialsMedia,

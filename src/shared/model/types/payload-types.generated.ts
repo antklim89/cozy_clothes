@@ -80,6 +80,7 @@ export interface Config {
     'product-categories': ProductCategory;
     'product-countries': ProductCountry;
     'product-colors': ProductColor;
+    'product-sizes': ProductSize;
     'hero-media': HeroMedia;
     testimonials: Testimonial;
     'testimonials-media': TestimonialsMedia;
@@ -110,6 +111,7 @@ export interface Config {
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'product-countries': ProductCountriesSelect<false> | ProductCountriesSelect<true>;
     'product-colors': ProductColorsSelect<false> | ProductColorsSelect<true>;
+    'product-sizes': ProductSizesSelect<false> | ProductSizesSelect<true>;
     'hero-media': HeroMediaSelect<false> | HeroMediaSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'testimonials-media': TestimonialsMediaSelect<false> | TestimonialsMediaSelect<true>;
@@ -423,6 +425,19 @@ export interface ProductColor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-sizes".
+ */
+export interface ProductSize {
+  id: number;
+  name: string;
+  length?: number | null;
+  shoulderLength?: number | null;
+  sleeveLength?: number | null;
+  waistSize?: number | null;
+  bustSize?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
@@ -542,6 +557,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'product-colors';
         value: number | ProductColor;
+      } | null)
+    | ({
+        relationTo: 'product-sizes';
+        value: number | ProductSize;
       } | null)
     | ({
         relationTo: 'hero-media';
@@ -776,6 +795,18 @@ export interface ProductCountriesSelect<T extends boolean = true> {
 export interface ProductColorsSelect<T extends boolean = true> {
   name?: T;
   code?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-sizes_select".
+ */
+export interface ProductSizesSelect<T extends boolean = true> {
+  name?: T;
+  length?: T;
+  shoulderLength?: T;
+  sleeveLength?: T;
+  waistSize?: T;
+  bustSize?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
