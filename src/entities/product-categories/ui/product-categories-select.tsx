@@ -9,19 +9,19 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, Se
 
 const queryStateOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
-export function ProductCategorySelect({ categories }: { categories: ProductCategoryType[] }) {
+export function ProductCategoriesSelect({ categories }: { categories: ProductCategoryType[] }) {
   const id = useId();
   const [query, setQuery] = useQueryStates({
-    category: queryStateOptions,
+    categories: queryStateOptions,
     page: parseAsInteger,
   });
 
-  const selectedCategories = categories.filter(i => query.category.includes(i.id));
+  const selectedCategories = categories.filter(i => query.categories.includes(i.id));
 
   return (
     <Field>
       <FieldLabel htmlFor={id}>Category</FieldLabel>
-      <Select value={query.category} onValueChange={async v => setQuery({ category: v, page: null })} multiple>
+      <Select value={query.categories} onValueChange={async v => setQuery({ categories: v, page: null })} multiple>
         <SelectTrigger id={id} className="w-full">
           <SelectMultipleValue
             items={selectedCategories}
@@ -32,7 +32,7 @@ export function ProductCategorySelect({ categories }: { categories: ProductCateg
         <SelectContent>
           <SelectGroup>
             {categories
-              .toSorted(a => (query.category.includes(a.id) ? -1 : 1))
+              .toSorted(a => (query.categories.includes(a.id) ? -1 : 1))
               .map(category => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}

@@ -1,7 +1,7 @@
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Skeleton } from '@/shared/ui/skeleton';
 
-export function ProductColorSelectFallback() {
+export function ProductColorsSelectFallback() {
   return (
     <Field>
       <FieldLabel>Color</FieldLabel>

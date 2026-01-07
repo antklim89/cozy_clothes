@@ -1,4 +1,4 @@
-export { ProductCategoryNavBar } from './product-category-nav-bar';
-export { ProductCategoryNavBarFallback } from './product-category-nav-bar-fallback';
-export { ProductCategorySelect } from './product-category-select';
-export { ProductCategorySelectFallback } from './product-category-select-fallback';
+export { ProductCategoriesNavBar } from './product-categories-nav-bar';
+export { ProductCategoriesNavBarFallback } from './product-categories-nav-bar-fallback';
+export { ProductCategoriesSelect } from './product-categories-select';
+export { ProductCategoriesSelectFallback } from './product-categories-select-fallback';

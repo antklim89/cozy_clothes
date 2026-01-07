@@ -4,13 +4,13 @@ import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuq
 
 import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
 import { getProductCategories } from '@/entities/product-categories/services';
-import { ProductCategorySelect, ProductCategorySelectFallback } from '@/entities/product-categories/ui';
+import { ProductCategoriesSelect, ProductCategoriesSelectFallback } from '@/entities/product-categories/ui';
 import { PRODUCT_COLORS_CACHE_TAG } from '@/entities/product-colors/config';
 import { getProductColors } from '@/entities/product-colors/services';
-import { ProductColorSelect, ProductColorSelectFallback } from '@/entities/product-colors/ui';
+import { ProductColorsSelect, ProductColorsSelectFallback } from '@/entities/product-colors/ui';
 import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
 import { getProductCountries } from '@/entities/product-countries/services';
-import { ProductCountrySelect, ProductCountrySelectFallback } from '@/entities/product-countries/ui';
+import { ProductCountriesSelect, ProductCountriesSelectFallback } from '@/entities/product-countries/ui';
 import { PRODUCT_SIZES_CACHE_TAG } from '@/entities/product-sizes/config';
 import { getProductSizes } from '@/entities/product-sizes/services';
 import { ProductSizeSelect, ProductSizesSelectFallback } from '@/entities/product-sizes/ui';
@@ -29,36 +29,36 @@ const loadSearchParams = createLoader({
   sort: parseAsString,
 });
 
-async function CategoryFilterPageSection() {
+async function ProductCategoriesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
   const { result: categories, type, error } = await getProductCategories();
   if (type === 'error') return <ErrorComponent error={error} />;
 
-  return <ProductCategorySelect categories={categories} />;
+  return <ProductCategoriesSelect categories={categories} />;
 }
-async function CountryFilterPageSection() {
+async function ProductCountriesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_COUNTRIES_CACHE_TAG);
   const { result: countries, type, error } = await getProductCountries();
   if (type === 'error') return <ErrorComponent error={error} />;
 
-  return <ProductCountrySelect countries={countries} />;
+  return <ProductCountriesSelect countries={countries} />;
 }
 
-async function ColorFilterPageSection() {
+async function ProductColorsFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_COLORS_CACHE_TAG);
   const { result: colors, type, error } = await getProductColors();
   if (type === 'error') return <ErrorComponent error={error} />;
 
-  return <ProductColorSelect colors={colors} />;
+  return <ProductColorsSelect colors={colors} />;
 }
 
-async function SizeFilterPageSection() {
+async function ProductSizesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_SIZES_CACHE_TAG);
@@ -76,7 +76,7 @@ async function ProductCatalogListPageSection({ searchParams }: PageProps<'/produ
       search: params.search ?? undefined,
       minPrice: params.minPrice ?? undefined,
       maxPrice: params.maxPrice ?? undefined,
-      category: params.category ?? undefined,
+      categories: params.category ?? undefined,
       countries: params.countries ?? undefined,
     },
     options: {
@@ -94,17 +94,17 @@ function Page(props: PageProps<'/products'>) {
     <ProductCatalog
       filter={
         <ProductCatalogAside>
-          <Suspense fallback={<ProductCountrySelectFallback />}>
-            <CategoryFilterPageSection />
+          <Suspense fallback={<ProductCountriesSelectFallback />}>
+            <ProductCategoriesFilterPageSection />
           </Suspense>
-          <Suspense fallback={<ProductCategorySelectFallback />}>
-            <CountryFilterPageSection />
+          <Suspense fallback={<ProductCategoriesSelectFallback />}>
+            <ProductCountriesFilterPageSection />
           </Suspense>
-          <Suspense fallback={<ProductColorSelectFallback />}>
-            <ColorFilterPageSection />
+          <Suspense fallback={<ProductColorsSelectFallback />}>
+            <ProductColorsFilterPageSection />
           </Suspense>
           <Suspense fallback={<ProductSizesSelectFallback />}>
-            <SizeFilterPageSection />
+            <ProductSizesFilterPageSection />
           </Suspense>
         </ProductCatalogAside>
       }

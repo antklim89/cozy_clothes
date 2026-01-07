@@ -1,10 +1,10 @@
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Skeleton } from '@/shared/ui/skeleton';
 
-export function ProductCategorySelectFallback() {
+export function ProductCountriesSelectFallback() {
   return (
     <Field>
-      <FieldLabel>Category</FieldLabel>
+      <FieldLabel>Country</FieldLabel>
       <Skeleton className="h-8 w-full" />
     </Field>
   );

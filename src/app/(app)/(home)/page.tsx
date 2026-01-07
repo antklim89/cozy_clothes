@@ -9,7 +9,7 @@ import { getHero } from '@/entities/hero/services';
 import { Hero } from '@/entities/hero/ui';
 import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
 import { getProductCategories } from '@/entities/product-categories/services';
-import { ProductCategoryNavBar } from '@/entities/product-categories/ui';
+import { ProductCategoriesNavBar } from '@/entities/product-categories/ui';
 import { ProductsListFallback } from '@/entities/products/ui';
 import { TESTIMONIALS_CACHE_TAG } from '@/entities/testimonials/config';
 import { getTestimonials } from '@/entities/testimonials/services';
@@ -25,7 +25,7 @@ async function ProductCategoryNavBarPageSection() {
   const { type, result: categories, error } = await getProductCategories();
   if (type === 'error') return <ErrorComponent error={error} />;
 
-  return <ProductCategoryNavBar categories={categories} />;
+  return <ProductCategoriesNavBar categories={categories} />;
 }
 async function ContactsPageSection() {
   'use cache';

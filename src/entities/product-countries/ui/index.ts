@@ -1,2 +1,2 @@
-export { ProductCountrySelect } from './product-country-select';
-export { ProductCountrySelectFallback } from './product-country-select-fallback';
+export { ProductCountriesSelect } from './product-countries-select';
+export { ProductCountriesSelectFallback } from './product-countries-select-fallback';

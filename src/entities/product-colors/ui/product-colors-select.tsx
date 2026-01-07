@@ -9,7 +9,7 @@ import type { ProductColorType } from '../models/types';
 
 const querySelectOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
-export function ProductColorSelect({ colors }: { colors: ProductColorType[] }) {
+export function ProductColorsSelect({ colors }: { colors: ProductColorType[] }) {
   const id = useId();
   const [query, setQuery] = useQueryStates({
     colors: querySelectOptions,

@@ -9,7 +9,7 @@ import type { ProductCountryType } from '../models/types';
 
 const querySelectOptions = parseAsArrayOf(parseAsInteger).withDefault([]).withOptions({ shallow: false });
 
-export function ProductCountrySelect({ countries }: { countries: ProductCountryType[] }) {
+export function ProductCountriesSelect({ countries }: { countries: ProductCountryType[] }) {
   const id = useId();
   const [query, setQuery] = useQueryStates({
     countries: querySelectOptions,

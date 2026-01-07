@@ -1,6 +1,6 @@
 import { Skeleton } from '@/shared/ui/skeleton';
 
-export function ProductCategoryNavBarFallback() {
+export function ProductCategoriesNavBarFallback() {
   return (
     <div className="container my-4 flex gap-4">
       {Array.from({ length: 8 }, (_, index) => (

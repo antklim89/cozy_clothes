@@ -1,2 +1,2 @@
-export { ProductColorSelect } from './product-colors-select';
-export { ProductColorSelectFallback } from './product-colors-select-fallback';
+export { ProductColorsSelect } from './product-colors-select';
+export { ProductColorsSelectFallback } from './product-colors-select-fallback';

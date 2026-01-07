@@ -5,7 +5,7 @@ import { buttonVariants } from '@/shared/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/shared/ui/carousel';
 import type { ProductCategoryType } from '../model/types';
 
-export function ProductCategoryNavBar({ categories }: { categories: ProductCategoryType[] }) {
+export function ProductCategoriesNavBar({ categories }: { categories: ProductCategoryType[] }) {
   return (
     <section className="container my-4">
       <Carousel

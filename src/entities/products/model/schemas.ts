@@ -3,7 +3,7 @@ import { z } from 'zod/v4-mini';
 import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-schema';
 
 export const ProductFilterSchema = z.object({
-  category: z.optional(z.array(z.number())),
+  categories: z.optional(z.array(z.number())),
   countries: z.optional(z.array(z.number())),
   search: z.optional(z.string().check(z.trim())),
   minPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),
