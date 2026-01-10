@@ -21,6 +21,7 @@ export const ProductColors: CollectionConfig = {
       minLength: 2,
       maxLength: 1000,
       required: true,
+      unique: true,
     },
     {
       name: 'code',
@@ -28,6 +29,7 @@ export const ProductColors: CollectionConfig = {
       minLength: 2,
       maxLength: 1000,
       required: true,
+      unique: true,
     },
   ],
 };

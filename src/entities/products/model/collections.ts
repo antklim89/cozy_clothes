@@ -26,6 +26,7 @@ export const Products = {
       ({ id }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${id}`, 'max'),
     ] satisfies CollectionAfterDeleteHook<Product>[],
   },
+  indexes: [{ fields: ['productBase', 'color', 'size'], unique: true }],
   fields: [
     {
       name: 'title',
