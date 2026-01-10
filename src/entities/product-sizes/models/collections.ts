@@ -17,7 +17,7 @@ export const ProductSizes: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
-      minLength: 2,
+      minLength: 1,
       maxLength: 1000,
       required: true,
       unique: true,
