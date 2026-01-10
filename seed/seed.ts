@@ -9,9 +9,27 @@ import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const COLORS_NUMBER = 17;
 const PRODUCT_BASES_LENGTH = 50;
 const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
+const COLORS = [
+  { name: 'Crimson Red', code: '#DC143C' },
+  { name: 'Navy Blue', code: '#000080' },
+  { name: 'Forest Green', code: '#228B22' },
+  { name: 'Charcoal Gray', code: '#36454F' },
+  { name: 'Cream White', code: '#FFFDD0' },
+  { name: 'Burgundy', code: '#800020' },
+  { name: 'Mustard Yellow', code: '#FFDB58' },
+  { name: 'Royal Purple', code: '#660099' },
+  { name: 'Denim Blue', code: '#1560BD' },
+  { name: 'Olive Green', code: '#808000' },
+  { name: 'Coral Pink', code: '#FF7F50' },
+  { name: 'Teal', code: '#008080' },
+  { name: 'Chocolate Brown', code: '#654321' },
+  { name: 'Lavender', code: '#E6E6FA' },
+  { name: 'Turquoise', code: '#40E0D0' },
+  { name: 'Black', code: '#000000' },
+  { name: 'Blush Nude', code: '#FFCCCC' },
+] as const;
 
 const config = await configPromise;
 config.collections.forEach(collection => {
@@ -171,13 +189,10 @@ function createSizes() {
 
 function createColors() {
   return Promise.all(
-    Array.from({ length: COLORS_NUMBER }, () => {
+    COLORS.map(data => {
       return payload.create({
         collection: 'product-colors',
-        data: {
-          name: faker.color.human(),
-          code: faker.color.rgb(),
-        },
+        data,
       });
     }),
   );
