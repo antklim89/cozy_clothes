@@ -20,7 +20,7 @@ export function ProductsVariantsSelect({ variants, selectedVariant: variant, cla
 }
 
 function ColorVariant({ variants, selectedVariant }: Props) {
-  const colors = Map.groupBy(variants, i => i.colorName);
+  const colors = Map.groupBy(variants, i => i.color.name);
 
   return (
     <div className="flex flex-col gap-2">
@@ -28,9 +28,9 @@ function ColorVariant({ variants, selectedVariant }: Props) {
       <div className="flex flex-wrap gap-1">
         {Array.from(colors, ([color, variant]) => {
           const newVariant =
-            (selectedVariant.colorName === color ? selectedVariant : null) ??
-            variants.find(i => i.size === selectedVariant.size && i.colorName === color) ??
-            variants.find(i => i.colorName === color);
+            (selectedVariant.color.name === color ? selectedVariant : null) ??
+            variants.find(i => i.size === selectedVariant.size && i.color.name === color) ??
+            variants.find(i => i.color.name === color);
 
           if (newVariant == null) return null;
           return (
@@ -43,7 +43,7 @@ function ColorVariant({ variants, selectedVariant }: Props) {
               href={`/products/${newVariant?.id}`}
               scroll={false}
             >
-              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.colorCode }} />
+              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.color.code }} />
               {color}
             </Link>
           );
@@ -62,22 +62,22 @@ function SizeVariant({ variants, selectedVariant }: Props) {
       <div className="flex flex-wrap gap-1">
         {Array.from(sizes, ([size, variant]) => {
           const newVariant =
-            (selectedVariant.size === size ? selectedVariant : null) ??
-            variants.find(i => i.colorName === selectedVariant.colorName && i.size === size) ??
-            variants.find(i => i.size === size);
+            (selectedVariant.size.id === size.id ? selectedVariant : null) ??
+            variants.find(i => i.color.name === selectedVariant.color.name && i.size.id === size.id) ??
+            variants.find(i => i.size.id === size.id);
 
           if (newVariant == null) return null;
           return (
             <Link
-              key={size}
+              key={size.id}
               className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
                 'border-2 border-primary dark:border-primary': newVariant.id === selectedVariant.id,
-                'opacity-40': !variant.some(i => i.colorName === selectedVariant.colorName),
+                'opacity-40': !variant.some(i => i.color.name === selectedVariant.color.name),
               })}
               href={`/products/${newVariant?.id}`}
               scroll={false}
             >
-              {size}
+              {size.name}
             </Link>
           );
         })}

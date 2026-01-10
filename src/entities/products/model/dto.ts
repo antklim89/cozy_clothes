@@ -2,8 +2,10 @@ import type {
   Product,
   ProductBase,
   ProductCategory,
+  ProductColor,
   ProductCountry,
   ProductMedia,
+  ProductSize,
 } from '@/shared/model/types/payload-types.generated';
 import type { ProductPreviewType, ProductType } from './types';
 
@@ -25,17 +27,15 @@ export function productDto(product: Product): ProductType {
     baseDescription: productBase.description,
     category,
     country,
-    colorCode: product.colorCode,
-    colorName: product.colorName,
-    size: product.size,
+    color: product.color as ProductColor,
+    size: product.size as ProductSize,
     discount: product.discount ?? productBase.discount ?? 0,
     images: [...baseImages, ...images],
     price: product.price ?? productBase.price,
     productVariants: productVariants.map(i => ({
-      colorCode: i.colorCode,
-      colorName: i.colorName,
       id: i.id,
-      size: i.size,
+      color: i.color as ProductColor,
+      size: i.size as ProductSize,
     })),
   };
 }
@@ -55,9 +55,8 @@ export function productPreviewDto(product: Product): ProductPreviewType {
     baseTitle: productBase.title,
     category,
     country,
-    colorCode: product.colorCode,
-    colorName: product.colorName,
-    size: product.size,
+    color: product.color as ProductColor,
+    size: product.size as ProductSize,
     discount: product.discount ?? productBase.discount ?? 0,
     imagePreview,
     price: product.price ?? productBase.price,

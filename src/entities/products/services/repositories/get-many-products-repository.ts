@@ -12,7 +12,7 @@ import { productPreviewDto } from '../../model/dto';
 
 export async function getManyProductsRepository({
   options = {},
-  filter: { category, countries, minPrice, maxPrice, search } = {},
+  filter: { categories, countries, minPrice, maxPrice, search, colors, sizes } = {},
 }: {
   options?: PayloadOptions;
   filter?: ProductFilterType;
@@ -23,7 +23,10 @@ export async function getManyProductsRepository({
 
     const where: Where = { _status: { equals: 'published' } };
     if (countries != null) where['productBase.country'] = { in: countries };
-    if (category != null) where['productBase.category'] = { in: category };
+    if (categories != null) where['productBase.category'] = { in: categories };
+    if (categories != null) where['productBase.category'] = { in: categories };
+    if (colors) where.color = { in: colors };
+    if (sizes) where.size = { in: sizes };
     if (search != null) where.or = [{ title: { contains: search } }, { description: { contains: search } }];
 
     if (minPrice != null && maxPrice != null) where.price = { greater_than_equal: minPrice, less_than_equal: maxPrice };

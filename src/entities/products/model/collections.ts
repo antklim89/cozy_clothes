@@ -1,7 +1,6 @@
 import { revalidateTag } from 'next/cache';
 import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig } from 'payload';
 
-import { SIZES } from '@/shared/config/sizes';
 import { MediaCollection } from '@/shared/model/collections/media-collection';
 import type { Product, ProductBase } from '@/shared/model/types/payload-types.generated';
 import { PRODUCT_CACHE_TAG } from '../config';
@@ -57,18 +56,14 @@ export const Products = {
     },
     {
       name: 'size',
-      type: 'select',
-      options: SIZES as unknown as string[],
+      type: 'relationship',
+      relationTo: 'product-sizes',
       required: true,
     },
     {
-      name: 'colorName',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'colorCode',
-      type: 'text',
+      name: 'color',
+      type: 'relationship',
+      relationTo: 'product-colors',
       required: true,
     },
     {
@@ -189,7 +184,7 @@ export const ProductBases = {
       collection: 'products',
       on: 'productBase',
       hasMany: true,
-      maxDepth: 2,
+      maxDepth: 3,
       defaultLimit: 500,
     },
   ],

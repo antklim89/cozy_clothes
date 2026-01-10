@@ -260,9 +260,8 @@ export interface Product {
   } | null;
   price?: number | null;
   discount?: number | null;
-  size: 'sx' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
-  colorName: string;
-  colorCode: string;
+  size: number | ProductSize;
+  color: number | ProductColor;
   imagePreview: number | ProductMedia;
   images?: (number | ProductMedia)[] | null;
   productBase: number | ProductBase;
@@ -274,6 +273,28 @@ export interface Product {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-sizes".
+ */
+export interface ProductSize {
+  id: number;
+  name: string;
+  length?: number | null;
+  shoulderLength?: number | null;
+  sleeveLength?: number | null;
+  waistSize?: number | null;
+  bustSize?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-colors".
+ */
+export interface ProductColor {
+  id: number;
+  name: string;
+  code: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -413,28 +434,6 @@ export interface AboutMedia {
   height: number;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-colors".
- */
-export interface ProductColor {
-  id: number;
-  name: string;
-  code: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-sizes".
- */
-export interface ProductSize {
-  id: number;
-  name: string;
-  length?: number | null;
-  shoulderLength?: number | null;
-  sleeveLength?: number | null;
-  waistSize?: number | null;
-  bustSize?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -717,8 +716,7 @@ export interface ProductsSelect<T extends boolean = true> {
   price?: T;
   discount?: T;
   size?: T;
-  colorName?: T;
-  colorCode?: T;
+  color?: T;
   imagePreview?: T;
   images?: T;
   productBase?: T;

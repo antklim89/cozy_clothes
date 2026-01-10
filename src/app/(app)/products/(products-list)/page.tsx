@@ -24,6 +24,8 @@ const loadSearchParams = createLoader({
   search: parseAsString,
   category: parseAsArrayOf(parseAsInteger),
   countries: parseAsArrayOf(parseAsInteger),
+  colors: parseAsArrayOf(parseAsInteger),
+  sizes: parseAsArrayOf(parseAsInteger),
   minPrice: parseAsInteger,
   maxPrice: parseAsInteger,
   sort: parseAsString,
@@ -78,6 +80,8 @@ async function ProductCatalogListPageSection({ searchParams }: PageProps<'/produ
       maxPrice: params.maxPrice ?? undefined,
       categories: params.category ?? undefined,
       countries: params.countries ?? undefined,
+      colors: params.colors ?? undefined,
+      sizes: params.sizes ?? undefined,
     },
     options: {
       page: params.page ?? undefined,

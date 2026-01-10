@@ -5,6 +5,8 @@ import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-sch
 export const ProductFilterSchema = z.object({
   categories: z.optional(z.array(z.number())),
   countries: z.optional(z.array(z.number())),
+  sizes: z.optional(z.array(z.number())),
+  colors: z.optional(z.array(z.number())),
   search: z.optional(z.string().check(z.trim())),
   minPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),
   maxPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),

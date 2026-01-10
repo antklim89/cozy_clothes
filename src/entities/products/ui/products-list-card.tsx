@@ -56,11 +56,11 @@ export async function ProductsListCard({ product }: Props) {
 
         <div className="flex gap-6">
           <Badge variant="outline" className="w-24 p-4 text-md uppercase">
-            {product.size}
+            {product.size.name}
           </Badge>
           <Badge variant="outline" className="min-w-24 p-4 text-md uppercase">
-            <span className="size-4 rounded-full" style={{ backgroundColor: product.colorCode }} />
-            {product.colorName}
+            <span className="size-4 rounded-full" style={{ backgroundColor: product.color.code }} />
+            {product.color.name}
           </Badge>
         </div>
         <Price className="items-end" discount={product.discount} price={product.price} />

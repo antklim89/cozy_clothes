@@ -12,7 +12,7 @@ export async function getOneProductRepository(id: ProductType['id']) {
     const productPayloadResult = await payload.findByID({
       collection: 'products',
       id,
-      depth: 2,
+      depth: 3,
     });
     if (productPayloadResult._status !== 'published') return err({ type: 'not-found', message: 'Product not found.' });
 

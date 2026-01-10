@@ -36,8 +36,8 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
           <Link href={`/products/${product.id}`}>{product.title}</Link>
         </h3>
         <div className="flex gap-4">
-          <span className="text-gray-600 uppercase">{product.colorName}</span>
-          <span className="text-gray-600 uppercase">{product.size}</span>
+          <span className="text-gray-600 uppercase">{product.color.name}</span>
+          <span className="text-gray-600 uppercase">{product.size.name}</span>
         </div>
       </div>
 

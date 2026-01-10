@@ -4,13 +4,14 @@ import { faker } from '@faker-js/faker';
 import configPromise from '@payload-config';
 import { type CollectionSlug, getPayload } from 'payload';
 
-import { SIZES } from '@/shared/config/sizes';
 import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
+const COLORS_NUMBER = 17;
 const PRODUCT_BASES_LENGTH = 50;
+const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
 
 const config = await configPromise;
 config.collections.forEach(collection => {
@@ -62,11 +63,6 @@ function createRichText(textArr: string[]): ProductBase['description'] {
     },
   };
 }
-
-const COLORS = Array.from({ length: 7 }, () => ({
-  name: faker.color.human(),
-  code: faker.color.rgb(),
-}));
 
 async function clear() {
   // await payload.db.migrateFresh({ forceAcceptWarning: true });
@@ -155,15 +151,49 @@ function createCountries() {
   );
 }
 
+function createSizes() {
+  return Promise.all(
+    SIZES.map(size => {
+      return payload.create({
+        collection: 'product-sizes',
+        data: {
+          name: size,
+          bustSize: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
+          length: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
+          shoulderLength: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
+          sleeveLength: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
+          waistSize: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
+        },
+      });
+    }),
+  );
+}
+
+function createColors() {
+  return Promise.all(
+    Array.from({ length: COLORS_NUMBER }, () => {
+      return payload.create({
+        collection: 'product-colors',
+        data: {
+          name: faker.color.human(),
+          code: faker.color.rgb(),
+        },
+      });
+    }),
+  );
+}
+
 async function createProducts(productBases: ProductBase[]) {
   const images = await getImages('product-media', 'products');
+  const sizes = await createSizes();
+  const colors = await createColors();
 
   return Promise.all(
     productBases.map(productBase => {
       return Promise.all(
-        COLORS.map(color => {
+        colors.map(color => {
           return Promise.all(
-            SIZES.map(size => {
+            sizes.map(size => {
               if (Math.random() > 0.2) return null;
 
               return payload.create({
@@ -176,8 +206,7 @@ async function createProducts(productBases: ProductBase[]) {
                   price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
                   imagePreview: getRandomItem(images).id,
                   images: sliceRandom(shuffle(images)).map(i => i.id),
-                  colorName: color.name,
-                  colorCode: color.code,
+                  color,
                   size,
                   productBase: productBase.id,
                 },
