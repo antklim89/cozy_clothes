@@ -20,31 +20,31 @@ export function ProductsVariantsSelect({ variants, selectedVariant: variant, cla
 }
 
 function ColorVariant({ variants, selectedVariant }: Props) {
-  const colors = Map.groupBy(variants, i => i.color.name);
+  const groupedColors = Map.groupBy(variants, i => i.color.id);
 
   return (
     <div className="flex flex-col gap-2">
       <h4 className="text-lg">Colors:</h4>
       <div className="flex flex-wrap gap-1">
-        {Array.from(colors, ([color, variant]) => {
-          const newVariant =
-            (selectedVariant.color.name === color ? selectedVariant : null) ??
-            variants.find(i => i.size === selectedVariant.size && i.color.name === color) ??
-            variants.find(i => i.color.name === color);
+        {Array.from(groupedColors, ([colorId, groupedVariants]) => {
+          const variant =
+            (selectedVariant.color.id === colorId ? selectedVariant : null) ??
+            variants.find(i => i.size.id === selectedVariant.size.id && i.color.id === colorId) ??
+            variants.find(i => i.color.id === colorId);
 
-          if (newVariant == null) return null;
+          if (variant == null) return null;
           return (
             <Link
-              key={color}
+              key={colorId}
               className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
-                'border-2 border-primary dark:border-primary': newVariant.id === selectedVariant.id,
-                'opacity-40': !variant.some(i => i.size === selectedVariant.size),
+                'border-2 border-primary dark:border-primary': variant.id === selectedVariant.id,
+                'opacity-40': !groupedVariants.some(i => i.size.id === selectedVariant.size.id),
               })}
-              href={`/products/${newVariant?.id}`}
+              href={`/products/${variant.id}`}
               scroll={false}
             >
-              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant?.[0]?.color.code }} />
-              {color}
+              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant.color.code }} />
+              {variant.color.name}
             </Link>
           );
         })}
@@ -54,30 +54,30 @@ function ColorVariant({ variants, selectedVariant }: Props) {
 }
 
 function SizeVariant({ variants, selectedVariant }: Props) {
-  const sizes = Map.groupBy(variants, i => i.size);
+  const groupedSizes = Map.groupBy(variants, i => i.size.id);
 
   return (
     <div className="flex flex-col gap-2">
       <h4 className="text-lg">Sizes:</h4>
       <div className="flex flex-wrap gap-1">
-        {Array.from(sizes, ([size, variant]) => {
-          const newVariant =
-            (selectedVariant.size.id === size.id ? selectedVariant : null) ??
-            variants.find(i => i.color.name === selectedVariant.color.name && i.size.id === size.id) ??
-            variants.find(i => i.size.id === size.id);
+        {Array.from(groupedSizes, ([sizeId, groupedVariants]) => {
+          const variant =
+            (selectedVariant.size.id === sizeId ? selectedVariant : null) ??
+            variants.find(i => i.color.id === selectedVariant.color.id && i.size.id === sizeId) ??
+            variants.find(i => i.size.id === sizeId);
 
-          if (newVariant == null) return null;
+          if (variant == null) return null;
           return (
             <Link
-              key={size.id}
+              key={sizeId}
               className={cn(buttonVariants({ variant: 'outline' }), 'text-md uppercase no-underline', {
-                'border-2 border-primary dark:border-primary': newVariant.id === selectedVariant.id,
-                'opacity-40': !variant.some(i => i.color.name === selectedVariant.color.name),
+                'border-2 border-primary dark:border-primary': variant.id === selectedVariant.id,
+                'opacity-40': !groupedVariants.some(i => i.color.id === selectedVariant.color.id),
               })}
-              href={`/products/${newVariant?.id}`}
+              href={`/products/${variant.id}`}
               scroll={false}
             >
-              {size.name}
+              {variant.size.name}
             </Link>
           );
         })}
