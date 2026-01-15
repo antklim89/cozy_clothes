@@ -8,7 +8,7 @@ import { err, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
 import type { PayloadOptions } from '@/shared/model/types/types';
 
-export async function getProductsFavoritesRepository({
+export async function getFavoritesProductsRepository({
   user,
   options,
 }: {

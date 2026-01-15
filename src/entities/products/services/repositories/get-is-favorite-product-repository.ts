@@ -4,7 +4,7 @@ import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 import type { ProductType } from '../../model';
 
-export async function getFavoriteProductRepository(id: ProductType['id'], userId: number) {
+export async function getIsFavoriteProductRepository(id: ProductType['id'], userId: number) {
   try {
     const payload = await getPayload();
 

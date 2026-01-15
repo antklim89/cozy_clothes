@@ -6,10 +6,10 @@ import type { ProductFilterType, ProductType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
 import { err } from '@/shared/lib/result';
 import type { PayloadOptions } from '@/shared/model/types/types';
-import { getFavoriteProductRepository } from './repositories/get-favorite-product-repository';
+import { getFavoritesProductsRepository } from './repositories/get-favorites-products-repository';
+import { getIsFavoriteProductRepository } from './repositories/get-is-favorite-product-repository';
 import { getManyProductsRepository } from './repositories/get-many-products-repository';
 import { getOneProductRepository } from './repositories/get-one-product-repository';
-import { getProductsFavoritesRepository } from './repositories/get-products-favorites-repository';
 import { GetProductListInputSchema, GetProductsFavoritesInputSchema } from '../model/schemas';
 
 export const getProductList = cache(
@@ -32,7 +32,7 @@ export const getFavoriteProduct = cache(async (id: ProductType['id']) => {
   const user = await getMe();
   if (!user) return err({ type: 'unauthenticated', message: 'You are not authenticated.' });
 
-  const result = await getFavoriteProductRepository(id, user.id);
+  const result = await getIsFavoriteProductRepository(id, user.id);
   return result;
 });
 
@@ -44,6 +44,6 @@ export const getProductsFavorites = cache(async (input: { options: Pick<PayloadO
   const user = await getMe();
   if (!user) return err({ type: 'unauthenticated', message: 'You are not authenticated.' });
 
-  const result = await getProductsFavoritesRepository({ user, options });
+  const result = await getFavoritesProductsRepository({ user, options });
   return result;
 });
