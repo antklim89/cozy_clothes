@@ -24,7 +24,7 @@
     "dev:typecheck": "bun typecheck -w",
     "build": "run-s build:**",
     "build:lint": "bun lint",
-    "build:next": "bun next build --webpack",
+    "build:next": "bun next build",
     "start": "bunx next start",
     "typecheck": "tsc --noEmit --preserveWatchOutput",
     "typegen": "payload generate:types",
