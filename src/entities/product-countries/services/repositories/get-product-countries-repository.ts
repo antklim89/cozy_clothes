@@ -3,7 +3,7 @@ import 'server-only';
 import { getPayload } from '@/shared/lib/payload';
 import { err, ok } from '@/shared/lib/result';
 
-export async function getCountriesRepository({ name }: { name?: string } = {}) {
+export async function getProductCountriesRepository({ name }: { name?: string } = {}) {
   try {
     const payload = await getPayload();
     const result = await payload.find({

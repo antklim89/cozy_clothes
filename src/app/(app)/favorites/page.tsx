@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createLoader, parseAsInteger } from 'nuqs/server';
 
-import { getProductsFavorites } from '@/entities/products/services';
+import { getFavoritesProducts } from '@/entities/products/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductsFavorites } from '@/widgets/product-favorites/ui';
 
@@ -11,7 +11,7 @@ const loadSearchParams = createLoader({
 
 async function Page({ searchParams }: PageProps<'/favorites'>) {
   const params = loadSearchParams(await searchParams);
-  const { result: products, error } = await getProductsFavorites({ options: { page: params.page } });
+  const { result: products, error } = await getFavoritesProducts({ options: { page: params.page } });
 
   if (error && error.type === 'unauthenticated') return redirect('/');
   if (error) return <ErrorComponent error={error} />;

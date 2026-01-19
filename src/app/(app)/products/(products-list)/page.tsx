@@ -14,7 +14,7 @@ import { ProductCountriesSelect, ProductCountriesSelectFallback } from '@/entiti
 import { PRODUCT_SIZES_CACHE_TAG } from '@/entities/product-sizes/config';
 import { getProductSizes } from '@/entities/product-sizes/services';
 import { ProductSizeSelect, ProductSizesSelectFallback } from '@/entities/product-sizes/ui';
-import { getProductList } from '@/entities/products/services';
+import { getManyProducts } from '@/entities/products/services';
 import { ProductsListFallback } from '@/entities/products/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductCatalog, ProductCatalogAside, ProductCatalogList } from '@/widgets/products-catalog/ui';
@@ -73,7 +73,7 @@ async function ProductSizesFilterPageSection() {
 async function ProductCatalogListPageSection({ searchParams }: PageProps<'/products'>) {
   const params = loadSearchParams(await searchParams);
 
-  const getProductListResult = await getProductList({
+  const getProductListResult = await getManyProducts({
     filter: {
       search: params.search ?? undefined,
       minPrice: params.minPrice ?? undefined,

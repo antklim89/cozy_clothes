@@ -1,4 +1,4 @@
-import { getFavoriteProduct } from '@/entities/products/services';
+import { getIsFavoriteProduct } from '@/entities/products/services';
 import { getMe } from '@/entities/user/services';
 import { FavoritesToggleButton, FavoritesToggleButtonUnauthorized } from '@/features/favorites-toggle/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
@@ -8,7 +8,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
   const { productId } = await ParamsSchema.parseAsync(await params);
 
   const user = await getMe();
-  const favoriteProduct = await getFavoriteProduct(productId);
+  const favoriteProduct = await getIsFavoriteProduct(productId);
 
   if (favoriteProduct.type === 'error' && favoriteProduct.error.type === 'unauthenticated')
     return <FavoritesToggleButtonUnauthorized size="icon-lg" />;

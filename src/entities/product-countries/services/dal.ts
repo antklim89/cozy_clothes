@@ -1,9 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { getCountriesRepository } from './repositories/get-countries-repository';
+import { getProductCountriesRepository } from './repositories/get-product-countries-repository';
 
 export const getProductCountries = cache(async () => {
-  const result = await getCountriesRepository();
+  const result = await getProductCountriesRepository();
   return result;
 });

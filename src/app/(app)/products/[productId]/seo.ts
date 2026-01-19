@@ -4,7 +4,7 @@ import { cacheLife, cacheTag } from 'next/cache';
 import { z } from 'zod/v4-mini';
 
 import { PRODUCT_CACHE_TAG } from '@/entities/products/config';
-import { getProduct } from '@/entities/products/services';
+import { getOneProduct } from '@/entities/products/services';
 import { env } from '@/shared/lib/env';
 
 export async function generateMetadata({ params }: PageProps<'/products/[productId]'>): Promise<Metadata> {
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<'/products/[product
 
   cacheTag(`${PRODUCT_CACHE_TAG}:${data.productId}`);
 
-  const { type, result: product, error } = await getProduct(data.productId);
+  const { type, result: product, error } = await getOneProduct(data.productId);
   if (type === 'error') return { title: error.type, description: error.message };
 
   const {

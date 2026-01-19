@@ -12,7 +12,7 @@ import { getManyProductsRepository } from './repositories/get-many-products-repo
 import { getOneProductRepository } from './repositories/get-one-product-repository';
 import { GetProductListInputSchema, GetProductsFavoritesInputSchema } from '../model/schemas';
 
-export const getProductList = cache(
+export const getManyProducts = cache(
   async (input: { filter: ProductFilterType; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
     const validatedInput = await GetProductListInputSchema.safeParseAsync(input);
     if (!validatedInput.success) return err({ type: 'validation', message: validatedInput.error.message });
@@ -23,12 +23,12 @@ export const getProductList = cache(
   },
 );
 
-export const getProduct = cache(async (id: ProductType['id']) => {
+export const getOneProduct = cache(async (id: ProductType['id']) => {
   const result = await getOneProductRepository(id);
   return result;
 });
 
-export const getFavoriteProduct = cache(async (id: ProductType['id']) => {
+export const getIsFavoriteProduct = cache(async (id: ProductType['id']) => {
   const user = await getMe();
   if (!user) return err({ type: 'unauthenticated', message: 'You are not authenticated.' });
 
@@ -36,7 +36,7 @@ export const getFavoriteProduct = cache(async (id: ProductType['id']) => {
   return result;
 });
 
-export const getProductsFavorites = cache(async (input: { options: Pick<PayloadOptions, 'page'> }) => {
+export const getFavoritesProducts = cache(async (input: { options: Pick<PayloadOptions, 'page'> }) => {
   const validatedInput = await GetProductsFavoritesInputSchema.safeParseAsync(input);
   if (!validatedInput.success) return err({ type: 'validation', message: validatedInput.error.message });
   const { options } = validatedInput.data;

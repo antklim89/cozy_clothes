@@ -1,9 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { getSizesRepository } from './repositories/get-sizes-repository';
+import { getProductSizesRepository } from './repositories/get-product-sizes-repository';
 
 export const getProductSizes = cache(async () => {
-  const result = await getSizesRepository();
+  const result = await getProductSizesRepository();
   return result;
 });

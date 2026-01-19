@@ -1,7 +1,7 @@
 import { cacheLife, cacheTag } from 'next/cache';
 
 import { PRODUCT_CACHE_TAG } from '@/entities/products/config';
-import { getProduct } from '@/entities/products/services';
+import { getOneProduct } from '@/entities/products/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ProductImagesCarousel } from '@/widgets/product/ui';
 import { ParamsSchema } from '../params';
@@ -13,7 +13,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
   cacheLife('max');
   cacheTag(`${PRODUCT_CACHE_TAG}:${productId}`);
 
-  const productResult = await getProduct(productId);
+  const productResult = await getOneProduct(productId);
   if (productResult.type === 'error') return <ErrorComponent error={productResult.error} />;
 
   return <ProductImagesCarousel images={productResult.result.images} alt={productResult.result.title} />;

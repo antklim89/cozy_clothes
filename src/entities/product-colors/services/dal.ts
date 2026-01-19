@@ -1,9 +1,9 @@
 import 'server-only';
 import { cache } from 'react';
 
-import { getColorsRepository } from './repositories/get-colors-repository';
+import { getProductColorsRepository } from './repositories/get-product-colors-repository';
 
 export const getProductColors = cache(async () => {
-  const result = await getColorsRepository();
+  const result = await getProductColorsRepository();
   return result;
 });
