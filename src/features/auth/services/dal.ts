@@ -1,5 +1,6 @@
 import 'server-only';
 import { cache } from 'react';
+import { z } from 'zod/v4-mini';
 
 import type { AuthType } from '@/entities/user/model';
 import { AuthSchema } from '@/entities/user/model';
@@ -10,7 +11,7 @@ import { logoutRepository } from './repositories/logout-repository';
 
 export const register = cache(async ({ email, password }: AuthType) => {
   const { success, data: validatedInput, error } = AuthSchema.safeParse({ email, password });
-  if (!success) return errValidation(error.message);
+  if (!success) return errValidation(z.prettifyError(error));
 
   const createUserResult = await createUserRepository(validatedInput);
   if (createUserResult.error) return createUserResult;
@@ -21,7 +22,7 @@ export const register = cache(async ({ email, password }: AuthType) => {
 
 export const login = cache(async ({ email, password }: AuthType) => {
   const { success, data: validatedInput, error } = AuthSchema.safeParse({ email, password });
-  if (!success) return errValidation(error.message);
+  if (!success) return errValidation(z.prettifyError(error));
 
   const loginResult = await loginRepository(validatedInput);
   return loginResult;

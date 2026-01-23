@@ -19,10 +19,8 @@ export const addFavoritesRepository = cache(async ({ productId, userId }: { prod
 
     return ok(null);
   } catch (error) {
-    if (error instanceof ValidationError) {
-      if (error.data.errors.some(e => e.message === 'Value must be unique')) {
-        return errConflict('Product already in favorites.');
-      }
+    if (error instanceof ValidationError && error.data.errors.some(e => e.message === 'Value must be unique')) {
+      return errConflict('Product already in favorites.');
     }
     return errUnexpected('Failed to add favorite product.');
   }

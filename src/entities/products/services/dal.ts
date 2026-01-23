@@ -1,6 +1,7 @@
 import 'server-only';
 
 import { cache } from 'react';
+import z from 'zod/v4-mini';
 
 import type { ProductFilterType, ProductType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
@@ -14,11 +15,10 @@ import { GetProductListInputSchema, GetProductsFavoritesInputSchema } from '../m
 
 export const getManyProducts = cache(
   async (input: { filter: ProductFilterType; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
-    const validatedInput = await GetProductListInputSchema.safeParseAsync(input);
-    if (!validatedInput.success) return errValidation(validatedInput.error.message);
-    const { filter, options } = validatedInput.data;
+    const { success, error, data: validatedInput } = await GetProductListInputSchema.safeParseAsync(input);
+    if (!success) return errValidation(z.prettifyError(error));
 
-    const result = await getManyProductsRepository({ filter, options });
+    const result = await getManyProductsRepository(validatedInput);
     return result;
   },
 );
@@ -30,20 +30,19 @@ export const getOneProduct = cache(async (id: ProductType['id']) => {
 
 export const getIsFavoriteProduct = cache(async (id: ProductType['id']) => {
   const user = await getMe();
-  if (!user) return errUnauthenticated('You are not authenticated.');
+  if (!user) return errUnauthenticated();
 
   const result = await getIsFavoriteProductRepository(id, user.id);
   return result;
 });
 
 export const getFavoritesProducts = cache(async (input: { options: Pick<PayloadOptions, 'page'> }) => {
-  const validatedInput = await GetProductsFavoritesInputSchema.safeParseAsync(input);
-  if (!validatedInput.success) return errValidation(validatedInput.error.message);
-  const { options } = validatedInput.data;
+  const { success, error, data: validatedInput } = await GetProductsFavoritesInputSchema.safeParseAsync(input);
+  if (!success) return errValidation(z.prettifyError(error));
 
   const user = await getMe();
-  if (!user) return errUnauthenticated('You are not authenticated.');
+  if (!user) return errUnauthenticated();
 
-  const result = await getFavoritesProductsRepository({ user, options });
+  const result = await getFavoritesProductsRepository({ user, options: validatedInput.options });
   return result;
 });
