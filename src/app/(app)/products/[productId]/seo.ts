@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: PageProps<'/products/[product
 
   cacheTag(`${PRODUCT_CACHE_TAG}:${data.productId}`);
 
-  const { type, result: product, error } = await getOneProduct(data.productId);
-  if (type === 'error') return { title: error.type, description: error.message };
+  const { result: product, error } = await getOneProduct(data.productId);
+  if (error) return { title: error.type, description: error.message };
 
   const {
     title,

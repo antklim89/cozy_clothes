@@ -4,7 +4,7 @@ import { PRODUCTS_PER_PAGE } from '@/entities/products/config';
 import { productPreviewDto } from '@/entities/products/model';
 import type { UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
 import type { PayloadOptions } from '@/shared/model/types/types';
 
@@ -40,6 +40,6 @@ export async function getFavoritesProductsRepository({
     return ok(productsResult);
   } catch (error) {
     console.error('[Error getFavoritesProductsRepository]:', error);
-    return err({ type: 'unexpected', message: 'Failed to get product list. Try again later.' });
+    return errUnexpected('Failed to get product list. Try again later.');
   }
 }

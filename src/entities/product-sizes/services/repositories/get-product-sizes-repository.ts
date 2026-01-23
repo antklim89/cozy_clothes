@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export async function getProductSizesRepository() {
   try {
@@ -15,6 +15,6 @@ export async function getProductSizesRepository() {
     return ok(result.docs);
   } catch (error) {
     console.error('Error fetching sizes:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch sizes' });
+    return errUnexpected('Failed to fetch sizes');
   }
 }

@@ -35,8 +35,8 @@ async function ProductCategoriesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
-  const { result: categories, type, error } = await getProductCategories();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: categories, error } = await getProductCategories();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductCategoriesSelect categories={categories} />;
 }
@@ -44,8 +44,8 @@ async function ProductCountriesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_COUNTRIES_CACHE_TAG);
-  const { result: countries, type, error } = await getProductCountries();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: countries, error } = await getProductCountries();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductCountriesSelect countries={countries} />;
 }
@@ -54,8 +54,8 @@ async function ProductColorsFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_COLORS_CACHE_TAG);
-  const { result: colors, type, error } = await getProductColors();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: colors, error } = await getProductColors();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductColorsSelect colors={colors} />;
 }
@@ -64,8 +64,8 @@ async function ProductSizesFilterPageSection() {
   'use cache';
   cacheLife('max');
   cacheTag(PRODUCT_SIZES_CACHE_TAG);
-  const { result: sizes, type, error } = await getProductSizes();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: sizes, error } = await getProductSizes();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductSizeSelect sizes={sizes} />;
 }
@@ -88,7 +88,7 @@ async function ProductCatalogListPageSection({ searchParams }: PageProps<'/produ
       sort: params.sort ?? undefined,
     },
   });
-  if (getProductListResult.type === 'error') return <ErrorComponent error={getProductListResult.error} />;
+  if (getProductListResult.error) return <ErrorComponent error={getProductListResult.error} />;
 
   return <ProductCatalogList products={getProductListResult.result} />;
 }

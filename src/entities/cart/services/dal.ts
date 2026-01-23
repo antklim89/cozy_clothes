@@ -2,7 +2,7 @@ import 'server-only';
 
 import { cache } from 'react';
 
-import { err } from '@/shared/lib/result';
+import { errUnauthenticated } from '@/shared/lib/result';
 import { getLocalCartRepository } from './repositories/get-cart-by-local-cart-repository';
 import { getAndSyncCartRepository } from './repositories/get-cart-repository';
 import { getMe } from '../@x/user/services';
@@ -10,7 +10,7 @@ import type { LocalCartItemType } from '../model';
 
 export const getAndSyncCart = cache(async ({ localCart }: { localCart?: LocalCartItemType[] } = {}) => {
   const user = await getMe();
-  if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
+  if (user == null) return errUnauthenticated('You are not logged in');
 
   const result = await getAndSyncCartRepository({ userId: user.id, localCart });
   return result;

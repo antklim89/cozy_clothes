@@ -3,8 +3,8 @@ import { About } from '@/entities/about/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
 async function Page() {
-  const { type, result: about, error } = await getAbout();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: about, error } = await getAbout();
+  if (error) return <ErrorComponent error={error} />;
 
   return <About about={about} />;
 }

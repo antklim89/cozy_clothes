@@ -1,16 +1,14 @@
 export interface Ok<T> {
-  type: 'ok';
   result: T;
   error: null;
 }
 
 export interface Err<T extends string = string> {
-  type: 'error';
   error: ErrVariant<T>;
   result: null;
 }
 
-interface ErrVariant<T extends string> {
+interface ErrVariant<T extends string = string> {
   type: T;
   message: string;
   original?: unknown;
@@ -33,7 +31,6 @@ export const NOT_FOUND_ERROR = {
 
 export function ok<T>(result: T): Ok<T> {
   return {
-    type: 'ok',
     result,
     error: null,
   };
@@ -41,21 +38,44 @@ export function ok<T>(result: T): Ok<T> {
 
 export function err<T extends string>(error: ErrVariant<T>): Err<T> {
   return {
-    type: 'error',
     error,
     result: null,
   };
 }
 
-export function errMap<OldErr extends string, NewErr extends string, R>(
-  result: Result<R, OldErr>,
-  errCb: (arg: ErrVariant<OldErr>) => ErrVariant<NewErr>,
-): Result<R, NewErr> {
-  if (result.type === 'ok') return result;
-  return err(errCb(result.error));
+export function okMap<R, U, E extends string>(result: Result<R, E>, okCb: (arg: R) => U): Result<U, E> {
+  if (result.error) return result;
+  return ok(okCb(result.result));
 }
 
-export function okMap<R, U, E extends string>(result: Result<R, E>, okCb: (arg: R) => U): Result<U, E> {
-  if (result.type === 'error') return result;
-  return ok(okCb(result.result));
+export const ErrType = {
+  UNEXPECTED: 'unexpected',
+  NOT_FOUND: 'not-found',
+  UNAUTHENTICATED: 'unauthenticated',
+  VALIDATION: 'validation',
+  CONFLICT: 'conflict',
+} as const;
+export type ErrType = (typeof ErrType)[keyof typeof ErrType];
+
+export function errUnexpected(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'unexpected'> {
+  return err({ type: ErrType.UNEXPECTED, message, ...rest });
+}
+
+export function errNotFound(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'not-found'> {
+  return err({ type: ErrType.NOT_FOUND, message, ...rest });
+}
+
+export function errUnauthenticated(
+  message: string,
+  rest?: Pick<ErrVariant, 'original' | 'errors'>,
+): Err<'unauthenticated'> {
+  return err({ type: ErrType.UNAUTHENTICATED, message, ...rest });
+}
+
+export function errValidation(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'validation'> {
+  return err({ type: ErrType.VALIDATION, message, ...rest });
+}
+
+export function errConflict(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'conflict'> {
+  return err({ type: ErrType.CONFLICT, message, ...rest });
 }

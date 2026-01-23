@@ -39,7 +39,7 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
 
   const handleSubmit = form.handleSubmit(async (data: LoginType | RegisterType) => {
     const result = await onSubmit(data);
-    if (result.type === 'ok') {
+    if (result.result) {
       form.reset();
       return;
     }

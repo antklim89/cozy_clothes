@@ -30,10 +30,10 @@ export function useFavoritesQuery({
     },
     mutationFn: async () => {
       if (isFavoritePrev.current === isFavoriteCurr.current) return clear();
-      const result = await toggleFavoritesActionDebounced({ productId, isFavorite });
-      if (result.type === 'ok') {
-        isFavoritePrev.current = result.result;
-        queryClient.setQueryData<boolean>([FAVORITES_QUERY_KEY, { productId }], () => result.result);
+      const { result: newIsFavorite } = await toggleFavoritesActionDebounced({ productId, isFavorite });
+      if (newIsFavorite) {
+        isFavoritePrev.current = newIsFavorite;
+        queryClient.setQueryData<boolean>([FAVORITES_QUERY_KEY, { productId }], () => newIsFavorite);
       }
     },
   });

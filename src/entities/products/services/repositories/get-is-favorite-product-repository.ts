@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errNotFound, errUnexpected, ok } from '@/shared/lib/result';
 import type { ProductType } from '../../model';
 
 export async function getIsFavoriteProductRepository(id: ProductType['id'], userId: number) {
@@ -20,7 +20,7 @@ export async function getIsFavoriteProductRepository(id: ProductType['id'], user
         favorites: { limit: 1, where: { authorId: { equals: userId } } },
       },
     });
-    if (productPayloadResult._status !== 'published') return err({ type: 'not-found', message: 'Product not found.' });
+    if (productPayloadResult._status !== 'published') return errNotFound('Product not found.');
 
     return ok({
       id: productPayloadResult.id,
@@ -30,8 +30,8 @@ export async function getIsFavoriteProductRepository(id: ProductType['id'], user
     console.error('[Error getFavoriteProductRepository]:', error);
 
     if (error instanceof Error && error.name === 'NotFound') {
-      return err({ type: 'not-found', message: 'Product not found.' });
+      return errNotFound('Product not found.');
     }
-    return err({ type: 'unexpected', message: 'Failed to get product. Try again later.' });
+    return errUnexpected('Failed to get product. Try again later.');
   }
 }

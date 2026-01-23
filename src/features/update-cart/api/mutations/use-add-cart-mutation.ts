@@ -10,7 +10,7 @@ export function useAddCartMutation() {
       const isAuthenticated = await meta?.isAuthenticated();
       if (isAuthenticated) {
         const addCartItemResult = await addCartItemAction(newLocalCartItem);
-        if (addCartItemResult.type === 'error') throw new Error(addCartItemResult.error.message);
+        if (addCartItemResult.error) throw new Error(addCartItemResult.error.message);
       }
 
       addCartItemToLocalStorage(newLocalCartItem);

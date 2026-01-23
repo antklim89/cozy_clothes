@@ -4,7 +4,7 @@ import type { ValidationError } from 'payload';
 import type { AuthType, UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
 import type { PromiseResult } from '@/shared/lib/result';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, errValidation, ok } from '@/shared/lib/result';
 
 export async function createUserRepository({
   email,
@@ -35,10 +35,10 @@ export async function createUserRepository({
         {} as Record<string, string>,
       );
 
-      return err({ type: 'validation', message: error.message, errors: issues });
+      return errValidation(error.message, { errors: issues });
     }
 
     console.error('Error create user:', error);
-    return err({ type: 'unexpected', message: 'Failed to create user' });
+    return errUnexpected('Failed to create user');
   }
 }

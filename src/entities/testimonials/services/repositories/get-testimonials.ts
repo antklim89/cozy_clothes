@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 import type { TestimonialType } from '../../model/types';
 
 export async function getTestimonialsRepository() {
@@ -16,6 +16,6 @@ export async function getTestimonialsRepository() {
     return ok(result.docs as TestimonialType[]);
   } catch (error) {
     console.error('Error fetching testimonials:', error);
-    return err({ type: 'error', message: 'Failed to fetch testimonials' });
+    return errUnexpected('Failed to fetch testimonials');
   }
 }

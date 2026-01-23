@@ -2,7 +2,7 @@ import 'server-only';
 import { cache } from 'react';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export const updateCartQtyRepository = cache(
   async ({ productId, userId, qty }: { productId: number; userId: number; qty: number }) => {
@@ -27,7 +27,7 @@ export const updateCartQtyRepository = cache(
       return ok(null);
     } catch (error) {
       console.error(error);
-      return err({ type: 'unexpected', message: 'Failed to update cart item.' });
+      return errUnexpected('Failed to update cart item.');
     }
   },
 );

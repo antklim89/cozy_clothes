@@ -3,17 +3,17 @@ import { z } from 'zod/v4-mini';
 
 import { CartQtySchema } from '@/entities/cart/model';
 import { getMe } from '@/entities/user/services';
-import { err } from '@/shared/lib/result';
+import { errUnauthenticated, errValidation } from '@/shared/lib/result';
 import { addCartItemRepository } from './repositories/add-cart-item-repository';
 import { removeCartItemRepository } from './repositories/remove-cart-item-repository';
 import { updateCartQtyRepository } from './repositories/update-cart-qty-repository';
 
 export async function addCartItem({ productId, qty }: { productId: number; qty?: number }) {
   const { success, data: validatedQty } = await z.optional(CartQtySchema).safeParseAsync(qty);
-  if (!success) return err({ type: 'validation', message: 'Invalid quantity' });
+  if (!success) return errValidation('Invalid quantity');
 
   const user = await getMe();
-  if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
+  if (user == null) return errUnauthenticated('You are not logged in');
 
   const result = await addCartItemRepository({
     productId,
@@ -25,7 +25,7 @@ export async function addCartItem({ productId, qty }: { productId: number; qty?:
 
 export async function removeCartItem({ productId }: { productId: number }) {
   const user = await getMe();
-  if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
+  if (user == null) return errUnauthenticated('You are not logged in');
 
   const result = await removeCartItemRepository({
     productId,
@@ -36,10 +36,10 @@ export async function removeCartItem({ productId }: { productId: number }) {
 
 export async function updateCartQty({ productId, qty }: { productId: number; qty: number }) {
   const { success, data: validatedQty } = await CartQtySchema.safeParseAsync(qty);
-  if (!success) return err({ type: 'validation', message: 'Invalid quantity' });
+  if (!success) return errValidation('Invalid quantity');
 
   const user = await getMe();
-  if (user == null) return err({ type: 'unauthorized', message: 'You are not logged in' });
+  if (user == null) return errUnauthenticated('You are not logged in');
 
   const result = await updateCartQtyRepository({
     productId,

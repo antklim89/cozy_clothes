@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 import { cartDto } from '../../model/dto';
 import type { CartItemType, LocalCartItemType } from '../../model/types';
 
@@ -29,6 +29,6 @@ export async function getLocalCartRepository({ localCart }: { localCart: LocalCa
     return ok(cartResult);
   } catch (error) {
     console.error(error);
-    return err({ type: 'unexpected', message: 'Failed to get cart.' });
+    return errUnexpected('Failed to get cart.');
   }
 }

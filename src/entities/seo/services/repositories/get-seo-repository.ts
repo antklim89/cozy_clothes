@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 import { seoDto } from '../../models/dto';
 
 export async function getSeoRepository() {
@@ -15,6 +15,6 @@ export async function getSeoRepository() {
     return ok(dto);
   } catch (error) {
     console.error('Error fetching seo:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch seo' });
+    return errUnexpected('Failed to fetch seo');
   }
 }

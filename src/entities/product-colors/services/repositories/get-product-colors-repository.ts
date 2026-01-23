@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export async function getProductColorsRepository() {
   try {
@@ -15,6 +15,6 @@ export async function getProductColorsRepository() {
     return ok(result.docs);
   } catch (error) {
     console.error('Error fetching colors:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch colors' });
+    return errUnexpected('Failed to fetch colors');
   }
 }

@@ -14,7 +14,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
   cacheTag(`${PRODUCT_CACHE_TAG}:${productId}`);
 
   const productResult = await getOneProduct(productId);
-  if (productResult.type === 'error') return <ErrorComponent error={productResult.error} />;
+  if (productResult.error) return <ErrorComponent error={productResult.error} />;
 
   return (
     <ProductsVariantsSelect selectedVariant={productResult.result} variants={productResult.result.productVariants} />

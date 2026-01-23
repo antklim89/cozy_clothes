@@ -11,7 +11,7 @@ interface Props {
 export function Auth({ type }: Props) {
   async function handleSubmit(data: AuthType) {
     const result = type === 'login' ? await loginAction(data) : await registerAction(data);
-    if (result.type === 'error') return result;
+    if (result.error) return result;
 
     location.reload();
     return result;

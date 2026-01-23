@@ -3,7 +3,7 @@ import { cache } from 'react';
 
 import { cartDto } from '@/entities/cart/model';
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export const addCartItemRepository = cache(
   async ({ productId, userId, qty = 1 }: { productId: number; userId: number; qty?: number }) => {
@@ -25,7 +25,7 @@ export const addCartItemRepository = cache(
       return ok(cart);
     } catch (error) {
       console.error(error);
-      return err({ type: 'unexpected', message: 'Failed to add cart item.' });
+      return errUnexpected('Failed to add cart item.');
     }
   },
 );

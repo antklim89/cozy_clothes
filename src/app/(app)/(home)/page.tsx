@@ -22,8 +22,8 @@ async function ProductCategoryNavBarPageSection() {
   'use cache';
   cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
 
-  const { type, result: categories, error } = await getProductCategories();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: categories, error } = await getProductCategories();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductCategoriesNavBar categories={categories} />;
 }
@@ -31,8 +31,8 @@ async function ContactsPageSection() {
   'use cache';
   cacheTag(CONTACTS_CACHE_TAG);
 
-  const { type, result: contacts, error } = await getContacts();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: contacts, error } = await getContacts();
+  if (error) return <ErrorComponent error={error} />;
 
   return <Contacts contacts={contacts} />;
 }
@@ -40,22 +40,22 @@ async function HeroPageSection() {
   'use cache';
   cacheTag(HERO_CACHE_TAG);
 
-  const { type, result: hero, error } = await getHero();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: hero, error } = await getHero();
+  if (error) return <ErrorComponent error={error} />;
 
   return <Hero hero={hero} />;
 }
 
 async function NewProductsPageSection() {
-  const { type, result: products, error } = await getNewProducts();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: products, error } = await getNewProducts();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductsPromo products={products} title="New Products" />;
 }
 
 async function DiscountProductsPageSection() {
-  const { type, result: products, error } = await getDiscountProducts();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: products, error } = await getDiscountProducts();
+  if (error) return <ErrorComponent error={error} />;
 
   return <ProductsPromo products={products} title="Big Discounts" />;
 }
@@ -64,8 +64,8 @@ async function TestimonialsPageSection() {
   'use cache';
   cacheTag(TESTIMONIALS_CACHE_TAG);
 
-  const { type, result: testimonials, error } = await getTestimonials();
-  if (type === 'error') return <ErrorComponent error={error} />;
+  const { result: testimonials, error } = await getTestimonials();
+  if (error) return <ErrorComponent error={error} />;
 
   return <Testimonials testimonials={testimonials} />;
 }

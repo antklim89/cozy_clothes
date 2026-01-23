@@ -13,7 +13,7 @@ export function useUpdateCartMutation() {
       const isAuthenticated = await meta?.isAuthenticated();
       if (isAuthenticated) {
         const updateCartQtyResult = await updateCartQtyActionDebounced(updatedCartItem);
-        if (updateCartQtyResult.type === 'error') throw new Error(updateCartQtyResult.error.message);
+        if (updateCartQtyResult.error) throw new Error(updateCartQtyResult.error.message);
       }
 
       updateCartQtyInLocalStorage(updatedCartItem);

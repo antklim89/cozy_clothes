@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export async function getAboutRepository() {
   try {
@@ -14,6 +14,6 @@ export async function getAboutRepository() {
     return ok(result);
   } catch (error) {
     console.error('Error fetching about:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch about. Try again later.' });
+    return errUnexpected('Failed to fetch about. Try again later.');
   }
 }

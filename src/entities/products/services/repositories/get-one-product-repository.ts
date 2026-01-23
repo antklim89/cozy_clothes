@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errNotFound, errUnexpected, ok } from '@/shared/lib/result';
 import type { ProductType } from '../../model';
 import { productDto } from '../../model/dto';
 
@@ -14,7 +14,7 @@ export async function getOneProductRepository(id: ProductType['id']) {
       id,
       depth: 3,
     });
-    if (productPayloadResult._status !== 'published') return err({ type: 'not-found', message: 'Product not found.' });
+    if (productPayloadResult._status !== 'published') return errNotFound('Product not found.');
 
     const productResult = productDto(productPayloadResult);
 
@@ -23,8 +23,8 @@ export async function getOneProductRepository(id: ProductType['id']) {
     console.error('[Error getOneProductService]:', error);
 
     if (error instanceof Error && error.name === 'NotFound') {
-      return err({ type: 'not-found', message: 'Product not found.' });
+      return errNotFound('Product not found.');
     }
-    return err({ type: 'unexpected', message: 'Failed to get product. Try again later.' });
+    return errUnexpected('Failed to get product. Try again later.');
   }
 }

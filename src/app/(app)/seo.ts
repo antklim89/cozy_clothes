@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
   'use cache';
   cacheLife('max');
   cacheTag(SEO_CACHE_TAG);
-  const { type, error, result: seo } = await getSeo();
-  if (type === 'error') throw new Error(error.message);
+  const { error, result: seo } = await getSeo();
+  if (error) throw new Error(error.message);
 
   const { title, creator, description, images, keywords } = seo;
 

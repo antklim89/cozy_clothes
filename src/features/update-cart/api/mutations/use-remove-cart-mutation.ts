@@ -10,7 +10,7 @@ export function useRemoveCartMutation() {
       const isAuthenticated = await meta?.isAuthenticated();
       if (isAuthenticated) {
         const removeCartItemResult = await removeCartItemAction(deletedCartItem);
-        if (removeCartItemResult.type === 'error') throw new Error(removeCartItemResult.error.message);
+        if (removeCartItemResult.error) throw new Error(removeCartItemResult.error.message);
       }
 
       removeCartItemFromLocalStorage(deletedCartItem);

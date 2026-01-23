@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { getPayload } from '@/shared/lib/payload';
-import { err, ok } from '@/shared/lib/result';
+import { errUnexpected, ok } from '@/shared/lib/result';
 
 export async function getContactsRepository() {
   try {
@@ -14,6 +14,6 @@ export async function getContactsRepository() {
     return ok(result.docs);
   } catch (error) {
     console.error('Error fetching contacts:', error);
-    return err({ type: 'unexpected', message: 'Failed to fetch contacts. Try again later.' });
+    return errUnexpected('Failed to fetch contacts. Try again later.');
   }
 }
