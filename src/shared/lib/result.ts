@@ -57,19 +57,22 @@ export const ErrType = {
 } as const;
 export type ErrType = (typeof ErrType)[keyof typeof ErrType];
 
-export function errUnexpected(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'unexpected'> {
+export function errUnexpected(
+  message: string = 'Unexpected error. Try again later.',
+  rest?: Pick<ErrVariant, 'original' | 'errors'>,
+): Err<'unexpected'> {
   return err({ type: ErrType.UNEXPECTED, message, ...rest });
+}
+
+export function errUnauthenticated(
+  message: string = 'You are not authenticated',
+  rest?: Pick<ErrVariant, 'original' | 'errors'>,
+): Err<'unauthenticated'> {
+  return err({ type: ErrType.UNAUTHENTICATED, message, ...rest });
 }
 
 export function errNotFound(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'not-found'> {
   return err({ type: ErrType.NOT_FOUND, message, ...rest });
-}
-
-export function errUnauthenticated(
-  message: string,
-  rest?: Pick<ErrVariant, 'original' | 'errors'>,
-): Err<'unauthenticated'> {
-  return err({ type: ErrType.UNAUTHENTICATED, message, ...rest });
 }
 
 export function errValidation(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'validation'> {
