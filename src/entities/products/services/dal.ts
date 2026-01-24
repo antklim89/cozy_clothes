@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { cache } from 'react';
-import z from 'zod/v4-mini';
+import { z } from 'zod/v4-mini';
 
 import type { ProductFilterType, ProductType } from '@/entities/products/model';
 import { getMe } from '@/entities/user/services';
