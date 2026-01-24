@@ -6,7 +6,7 @@ import { AlertCircleIcon, Loader2 } from 'lucide-react';
 import type { LoginType, RegisterType, UserType } from '@/entities/user/model';
 import { LoginSchema, RegisterSchema } from '@/entities/user/model';
 import type { PromiseResult } from '@/shared/lib/result';
-import { cn } from '@/shared/lib/utils';
+import { cn, setFormErrors } from '@/shared/lib/utils';
 import { Alert, AlertDescription, AlertTitle } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Field, FieldError, FieldLabel, FieldSet } from '@/shared/ui/field';
@@ -38,19 +38,9 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
   }, [form]);
 
   const handleSubmit = form.handleSubmit(async (data: LoginType | RegisterType) => {
-    const result = await onSubmit(data);
-    if (result.result) {
-      form.reset();
-      return;
-    }
-
-    if (result.error.type === 'validation' && result.error.errors != null) {
-      Object.entries(result.error.errors).forEach(([key, value]) => {
-        form.setError(key as 'root', { message: value });
-      });
-    } else {
-      form.setError('root', { message: result.error.message });
-    }
+    const { error } = await onSubmit(data);
+    if (!error) form.reset();
+    setFormErrors(form, error);
   });
 
   return (

@@ -1,6 +1,9 @@
+import type { FieldValues, UseFormReturn } from 'react-hook-form';
 import type { ClassValue } from 'clsx';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+
+import type { ErrVariant } from './result';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,4 +32,15 @@ export function calculatePrice({
   qty?: number;
 }): number {
   return (price / (1 - discount / 100)) * qty;
+}
+
+export function setFormErrors<T extends FieldValues>(form: UseFormReturn<T>, error?: ErrVariant | null): void {
+  if (error == null) return;
+  if (error.type === 'validation' && error.issues != null) {
+    error.issues.forEach(({ path, message }) => {
+      form.setError(path as 'root', { message });
+    });
+  } else {
+    form.setError('root', { message: error.message });
+  }
 }
