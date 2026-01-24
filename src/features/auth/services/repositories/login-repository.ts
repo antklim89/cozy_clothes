@@ -1,13 +1,14 @@
-import 'server-only';
 import config from '@payload-config';
 import { login as payloadLogin } from '@payloadcms/next/auth';
+import 'server-only';
 
-import type { AuthType, UserType } from '@/entities/user/model';
-import type { PromiseResult } from '@/shared/lib/result';
-import { errUnexpected, ok } from '@/shared/lib/result';
+import { ValidationError } from 'payload';
+
+import type { AuthType } from '@/entities/user/model';
+import { errUnexpected, errValidation, ok } from '@/shared/lib/result';
 import type { User } from '@/shared/model/types/payload-types.generated';
 
-export async function loginRepository({ email, password }: AuthType): PromiseResult<UserType, 'unexpected'> {
+export async function loginRepository({ email, password }: AuthType) {
   try {
     const result = await payloadLogin({
       collection: 'users',
@@ -23,6 +24,9 @@ export async function loginRepository({ email, password }: AuthType): PromiseRes
       email: user.email,
     });
   } catch (error) {
+    if (error instanceof ValidationError) {
+      return errValidation(error.message, { issues: error.data.errors });
+    }
     return errUnexpected(error instanceof Error ? error.message : 'Failed to login');
   }
 }

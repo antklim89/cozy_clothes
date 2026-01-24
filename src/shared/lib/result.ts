@@ -12,7 +12,7 @@ export interface ErrVariant<T extends string = string> {
   type: T;
   message: string;
   original?: unknown;
-  errors?: Record<string, string>;
+  issues?: { message: string; path: string }[];
 }
 
 export type Result<T, E extends string = string> = Ok<T> | Err<E>;
@@ -59,26 +59,26 @@ export type ErrType = (typeof ErrType)[keyof typeof ErrType];
 
 export function errUnexpected(
   message: string = 'Unexpected error. Try again later.',
-  rest?: Pick<ErrVariant, 'original' | 'errors'>,
+  rest?: Pick<ErrVariant, 'original' | 'issues'>,
 ): Err<'unexpected'> {
   return err({ type: ErrType.UNEXPECTED, message, ...rest });
 }
 
 export function errUnauthenticated(
   message: string = 'You are not authenticated',
-  rest?: Pick<ErrVariant, 'original' | 'errors'>,
+  rest?: Pick<ErrVariant, 'original' | 'issues'>,
 ): Err<'unauthenticated'> {
   return err({ type: ErrType.UNAUTHENTICATED, message, ...rest });
 }
 
-export function errNotFound(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'not-found'> {
+export function errNotFound(message: string, rest?: Pick<ErrVariant, 'original' | 'issues'>): Err<'not-found'> {
   return err({ type: ErrType.NOT_FOUND, message, ...rest });
 }
 
-export function errValidation(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'validation'> {
+export function errValidation(message: string, rest?: Pick<ErrVariant, 'original' | 'issues'>): Err<'validation'> {
   return err({ type: ErrType.VALIDATION, message, ...rest });
 }
 
-export function errConflict(message: string, rest?: Pick<ErrVariant, 'original' | 'errors'>): Err<'conflict'> {
+export function errConflict(message: string, rest?: Pick<ErrVariant, 'original' | 'issues'>): Err<'conflict'> {
   return err({ type: ErrType.CONFLICT, message, ...rest });
 }

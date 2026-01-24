@@ -1,5 +1,5 @@
 import 'server-only';
-import type { ValidationError } from 'payload';
+import { ValidationError } from 'payload';
 
 import type { AuthType, UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
@@ -26,16 +26,8 @@ export async function createUserRepository({
       email: result.email,
     });
   } catch (error) {
-    if (error instanceof Error && error.name === 'ValidationError') {
-      const issues = (error as ValidationError).data.errors.reduce(
-        (acc, value) => {
-          acc[value.path] = value.message;
-          return acc;
-        },
-        {} as Record<string, string>,
-      );
-
-      return errValidation(error.message, { errors: issues });
+    if (error instanceof ValidationError) {
+      return errValidation(error.message, { issues: error.data.errors });
     }
 
     console.error('Error create user:', error);
