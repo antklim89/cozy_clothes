@@ -8,7 +8,7 @@ export interface Err<T extends string = string> {
   result: null;
 }
 
-interface ErrVariant<T extends string = string> {
+export interface ErrVariant<T extends string = string> {
   type: T;
   message: string;
   original?: unknown;
