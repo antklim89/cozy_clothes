@@ -1,13 +1,10 @@
-import { cacheTag } from 'next/cache';
-
-import { TESTIMONIALS_CACHE_TAG } from '@/entities/testimonials/config';
-import { getTestimonials } from '@/entities/testimonials/services';
+import { getTestimonials, testimonialsCache } from '@/entities/testimonials/services';
 import { Testimonials } from '@/entities/testimonials/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
 async function Page() {
   'use cache';
-  cacheTag(TESTIMONIALS_CACHE_TAG);
+  testimonialsCache();
 
   const { result: testimonials, error } = await getTestimonials();
   if (error) return <ErrorComponent error={error} />;

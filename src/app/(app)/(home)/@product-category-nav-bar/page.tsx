@@ -1,13 +1,10 @@
-import { cacheTag } from 'next/cache';
-
-import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
-import { getProductCategories } from '@/entities/product-categories/services';
+import { getProductCategories, productCategoriesCache } from '@/entities/product-categories/services';
 import { ProductCategoriesNavBar } from '@/entities/product-categories/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
 async function Page() {
   'use cache';
-  cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
+  productCategoriesCache();
 
   const { result: categories, error } = await getProductCategories();
   if (error) return <ErrorComponent error={error} />;

@@ -1,13 +1,11 @@
-import { revalidateTag } from 'next/cache';
 import type { CollectionConfig, GlobalConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
-import { HERO_CACHE_TAG } from '../config/cache-tag';
 
 export const Hero: GlobalConfig = {
   slug: 'Hero',
   hooks: {
-    afterChange: [() => revalidateTag(HERO_CACHE_TAG, 'max')],
+    afterChange: [() => import('../services/cache').then(m => m.revalidateHeroCache())],
   },
 
   fields: [

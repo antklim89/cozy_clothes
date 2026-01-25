@@ -1,13 +1,10 @@
-import { revalidateTag } from 'next/cache';
 import type { CollectionConfig } from 'payload';
-
-import { PRODUCT_CATEGORIES_CACHE_TAG } from '../config';
 
 export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
   hooks: {
-    afterChange: [() => revalidateTag(PRODUCT_CATEGORIES_CACHE_TAG, 'max')],
-    afterDelete: [() => revalidateTag(PRODUCT_CATEGORIES_CACHE_TAG, 'max')],
+    afterChange: [() => import('../services/cache').then(m => m.revalidateProductCategoriesCache())],
+    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductCategoriesCache())],
   },
   admin: {
     useAsTitle: 'name',

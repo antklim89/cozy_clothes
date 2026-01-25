@@ -1,9 +1,6 @@
-import { revalidateTag } from 'next/cache';
-import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
-import type { Product, ProductBase } from '@/shared/model/types/payload-types.generated';
-import { PRODUCT_CACHE_TAG } from '../config';
 
 export const Products = {
   slug: 'products',
@@ -17,14 +14,6 @@ export const Products = {
   },
   versions: {
     drafts: true,
-  },
-  hooks: {
-    afterChange: [
-      ({ doc }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${doc.id}`, 'max'),
-    ] satisfies CollectionAfterChangeHook<Product>[],
-    afterDelete: [
-      ({ id }) => revalidateTag(`${PRODUCT_CACHE_TAG}:${id}`, 'max'),
-    ] satisfies CollectionAfterDeleteHook<Product>[],
   },
   indexes: [{ fields: ['productBase', 'color', 'size'], unique: true }],
   fields: [
@@ -113,24 +102,6 @@ export const ProductBases = {
   },
   versions: {
     drafts: true,
-  },
-  hooks: {
-    afterChange: [
-      ({ doc }) => {
-        doc.productVariants?.docs?.forEach(variant => {
-          if (typeof variant === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${variant}`, 'max');
-          else revalidateTag(`${PRODUCT_CACHE_TAG}:${variant.id}`, 'max');
-        });
-      },
-    ] satisfies CollectionAfterChangeHook<ProductBase>[],
-    afterDelete: [
-      ({ doc }) => {
-        doc.productVariants?.docs?.forEach(variant => {
-          if (typeof variant === 'number') revalidateTag(`${PRODUCT_CACHE_TAG}:${variant}`, 'max');
-          else revalidateTag(`${PRODUCT_CACHE_TAG}:${variant.id}`, 'max');
-        });
-      },
-    ] satisfies CollectionAfterDeleteHook<ProductBase>[],
   },
   fields: [
     {

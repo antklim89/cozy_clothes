@@ -1,13 +1,10 @@
-import { revalidateTag } from 'next/cache';
 import type { CollectionConfig } from 'payload';
-
-import { PRODUCT_COLORS_CACHE_TAG } from '../config';
 
 export const ProductColors: CollectionConfig = {
   slug: 'product-colors',
   hooks: {
-    afterChange: [() => revalidateTag(PRODUCT_COLORS_CACHE_TAG, 'max')],
-    afterDelete: [() => revalidateTag(PRODUCT_COLORS_CACHE_TAG, 'max')],
+    afterChange: [() => import('../services/cache').then(m => m.revalidateProductColorsCache())],
+    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductColorsCache())],
   },
   admin: {
     useAsTitle: 'name',

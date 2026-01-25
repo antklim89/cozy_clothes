@@ -1,18 +1,13 @@
 import { Suspense } from 'react';
-import { cacheLife, cacheTag } from 'next/cache';
 import { createLoader, parseAsArrayOf, parseAsInteger, parseAsString } from 'nuqs/server';
 
-import { PRODUCT_CATEGORIES_CACHE_TAG } from '@/entities/product-categories/config';
-import { getProductCategories } from '@/entities/product-categories/services';
+import { getProductCategories, productCategoriesCache } from '@/entities/product-categories/services';
 import { ProductCategoriesSelect, ProductCategoriesSelectFallback } from '@/entities/product-categories/ui';
-import { PRODUCT_COLORS_CACHE_TAG } from '@/entities/product-colors/config';
-import { getProductColors } from '@/entities/product-colors/services';
+import { getProductColors, productColorsCache } from '@/entities/product-colors/services';
 import { ProductColorsSelect, ProductColorsSelectFallback } from '@/entities/product-colors/ui';
-import { PRODUCT_COUNTRIES_CACHE_TAG } from '@/entities/product-countries/config';
-import { getProductCountries } from '@/entities/product-countries/services';
+import { getProductCountries, productCountriesCache } from '@/entities/product-countries/services';
 import { ProductCountriesSelect, ProductCountriesSelectFallback } from '@/entities/product-countries/ui';
-import { PRODUCT_SIZES_CACHE_TAG } from '@/entities/product-sizes/config';
-import { getProductSizes } from '@/entities/product-sizes/services';
+import { getProductSizes, productSizesCache } from '@/entities/product-sizes/services';
 import { ProductSizeSelect, ProductSizesSelectFallback } from '@/entities/product-sizes/ui';
 import { getManyProducts } from '@/entities/products/services';
 import { ProductsListFallback } from '@/entities/products/ui';
@@ -33,8 +28,7 @@ const loadSearchParams = createLoader({
 
 async function ProductCategoriesFilterPageSection() {
   'use cache';
-  cacheLife('max');
-  cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);
+  productCategoriesCache();
   const { result: categories, error } = await getProductCategories();
   if (error) return <ErrorComponent error={error} />;
 
@@ -42,8 +36,7 @@ async function ProductCategoriesFilterPageSection() {
 }
 async function ProductCountriesFilterPageSection() {
   'use cache';
-  cacheLife('max');
-  cacheTag(PRODUCT_COUNTRIES_CACHE_TAG);
+  productCountriesCache();
   const { result: countries, error } = await getProductCountries();
   if (error) return <ErrorComponent error={error} />;
 
@@ -52,8 +45,7 @@ async function ProductCountriesFilterPageSection() {
 
 async function ProductColorsFilterPageSection() {
   'use cache';
-  cacheLife('max');
-  cacheTag(PRODUCT_COLORS_CACHE_TAG);
+  productColorsCache();
   const { result: colors, error } = await getProductColors();
   if (error) return <ErrorComponent error={error} />;
 
@@ -62,8 +54,7 @@ async function ProductColorsFilterPageSection() {
 
 async function ProductSizesFilterPageSection() {
   'use cache';
-  cacheLife('max');
-  cacheTag(PRODUCT_SIZES_CACHE_TAG);
+  productSizesCache();
   const { result: sizes, error } = await getProductSizes();
   if (error) return <ErrorComponent error={error} />;
 

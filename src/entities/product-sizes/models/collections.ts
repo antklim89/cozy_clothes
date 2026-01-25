@@ -1,13 +1,10 @@
-import { revalidateTag } from 'next/cache';
 import type { CollectionConfig } from 'payload';
-
-import { PRODUCT_SIZES_CACHE_TAG } from '../config';
 
 export const ProductSizes: CollectionConfig = {
   slug: 'product-sizes',
   hooks: {
-    afterChange: [() => revalidateTag(PRODUCT_SIZES_CACHE_TAG, 'max')],
-    afterDelete: [() => revalidateTag(PRODUCT_SIZES_CACHE_TAG, 'max')],
+    afterChange: [() => import('../services/cache').then(m => m.revalidateProductSizesCache())],
+    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductSizesCache())],
   },
   admin: {
     useAsTitle: 'name',
