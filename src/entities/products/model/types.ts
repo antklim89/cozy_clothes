@@ -17,6 +17,7 @@ export interface ProductType {
   description?: RichText;
   price: number;
   discount: number;
+  isFavorite: boolean;
   category: {
     id: number;
     name: string;
@@ -54,8 +55,8 @@ export interface ProductPreviewType
     | 'updatedAt'
     | 'size'
     | 'color'
+    | 'isFavorite'
   > {
-  isFavorite: boolean;
   imagePreview: Media;
 }
 

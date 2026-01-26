@@ -21,6 +21,7 @@ export function productDto(product: Product): ProductType {
     id: product.id,
     createdAt: product.createdAt,
     updatedAt: product.updatedAt,
+    isFavorite: product.favorites?.docs != null && product.favorites.docs.length > 0,
     title: product.title ?? undefined,
     baseTitle: productBase.title,
     description: product.description ?? undefined,
