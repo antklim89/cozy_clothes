@@ -8,8 +8,8 @@ export const ProductFilterSchema = z.object({
   sizes: z.optional(z.array(z.number())),
   colors: z.optional(z.array(z.number())),
   search: z.optional(z.string().check(z.trim())),
-  minPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),
-  maxPrice: z.catch(z.optional(z.number().check(z.minimum(0))), 0),
+  minPrice: z.optional(z.number().check(z.minimum(0))),
+  maxPrice: z.optional(z.number().check(z.minimum(0))),
 });
 
 export const GetProductListInputSchema = z.object({
