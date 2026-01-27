@@ -1,1 +1,0 @@
-export const PRODUCT_SIZES_CACHE_TAG = 'PRODUCT_SIZES';
