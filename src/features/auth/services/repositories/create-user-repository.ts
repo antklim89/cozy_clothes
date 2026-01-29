@@ -29,8 +29,7 @@ export async function createUserRepository({
     if (error instanceof ValidationError) {
       return errValidation(error.message, { issues: error.data.errors });
     }
-
-    console.error('Error create user:', error);
+    console.error(error);
     return errUnexpected('Failed to create user');
   }
 }

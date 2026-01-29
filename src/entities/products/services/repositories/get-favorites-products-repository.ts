@@ -39,7 +39,7 @@ export async function getFavoritesProductsRepository({
 
     return ok(productsResult);
   } catch (error) {
-    console.error('[Error getFavoritesProductsRepository]:', error);
+    console.error(error);
     return errUnexpected('Failed to get product list. Try again later.');
   }
 }

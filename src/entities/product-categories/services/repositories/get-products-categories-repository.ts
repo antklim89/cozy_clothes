@@ -13,7 +13,7 @@ export async function getProductCategoriesRepository() {
 
     return ok(result.docs);
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch categories');
   }
 }

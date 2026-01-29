@@ -27,6 +27,7 @@ export async function loginRepository({ email, password }: AuthType) {
     if (error instanceof ValidationError) {
       return errValidation(error.message, { issues: error.data.errors });
     }
+    console.error(error);
     return errUnexpected(error instanceof Error ? error.message : 'Failed to login');
   }
 }

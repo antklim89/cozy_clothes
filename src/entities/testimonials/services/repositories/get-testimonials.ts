@@ -15,7 +15,7 @@ export async function getTestimonialsRepository() {
 
     return ok(result.docs as TestimonialType[]);
   } catch (error) {
-    console.error('Error fetching testimonials:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch testimonials');
   }
 }

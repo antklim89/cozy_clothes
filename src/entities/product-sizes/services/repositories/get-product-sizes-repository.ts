@@ -14,7 +14,7 @@ export async function getProductSizesRepository() {
 
     return ok(result.docs);
   } catch (error) {
-    console.error('Error fetching sizes:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch sizes');
   }
 }

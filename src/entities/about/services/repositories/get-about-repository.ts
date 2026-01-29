@@ -13,7 +13,7 @@ export async function getAboutRepository() {
 
     return ok(result);
   } catch (error) {
-    console.error('Error fetching about:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch about. Try again later.');
   }
 }

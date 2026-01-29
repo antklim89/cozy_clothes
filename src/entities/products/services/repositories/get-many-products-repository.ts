@@ -50,7 +50,7 @@ export async function getManyProductsRepository({
 
     return ok(productsResult);
   } catch (error) {
-    console.error('[Error getManyProductsService]:', error);
+    console.error(error);
     return errUnexpected('Failed to get product list. Try again later.');
   }
 }

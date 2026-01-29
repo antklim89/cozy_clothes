@@ -13,7 +13,7 @@ export async function getContactsRepository() {
 
     return ok(result.docs);
   } catch (error) {
-    console.error('Error fetching contacts:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch contacts. Try again later.');
   }
 }

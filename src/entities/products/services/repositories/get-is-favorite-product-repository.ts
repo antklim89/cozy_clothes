@@ -1,5 +1,7 @@
 import 'server-only';
 
+import { NotFound } from 'payload';
+
 import { getPayload } from '@/shared/lib/payload';
 import { errNotFound, errUnexpected, ok } from '@/shared/lib/result';
 import type { ProductType } from '../../model';
@@ -27,11 +29,8 @@ export async function getIsFavoriteProductRepository(id: ProductType['id'], user
       isFavorite: productPayloadResult.favorites?.docs != null && productPayloadResult.favorites.docs.length > 0,
     });
   } catch (error) {
-    console.error('[Error getFavoriteProductRepository]:', error);
-
-    if (error instanceof Error && error.name === 'NotFound') {
-      return errNotFound('Product not found.');
-    }
+    if (error instanceof NotFound) return errNotFound('Product not found.');
+    console.error(error);
     return errUnexpected('Failed to get product. Try again later.');
   }
 }

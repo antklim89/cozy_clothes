@@ -14,7 +14,7 @@ export async function getSeoRepository() {
     const dto = seoDto(payloadResult);
     return ok(dto);
   } catch (error) {
-    console.error('Error fetching seo:', error);
+    console.error(error);
     return errUnexpected('Failed to fetch seo');
   }
 }
