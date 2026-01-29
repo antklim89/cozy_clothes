@@ -15,8 +15,8 @@ export function Hero({ hero: { text, image } }: { hero: HeroType }) {
               <RichText className="prose md:p-1" data={text} />
             </div>
             <div className="flex flex-col items-center md:flex-row">
-              <Link className={buttonVariants()} href="/products">
-                Show more
+              <Link className={buttonVariants({ size: 'lg', className: 'px-12' })} href="/products">
+                Catalog
               </Link>
             </div>
           </div>
