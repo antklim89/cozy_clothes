@@ -45,7 +45,7 @@ export async function ProductsListCard({ product }: Props) {
 
       <CardContent className="flex flex-col gap-4">
         <p className="mt-1 text-sm">
-          <Link className="underline" href={`/products?category=${product.category.id}`}>
+          <Link className="underline" href={`/products?categories=${product.category.id}`}>
             {product.category.name}
           </Link>{' '}
           from{' '}
@@ -55,10 +55,18 @@ export async function ProductsListCard({ product }: Props) {
         </p>
 
         <div className="flex gap-6">
-          <Badge variant="outline" className="w-24 p-4 text-md uppercase">
+          <Badge
+            render={<Link href={`/products?sizes=${product.size.id}`} />}
+            variant="outline"
+            className="w-24 p-4 text-md uppercase"
+          >
             {product.size.name}
           </Badge>
-          <Badge variant="outline" className="min-w-24 p-4 text-md uppercase">
+          <Badge
+            render={<Link href={`/products?colors=${product.color.id}`} />}
+            variant="outline"
+            className="min-w-24 p-4 text-md uppercase"
+          >
             <span className="size-4 rounded-full" style={{ backgroundColor: product.color.code }} />
             {product.color.name}
           </Badge>
