@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { useDebounce } from '@/shared/hooks/use-debounce';
+import { useDebounce } from '@/shared/lib/hooks/use-debounce';
 import { toggleFavoritesAction } from '../actions';
 
 const FAVORITES_QUERY_KEY = 'favorites';

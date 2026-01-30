@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { cartQueryOptions } from '@/entities/cart/api';
 import { updateCartQtyInLocalStorage } from '@/entities/cart/lib';
-import { useDebounce } from '@/shared/hooks/use-debounce';
+import { useDebounce } from '@/shared/lib/hooks/use-debounce';
 import { updateCartQtyAction } from '../actions';
 
 export function useUpdateCartMutation() {
