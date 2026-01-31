@@ -13,7 +13,7 @@ export function Cart() {
   if (!cartQuery.data || cartQuery.data.length === 0) return <CartListEmpty />;
 
   return (
-    <CartList checkoutSlot={<CartCheckout />} totalSlot={<CartTotal cartItems={cartQuery.data} />}>
+    <CartList checkout={<CartCheckout />} total={<CartTotal cartItems={cartQuery.data} />}>
       {cartQuery.data.map(cartItem => (
         <CartListItem cartItem={cartItem} key={cartItem.product.id} />
       ))}

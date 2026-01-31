@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { useRemoveCartMutation } from '@/features/update-cart/api';
 import { CartQtyInput } from '@/features/update-cart/ui';
-import { getPrice } from '@/shared/lib/utils';
+import { cn, getPrice } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/shared/ui/item';
@@ -47,13 +47,11 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
           </Badge>
         </div>
         <div>
-          {qty > 1 && (
-            <div className="flex items-center text-gray-600">
-              <span className="text-sm">x</span>
-              <span className="w-20 border-none px-4 text-md">1</span>
-              <span className="text-xl">{getPrice({ price: product.price, discount: product.discount })}</span>
-            </div>
-          )}
+          <div className={cn('flex items-center text-gray-600', { 'opacity-0': qty <= 1 })}>
+            <span className="text-sm">x</span>
+            <span className="w-20 border-none px-4 text-md">1</span>
+            <span className="text-xl">{getPrice({ price: product.price, discount: product.discount })}</span>
+          </div>
 
           <div className="flex items-center">
             <span className="text-sm">x</span>
@@ -62,7 +60,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
           </div>
         </div>
       </ItemContent>
-      <ItemActions>
+      <ItemActions className="ml-auto self-end">
         <CartQtyInput productId={product.id} />
         <Button variant="outline" size="icon" className="px-8 text-destructive" onClick={handleRemoveFromCart}>
           <TrashIcon />
