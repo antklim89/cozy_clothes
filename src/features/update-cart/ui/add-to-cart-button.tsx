@@ -1,12 +1,12 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { ShoppingCartIcon, Trash2Icon } from 'lucide-react';
+import { ShoppingCartIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import { cartQueryOptions } from '@/entities/cart/api';
 import { Button, buttonVariants } from '@/shared/ui/button';
-import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
+import { NumberField } from '@/shared/ui/number-field';
 import { AddToCartButtonFallback } from './add-to-cart-button-fallback';
 import { useAddCartMutation } from '../api/mutations/use-add-cart-mutation';
 import { useRemoveCartMutation } from '../api/mutations/use-remove-cart-mutation';
@@ -35,7 +35,8 @@ export function AddToCartButton({ productId }: { productId: number }) {
     });
   }
 
-  async function handleChange(newQty: number) {
+  async function handleChange(newQty: number | null) {
+    if (newQty == null) return;
     await updateCartMutation.mutateAsync({
       productId,
       qty: newQty,
@@ -48,18 +49,20 @@ export function AddToCartButton({ productId }: { productId: number }) {
 
   if (hasCartItem) {
     return (
-      <div className="grid grid-cols-2 gap-2">
-        <Link className={buttonVariants()} href="/cart">
-          <ShoppingCartIcon /> Go to Cart
+      <div className="flex gap-2">
+        <Link className={buttonVariants({ size: 'lg', className: 'grow basis-0' })} href="/cart">
+          <ShoppingCartIcon className="hidden sm:inline-block" /> Go to Cart
         </Link>
-        <InputNumber value={qty} onChange={handleChange}>
-          <InputNumberDecrement aria-label="Decrement product quantity" />
-          <InputNumberContent />
-          <InputNumberIncrement aria-label="Increment product quantity" />
-        </InputNumber>
-        <Button variant="destructive" disabled={isLoading} onClick={handleRemoveCartItem}>
-          <Trash2Icon /> Remove
+        <Button
+          aria-label="Remove from cart"
+          size="icon-lg"
+          variant="destructive"
+          disabled={isLoading}
+          onClick={handleRemoveCartItem}
+        >
+          <TrashIcon />
         </Button>
+        <NumberField size="lg" value={qty} min={1} max={10} onValueChange={handleChange} />
       </div>
     );
   }

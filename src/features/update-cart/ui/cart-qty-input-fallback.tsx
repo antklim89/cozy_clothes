@@ -1,11 +1,5 @@
-import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
+import { Skeleton } from '@/shared/ui/skeleton';
 
 export function CartQtyInputFallback() {
-  return (
-    <InputNumber value={0}>
-      <InputNumberDecrement aria-label="Decrement product quantity" />
-      <InputNumberContent />
-      <InputNumberIncrement aria-label="Increment product quantity" />
-    </InputNumber>
-  );
+  return <Skeleton className="h-10 w-32" />;
 }

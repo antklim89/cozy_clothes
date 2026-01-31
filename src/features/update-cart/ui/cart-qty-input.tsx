@@ -4,16 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import { cartQueryOptions } from '@/entities/cart/api';
 import type { LocalCartItemType } from '@/entities/cart/model';
-import { InputNumber, InputNumberContent, InputNumberDecrement, InputNumberIncrement } from '@/shared/ui/input-number';
+import { NumberField } from '@/shared/ui/number-field';
 import { CartQtyInputFallback } from './cart-qty-input-fallback';
 import { useUpdateCartMutation } from '../api/mutations/use-update-cart-mutation';
 
-interface Props {
-  productId: LocalCartItemType['productId'];
-  className?: string;
-}
-
-export function CartQtyInput({ productId, className }: Props) {
+export function CartQtyInput({ productId }: { productId: LocalCartItemType['productId'] }) {
   const cartQuery = useQuery(cartQueryOptions());
   const { mutateAsync: updateQty } = useUpdateCartMutation();
 
@@ -23,7 +18,8 @@ export function CartQtyInput({ productId, className }: Props) {
   const currentCartItem = cartQuery.data.find(item => item.product.id === productId);
   const qty = currentCartItem?.qty ?? 1;
 
-  async function handleChange(newQty: number) {
+  async function handleChange(newQty: number | null) {
+    if (!newQty) return;
     if (cartQuery.data == null) return;
     await updateQty({
       productId,
@@ -31,18 +27,6 @@ export function CartQtyInput({ productId, className }: Props) {
     });
   }
 
-  if (currentCartItem != null)
-    return (
-      <InputNumber className={className} value={qty} onChange={handleChange}>
-        <InputNumberDecrement aria-label="Decrement product quantity" />
-        <InputNumberContent />
-        <InputNumberIncrement aria-label="Increment product quantity" />
-      </InputNumber>
-    );
-
-  return (
-    <InputNumber className="opacity-0" value={0}>
-      <InputNumberContent />
-    </InputNumber>
-  );
+  if (currentCartItem == null) return <NumberField className="opacity-0" value={0} />;
+  return <NumberField value={qty} min={1} max={10} onValueChange={handleChange} />;
 }
