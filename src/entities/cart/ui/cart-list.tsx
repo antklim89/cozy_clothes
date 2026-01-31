@@ -1,6 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react';
 
 import { cn } from '@/shared/lib/utils';
+import { ItemGroup } from '@/shared/ui/item';
 
 interface Props extends ComponentProps<'section'> {
   totalSlot: ReactNode;
@@ -11,7 +12,7 @@ export function CartList({ totalSlot, checkoutSlot, className, children, ...prop
   return (
     <section className={cn('container my-8', className)} {...props}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-[3fr_1fr]">
-        <div className="flex flex-col gap-4">{children}</div>
+        <ItemGroup>{children}</ItemGroup>
         <div className="flex flex-col gap-2">
           {totalSlot}
           {checkoutSlot}
