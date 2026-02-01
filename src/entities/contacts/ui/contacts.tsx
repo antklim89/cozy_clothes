@@ -4,8 +4,8 @@ import type { ContactType } from '../model/types';
 
 export function Contacts({ contacts }: { contacts: ContactType[] }) {
   return (
-    <Card className="prose dark:prose-invert container my-8 flex flex-col lg:flex-row">
-      <CardHeader className="flex-[1_1_0%]">
+    <Card className="container my-8 flex flex-col lg:flex-row">
+      <CardHeader className="prose dark:prose-invert flex-[1_1_0%]">
         <h2>Get In Touch</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       </CardHeader>

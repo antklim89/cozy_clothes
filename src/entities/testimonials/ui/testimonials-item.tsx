@@ -4,7 +4,7 @@ import type { TestimonialType } from '../model/types';
 
 export function TestimonialsItem({ image, name, text }: TestimonialType) {
   return (
-    <div className="flex flex-col">
+    <div className="prose flex flex-col">
       <div>
         <Image
           alt={name}

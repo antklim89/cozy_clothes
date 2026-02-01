@@ -7,9 +7,9 @@ export function Testimonials({ testimonials }: { testimonials: TestimonialType[]
     <section className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
       <TestimonialsBackground />
 
-      <div className="prose container">
-        <h2 className="pb-8 text-center text-3xl">Join thousands of happy clients</h2>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(340px,100%),1fr))] gap-8">
+      <div className="container">
+        <h2 className="prose pb-8 text-center text-3xl">Join thousands of happy clients</h2>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(min(320px,100%),1fr))] gap-8">
           {testimonials.map(testimonial => (
             <TestimonialsItem {...testimonial} key={testimonial.id} />
           ))}
