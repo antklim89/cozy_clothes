@@ -1,1 +1,1 @@
-export { getMe } from './dal';
+export { getMe, getUserProfile } from './dal';

@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { HeartIcon, LogInIcon, LogOut, User2Icon, UserCheck2Icon, UserPlus, UserPlus2Icon } from 'lucide-react';
+import { HeartIcon, LogInIcon, LogOut, SettingsIcon, UserCheckIcon, UserIcon, UserPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import { meQueryOptions } from '@/entities/user/api';
@@ -28,7 +28,7 @@ export function AuthMenu() {
     return (
       <Skeleton>
         <Button disabled variant="ghost">
-          <User2Icon />
+          <UserIcon />
         </Button>
       </Skeleton>
     );
@@ -41,7 +41,7 @@ export function AuthMenu() {
       <AuthDialog type={type === 'register' ? 'register' : null} setType={setType} />
 
       <DropdownMenuTrigger aria-label="User Menu" className={buttonVariants({ variant: 'ghost' })}>
-        {user ? <UserCheck2Icon /> : <UserPlus2Icon />}
+        {user ? <UserCheckIcon /> : <UserPlusIcon />}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56" side="bottom" sideOffset={4}>
         {user != null ? (
@@ -51,6 +51,16 @@ export function AuthMenu() {
             </DropdownMenuLabel>
 
             <Separator />
+
+            <DropdownMenuItem render={<Link href="/user/profile" />}>
+              <UserIcon />
+              <span>Profile</span>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem render={<Link href="/user/settings" />}>
+              <SettingsIcon />
+              <span>Settings</span>
+            </DropdownMenuItem>
 
             <DropdownMenuItem render={<Link href="/favorites" />}>
               <HeartIcon />
@@ -69,7 +79,7 @@ export function AuthMenu() {
               <span>Log In</span>
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setType('register')}>
-              <UserPlus />
+              <UserPlusIcon />
               <span>Register</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>

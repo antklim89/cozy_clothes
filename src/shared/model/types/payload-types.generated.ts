@@ -386,6 +386,10 @@ export interface ProductFavorite {
  */
 export interface User {
   id: number;
+  firstName?: string | null;
+  lastName?: string | null;
+  address?: string | null;
+  phone?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -858,6 +862,10 @@ export interface TestimonialsMediaSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  address?: T;
+  phone?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

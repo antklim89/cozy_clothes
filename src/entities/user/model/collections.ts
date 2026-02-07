@@ -6,5 +6,36 @@ export const Users = {
     useAsTitle: 'email',
   },
   auth: true,
-  fields: [],
+  fields: [
+    {
+      label: 'First Name',
+      name: 'firstName',
+      type: 'text',
+      maxLength: 1000,
+      required: false,
+      defaultValue: '',
+    },
+    {
+      label: 'Last Name',
+      name: 'lastName',
+      type: 'text',
+      maxLength: 1000,
+      required: false,
+      defaultValue: '',
+    },
+    {
+      name: 'address',
+      type: 'text',
+      maxLength: 5000,
+      required: false,
+      defaultValue: '',
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      maxLength: 1000,
+      required: false,
+      defaultValue: '',
+    },
+  ],
 } as const satisfies CollectionConfig;

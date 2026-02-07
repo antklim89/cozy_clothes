@@ -6,3 +6,11 @@ export type UserType = z.infer<typeof UserSchema>;
 export type LoginType = z.infer<typeof LoginSchema>;
 export type RegisterType = z.infer<typeof RegisterSchema>;
 export type AuthType = z.infer<typeof AuthSchema>;
+
+export interface UserProfileType {
+  id: number;
+  address: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
