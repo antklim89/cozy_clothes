@@ -31,6 +31,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  cookiePrefix: 'payload',
   globals: [About, Hero, Seo],
   collections: [
     Admins,
