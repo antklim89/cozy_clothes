@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import type { ProductPreviewType } from '@/entities/products/model';
-import { getMe } from '@/entities/user/services';
+import { hasSession } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export async function ProductsListCard({ product }: Props) {
-  const user = await getMe();
+  const isAuthenticated = await hasSession();
 
   return (
     <Card className="group relative pt-0">
@@ -40,7 +40,11 @@ export async function ProductsListCard({ product }: Props) {
             <span className="font-sm opacity-70">{product.title}</span>
           </Link>
         </CardTitle>
-        <FavoritesToggleButton isAuthenticated={user != null} productId={product.id} isFavorite={product.isFavorite} />
+        <FavoritesToggleButton
+          isAuthenticated={isAuthenticated}
+          productId={product.id}
+          isFavorite={product.isFavorite}
+        />
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4">

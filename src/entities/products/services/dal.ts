@@ -15,10 +15,13 @@ import { GetProductListInputSchema, GetProductsFavoritesInputSchema } from '../m
 
 export const getManyProducts = cache(
   async (input: { filter: ProductFilterType; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
+    const user = await getMe();
+
     const { success, error, data: validatedInput } = await GetProductListInputSchema.safeParseAsync(input);
     if (!success) return errValidation(z.prettifyError(error));
+    const { filter, options } = validatedInput;
 
-    const result = await getManyProductsRepository(validatedInput);
+    const result = await getManyProductsRepository({ filter, options, user });
     return result;
   },
 );

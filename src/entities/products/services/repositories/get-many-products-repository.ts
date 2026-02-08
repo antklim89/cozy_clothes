@@ -1,11 +1,11 @@
 import 'server-only';
 import type { Where } from 'payload';
 
+import type { UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
 import { errUnexpected, ok } from '@/shared/lib/result';
 import { paginationDto } from '@/shared/model/dto/pagination-dto';
 import type { PayloadOptions } from '@/shared/model/types/types';
-import { getMe } from '../../@x/user/services';
 import { PRODUCTS_PER_PAGE } from '../../config';
 import type { ProductFilterType } from '../../model';
 import { productPreviewDto } from '../../model/dto';
@@ -13,13 +13,14 @@ import { productPreviewDto } from '../../model/dto';
 export async function getManyProductsRepository({
   options = {},
   filter: { categories, countries, minPrice, maxPrice, search, colors, sizes } = {},
+  user,
 }: {
   options?: PayloadOptions;
   filter?: ProductFilterType;
+  user: UserType | null;
 }) {
   try {
     const payload = await getPayload();
-    const user = await getMe();
 
     const where: Where = { _status: { equals: 'published' } };
     if (countries != null) where['productBase.country'] = { in: countries };
