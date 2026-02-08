@@ -1,11 +1,9 @@
 'use client';
-import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { HeartIcon, LogInIcon, LogOut, SettingsIcon, UserCheckIcon, UserIcon, UserPlusIcon } from 'lucide-react';
-import Link from 'next/link';
+import { type ReactNode, useState } from 'react';
+import { LogInIcon, UserIcon, UserPlusIcon } from 'lucide-react';
 
-import { meQueryOptions } from '@/entities/user/api';
-import { Button, buttonVariants } from '@/shared/ui/button';
+import type { UserType } from '@/entities/user/model';
+import { buttonVariants } from '@/shared/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,26 +12,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/shared/ui/dropdown-menu';
-import { ErrorComponent } from '@/shared/ui/error-component';
 import { Separator } from '@/shared/ui/separator';
-import { Skeleton } from '@/shared/ui/skeleton';
 import { AuthDialog } from './auth-dialog';
-import { LogoutButton } from './logout-button';
+import { AuthMenuAvatar } from './auth-menu-avatar';
 
-export function AuthMenu() {
-  const { data: user, isFetchedAfterMount, error, isError } = useQuery(meQueryOptions());
+export function AuthMenu({ privateItems, user }: { privateItems: ReactNode; user: UserType | null }) {
   const [type, setType] = useState<'login' | 'register' | null>(null);
-
-  if (!isFetchedAfterMount)
-    return (
-      <Skeleton>
-        <Button disabled variant="ghost">
-          <UserIcon />
-        </Button>
-      </Skeleton>
-    );
-
-  if (isError) return <ErrorComponent error={error} />;
 
   return (
     <DropdownMenu>
@@ -41,7 +25,7 @@ export function AuthMenu() {
       <AuthDialog type={type === 'register' ? 'register' : null} setType={setType} />
 
       <DropdownMenuTrigger aria-label="User Menu" className={buttonVariants({ variant: 'ghost' })}>
-        {user ? <UserCheckIcon /> : <UserPlusIcon />}
+        {user ? <AuthMenuAvatar user={user} /> : <UserIcon />}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56" side="bottom" sideOffset={4}>
         {user != null ? (
@@ -52,25 +36,7 @@ export function AuthMenu() {
 
             <Separator />
 
-            <DropdownMenuItem render={<Link href="/user/profile" />}>
-              <UserIcon />
-              <span>Profile</span>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem render={<Link href="/user/settings" />}>
-              <SettingsIcon />
-              <span>Settings</span>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem render={<Link href="/favorites" />}>
-              <HeartIcon />
-              <span>Favorites</span>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem render={<LogoutButton className="w-full" />} nativeButton>
-              <LogOut />
-              <span>Log out</span>
-            </DropdownMenuItem>
+            {privateItems}
           </DropdownMenuGroup>
         ) : (
           <DropdownMenuGroup>

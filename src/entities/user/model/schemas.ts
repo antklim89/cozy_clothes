@@ -1,10 +1,5 @@
 import { z } from 'zod/v4-mini';
 
-export const UserSchema = z.object({
-  id: z.number(),
-  email: z.string().check(z.email()),
-});
-
 export const LoginSchema = z.object({
   email: z.string().check(z.email()),
   password: z.string().check(z.minLength(8)),

@@ -16,6 +16,8 @@ export async function getMeRepository(): Promise<UserType | null> {
     return {
       id: result.user.id,
       email: result.user.email,
+      firstName: result.user.firstName ?? undefined,
+      lastName: result.user.lastName ?? undefined,
     };
   } catch {
     return null;
