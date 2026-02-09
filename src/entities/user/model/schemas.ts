@@ -7,13 +7,13 @@ export const LoginSchema = z.object({
 
 export const RegisterSchema = z
   .object({
-    confirmPassword: z.string().check(z.minLength(8)),
+    confirmPassword: z.string(),
     ...LoginSchema.shape,
   })
   .check(
     z.refine(data => data.password === data.confirmPassword, {
       message: 'Passwords do not match',
-      path: ['confirmPassword', 'password'],
+      path: ['confirmPassword'],
     }),
   );
 
