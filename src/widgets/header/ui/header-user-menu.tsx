@@ -35,7 +35,7 @@ export function HeaderUserMenu() {
                 <span>Settings</span>
               </DropdownMenuItem>
 
-              <DropdownMenuItem render={<Link href="/favorites" />}>
+              <DropdownMenuItem render={<Link href="/user/favorites" />}>
                 <HeartIcon />
                 <span>Favorites</span>
               </DropdownMenuItem>

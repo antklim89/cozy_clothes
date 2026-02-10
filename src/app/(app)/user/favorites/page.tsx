@@ -10,7 +10,7 @@ const loadSearchParams = createLoader({
   page: parseAsInteger.withDefault(1),
 });
 
-async function Page({ searchParams }: PageProps<'/favorites'>) {
+async function Page({ searchParams }: PageProps<'/user/favorites'>) {
   const params = loadSearchParams(await searchParams);
   const { result: products, error } = await getFavoritesProducts({ options: { page: params.page } });
 
