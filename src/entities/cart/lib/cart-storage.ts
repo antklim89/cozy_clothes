@@ -14,10 +14,6 @@ export function getCartFromLocalStorage(): LocalCartItemType[] {
   }
 }
 
-export function clearCartLocalStorage(): void {
-  localStorage.setItem('cart', '[]');
-}
-
 export function setCartToLocalStorage(cart: LocalCartItemType[]): LocalCartItemType[] {
   localStorage.setItem('cart', JSON.stringify(cart));
   return cart;

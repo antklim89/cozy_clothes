@@ -1,6 +1,6 @@
 import { cacheTag, revalidateTag } from 'next/cache';
 
-export const PRODUCT_COLORS_CACHE_TAG = 'PRODUCT_COLORS';
+const PRODUCT_COLORS_CACHE_TAG = 'PRODUCT_COLORS';
 
 export function productColorsCache() {
   cacheTag(PRODUCT_COLORS_CACHE_TAG);

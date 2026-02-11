@@ -1,1 +1,0 @@
-export { toggleFavorites } from './dal';

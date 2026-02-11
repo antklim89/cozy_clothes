@@ -16,5 +16,3 @@ export const RegisterSchema = z
       path: ['confirmPassword'],
     }),
   );
-
-export const AuthSchema = LoginSchema;

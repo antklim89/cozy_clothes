@@ -4,11 +4,11 @@ import 'server-only';
 
 import { ValidationError } from 'payload';
 
-import type { AuthType } from '@/entities/user/model';
+import type { LoginType } from '@/entities/user/model';
 import { errUnexpected, errValidation, ok } from '@/shared/lib/result';
 import type { User } from '@/shared/model/types/payload-types.generated';
 
-export async function loginRepository({ email, password }: AuthType) {
+export async function loginRepository({ email, password }: LoginType) {
   try {
     const result = await payloadLogin({
       collection: 'users',

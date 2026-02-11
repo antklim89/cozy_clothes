@@ -1,2 +1,2 @@
-export { productCategoriesCache, revalidateProductCategoriesCache } from './cache';
+export { productCategoriesCache } from './cache';
 export { getProductCategories } from './dal';

@@ -1,6 +1,6 @@
 import { cacheTag, revalidateTag } from 'next/cache';
 
-export const CONTACTS_CACHE_TAG = 'CONTACTS';
+const CONTACTS_CACHE_TAG = 'CONTACTS';
 
 export function contactsCache() {
   cacheTag(CONTACTS_CACHE_TAG);

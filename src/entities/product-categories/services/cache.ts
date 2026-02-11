@@ -1,6 +1,6 @@
 import { cacheTag, revalidateTag } from 'next/cache';
 
-export const PRODUCT_CATEGORIES_CACHE_TAG = 'PRODUCT_CATEGORIES';
+const PRODUCT_CATEGORIES_CACHE_TAG = 'PRODUCT_CATEGORIES';
 
 export function productCategoriesCache() {
   cacheTag(PRODUCT_CATEGORIES_CACHE_TAG);

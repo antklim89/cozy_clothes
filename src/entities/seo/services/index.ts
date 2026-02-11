@@ -1,2 +1,2 @@
-export { revalidateSeoCache, seoCache } from './cache';
+export { seoCache } from './cache';
 export { getSeo } from './dal';

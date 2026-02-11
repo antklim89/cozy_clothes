@@ -1,6 +1,6 @@
 'use client';
 
-import type { AuthType } from '@/entities/user/model';
+import type { LoginType } from '@/entities/user/model';
 import { AuthForm } from './auth-form';
 import { loginAction, registerAction } from '../api/actions';
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function Auth({ type }: Props) {
-  async function handleSubmit(data: AuthType) {
+  async function handleSubmit(data: LoginType) {
     const result = type === 'login' ? await loginAction(data) : await registerAction(data);
     if (result.error) return result;
 
