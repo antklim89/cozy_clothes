@@ -9,6 +9,7 @@ import sharp from 'sharp';
 import { About, AboutMedia } from '@/entities/about/model/collections';
 import { Cart } from '@/entities/cart/model/collections';
 import { Contacts } from '@/entities/contacts/model/collections';
+import { Feedback, FeedbackMedia } from '@/entities/feedbacks/model/collections';
 import { Hero, HeroMedia } from '@/entities/hero/model/collections';
 import { ProductCategories } from '@/entities/product-categories/model/collections';
 import { ProductColors } from '@/entities/product-colors/models/collections';
@@ -40,6 +41,8 @@ export default buildConfig({
     Cart,
     Contacts,
     AboutMedia,
+    Feedback,
+    FeedbackMedia,
     Products,
     ProductBases,
     ProductFavorites,

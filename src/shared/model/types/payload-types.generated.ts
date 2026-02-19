@@ -73,6 +73,8 @@ export interface Config {
     cart: Cart;
     contacts: Contact;
     'about-media': AboutMedia;
+    feedback: Feedback;
+    'feedback-media': FeedbackMedia;
     products: Product;
     'product-bases': ProductBase;
     'product-favorites': ProductFavorite;
@@ -104,6 +106,8 @@ export interface Config {
     cart: CartSelect<false> | CartSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
+    feedback: FeedbackSelect<false> | FeedbackSelect<true>;
+    'feedback-media': FeedbackMediaSelect<false> | FeedbackMediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     'product-bases': ProductBasesSelect<false> | ProductBasesSelect<true>;
     'product-favorites': ProductFavoritesSelect<false> | ProductFavoritesSelect<true>;
@@ -441,6 +445,41 @@ export interface AboutMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback".
+ */
+export interface Feedback {
+  id: number;
+  review?: string | null;
+  positiveReview?: string | null;
+  negativeReview?: string | null;
+  rating: number;
+  user: number | User;
+  product: number | Product;
+  images?: (number | FeedbackMedia)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback-media".
+ */
+export interface FeedbackMedia {
+  id: number;
+  blurDataUrl: string;
+  updatedAt: string;
+  createdAt: string;
+  url: string;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width: number;
+  height: number;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hero-media".
  */
 export interface HeroMedia {
@@ -532,6 +571,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'about-media';
         value: number | AboutMedia;
+      } | null)
+    | ({
+        relationTo: 'feedback';
+        value: number | Feedback;
+      } | null)
+    | ({
+        relationTo: 'feedback-media';
+        value: number | FeedbackMedia;
       } | null)
     | ({
         relationTo: 'products';
@@ -697,6 +744,39 @@ export interface ContactsSelect<T extends boolean = true> {
  * via the `definition` "about-media_select".
  */
 export interface AboutMediaSelect<T extends boolean = true> {
+  blurDataUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback_select".
+ */
+export interface FeedbackSelect<T extends boolean = true> {
+  review?: T;
+  positiveReview?: T;
+  negativeReview?: T;
+  rating?: T;
+  user?: T;
+  product?: T;
+  images?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedback-media_select".
+ */
+export interface FeedbackMediaSelect<T extends boolean = true> {
   blurDataUrl?: T;
   updatedAt?: T;
   createdAt?: T;
