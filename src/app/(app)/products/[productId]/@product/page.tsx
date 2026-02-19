@@ -3,7 +3,7 @@ import { hasSession } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { Product } from '@/widgets/product/ui';
-import { ParamsSchema } from './params';
+import { ParamsSchema } from '../params';
 
 async function Page({ params }: PageProps<'/products/[productId]'>) {
   const { productId } = await ParamsSchema.parseAsync(await params);
@@ -29,4 +29,4 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
 
 export default Page;
 
-export { generateMetadata } from './seo';
+export { generateMetadata } from '../seo';

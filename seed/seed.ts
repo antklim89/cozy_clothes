@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: ok */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
@@ -6,10 +7,11 @@ import { type CollectionSlug, getPayload } from 'payload';
 
 import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
+const USERS_NUMBER = 7;
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const PRODUCT_BASES_LENGTH = 50;
+const PRODUCT_BASES_LENGTH = 20;
 const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
 const COLORS = [
   { name: 'Crimson Red', code: '#DC143C' },
@@ -53,8 +55,8 @@ function shuffle<T>(arr: readonly T[]): T[] {
   return arr.toSorted(() => Math.random() - 0.5);
 }
 
-function sliceRandom<T>(arr: readonly T[]): T[] {
-  return arr.slice(0, faker.number.int({ min: 1, max: arr.length - 1 }));
+function sliceRandom<T>(arr: readonly T[], max?: number): T[] {
+  return arr.slice(0, faker.number.int({ min: 1, max: max ?? arr.length - 1 }));
 }
 
 function createRichText(textArr: string[]): ProductBase['description'] {
@@ -102,6 +104,29 @@ async function getImages<T extends CollectionSlug>(collection: T, imagesPath: st
     }),
   );
   return images;
+}
+
+function createUsers() {
+  return Promise.all(
+    Array.from({ length: USERS_NUMBER }, () => {
+      const firstName = Math.random() > 0.4 ? faker.person.firstName() : undefined;
+      const lastName = Math.random() > 0.4 ? faker.person.lastName() : undefined;
+      const address = Math.random() > 0.4 ? faker.location.streetAddress() : undefined;
+      const phone = Math.random() > 0.4 ? faker.phone.number({ style: 'international' }) : undefined;
+
+      return payload.create({
+        collection: 'users',
+        data: {
+          email: faker.internet.email({ firstName, lastName }),
+          password: 'qwer1234',
+          firstName,
+          lastName,
+          address,
+          phone,
+        },
+      });
+    }),
+  );
 }
 
 async function createAbout() {
@@ -194,6 +219,41 @@ function createColors() {
         collection: 'product-colors',
         data,
       });
+    }),
+  );
+}
+
+async function createFeedbacks() {
+  const images = await getImages('feedback-media', 'products');
+  const products = await payload.find({
+    collection: 'products',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+  const users = await payload.find({
+    collection: 'users',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+
+  return Promise.all(
+    products.docs.map(product => {
+      return Promise.all(
+        users.docs.map(user => {
+          return payload.create({
+            collection: 'feedback',
+            data: {
+              product: product.id,
+              rating: faker.number.int({ min: 1, max: 5 }),
+              user: user.id,
+              review: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+              positiveReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+              negativeReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+              images: Math.random() > 0.6 ? sliceRandom(shuffle(images), 5).map(i => i.id) : undefined,
+            },
+          });
+        }),
+      );
     }),
   );
 }
@@ -294,13 +354,25 @@ function createContacts() {
     }),
   );
 }
-await clear();
 
-await Promise.all([
-  createAbout(),
-  createHero(),
-  createSeo(),
-  createContacts(),
-  createProductBases(),
-  createTestimonials(),
-]);
+async function main() {
+  try {
+    await clear();
+
+    await createUsers();
+    await Promise.all([
+      createAbout(),
+      createHero(),
+      createSeo(),
+      createContacts(),
+      createProductBases(),
+      createTestimonials(),
+    ]);
+    await createFeedbacks();
+  } catch (error) {
+    // biome-ignore lint/suspicious/noConsole: ok
+    console.dir(error, { depth: 50, compact: false });
+  }
+}
+
+await main();
