@@ -7,5 +7,6 @@ export function paginationDto<T, U>(data: PaginatedDocs<U>, dto: (args: U) => T)
     page: data.page ?? 1,
     totalPages: data.totalPages,
     docs: data.docs.map(dto),
+    totalDocs: data.totalDocs,
   };
 }

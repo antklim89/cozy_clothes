@@ -12,4 +12,5 @@ export interface PaginatedData<T> {
   docs: T[];
   page: number;
   totalPages: number;
+  totalDocs: number;
 }
