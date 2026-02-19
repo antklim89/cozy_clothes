@@ -28,7 +28,7 @@
     "start": "bunx next start",
     "typecheck": "tsc --noEmit --preserveWatchOutput",
     "typegen": "payload generate:types",
-    "seed": "bun payload run seed/seed.ts",
+    "seed": "rm ./database.db && bun payload run seed/seed.ts",
     "lint": "bunx biome check",
     "docker:dev": "docker compose -f compose.yml -f compose.dev.yml up --build --watch",
     "docker:up": "docker compose up",
