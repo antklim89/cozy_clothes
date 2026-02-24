@@ -10,7 +10,7 @@ import type { CreateFeedbackInputType } from '../model/types';
 
 export async function addFeedback({ productId, input }: { productId: number; input: CreateFeedbackInputType }) {
   const { success, data: validatedInput } = await CreateFeedbackInputSchema.safeParseAsync(input);
-  if (!success) return errValidation('Invalid quantity');
+  if (!success) return errValidation('Invalid input.');
 
   const user = await getMe();
   if (user == null) return errUnauthenticated();
