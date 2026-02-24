@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../config/constants';
 
 export const Feedback: CollectionConfig = {
   slug: 'feedback',
@@ -69,6 +70,11 @@ export const FeedbackMedia = {
   slug: 'feedback-media',
   upload: {
     ...MediaCollection.upload,
+    resizeOptions: {
+      width: IMAGE_WIDTH,
+      height: IMAGE_HEIGHT,
+      fit: 'contain',
+    },
     staticDir: 'media/feedbacks',
   },
 } as const satisfies CollectionConfig;

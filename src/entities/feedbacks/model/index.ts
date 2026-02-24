@@ -1,0 +1,1 @@
+export { feedbackDto } from './dto';

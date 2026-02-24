@@ -7,7 +7,10 @@ export function feedbackDto(data: Feedback): FeedbackType {
   const product = data.product as Product;
   return {
     id: data.id,
-    productId: product.id,
+    product: {
+      id: product.id,
+      title: product.title,
+    },
     review: data.review || undefined,
     positiveReview: data.positiveReview || undefined,
     negativeReview: data.negativeReview || undefined,

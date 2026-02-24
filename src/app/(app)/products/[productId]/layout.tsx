@@ -1,8 +1,9 @@
-export default function Layout({ feedbacks, product }: LayoutProps<'/products/[productId]'>) {
+export default function Layout(props: LayoutProps<'/products/[productId]'>) {
   return (
     <div className="flex flex-col gap-4">
-      {product}
-      {feedbacks}
+      {props.product}
+      {props['feedback-create']}
+      {props.feedbacks}
     </div>
   );
 }
