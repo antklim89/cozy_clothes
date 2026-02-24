@@ -11,8 +11,8 @@ export const removeFeedbackRepository = cache(async ({ productId, userId }: { pr
     await payload.delete({
       collection: 'feedback',
       where: {
-        userId: { equals: userId },
-        productId: { equals: productId },
+        user: { equals: userId },
+        product: { equals: productId },
       },
     });
 
