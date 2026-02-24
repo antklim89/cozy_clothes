@@ -1,0 +1,47 @@
+import { err, errUnexpected, ok, type Result } from './result';
+
+export async function imageTransform({
+  file,
+  maxWidth,
+  maxHeight,
+  maxImageSize,
+  quality = 0.8,
+}: {
+  file: File;
+  maxWidth: number;
+  maxHeight: number;
+  maxImageSize: number;
+  quality?: number;
+}) {
+  if (quality <= 0) return errUnexpected('Failed to transform image.');
+  const { error, result } = await new Promise<Result<File, 'unexpected'>>(resolve => {
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const ratio = Math.min(maxWidth / img.width, maxHeight / img.height);
+      const height = img.height * ratio;
+      const width = img.width * ratio;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return resolve(errUnexpected('Failed to create canvas context'));
+
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        blob => {
+          if (blob) void resolve(ok(new File([blob], crypto.randomUUID(), { type: 'image/webp' })));
+          else void resolve(errUnexpected('Failed to transform image.'));
+        },
+        'image/webp',
+        quality,
+      );
+    };
+  });
+  if (error) return err(error);
+
+  if (result.size <= maxImageSize) return ok(result);
+  return imageTransform({ maxImageSize, file: result, maxHeight, maxWidth, quality: quality - 0.05 });
+}
