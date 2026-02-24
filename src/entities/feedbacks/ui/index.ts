@@ -1,3 +1,2 @@
-export { FeedbackFallback } from './feedback-fallback';
-export { Feedbacks } from './feedbacks';
+export { FeedbackItem } from './feedback-item';
 export { FeedbacksEmpty } from './feedbacks-empty';

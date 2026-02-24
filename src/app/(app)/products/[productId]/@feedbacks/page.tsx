@@ -1,8 +1,8 @@
 import { cacheLife } from 'next/cache';
 
 import { feedbackCache, getFeedbacks } from '@/entities/feedbacks/services';
-import { Feedbacks } from '@/entities/feedbacks/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
+import { FeedbacksList } from '@/widgets/feedbacks-list/ui';
 import { ParamsSchema } from '../params';
 
 async function Page({ params }: PageProps<'/products/[productId]'>) {
@@ -14,7 +14,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
   const { result: feedbacks, error } = await getFeedbacks({ productId });
   if (error) return <ErrorComponent error={error} />;
 
-  return <Feedbacks feedbacks={feedbacks} />;
+  return <FeedbacksList feedbacks={feedbacks} />;
 }
 
 export default Page;

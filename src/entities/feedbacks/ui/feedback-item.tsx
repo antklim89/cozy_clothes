@@ -7,7 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/sha
 import { Rating } from '@/shared/ui/rating';
 import type { FeedbackType } from '../model/types';
 
-export function FeedbackItem({ feedback, type }: { feedback: FeedbackType; type?: 'product' | 'personal' }) {
+export function FeedbackItem({
+  feedback,
+  type,
+  deleteFeedback,
+}: {
+  feedback: FeedbackType;
+  type?: 'product' | 'personal';
+  deleteFeedback: ReactNode;
+}) {
   const fullName = `${feedback.user.firstName || ''} ${feedback.user.lastName || ''}`.trim();
 
   return (
@@ -23,8 +31,8 @@ export function FeedbackItem({ feedback, type }: { feedback: FeedbackType; type?
           )}
           <span className="opacity-65">{new Date(feedback.createdAt).toLocaleString()}</span>
         </div>
-
         <Rating rating={feedback.rating} />
+        {deleteFeedback}
       </CardHeader>
 
       {feedback.images && feedback.images.length > 0 && (

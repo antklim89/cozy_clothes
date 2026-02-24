@@ -2,11 +2,13 @@ import { Card, CardContent, CardHeader } from '@/shared/ui/card';
 import { Item, ItemContent, ItemHeader, ItemTitle } from '@/shared/ui/item';
 import { Skeleton } from '@/shared/ui/skeleton';
 
-export function FeedbackFallback() {
+export function FeedbacksListFallback() {
   return (
     <Item className="container my-8 flex w-full flex-col">
       <ItemHeader className="flex flex-col gap-4">
-        <ItemTitle className="text-3xl">Users Feedbacks</ItemTitle>
+        <ItemTitle className="text-3xl">
+          <Skeleton className="h-8 w-38" />
+        </ItemTitle>
         <p>Total feedbacks: ...</p>
       </ItemHeader>
 
