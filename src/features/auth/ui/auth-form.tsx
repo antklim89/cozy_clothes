@@ -61,12 +61,13 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
               <FieldLabel htmlFor={field.name + id}>E-mail</FieldLabel>
               <Input
                 id={field.name + id}
+                autoComplete="email"
                 type="text"
                 placeholder="example@mail.com"
                 {...field}
                 aria-invalid={fieldState.invalid}
               />
-              <FieldError errors={[fieldState.error]} />
+              <FieldError errors={fieldState.error} />
             </Field>
           )}
         />
@@ -78,13 +79,14 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
             <Field>
               <FieldLabel htmlFor={field.name + id}>Password</FieldLabel>
               <Input
+                autoComplete="new-password"
                 id={field.name + id}
                 aria-invalid={fieldState.invalid}
                 placeholder="******"
                 type="password"
                 {...field}
               />
-              <FieldError errors={[fieldState.error]} />
+              <FieldError errors={fieldState.error} />
             </Field>
           )}
         />
@@ -97,13 +99,14 @@ export function AuthForm({ className, type, onSubmit, ...props }: Props) {
               <Field>
                 <FieldLabel htmlFor={field.name + id}>Confirm Password</FieldLabel>
                 <Input
+                  autoComplete="new-password"
                   id={field.name + id}
                   aria-invalid={fieldState.invalid}
                   placeholder="******"
                   type="password"
                   {...field}
                 />
-                <FieldError errors={[fieldState.error]} />
+                <FieldError errors={fieldState.error} />
               </Field>
             )}
           />
