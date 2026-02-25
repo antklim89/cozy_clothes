@@ -17,7 +17,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
       product={product}
       favoriteButtonSlot={
         <FavoritesToggleButton
-          size="icon-lg"
+          size="icon-xl"
           isAuthenticated={isAuthenticated}
           productId={product.id}
           isFavorite={product.isFavorite}

@@ -41,6 +41,7 @@ export async function ProductsListCard({ product }: Props) {
           </Link>
         </CardTitle>
         <FavoritesToggleButton
+          size="icon"
           isAuthenticated={isAuthenticated}
           productId={product.id}
           isFavorite={product.isFavorite}

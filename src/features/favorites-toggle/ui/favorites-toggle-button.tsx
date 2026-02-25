@@ -21,10 +21,10 @@ export function FavoritesToggleButton({
     isFavorite: isFavoriteDefault,
   });
 
-  if (!isAuthenticated) return <FavoritesToggleButtonUnauthorized {...props} />;
+  if (!isAuthenticated) return <FavoritesToggleButtonUnauthorized variant="outline" {...props} />;
   return (
-    <Button aria-label="Add product to favorites" onClick={() => toggleFavorites()} {...props}>
-      <HeartIcon className={cn({ 'fill-primary-foreground': isFavorite })} />
+    <Button variant="outline" aria-label="Add product to favorites" onClick={() => toggleFavorites()} {...props}>
+      <HeartIcon className={cn({ 'fill-primary': isFavorite })} />
     </Button>
   );
 }
