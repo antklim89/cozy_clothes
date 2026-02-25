@@ -3,10 +3,14 @@ import { cache } from 'react';
 
 import { getMe } from '@/entities/user/services';
 import { errUnauthenticated } from '@/shared/lib/result';
+import { feedbackCache } from './cache';
 import { getFeedbacksRepository } from './repositories/get-feedbacks-repository';
 import { getMyFeedbacksRepository } from './repositories/get-my-feedbacks-repository';
 
 export const getFeedbacks = cache(async ({ productId }: { productId: number }) => {
+  'use cache';
+  feedbackCache({ productId });
+
   const result = await getFeedbacksRepository({ productId });
   return result;
 });

@@ -1,8 +1,9 @@
-import { cacheTag, updateTag } from 'next/cache';
+import { cacheLife, cacheTag, updateTag } from 'next/cache';
 
 const FEEDBACK_CACHE_TAG = 'FEEDBACK';
 
 export function feedbackCache({ productId }: { productId: number }) {
+  cacheLife('seconds');
   cacheTag(`${FEEDBACK_CACHE_TAG}:${productId}`);
 }
 
