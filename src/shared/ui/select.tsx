@@ -109,12 +109,12 @@ const selectTriggerVariants = cva(
 					[&_[data-slot=select-clear]>svg]:size-3 **:data-[slot=select-clear]:end-6
 				`,
         sm: `
-					min-h-9 px-2.5 text-xs gap-1 rounded-md
+					min-h-8 px-2.5 text-xs gap-1 rounded-md
 					**:data-[slot=select-icon]:size-3.5 **:data-[slot=select-icon]:-me-0.75
 					[&_[data-slot=select-clear]>svg]:size-3 **:data-[slot=select-clear]:end-6
 				`,
         md: `
-					min-h-10 px-3 text-sm gap-1 rounded-md
+					min-h-9 px-3 text-sm gap-1 rounded-md
 					**:data-[slot=select-icon]:size-4 **:data-[slot=select-icon]:-me-1
 					[&_[data-slot=select-clear]>svg]:size-3.5 **:data-[slot=select-clear]:end-7
 				`,
