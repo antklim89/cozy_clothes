@@ -7,5 +7,9 @@ export const CreateFeedbackInputSchema = z.object({
   review: z.optional(z.string().check(z.maxLength(10000))),
   negativeReview: z.optional(z.string().check(z.maxLength(10000))),
   positiveReview: z.optional(z.string().check(z.maxLength(10000))),
-  images: z.optional(z.array(z.file().check(z.maxSize(MAX_IMAGE_SIZE)))),
+  images: z.optional(
+    z
+      .array(z.file().check(z.maxSize(MAX_IMAGE_SIZE)))
+      .check(z.maxLength(5, 'Too many images. Expected less or equal 5.')),
+  ),
 });
