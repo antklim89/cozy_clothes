@@ -5,8 +5,8 @@ export function AuthMenuAvatar({ user }: { user: UserType }) {
   const initials = nameInitials.length === 0 ? user.email[0] || 'A' : nameInitials;
 
   return (
-    <div className="m-0 flex size-7 items-center justify-center rounded-full bg-secondary">
-      <span className="text-xs uppercase">{initials}</span>
-    </div>
+    <span className="flex size-9 items-center justify-center rounded-full bg-secondary text-xs uppercase leading-0">
+      {initials}
+    </span>
   );
 }
