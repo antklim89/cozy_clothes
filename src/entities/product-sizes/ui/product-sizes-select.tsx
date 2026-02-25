@@ -1,8 +1,11 @@
 'use client';
 
 import { useId } from 'react';
+import { XIcon } from 'lucide-react';
 import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
+import { Button } from '@/shared/ui/button';
+import { ButtonGroup } from '@/shared/ui/button-group';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 import type { ProductSizeType } from '../models/types';
@@ -26,13 +29,18 @@ export function ProductSizeSelect({ sizes }: { sizes: ProductSizeType[] }) {
         onValueChange={async v => setQuery({ sizes: v, page: null })}
         multiple
       >
-        <SelectTrigger id={id} className="w-full">
-          <SelectMultipleValue
-            items={selectedSizes}
-            render={size => <div key={size.id}>{size.name}</div>}
-            placeholder="Select Size"
-          />
-        </SelectTrigger>
+        <ButtonGroup>
+          <SelectTrigger id={id} className="w-full">
+            <SelectMultipleValue
+              items={selectedSizes}
+              render={size => <div key={size.id}>{size.name}</div>}
+              placeholder="Select Size"
+            />
+          </SelectTrigger>
+          <Button variant="outline" className="h-auto" onClick={() => setQuery({ sizes: [], page: null })}>
+            <XIcon />
+          </Button>
+        </ButtonGroup>
         <SelectContent>
           <SelectGroup>
             {sizes

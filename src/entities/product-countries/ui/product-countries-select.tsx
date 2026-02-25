@@ -1,8 +1,11 @@
 'use client';
 
 import { useId } from 'react';
+import { XIcon } from 'lucide-react';
 import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
+import { Button } from '@/shared/ui/button';
+import { ButtonGroup } from '@/shared/ui/button-group';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 import type { ProductCountryType } from '../models/types';
@@ -26,13 +29,18 @@ export function ProductCountriesSelect({ countries }: { countries: ProductCountr
         onValueChange={async v => setQuery({ countries: v, page: null })}
         multiple
       >
-        <SelectTrigger id={id} className="w-full">
-          <SelectMultipleValue
-            items={selectedCountries}
-            render={i => <span key={i.id}>{i.name}</span>}
-            placeholder="Select Country"
-          />
-        </SelectTrigger>
+        <ButtonGroup>
+          <SelectTrigger id={id} className="w-full">
+            <SelectMultipleValue
+              items={selectedCountries}
+              render={i => <span key={i.id}>{i.name}</span>}
+              placeholder="Select Country"
+            />
+          </SelectTrigger>
+          <Button variant="outline" className="h-auto" onClick={() => setQuery({ countries: [], page: null })}>
+            <XIcon />
+          </Button>
+        </ButtonGroup>
         <SelectContent>
           <SelectGroup>
             {countries

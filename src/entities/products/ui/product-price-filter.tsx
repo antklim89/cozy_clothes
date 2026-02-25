@@ -1,8 +1,11 @@
 'use client';
 
+import { XIcon } from 'lucide-react';
 import { parseAsInteger, parseAsString, useQueryStates } from 'nuqs';
 import { z } from 'zod/v4-mini';
 
+import { Button } from '@/shared/ui/button';
+import { ButtonGroup } from '@/shared/ui/button-group';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 
@@ -26,27 +29,37 @@ export function PriceFilter() {
       <FieldGroup className="flex flex-row gap-2">
         <Field data-invalid={!validatedMinPrice.success} className="flex-1">
           <FieldLabel>Min Price</FieldLabel>
-          <Input
-            aria-invalid={!validatedMinPrice.success}
-            max={price.maxPrice}
-            min={0}
-            type="text"
-            inputMode="numeric"
-            value={price.minPrice}
-            onChange={async e => setPrice({ minPrice: e.target.value, page: null })}
-          />
+          <ButtonGroup>
+            <Input
+              aria-invalid={!validatedMinPrice.success}
+              max={price.maxPrice}
+              min={0}
+              type="text"
+              inputMode="numeric"
+              value={price.minPrice}
+              onChange={async e => setPrice({ minPrice: e.target.value, page: null })}
+            />
+            <Button variant="outline" onClick={() => setPrice({ minPrice: '', page: null })}>
+              <XIcon />
+            </Button>
+          </ButtonGroup>
           {!validatedMinPrice.success && <FieldError>Invalid minimum price</FieldError>}
         </Field>
         <Field data-invalid={!validatedMaxPrice.success} className="flex-1">
           <FieldLabel>Max Price</FieldLabel>
-          <Input
-            aria-invalid={!validatedMaxPrice.success}
-            min={price.minPrice}
-            type="text"
-            inputMode="numeric"
-            value={price.maxPrice}
-            onChange={async e => setPrice({ maxPrice: e.target.value, page: null })}
-          />
+          <ButtonGroup>
+            <Input
+              aria-invalid={!validatedMaxPrice.success}
+              min={price.minPrice}
+              type="text"
+              inputMode="numeric"
+              value={price.maxPrice}
+              onChange={async e => setPrice({ maxPrice: e.target.value, page: null })}
+            />
+            <Button variant="outline" onClick={() => setPrice({ maxPrice: '', page: null })}>
+              <XIcon />
+            </Button>
+          </ButtonGroup>
           {!validatedMaxPrice.success && <FieldError>Invalid maximum price</FieldError>}
         </Field>
       </FieldGroup>

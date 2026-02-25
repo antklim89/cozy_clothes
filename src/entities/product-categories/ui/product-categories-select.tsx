@@ -1,9 +1,12 @@
 'use client';
 
 import { useId } from 'react';
+import { XIcon } from 'lucide-react';
 import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
 import type { ProductCategoryType } from '@/entities/product-categories/model';
+import { Button } from '@/shared/ui/button';
+import { ButtonGroup } from '@/shared/ui/button-group';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 
@@ -22,13 +25,19 @@ export function ProductCategoriesSelect({ categories }: { categories: ProductCat
     <Field>
       <FieldLabel htmlFor={id}>Category</FieldLabel>
       <Select value={query.categories} onValueChange={async v => setQuery({ categories: v, page: null })} multiple>
-        <SelectTrigger id={id} className="w-full">
-          <SelectMultipleValue
-            items={selectedCategories}
-            render={i => <span key={i.id}>{i.name}</span>}
-            placeholder="Select Category"
-          />
-        </SelectTrigger>
+        <ButtonGroup>
+          <SelectTrigger id={id} className="w-full">
+            <SelectMultipleValue
+              items={selectedCategories}
+              render={i => <span key={i.id}>{i.name}</span>}
+              placeholder="Select Category"
+            />
+          </SelectTrigger>
+          <Button variant="outline" className="h-auto" onClick={() => setQuery({ categories: [], page: null })}>
+            <XIcon />
+          </Button>
+        </ButtonGroup>
+
         <SelectContent>
           <SelectGroup>
             {categories

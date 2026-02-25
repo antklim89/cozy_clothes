@@ -1,8 +1,11 @@
 'use client';
 
 import { useId } from 'react';
+import { XIcon } from 'lucide-react';
 import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
+import { Button } from '@/shared/ui/button';
+import { ButtonGroup } from '@/shared/ui/button-group';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 import type { ProductColorType } from '../models/types';
@@ -26,18 +29,23 @@ export function ProductColorsSelect({ colors }: { colors: ProductColorType[] }) 
         onValueChange={async v => setQuery({ colors: v, page: null })}
         multiple
       >
-        <SelectTrigger id={id} className="w-full">
-          <SelectMultipleValue
-            items={selectedColors}
-            render={color => (
-              <div key={color.id} className="flex items-center gap-1">
-                <span className="inline-block size-4 rounded-full" style={{ backgroundColor: color.code }} />
-                <span className="uppercase">{color.name}</span>
-              </div>
-            )}
-            placeholder="Select Color"
-          />
-        </SelectTrigger>
+        <ButtonGroup>
+          <SelectTrigger id={id} className="w-full">
+            <SelectMultipleValue
+              items={selectedColors}
+              render={color => (
+                <div key={color.id} className="flex items-center gap-1">
+                  <span className="inline-block size-4 rounded-full" style={{ backgroundColor: color.code }} />
+                  <span className="uppercase">{color.name}</span>
+                </div>
+              )}
+              placeholder="Select Color"
+            />
+          </SelectTrigger>
+          <Button variant="outline" className="h-auto" onClick={() => setQuery({ colors: [], page: null })}>
+            <XIcon />
+          </Button>
+        </ButtonGroup>
         <SelectContent>
           <SelectGroup>
             {colors
