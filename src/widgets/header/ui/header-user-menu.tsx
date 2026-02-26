@@ -15,7 +15,7 @@ export function HeaderUserMenu() {
     <Suspense
       fallback={
         <Skeleton>
-          <Button disabled variant="ghost">
+          <Button size="icon" disabled variant="ghost">
             <UserIcon />
           </Button>
         </Skeleton>

@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
-import { Button, buttonVariants } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button';
 import { Skeleton } from '@/shared/ui/skeleton';
 import { cartQueryOptions } from '../api';
 
@@ -17,7 +17,7 @@ export function CartButton({ className, ...props }: ComponentProps<'a'>) {
   if (!cartQuery.isFetchedAfterMount || cartQuery.isPending) {
     return (
       <Skeleton>
-        <Button variant="ghost">
+        <Button variant="ghost" size="icon">
           <ShoppingCartIcon />
         </Button>
       </Skeleton>
@@ -25,8 +25,10 @@ export function CartButton({ className, ...props }: ComponentProps<'a'>) {
   }
 
   return (
-    <Link {...props} href="/cart" className={cn(buttonVariants({ variant: 'ghost' }), className)}>
-      <ShoppingCartIcon />
+    <Link {...props} href="/cart" className={cn('flex items-center', className)}>
+      <Button variant="ghost" size="icon">
+        <ShoppingCartIcon />
+      </Button>
       {cartQuery.data != null && cartQuery.data.length > 0 && (
         <Badge variant="destructive" className="text-white shadow">
           {cartQuery.data.length}

@@ -24,7 +24,7 @@ export function AuthMenu({ privateItems, user }: { privateItems: ReactNode; user
       <AuthDialog type={type === 'login' ? 'login' : null} setType={setType} />
       <AuthDialog type={type === 'register' ? 'register' : null} setType={setType} />
 
-      <DropdownMenuTrigger aria-label="User Menu" className={buttonVariants({ variant: 'ghost' })}>
+      <DropdownMenuTrigger aria-label="User Menu" className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
         {user ? <AuthMenuAvatar user={user} /> : <UserIcon />}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-56" side="bottom" sideOffset={4}>

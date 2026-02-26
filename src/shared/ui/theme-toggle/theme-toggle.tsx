@@ -10,7 +10,12 @@ export function ThemeToggle(props: ComponentProps<typeof Button>) {
   const { setTheme, theme } = useTheme();
 
   return (
-    <Button variant="ghost" {...props} onClick={() => (theme === 'dark' ? setTheme('light') : setTheme('dark'))}>
+    <Button
+      size="icon"
+      variant="ghost"
+      {...props}
+      onClick={() => (theme === 'dark' ? setTheme('light') : setTheme('dark'))}
+    >
       {theme === 'dark' ? <Sun /> : <Moon />}
     </Button>
   );
@@ -19,7 +24,7 @@ export function ThemeToggle(props: ComponentProps<typeof Button>) {
 export function ThemeToggleFallback() {
   return (
     <Skeleton>
-      <Button variant="ghost">
+      <Button variant="ghost" size="icon">
         <SunMoonIcon />
       </Button>
     </Skeleton>

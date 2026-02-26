@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 export function HeaderSheet({ children }: { children: ReactNode }) {
   return (
     <Sheet>
-      <SheetTrigger className={buttonVariants({ variant: 'ghost' })}>
+      <SheetTrigger className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
         <MenuIcon />
       </SheetTrigger>
 

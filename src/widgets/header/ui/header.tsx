@@ -8,7 +8,7 @@ import { Logo } from './logo';
 export function Header() {
   return (
     <header className="bg-primary text-primary-foreground">
-      <div className="container hidden items-center sm:flex">
+      <div className="container hidden items-center gap-2 sm:flex">
         <Logo />
         <Links />
 
@@ -16,10 +16,10 @@ export function Header() {
         <HeaderUserMenu />
         <CartButton />
       </div>
-      <div className="container flex items-center sm:hidden">
+      <div className="container flex items-center gap-2 sm:hidden">
         <Logo />
-        <CartButton />
         <HeaderUserMenu />
+        <CartButton />
 
         <HeaderSheet>
           <Links className="flex-col gap-4" />
