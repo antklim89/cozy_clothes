@@ -17,8 +17,8 @@ export function Rating({ rating }: { rating: number }) {
 export function RatingTotal({ rating, total }: { rating: number; total?: number }) {
   return (
     <div className="flex items-center gap-2">
-      <StarIcon className="fill-amber-600 stroke-amber-700" />
-      <span className="text-2xl">{rating.toFixed(1)} </span>
+      <StarIcon className="size-8 fill-amber-600 stroke-amber-700" />
+      <span className="text-3xl">{rating.toFixed(1)} </span>
       <span className="opacity-65">{total}</span>
     </div>
   );
