@@ -7,6 +7,7 @@ import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Price } from '@/shared/ui/price';
+import { RatingTotal } from '@/shared/ui/rating';
 
 interface Props {
   product: ProductPreviewType;
@@ -40,12 +41,15 @@ export async function ProductsListCard({ product }: Props) {
             <span className="font-sm opacity-70">{product.title}</span>
           </Link>
         </CardTitle>
-        <FavoritesToggleButton
-          size="icon"
-          isAuthenticated={isAuthenticated}
-          productId={product.id}
-          isFavorite={product.isFavorite}
-        />
+        <div className="flex flex-col items-end gap-2">
+          <FavoritesToggleButton
+            size="icon"
+            isAuthenticated={isAuthenticated}
+            productId={product.id}
+            isFavorite={product.isFavorite}
+          />
+          <RatingTotal rating={product.averageFeedback} total={product.totalFeedbacks} />
+        </div>
       </CardHeader>
 
       <CardContent className="flex flex-col gap-4">

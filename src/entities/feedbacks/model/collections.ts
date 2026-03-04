@@ -6,6 +6,15 @@ import { IMAGE_HEIGHT, IMAGE_WIDTH } from '../config/constants';
 export const Feedback: CollectionConfig = {
   slug: 'feedback',
   indexes: [{ fields: ['product', 'user'], unique: true }],
+
+  hooks: {
+    afterChange: [
+      args => import('../services/update-product-feedbacks-hook').then(m => m.updateProductFeedbacksHook(args)),
+    ],
+    afterDelete: [
+      args => import('../services/update-product-feedbacks-hook').then(m => m.updateProductFeedbacksHook(args)),
+    ],
+  },
   fields: [
     {
       label: 'Review',

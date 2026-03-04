@@ -7,6 +7,7 @@ import { AddToCartButton } from '@/features/update-cart/ui';
 import { cn } from '@/shared/lib/utils';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel';
 import { Price } from '@/shared/ui/price';
+import { RatingTotal } from '@/shared/ui/rating';
 import { ProductsVariantsSelect } from './products-variants-select';
 
 export function Product({
@@ -44,7 +45,10 @@ export function Product({
         </section>
       </section>
       <aside className="flex w-full flex-col gap-8 px-4">
-        <div className="flex justify-end">{favoriteButtonSlot}</div>
+        <div className="flex justify-end gap-8">
+          <RatingTotal rating={product.averageFeedback} total={product.totalFeedbacks} />
+          {favoriteButtonSlot}
+        </div>
         <div className="prose dark:prose-invert flex flex-col px-4">
           <h1>
             <span className="font-bold text-5xl">{product.baseTitle}</span>

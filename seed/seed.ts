@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: ok */
+/** biome-ignore-all lint/performance/noAwaitInLoops: ok */
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { faker } from '@faker-js/faker';
@@ -7,11 +8,11 @@ import { type CollectionSlug, getPayload } from 'payload';
 
 import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
-const USERS_NUMBER = 7;
+const USERS_NUMBER = 500;
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const PRODUCT_BASES_LENGTH = 20;
+const PRODUCT_BASES_LENGTH = 5;
 const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
 const COLORS = [
   { name: 'Crimson Red', code: '#DC143C' },
@@ -36,6 +37,7 @@ const COLORS = [
 const config = await configPromise;
 config.collections.forEach(collection => {
   if (collection.slug.includes('media')) return;
+  if (collection.slug === 'feedback') return;
   collection.hooks.afterChange = [];
   collection.hooks.afterDelete = [];
 });
@@ -85,7 +87,6 @@ function createRichText(textArr: string[]): ProductBase['description'] {
 }
 
 async function clear() {
-  // await payload.db.migrateFresh({ forceAcceptWarning: true });
   await fs.rm(path.resolve('media'), { force: true, recursive: true });
   await fs.mkdir(path.resolve('media'));
 }
@@ -106,27 +107,25 @@ async function getImages<T extends CollectionSlug>(collection: T, imagesPath: st
   return images;
 }
 
-function createUsers() {
-  return Promise.all(
-    Array.from({ length: USERS_NUMBER }, () => {
-      const firstName = Math.random() > 0.4 ? faker.person.firstName() : undefined;
-      const lastName = Math.random() > 0.4 ? faker.person.lastName() : undefined;
-      const address = Math.random() > 0.4 ? faker.location.streetAddress() : undefined;
-      const phone = Math.random() > 0.4 ? faker.phone.number({ style: 'international' }) : undefined;
+async function createUsers() {
+  for (let index = 0; index < USERS_NUMBER; index++) {
+    const firstName = Math.random() > 0.4 ? faker.person.firstName() : undefined;
+    const lastName = Math.random() > 0.4 ? faker.person.lastName() : undefined;
+    const address = Math.random() > 0.4 ? faker.location.streetAddress() : undefined;
+    const phone = Math.random() > 0.4 ? faker.phone.number({ style: 'international' }) : undefined;
 
-      return payload.create({
-        collection: 'users',
-        data: {
-          email: faker.internet.email({ firstName, lastName }),
-          password: 'qwer1234',
-          firstName,
-          lastName,
-          address,
-          phone,
-        },
-      });
-    }),
-  );
+    await payload.create({
+      collection: 'users',
+      data: {
+        email: faker.internet.email({ firstName, lastName }),
+        password: 'qwer1234',
+        firstName,
+        lastName,
+        address,
+        phone,
+      },
+    });
+  }
 }
 
 async function createAbout() {
@@ -168,36 +167,32 @@ async function createHero() {
   });
 }
 
-function createCategories() {
-  return Promise.all(
-    Array.from({ length: CATEGORIES_NUMBER }, () => {
-      return payload.create({
-        collection: 'product-categories',
-        data: {
-          name: faker.commerce.productMaterial(),
-        },
-      });
-    }),
-  );
+async function createCategories() {
+  for (let index = 0; index < CATEGORIES_NUMBER; index++) {
+    await payload.create({
+      collection: 'product-categories',
+      data: {
+        name: faker.commerce.productMaterial(),
+      },
+    });
+  }
 }
 
-function createCountries() {
-  return Promise.all(
-    Array.from({ length: COUNTRIES_NUMBER }, () => {
-      return payload.create({
-        collection: 'product-countries',
-        data: {
-          name: faker.location.country(),
-        },
-      });
-    }),
-  );
+async function createCountries() {
+  for (let index = 0; index < COUNTRIES_NUMBER; index++) {
+    await payload.create({
+      collection: 'product-countries',
+      data: {
+        name: faker.location.country(),
+      },
+    });
+  }
 }
 
-function createSizes() {
-  return Promise.all(
-    SIZES.map(size => {
-      return payload.create({
+async function createSizes() {
+  for (const size of SIZES) {
+    try {
+      await payload.create({
         collection: 'product-sizes',
         data: {
           name: size,
@@ -208,19 +203,23 @@ function createSizes() {
           waistSize: faker.number.float({ min: 2, max: 50, fractionDigits: 2 }),
         },
       });
-    }),
-  );
+    } catch {
+      return;
+    }
+  }
 }
 
-function createColors() {
-  return Promise.all(
-    COLORS.map(data => {
-      return payload.create({
+async function createColors() {
+  for (const colors of COLORS) {
+    try {
+      await payload.create({
         collection: 'product-colors',
-        data,
+        data: colors,
       });
-    }),
-  );
+    } catch {
+      return;
+    }
+  }
 }
 
 async function createFeedbacks() {
@@ -236,123 +235,127 @@ async function createFeedbacks() {
     limit: Number.MAX_SAFE_INTEGER,
   });
 
-  return Promise.all(
-    products.docs.map(product => {
-      return Promise.all(
-        users.docs.map(user => {
-          return payload.create({
-            collection: 'feedback',
-            data: {
-              product: product.id,
-              rating: faker.number.int({ min: 1, max: 5 }),
-              user: user.id,
-              review: Math.random() > 0.4 ? faker.lorem.text() : undefined,
-              positiveReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
-              negativeReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
-              images: Math.random() > 0.6 ? sliceRandom(shuffle(images), 5).map(i => i.id) : undefined,
-            },
-          });
-        }),
-      );
-    }),
-  );
-}
-
-async function createProducts(productBases: ProductBase[]) {
-  const images = await getImages('product-media', 'products');
-  const sizes = await createSizes();
-  const colors = await createColors();
-
-  return Promise.all(
-    productBases.map(productBase => {
-      return Promise.all(
-        colors.map(color => {
-          return Promise.all(
-            sizes.map(size => {
-              if (Math.random() > 0.2) return null;
-
-              return payload.create({
-                collection: 'products',
-                data: {
-                  _status: 'published',
-                  title: faker.commerce.productName(),
-                  description: createRichText([faker.lorem.text()]),
-                  discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
-                  price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
-                  imagePreview: getRandomItem(images).id,
-                  images: sliceRandom(shuffle(images)).map(i => i.id),
-                  color,
-                  size,
-                  productBase: productBase.id,
-                },
-              });
-            }),
-          );
-        }),
-      );
-    }),
-  );
+  for (const product of products.docs) {
+    for (const user of users.docs) {
+      await payload.create({
+        collection: 'feedback',
+        data: {
+          product: product.id,
+          rating: faker.number.int({ min: 1, max: 5 }),
+          user: user.id,
+          review: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+          positiveReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+          negativeReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
+          images: Math.random() > 0.6 ? sliceRandom(shuffle(images), 5).map(i => i.id) : undefined,
+        },
+      });
+    }
+  }
 }
 
 async function createProductBases() {
-  const categories = await createCategories();
-  const countries = await createCountries();
+  const categories = await payload.find({
+    collection: 'product-categories',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+  const countries = await payload.find({
+    collection: 'product-countries',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+
   const images = await getImages('product-media', 'products');
 
-  const products = await Promise.all(
-    Array.from({ length: PRODUCT_BASES_LENGTH }, () => {
-      const category = getRandomItem(categories);
-      const country = getRandomItem(countries);
+  for (let index = 0; index < PRODUCT_BASES_LENGTH; index++) {
+    const category = getRandomItem(categories.docs);
+    const country = getRandomItem(countries.docs);
 
-      return payload.create({
-        collection: 'product-bases',
-        data: {
-          _status: 'published',
-          title: faker.commerce.productName(),
-          description: createRichText([faker.lorem.text()]),
-          category: category.id,
-          country: country.id,
-          discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
-          price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
-          images: sliceRandom(shuffle(images)).map(i => i.id),
-        },
-      });
-    }),
-  );
+    await payload.create({
+      collection: 'product-bases',
+      data: {
+        _status: 'published',
+        title: faker.commerce.productName(),
+        description: createRichText([faker.lorem.text()]),
+        category: category.id,
+        country: country.id,
+        discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
+        price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
+        images: sliceRandom(shuffle(images)).map(i => i.id),
+      },
+    });
+  }
+}
 
-  await createProducts(products);
+async function createProducts() {
+  const images = await getImages('product-media', 'products');
+  const productBases = await payload.find({
+    collection: 'product-bases',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+  const colors = await payload.find({
+    collection: 'product-colors',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+  const sizes = await payload.find({
+    collection: 'product-sizes',
+    pagination: false,
+    limit: Number.MAX_SAFE_INTEGER,
+  });
+
+  for (const productBase of productBases.docs) {
+    for (const color of colors.docs) {
+      for (const size of sizes.docs) {
+        if (Math.random() > 0.05) continue;
+
+        await payload.create({
+          collection: 'products',
+          data: {
+            _status: 'published',
+            title: faker.commerce.productName(),
+            description: createRichText([faker.lorem.text()]),
+            discount: Math.random() > 0.5 ? faker.number.int({ min: 5, max: 90 }) : 0,
+            price: faker.number.float({ min: 900, max: 900000, fractionDigits: 2 }),
+            imagePreview: getRandomItem(images).id,
+            images: sliceRandom(shuffle(images)).map(i => i.id),
+            color,
+            size,
+            productBase: productBase.id,
+          },
+        });
+      }
+    }
+  }
 }
 
 async function createTestimonials() {
   const images = await getImages('testimonials-media', 'testimonials');
 
-  return Promise.all(
-    images.map(image => {
-      return payload.create({
-        collection: 'testimonials',
-        data: {
-          image: image.id,
-          text: faker.lorem.text(),
-          name: faker.person.fullName(),
-        },
-      });
-    }),
-  );
+  for (const image of images) {
+    await payload.create({
+      collection: 'testimonials',
+      data: {
+        image: image.id,
+        text: faker.lorem.text(),
+        name: faker.person.fullName(),
+      },
+    });
+  }
 }
 
-function createContacts() {
-  return Promise.all(
-    Array.from({ length: CONTACTS_NUMBER }, () => {
-      return payload.create({
-        collection: 'contacts',
-        data: {
-          email: faker.internet.email(),
-          phone: faker.phone.number({ style: 'national' }),
-          title: faker.lorem.words(3),
-        },
-      });
-    }),
-  );
+async function createContacts() {
+  for (let index = 0; index < CONTACTS_NUMBER; index++) {
+    await payload.create({
+      collection: 'contacts',
+      data: {
+        email: faker.internet.email(),
+        phone: faker.phone.number({ style: 'national' }),
+        title: faker.lorem.words(3),
+      },
+    });
+  }
 }
 
 async function main() {
@@ -360,14 +363,20 @@ async function main() {
     await clear();
 
     await createUsers();
-    await Promise.all([
-      createAbout(),
-      createHero(),
-      createSeo(),
-      createContacts(),
-      createProductBases(),
-      createTestimonials(),
-    ]);
+
+    await createAbout();
+    await createHero();
+    await createSeo();
+    await createContacts();
+    await createTestimonials();
+
+    await createCategories();
+    await createCountries();
+    await createSizes();
+    await createColors();
+    await createProductBases();
+    await createProducts();
+
     await createFeedbacks();
   } catch (error) {
     // biome-ignore lint/suspicious/noConsole: ok

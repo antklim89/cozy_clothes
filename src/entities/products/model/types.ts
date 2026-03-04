@@ -39,6 +39,8 @@ export interface ProductType {
   productVariants: ProductVariantType[];
   updatedAt: string;
   createdAt: string;
+  totalFeedbacks: number;
+  averageFeedback: number;
 }
 
 export interface ProductPreviewType
@@ -56,6 +58,8 @@ export interface ProductPreviewType
     | 'size'
     | 'color'
     | 'isFavorite'
+    | 'totalFeedbacks'
+    | 'averageFeedback'
   > {
   imagePreview: Media;
 }

@@ -274,6 +274,8 @@ export interface Product {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
+  totalFeedbacks?: number | null;
+  averageFeedback?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -805,6 +807,8 @@ export interface ProductsSelect<T extends boolean = true> {
   images?: T;
   productBase?: T;
   favorites?: T;
+  totalFeedbacks?: T;
+  averageFeedback?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

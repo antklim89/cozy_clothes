@@ -87,6 +87,22 @@ export const Products = {
         hidden: true,
       },
     },
+    {
+      label: 'Total feedbacks',
+      name: 'totalFeedbacks',
+      type: 'number',
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      label: 'Average feedback',
+      name: 'averageFeedback',
+      type: 'number',
+      admin: {
+        readOnly: true,
+      },
+    },
   ],
 } as const satisfies CollectionConfig;
 

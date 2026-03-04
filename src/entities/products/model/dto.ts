@@ -33,6 +33,8 @@ export function productDto(product: Product): ProductType {
     discount: product.discount ?? productBase.discount ?? 0,
     images: [...baseImages, ...images],
     price: product.price ?? productBase.price,
+    averageFeedback: product.averageFeedback || 0,
+    totalFeedbacks: product.totalFeedbacks || 0,
     productVariants: productVariants.map(i => ({
       id: i.id,
       color: i.color as ProductColor,
@@ -61,5 +63,7 @@ export function productPreviewDto(product: Product): ProductPreviewType {
     discount: product.discount ?? productBase.discount ?? 0,
     imagePreview,
     price: product.price ?? productBase.price,
+    averageFeedback: product.averageFeedback || 0,
+    totalFeedbacks: product.totalFeedbacks || 0,
   };
 }
