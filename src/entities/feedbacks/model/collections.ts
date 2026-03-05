@@ -51,6 +51,7 @@ export const Feedback: CollectionConfig = {
       type: 'relationship',
       required: true,
       relationTo: 'users',
+      index: true,
     },
     {
       label: 'Product',
@@ -58,6 +59,7 @@ export const Feedback: CollectionConfig = {
       type: 'relationship',
       required: true,
       relationTo: 'products',
+      index: true,
     },
     {
       name: 'images',
