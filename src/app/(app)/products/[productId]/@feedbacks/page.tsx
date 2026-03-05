@@ -1,14 +1,14 @@
-import { feedbackCache, getFeedbacks } from '@/entities/feedbacks/services';
+import { getFeedbacks } from '@/entities/feedbacks/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { FeedbacksList } from '@/widgets/feedbacks-list/ui';
-import { ParamsSchema } from '../params';
+import { ParamsSchema, SearchParamsSchema } from '../params';
 
-async function Page({ params }: PageProps<'/products/[productId]'>) {
-  'use cache';
+async function Page({ params, searchParams }: PageProps<'/products/[productId]'>) {
+  // TODO: add use cache
   const { productId } = await ParamsSchema.parseAsync(await params);
-  feedbackCache({ productId });
+  const options = await SearchParamsSchema.parseAsync(await searchParams);
 
-  const { result: feedbacks, error } = await getFeedbacks({ productId });
+  const { result: feedbacks, error } = await getFeedbacks({ productId, options });
   if (error) return <ErrorComponent error={error} />;
 
   return <FeedbacksList feedbacks={feedbacks} />;

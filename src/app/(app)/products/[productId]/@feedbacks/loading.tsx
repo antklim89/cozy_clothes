@@ -1,6 +1,6 @@
-import { FeedbackListFallback } from '@/widgets/feedbacks-list/ui';
+import { FeedbacksListFallback } from '@/widgets/feedbacks-list/ui';
 
 function Loading() {
-  return <FeedbackListFallback />;
+  return <FeedbacksListFallback />;
 }
 export default Loading;

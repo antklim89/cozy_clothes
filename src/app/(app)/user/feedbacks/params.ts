@@ -1,9 +1,5 @@
 import { z } from 'zod/v4-mini';
 
-export const ParamsSchema = z.object({
-  productId: z.coerce.number(),
-});
-
 export const SearchParamsSchema = z.object({
   page: z.catch(z.optional(z.coerce.number().check(z.positive())), undefined),
   sort: z.catch(z.optional(z.string()), undefined),
