@@ -1,2 +1,2 @@
 export { feedbackCache, updateFeedbackCache } from './cache';
-export { getFeedbacks, getMyFeedbacks } from './dal';
+export { checkMyFeedback, getFeedbacks, getMyFeedbacks } from './dal';

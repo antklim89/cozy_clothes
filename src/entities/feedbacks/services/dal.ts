@@ -7,6 +7,7 @@ import { errUnauthenticated } from '@/shared/lib/result';
 import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-schema';
 import type { PayloadOptions } from '@/shared/model/types/types';
 import { feedbackCache } from './cache';
+import { checkMyFeedbackRepository } from './repositories/check-my-feedback-repository';
 import { getFeedbacksRepository } from './repositories/get-feedbacks-repository';
 import { getMyFeedbacksRepository } from './repositories/get-my-feedbacks-repository';
 
@@ -35,5 +36,13 @@ export const getMyFeedbacks = cache(async (input: { options: Pick<PayloadOptions
   if (user == null) return errUnauthenticated();
 
   const result = await getMyFeedbacksRepository({ userId: user.id, options });
+  return result;
+});
+
+export const checkMyFeedback = cache(async ({ productId }: { productId: number }) => {
+  const user = await getMe();
+  if (user == null) return errUnauthenticated();
+
+  const result = await checkMyFeedbackRepository({ userId: user.id, productId });
   return result;
 });

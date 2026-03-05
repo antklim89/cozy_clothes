@@ -1,5 +1,5 @@
 import { checkMyFeedback } from '@/entities/feedbacks/services';
-import { FeedbackUpdate } from '@/features/feedback-edit/ui';
+import { FeedbackCreate } from '@/features/feedback-edit/ui';
 import { Alert, AlertDescription } from '@/shared/ui/alert';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { ParamsSchema } from '../params';
@@ -24,7 +24,7 @@ async function Page({ params }: PageProps<'/products/[productId]'>) {
     );
   }
 
-  return <FeedbackUpdate productId={productId} />;
+  return <FeedbackCreate productId={productId} />;
 }
 
 export default Page;
