@@ -1,5 +1,5 @@
 import type { FeedbackType } from '@/entities/feedbacks/model';
-import { FeedbackItem } from '@/entities/feedbacks/ui';
+import { FeedbackItem, FeedbacksEmpty } from '@/entities/feedbacks/ui';
 import { FeedbackDeleteButton } from '@/features/feedback-edit/ui';
 import type { PaginatedData } from '@/shared/model/types/types';
 import { Item, ItemContent, ItemHeader, ItemTitle } from '@/shared/ui/item';
@@ -38,6 +38,13 @@ export function FeedbacksList({
             />
           ))}
         </div>
+        {feedbacks.docs.length === 0 && (
+          <FeedbacksEmpty
+            description={
+              type === 'product' ? 'No one has left any feedback yet.' : "You haven't added any feedback yet."
+            }
+          />
+        )}
       </ItemContent>
     </Item>
   );
