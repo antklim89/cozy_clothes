@@ -1,0 +1,76 @@
+import { type ChangeEvent, useId } from 'react';
+import type { ControllerFieldState, ControllerRenderProps } from 'react-hook-form';
+import { UploadIcon } from 'lucide-react';
+import Image from 'next/image';
+import { toast } from 'sonner';
+
+import { IMAGE_HEIGHT, IMAGE_WIDTH, MAX_IMAGE_SIZE } from '@/entities/feedbacks/config';
+import { imageTransform } from '@/shared/lib/image-transform';
+import { buttonVariants } from '@/shared/ui/button';
+import { Field, FieldError, FieldLabel } from '@/shared/ui/field';
+import { Input } from '@/shared/ui/input';
+import type { CreateFeedbackInputType } from '../model/types';
+
+const transformImageOptions = {
+  maxWidth: IMAGE_WIDTH,
+  maxHeight: IMAGE_HEIGHT,
+  maxImageSize: MAX_IMAGE_SIZE,
+  quality: 0.8,
+};
+
+export function FeedbackUploadImagesField({
+  field,
+  fieldState,
+}: {
+  field: ControllerRenderProps<CreateFeedbackInputType, 'images'>;
+  fieldState: ControllerFieldState;
+}) {
+  const id = useId();
+
+  async function handleFileUpload(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files === null || e.target.files.length === 0) return;
+
+    const transformedImages = await Promise.all(
+      Array.from(e.target.files, async file => {
+        const { error, result } = await imageTransform({ file, ...transformImageOptions });
+        if (error) return void toast.error(`Failed to upload image ${file.name}`);
+        return result;
+      }),
+    );
+
+    const filteredImages = transformedImages.filter(i => i != null);
+    const oldImages = field.value || [];
+    field.onChange([...filteredImages, ...oldImages].slice(undefined, 5));
+    e.target.value = '';
+  }
+
+  return (
+    <Field>
+      <FieldLabel className={buttonVariants({ variant: 'outline', size: 'lg' })} htmlFor={field.name + id}>
+        <UploadIcon /> Upload images ({field.value?.length || 0} / 5)
+      </FieldLabel>
+      <Input
+        id={field.name + id}
+        className="hidden"
+        type="file"
+        accept="image/*"
+        value={undefined}
+        onChange={handleFileUpload}
+        multiple
+      />
+      <div className="flex gap-2">
+        {field.value?.map(image => (
+          <Image
+            className="size-48"
+            key={image.name}
+            src={URL.createObjectURL(image)}
+            alt="Uploaded image"
+            width={64}
+            height={64}
+          />
+        ))}
+      </div>
+      <FieldError errors={fieldState.error} />
+    </Field>
+  );
+}

@@ -1,11 +1,11 @@
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { FeedbackUpdateForm } from './feedback-update-form';
+import { FeedbackCreateForm } from './feedback-create-form';
 import { addFeedbackAction } from '../api/actions';
 import type { CreateFeedbackInputType } from '../model/types';
 
-export function FeedbackUpdate({ productId }: { productId: number }) {
+export function FeedbackCreate({ productId }: { productId: number }) {
   async function handleSubmit(input: CreateFeedbackInputType) {
     const result = await addFeedbackAction({ productId, input });
     if (result.error) return result;
@@ -16,10 +16,10 @@ export function FeedbackUpdate({ productId }: { productId: number }) {
   return (
     <Card className="container">
       <CardHeader>
-        <CardTitle className="text-2xl">Add feedback</CardTitle>
+        <CardTitle className="text-2xl">Leave a feedback</CardTitle>
       </CardHeader>
       <CardContent>
-        <FeedbackUpdateForm onSubmit={handleSubmit} />
+        <FeedbackCreateForm onSubmit={handleSubmit} />
       </CardContent>
     </Card>
   );
