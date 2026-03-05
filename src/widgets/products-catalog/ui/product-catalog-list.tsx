@@ -1,14 +1,16 @@
 import type { ProductPreviewType } from '@/entities/products/model';
-import { ProductsList, ProductsListCard, ProductsListSort } from '@/entities/products/ui';
+import { ProductsList, ProductsListCard } from '@/entities/products/ui';
 import type { PaginatedData } from '@/shared/model/types/types';
 import { Pagination } from '@/shared/ui/pagination';
+import { QuerySort } from '@/shared/ui/query-sort';
+import { sortOptions } from '../config/sort-options';
 
 export function ProductCatalogList({ products }: { products: PaginatedData<ProductPreviewType> }) {
   return (
     <>
       <div className="flex flex-col gap-8 sm:flex-row">
         <Pagination page={products.page} totalPages={products.totalPages} />
-        <ProductsListSort className="self-end" />
+        <QuerySort options={sortOptions} />
       </div>
       <ProductsList>
         {products.docs.map(product => (
