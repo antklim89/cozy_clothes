@@ -1,10 +1,15 @@
+'use client';
+
 import type * as React from 'react';
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react';
+import type { Route } from 'next';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import { cn } from '@/shared/lib/utils';
 import { Button } from '@/shared/ui/button';
 
-function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
+function PaginationRoot({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
     <nav
       aria-label="pagination"
@@ -26,7 +31,7 @@ function PaginationItem({ ...props }: React.ComponentProps<'li'>) {
 type PaginationLinkProps = {
   isActive?: boolean;
 } & Pick<React.ComponentProps<typeof Button>, 'size'> &
-  React.ComponentProps<'a'>;
+  React.ComponentProps<typeof Link>;
 
 function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
   return (
@@ -36,7 +41,12 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
       className={cn(className)}
       nativeButton={false}
       render={
-        <a aria-current={isActive ? 'page' : undefined} data-slot="pagination-link" data-active={isActive} {...props} />
+        <Link
+          aria-current={isActive ? 'page' : undefined}
+          data-slot="pagination-link"
+          data-active={isActive}
+          {...props}
+        />
       }
     />
   );
@@ -60,26 +70,66 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
   );
 }
 
-function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {
+export function Pagination({
+  className,
+  totalPages,
+  page = 1,
+  ...props
+}: React.ComponentProps<'nav'> & {
+  page?: number;
+  totalPages: number;
+}) {
+  const searchParams = useSearchParams();
+  if (totalPages <= 1) return <div className={cn('mx-auto flex w-full justify-center', className)} />;
+
+  const hasNext = page < totalPages;
+  const hasPrev = page > 1;
+
+  function getSearchParamsLink(newPage?: number) {
+    const newSearchParams = new URLSearchParams(searchParams);
+    if (newPage == null) newSearchParams.delete('page');
+    else newSearchParams.set('page', newPage.toFixed(0));
+
+    return `?${newSearchParams.toString()}`;
+  }
+
   return (
-    <span
-      aria-hidden
-      data-slot="pagination-ellipsis"
-      className={cn("flex size-9 items-center justify-center [&_svg:not([class*='size-'])]:size-4", className)}
-      {...props}
-    >
-      <MoreHorizontalIcon />
-      <span className="sr-only">More pages</span>
-    </span>
+    <PaginationRoot className={className} {...props}>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            aria-disabled={!hasPrev}
+            className={cn({
+              'cursor-default bg-transparent text-gray-200 hover:bg-transparent hover:text-gray-200': !hasPrev,
+            })}
+            scroll={false}
+            href={hasPrev ? (getSearchParamsLink(Math.max(1, page - 1)) as Route) : ('' as Route)}
+            tabIndex={hasPrev ? 0 : -1}
+          />
+        </PaginationItem>
+
+        {[page - 2, page - 1, page, page + 1, page + 2]
+          .filter(i => i > 0 && i <= totalPages)
+          .map(i => (
+            <PaginationItem key={i}>
+              <PaginationLink scroll={false} href={getSearchParamsLink(i) as Route} isActive={i === page}>
+                {i}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+
+        <PaginationItem>
+          <PaginationNext
+            scroll={false}
+            aria-disabled={!hasNext}
+            className={cn({
+              'cursor-default bg-transparent text-gray-200 hover:bg-transparent hover:text-gray-200': !hasNext,
+            })}
+            href={hasNext ? (getSearchParamsLink(Math.min(totalPages, page + 1)) as Route) : ('' as Route)}
+            tabIndex={hasNext ? 0 : -1}
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </PaginationRoot>
   );
 }
-
-export {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-};
