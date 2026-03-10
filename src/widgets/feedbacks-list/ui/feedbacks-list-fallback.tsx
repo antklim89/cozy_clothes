@@ -5,7 +5,7 @@ import { Skeleton } from '@/shared/ui/skeleton';
 export function FeedbacksListFallback() {
   return (
     <Item className="container my-8 flex w-full flex-col">
-      <ItemHeader className="flex flex-col gap-4">
+      <ItemHeader className="flex-col items-start">
         <ItemTitle className="text-3xl">
           <Skeleton className="h-8 w-38" />
         </ItemTitle>
