@@ -6,7 +6,6 @@ import { getMe } from '@/entities/user/services';
 import { errUnauthenticated } from '@/shared/lib/result';
 import { PayloadOptionsSchema } from '@/shared/model/schemas/payload-options-schema';
 import type { PayloadOptions } from '@/shared/model/types/types';
-import { feedbackCache } from './cache';
 import { checkMyFeedbackRepository } from './repositories/check-my-feedback-repository';
 import { getFeedbacksRepository } from './repositories/get-feedbacks-repository';
 import { getMyFeedbacksRepository } from './repositories/get-my-feedbacks-repository';
@@ -19,10 +18,7 @@ const GetMyFeedbacksInputSchema = z.pick(GetFeedbacksInputSchema, { options: tru
 
 export const getFeedbacks = cache(
   async (input: { productId: number; options: Pick<PayloadOptions, 'page' | 'sort'> }) => {
-    'use cache';
-
     const { productId, options } = await GetFeedbacksInputSchema.parseAsync(input);
-    feedbackCache({ productId });
 
     const result = await getFeedbacksRepository({ productId, options });
     return result;
