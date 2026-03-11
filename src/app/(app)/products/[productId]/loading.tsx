@@ -1,9 +1,13 @@
-import { Spinner } from '@/shared/ui/spinner';
+import { FeedbackCreateFallback } from '@/features/feedback-edit/ui';
+import { FeedbacksListFallback } from '@/widgets/feedbacks-list/ui';
+import { ProductFallback } from '@/widgets/product/ui';
 
 function Loading() {
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <Spinner className="size-16" />
+    <div className="container flex flex-col gap-4">
+      <ProductFallback />
+      <FeedbackCreateFallback />
+      <FeedbacksListFallback />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { Skeleton } from '@/shared/ui/skeleton';
+import { FeedbackCreateFallback } from '@/features/feedback-edit/ui';
 import { FeedbacksListFallback } from '@/widgets/feedbacks-list/ui';
 import { ProductFallback } from '@/widgets/product/ui';
 import { ParamsSchema, SearchParamsSchema } from './params';
@@ -17,7 +17,7 @@ export default async function Page({ params, searchParams }: PageProps<'/product
       <Suspense fallback={<ProductFallback />}>
         <ProductSection productId={productId} />
       </Suspense>
-      <Suspense fallback={<Skeleton className="container h-[320px]" />}>
+      <Suspense fallback={<FeedbackCreateFallback />}>
         <FeedbackCreateSection productId={productId} />
       </Suspense>
       <Suspense fallback={<FeedbacksListFallback />}>
