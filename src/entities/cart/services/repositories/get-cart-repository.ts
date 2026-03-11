@@ -26,24 +26,25 @@ export async function getAndSyncCartRepository({
       },
     });
 
-    if (localCart && localCart.length > 0) {
+    if (localCart) {
       await Promise.all(
-        localCart.map(async localCartItem => {
-          const isInServerCart = payloadResult.docs.some(i => (i.product as Product).id === localCartItem.productId);
-          if (isInServerCart) return;
+        localCart
+          .filter(localCartItem => !payloadResult.docs.some(i => (i.product as Product).id === localCartItem.productId))
+          .map(async localCartItem => {
+            const addedLocalCart = await payload
+              .create({
+                collection: 'cart',
+                depth: 3,
+                data: {
+                  user: userId,
+                  product: localCartItem.productId,
+                  qty: localCartItem.qty,
+                },
+              })
+              .catch(() => null);
 
-          const addedLocalCart = await payload.create({
-            collection: 'cart',
-            depth: 3,
-            data: {
-              user: userId,
-              product: localCartItem.productId,
-              qty: localCartItem.qty,
-            },
-          });
-
-          payloadResult.docs.push(addedLocalCart);
-        }),
+            if (addedLocalCart) payloadResult.docs.push(addedLocalCart);
+          }),
       );
     }
 
