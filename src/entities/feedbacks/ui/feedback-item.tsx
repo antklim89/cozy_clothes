@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 import { MessageCircleMoreIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Rating } from '@/shared/ui/rating';
@@ -9,30 +8,22 @@ import type { FeedbackType } from '../model/types';
 
 export function FeedbackItem({
   feedback,
-  type,
-  deleteFeedback,
+  title,
+  deleteSlot,
 }: {
   feedback: FeedbackType;
-  type?: 'product' | 'personal';
-  deleteFeedback: ReactNode;
+  title: ReactNode;
+  deleteSlot?: ReactNode;
 }) {
-  const fullName = `${feedback.user.firstName || ''} ${feedback.user.lastName || ''}`.trim();
-
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-col justify-between md:flex-row">
         <div>
-          {type === 'product' ? (
-            <CardTitle className="text-3xl">{fullName}</CardTitle>
-          ) : (
-            <Link href={`/products/${feedback.product.id}`}>
-              <CardTitle className="text-3xl">{feedback.product.title}</CardTitle>
-            </Link>
-          )}
+          <CardTitle className="text-3xl">{title}</CardTitle>
           <span className="opacity-65">{new Date(feedback.createdAt).toLocaleString()}</span>
         </div>
         <Rating rating={feedback.rating} />
-        {deleteFeedback}
+        {deleteSlot}
       </CardHeader>
 
       {feedback.images && feedback.images.length > 0 && (

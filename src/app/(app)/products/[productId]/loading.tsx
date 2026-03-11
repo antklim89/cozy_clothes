@@ -1,5 +1,6 @@
+import { FeedbacksListFallback } from '@/entities/feedbacks/ui';
 import { FeedbackCreateFallback } from '@/features/feedback-edit/ui';
-import { FeedbacksListFallback } from '@/widgets/feedbacks-list/ui';
+import { FeedbacksWidget } from '@/widgets/feedbacks-widget/ui';
 import { ProductFallback } from '@/widgets/product/ui';
 
 function Loading() {
@@ -7,7 +8,9 @@ function Loading() {
     <div className="container flex flex-col gap-4">
       <ProductFallback />
       <FeedbackCreateFallback />
-      <FeedbacksListFallback />
+      <FeedbacksWidget title="Feedbacks">
+        <FeedbacksListFallback />
+      </FeedbacksWidget>
     </div>
   );
 }

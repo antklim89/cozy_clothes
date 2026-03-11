@@ -1,11 +1,11 @@
-import { ProductsListFallback } from '@/entities/products/ui';
+import { FeedbacksListFallback } from '@/entities/feedbacks/ui';
+import { FeedbacksWidget } from '@/widgets/feedbacks-widget/ui';
 
 function Loading() {
   return (
-    <section className="container my-8">
-      <h2 className="mb-4 text-2xl">Favorites Products</h2>
-      <ProductsListFallback />
-    </section>
+    <FeedbacksWidget title="My Feedbacks">
+      <FeedbacksListFallback />
+    </FeedbacksWidget>
   );
 }
 

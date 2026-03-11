@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 
+import { FeedbacksListFallback } from '@/entities/feedbacks/ui';
 import { FeedbackCreateFallback } from '@/features/feedback-edit/ui';
-import { FeedbacksListFallback } from '@/widgets/feedbacks-list/ui';
+import { FeedbacksWidget } from '@/widgets/feedbacks-widget/ui';
 import { ProductFallback } from '@/widgets/product/ui';
 import { ParamsSchema, SearchParamsSchema } from './params';
 import { FeedbackCreateSection } from './sections/feedback-create-section';
@@ -20,7 +21,13 @@ export default async function Page({ params, searchParams }: PageProps<'/product
       <Suspense fallback={<FeedbackCreateFallback />}>
         <FeedbackCreateSection productId={productId} />
       </Suspense>
-      <Suspense fallback={<FeedbacksListFallback />}>
+      <Suspense
+        fallback={
+          <FeedbacksWidget title="Feedbacks">
+            <FeedbacksListFallback />
+          </FeedbacksWidget>
+        }
+      >
         <FeedbacksListSection productId={productId} options={options} />
       </Suspense>
     </div>
