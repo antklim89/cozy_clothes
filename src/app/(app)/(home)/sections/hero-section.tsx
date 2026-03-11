@@ -4,7 +4,7 @@ import { heroCache } from '@/entities/hero/services/cache';
 import { Hero } from '@/entities/hero/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function HeroSection() {
   'use cache';
   heroCache();
 
@@ -13,5 +13,3 @@ async function Page() {
 
   return <Hero hero={hero} />;
 }
-
-export default Page;

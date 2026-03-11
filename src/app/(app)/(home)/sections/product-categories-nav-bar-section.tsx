@@ -2,7 +2,7 @@ import { getProductCategories, productCategoriesCache } from '@/entities/product
 import { ProductCategoriesNavBar } from '@/entities/product-categories/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function ProductCategoriesNavBarSection() {
   'use cache';
   productCategoriesCache();
 
@@ -11,5 +11,3 @@ async function Page() {
 
   return <ProductCategoriesNavBar categories={categories} />;
 }
-
-export default Page;

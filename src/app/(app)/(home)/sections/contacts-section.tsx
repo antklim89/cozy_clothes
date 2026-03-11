@@ -2,7 +2,7 @@ import { contactsCache, getContacts } from '@/entities/contacts/services';
 import { Contacts } from '@/entities/contacts/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function ContactsSection() {
   'use cache';
   contactsCache();
 
@@ -11,5 +11,3 @@ async function Page() {
 
   return <Contacts contacts={contacts} />;
 }
-
-export default Page;

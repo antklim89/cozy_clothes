@@ -2,7 +2,7 @@ import { getProductColors, productColorsCache } from '@/entities/product-colors/
 import { ProductColorsSelect } from '@/entities/product-colors/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function ColorsFilterSection() {
   'use cache';
   productColorsCache();
   const { result: colors, error } = await getProductColors();
@@ -10,5 +10,3 @@ async function Page() {
 
   return <ProductColorsSelect colors={colors} />;
 }
-
-export default Page;

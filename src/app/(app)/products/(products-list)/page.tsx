@@ -1,19 +1,38 @@
-import { getManyProducts } from '@/entities/products/services';
-import { ErrorComponent } from '@/shared/ui/error-component';
-import { ProductCatalogList } from '@/widgets/products-catalog/ui';
+import { Suspense } from 'react';
+
+import { ProductsListFallback } from '@/entities/products/ui';
+import { ProductCatalog, ProductCatalogAside } from '@/widgets/products-catalog/ui';
 import { searchParamsSchema } from './params';
+import { CategoriesFilterSection } from './sections/categories-filter-section';
+import { ColorsFilterSection } from './sections/colors-filter-section';
+import { CountriesFilterSection } from './sections/countries-filter-section';
+import { ProductCatalogListSection } from './sections/product-catalog-list-section';
+import { SizesFilterSection } from './sections/sizes-filter-section';
 
 async function Page({ searchParams }: PageProps<'/products'>) {
   const { categories, colors, countries, maxPrice, minPrice, page, search, sizes, sort } =
     await searchParamsSchema.parseAsync(await searchParams);
 
-  const getProductListResult = await getManyProducts({
-    filter: { search, minPrice, maxPrice, categories, countries, colors, sizes },
-    options: { page, sort },
-  });
-  if (getProductListResult.error) return <ErrorComponent error={getProductListResult.error} />;
-
-  return <ProductCatalogList products={getProductListResult.result} />;
+  return (
+    <ProductCatalog
+      filter={
+        <ProductCatalogAside>
+          <CategoriesFilterSection />
+          <CountriesFilterSection />
+          <ColorsFilterSection />
+          <SizesFilterSection />
+        </ProductCatalogAside>
+      }
+      products={
+        <Suspense fallback={<ProductsListFallback />}>
+          <ProductCatalogListSection
+            options={{ page, sort }}
+            filter={{ categories, colors, countries, maxPrice, minPrice, search, sizes }}
+          />
+        </Suspense>
+      }
+    />
+  );
 }
 
 export default Page;

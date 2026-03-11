@@ -2,7 +2,7 @@ import { getProductCategories, productCategoriesCache } from '@/entities/product
 import { ProductCategoriesSelect } from '@/entities/product-categories/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function CategoriesFilterSection() {
   'use cache';
   productCategoriesCache();
   const { result: categories, error } = await getProductCategories();
@@ -10,5 +10,3 @@ async function Page() {
 
   return <ProductCategoriesSelect categories={categories} />;
 }
-
-export default Page;

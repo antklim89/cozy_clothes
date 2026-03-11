@@ -2,7 +2,7 @@ import { getProductCountries, productCountriesCache } from '@/entities/product-c
 import { ProductCountriesSelect } from '@/entities/product-countries/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function CountriesFilterSection() {
   'use cache';
   productCountriesCache();
   const { result: countries, error } = await getProductCountries();
@@ -10,5 +10,3 @@ async function Page() {
 
   return <ProductCountriesSelect countries={countries} />;
 }
-
-export default Page;

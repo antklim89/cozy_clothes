@@ -2,7 +2,7 @@ import { getProductSizes, productSizesCache } from '@/entities/product-sizes/ser
 import { ProductSizeSelect } from '@/entities/product-sizes/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function SizesFilterSection() {
   'use cache';
   productSizesCache();
   const { result: sizes, error } = await getProductSizes();
@@ -10,5 +10,3 @@ async function Page() {
 
   return <ProductSizeSelect sizes={sizes} />;
 }
-
-export default Page;

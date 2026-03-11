@@ -2,7 +2,7 @@ import { getTestimonials, testimonialsCache } from '@/entities/testimonials/serv
 import { Testimonials } from '@/entities/testimonials/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-async function Page() {
+export async function TestimonialsSection() {
   'use cache';
   testimonialsCache();
 
@@ -11,5 +11,3 @@ async function Page() {
 
   return <Testimonials testimonials={testimonials} />;
 }
-
-export default Page;
