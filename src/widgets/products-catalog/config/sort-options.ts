@@ -10,6 +10,10 @@ export const sortOptions = [
     label: 'old',
   },
   {
+    value: '-averageFeedback',
+    label: 'popular',
+  },
+  {
     value: 'price',
     label: 'cheaper',
   },
