@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 import { MessageCircleMoreIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react';
-import Image from 'next/image';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Rating } from '@/shared/ui/rating';
+import { FeedbackImagesCarousel } from './feedback-images-carousel';
 import type { FeedbackType } from '../model/types';
 
 export function FeedbackItem({
@@ -28,18 +28,7 @@ export function FeedbackItem({
 
       {feedback.images && feedback.images.length > 0 && (
         <CardContent className="flex gap-2">
-          {feedback.images.map(image => (
-            <Image
-              key={image.id}
-              alt="feedback image"
-              blurDataURL={image.blurDataUrl}
-              className="size-32 rounded-lg object-cover"
-              height={image.height}
-              placeholder="blur"
-              src={image.url}
-              width={image.width}
-            />
-          ))}
+          <FeedbackImagesCarousel alt="Feedback image" images={feedback.images} />
         </CardContent>
       )}
       <CardContent className="prose dark:prose-invert max-w-full space-y-4">

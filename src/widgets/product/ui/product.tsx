@@ -1,13 +1,12 @@
 import type { ComponentProps, ReactNode } from 'react';
 import { RichText } from '@payloadcms/richtext-lexical/react';
-import Image from 'next/image';
 
 import type { ProductType } from '@/entities/products/model';
 import { AddToCartButton } from '@/features/update-cart/ui';
 import { cn } from '@/shared/lib/utils';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/ui/carousel';
 import { Price } from '@/shared/ui/price';
 import { RatingTotal } from '@/shared/ui/rating';
+import { ProductImagesCarousel } from './product-images-carousel';
 import { ProductsVariantsSelect } from './products-variants-select';
 
 export function Product({
@@ -22,27 +21,7 @@ export function Product({
   return (
     <div {...props} className={cn('container my-4 grid grid-cols-1 gap-4 lg:grid-cols-2', className)}>
       <section>
-        <section>
-          <Carousel>
-            <CarouselContent>
-              {product.images.map((image, index) => (
-                <CarouselItem key={image.url}>
-                  <Image
-                    alt={`${product.title}-${index + 1}`}
-                    blurDataURL={image.blurDataUrl}
-                    className="h-80vh w-full object-cover supports-[height:80dvh]:h-[80dvh]"
-                    height={image.height}
-                    placeholder="blur"
-                    src={image.url}
-                    width={image.width}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
-        </section>
+        <ProductImagesCarousel alt={product.title} images={product.images} />
       </section>
       <aside className="flex w-full flex-col gap-8 px-4">
         <div className="flex justify-end gap-8">
