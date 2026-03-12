@@ -1,14 +1,6 @@
 'use client';
 
-import {
-  type ComponentProps,
-  createContext,
-  type KeyboardEvent,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { type ComponentProps, createContext, type KeyboardEvent, useCallback, useContext, useEffect } from 'react';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 
@@ -32,8 +24,6 @@ type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1];
   scrollPrev: () => void;
   scrollNext: () => void;
-  canScrollPrev: boolean;
-  canScrollNext: boolean;
 } & CarouselProps;
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
@@ -59,19 +49,12 @@ function Carousel({
 }: ComponentProps<'div'> & CarouselProps) {
   const [carouselRef, emplaApi] = useEmblaCarousel(
     {
+      loop: true,
       ...opts,
       axis: orientation === 'horizontal' ? 'x' : 'y',
     },
     plugins,
   );
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  const onSelect = useCallback((api: CarouselApi) => {
-    if (!api) return;
-    setCanScrollPrev(api.canScrollPrev());
-    setCanScrollNext(api.canScrollNext());
-  }, []);
 
   const scrollPrev = useCallback(() => {
     emplaApi?.scrollPrev();
@@ -99,17 +82,6 @@ function Carousel({
     setApi(emplaApi);
   }, [emplaApi, setApi]);
 
-  useEffect(() => {
-    if (!emplaApi) return;
-    onSelect(emplaApi);
-    emplaApi.on('reInit', onSelect);
-    emplaApi.on('select', onSelect);
-
-    return () => {
-      emplaApi?.off('select', onSelect);
-    };
-  }, [emplaApi, onSelect]);
-
   return (
     <CarouselContext.Provider
       value={{
@@ -119,12 +91,10 @@ function Carousel({
         orientation: orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
         scrollPrev,
         scrollNext,
-        canScrollPrev,
-        canScrollNext,
       }}
     >
       {/** biome-ignore lint/a11y/useSemanticElements: It's okay to use a role here */}
-      <section
+      <div
         onKeyDownCapture={handleKeyDown}
         className={cn('relative', className)}
         role="region"
@@ -133,7 +103,7 @@ function Carousel({
         {...props}
       >
         {children}
-      </section>
+      </div>
     </CarouselContext.Provider>
   );
 }
@@ -169,7 +139,7 @@ function CarouselPrevious({
   size = 'icon-sm',
   ...props
 }: ComponentProps<typeof Button>) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const { orientation, scrollPrev } = useCarousel();
 
   return (
     <Button
@@ -183,7 +153,6 @@ function CarouselPrevious({
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
-      disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
@@ -194,7 +163,7 @@ function CarouselPrevious({
 }
 
 function CarouselNext({ className, variant = 'outline', size = 'icon-sm', ...props }: ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { orientation, scrollNext } = useCarousel();
 
   return (
     <Button
@@ -208,7 +177,6 @@ function CarouselNext({ className, variant = 'outline', size = 'icon-sm', ...pro
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
         className,
       )}
-      disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
