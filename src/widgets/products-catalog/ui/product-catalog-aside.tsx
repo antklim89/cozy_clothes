@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Suspense } from 'react';
 
-import { PriceFilter, ProductSearch } from '@/entities/products/ui';
+import { FeedbackFilter, PriceFilter, ProductSearch } from '@/entities/products/ui';
 
 export function ProductCatalogAside({ children }: { children: ReactNode }) {
   return (
@@ -9,6 +9,7 @@ export function ProductCatalogAside({ children }: { children: ReactNode }) {
       <Suspense>
         <ProductSearch />
         <PriceFilter />
+        <FeedbackFilter />
         {children}
       </Suspense>
     </div>

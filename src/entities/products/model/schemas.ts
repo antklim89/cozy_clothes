@@ -11,6 +11,7 @@ export const ProductFilterSchema = z.object({
   search: z.optional(z.string().check(z.trim(), latinsCharsCheck)),
   minPrice: z.optional(z.number().check(z.minimum(0))),
   maxPrice: z.optional(z.number().check(z.minimum(0))),
+  averageFeedback: z.optional(z.number().check(z.minimum(0), z.maximum(5))),
 });
 
 export const GetProductListInputSchema = z.object({

@@ -7,7 +7,7 @@ const toArraySchema = z.pipe(
   z.transform(v => z.array(z.coerce.number().check(z.positive())).parseAsync(v.split(','))),
 );
 
-export const searchParamsSchema = z.object({
+export const SearchParamsSchema = z.object({
   page: z.catch(z.optional(z.coerce.number().check(z.positive())), undefined),
   search: z.catch(z.optional(z.string().check(latinsCharsCheck)), undefined),
   categories: z.catch(z.optional(toArraySchema), undefined),
@@ -17,4 +17,5 @@ export const searchParamsSchema = z.object({
   minPrice: z.catch(z.optional(z.coerce.number().check(z.minimum(0))), undefined),
   maxPrice: z.catch(z.optional(z.coerce.number().check(z.minimum(0))), undefined),
   sort: z.catch(z.optional(z.string()), undefined),
+  averageFeedback: z.catch(z.optional(z.coerce.number().check(z.minimum(0), z.maximum(5))), undefined),
 });

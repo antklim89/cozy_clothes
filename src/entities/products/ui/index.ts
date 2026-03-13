@@ -1,3 +1,4 @@
+export { FeedbackFilter } from './product-feedback-filter';
 export { PriceFilter } from './product-price-filter';
 export { ProductSearch } from './product-search';
 export { ProductsList } from './products-list';
