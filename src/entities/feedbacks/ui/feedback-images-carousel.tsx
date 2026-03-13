@@ -30,7 +30,7 @@ export function FeedbackImagesCarousel({ images, alt }: { images: Media[]; alt: 
         />
       ))}
 
-      <DialogContent className="sm:max-w-[90vh]">
+      <DialogContent className="overflow-hidden p-0">
         <Carousel opts={{ startIndex }}>
           <CarouselContent>
             {images.map((image, index) => (

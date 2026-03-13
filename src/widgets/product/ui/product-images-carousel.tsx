@@ -17,6 +17,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/shared/ui/dialog';
 export function ProductImagesCarousel({ images, alt }: { images: Media[]; alt: string }) {
   const [api, setApi] = useState<CarouselApi>();
   const [startIndex, setStartIndex] = useState(0);
+
   useEffect(() => {
     const listener = (e: EmblaCarouselType) => setStartIndex(e.selectedScrollSnap());
     api?.on('select', listener);
@@ -52,7 +53,7 @@ export function ProductImagesCarousel({ images, alt }: { images: Media[]; alt: s
         <CarouselNext />
       </Carousel>
 
-      <DialogContent className="sm:max-w-[90vh]">
+      <DialogContent className="overflow-hidden p-0">
         <Carousel opts={{ startIndex }}>
           <CarouselContent>
             {images.map((image, index) => (
