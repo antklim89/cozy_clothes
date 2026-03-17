@@ -36,7 +36,7 @@ export function ProductImagesCarousel({ images, alt }: { images: Media[]; alt: s
                     <Image
                       alt={`${alt}-${index + 1}`}
                       blurDataURL={image.blurDataUrl}
-                      className="h-full max-h-[640px] w-full object-cover"
+                      className="h-[640px] w-full object-cover object-center"
                       height={640}
                       placeholder="blur"
                       src={image.url}
@@ -53,15 +53,15 @@ export function ProductImagesCarousel({ images, alt }: { images: Media[]; alt: s
         <CarouselNext />
       </Carousel>
 
-      <DialogContent className="overflow-hidden p-0">
-        <Carousel opts={{ startIndex }}>
-          <CarouselContent>
+      <DialogContent className="max-h-[95vh] max-w-[95dvw] overflow-hidden p-0 supports-[height:95dvh]:max-h-[95dvh] sm:max-w-[95dvw]">
+        <Carousel opts={{ startIndex, align: 'center' }}>
+          <CarouselContent className="items-center">
             {images.map((image, index) => (
               <CarouselItem key={image.url}>
                 <Image
                   alt={`${alt}-${index + 1}`}
                   blurDataURL={image.blurDataUrl}
-                  className="h-[90vh] w-full object-contain supports-[height:90dvh]:h-[90dvh]"
+                  className="h-[95vh] w-full object-cover object-center supports-[height:95dvh]:h-[95dvh]"
                   height={image.height}
                   placeholder="blur"
                   src={image.url}

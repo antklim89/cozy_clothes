@@ -30,15 +30,15 @@ export function FeedbackImagesCarousel({ images, alt }: { images: Media[]; alt: 
         />
       ))}
 
-      <DialogContent className="overflow-hidden p-0">
-        <Carousel opts={{ startIndex }}>
-          <CarouselContent>
+      <DialogContent className="max-h-[95dvh] max-w-[95dvw] overflow-hidden p-0 sm:max-w-[95dvw]">
+        <Carousel opts={{ startIndex, align: 'center' }}>
+          <CarouselContent className="items-center">
             {images.map((image, index) => (
               <CarouselItem key={image.url}>
                 <Image
                   alt={`${alt}-${index + 1}`}
                   blurDataURL={image.blurDataUrl}
-                  className="h-[90vh] w-full object-contain supports-[height:90dvh]:h-[90dvh]"
+                  className="h-[95dvh] w-full object-cover object-center"
                   height={image.height}
                   placeholder="blur"
                   src={image.url}

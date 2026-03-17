@@ -1,26 +1,47 @@
 import { randomUUID } from 'node:crypto';
-import type { CollectionConfig } from 'payload';
+import type { CollectionBeforeOperationHook, CollectionBeforeValidateHook, CollectionConfig } from 'payload';
 import sharp from 'sharp';
+
+import {
+  PLACEHOLDER_BLUR_DATA,
+  PLACEHOLDER_HEIGHT,
+  PLACEHOLDER_MAX_HEIGHT,
+  PLACEHOLDER_MAX_WIDTH,
+  PLACEHOLDER_SRC,
+  PLACEHOLDER_WIDTH,
+} from '@/shared/config/image-placeholder';
+import type { Media } from '../types/types';
+
+const createBlurData: CollectionBeforeValidateHook<Media> = async ({ req, data }) => {
+  try {
+    if (!(req.file && data && data.width && data.height)) return;
+    const { width, height } = data;
+    const ratio = Math.min(24 / width, 24 / height);
+    const newHeight = Math.round(height * ratio);
+    const newWidth = Math.round(width * ratio);
+    const buffer = await sharp(req.file.data)
+      .resize({ width: newWidth, height: newHeight })
+      .webp({ quality: 20 })
+      .toBuffer();
+    const blurDataUrl = `data:image/webp;base64,${buffer.toString('base64')}`;
+
+    return { ...data, blurDataUrl };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const renameUploadedFileToUuid: CollectionBeforeOperationHook = ({ req, operation }) => {
+  if ((operation === 'create' || operation === 'update') && req.file) {
+    req.file.name = randomUUID();
+  }
+};
 
 export const MediaCollection = {
   slug: 'media',
   hooks: {
-    beforeValidate: [
-      async ({ req, operation, data }) => {
-        if ((operation === 'create' || operation === 'update') && req.file) {
-          const buffer = await sharp(req.file.data).resize({ width: 24 }).webp({ quality: 20 }).toBuffer();
-          const blurDataUrl = `data:image/webp;base64,${buffer.toString('base64')}`;
-          return { ...data, blurDataUrl };
-        }
-      },
-    ],
-    beforeOperation: [
-      ({ req, operation }) => {
-        if ((operation === 'create' || operation === 'update') && req.file) {
-          req.file.name = `${randomUUID()}-${req.file.name}`;
-        }
-      },
-    ],
+    beforeValidate: [createBlurData],
+    beforeOperation: [renameUploadedFileToUuid],
   },
   access: {
     read: () => true,
@@ -37,8 +58,7 @@ export const MediaCollection = {
       type: 'text',
       name: 'blurDataUrl',
       required: true,
-      defaultValue:
-        'data:image/webp;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPk4vpvDAACgQFIuAF96wAAAABJRU5ErkJggg==',
+      defaultValue: PLACEHOLDER_BLUR_DATA,
       admin: {
         readOnly: true,
         hidden: true,
@@ -50,19 +70,19 @@ export const MediaCollection = {
       type: 'text',
       name: 'url',
       required: true,
-      defaultValue: '/placeholder.jpg',
+      defaultValue: PLACEHOLDER_SRC,
     },
     {
       type: 'number',
       name: 'width',
       required: true,
-      defaultValue: 100,
+      defaultValue: PLACEHOLDER_WIDTH,
     },
     {
       type: 'number',
       name: 'height',
       required: true,
-      defaultValue: 100,
+      defaultValue: PLACEHOLDER_HEIGHT,
     },
   ],
   upload: {
@@ -72,6 +92,11 @@ export const MediaCollection = {
       options: {
         quality: 90,
       },
+    },
+    resizeOptions: {
+      width: PLACEHOLDER_MAX_WIDTH,
+      height: PLACEHOLDER_MAX_HEIGHT,
+      fit: 'cover',
     },
     mimeTypes: ['image/*'],
   },
