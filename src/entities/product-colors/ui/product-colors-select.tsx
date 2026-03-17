@@ -6,6 +6,7 @@ import { parseAsArrayOf, parseAsInteger, useQueryStates } from 'nuqs';
 
 import { Button } from '@/shared/ui/button';
 import { ButtonGroup } from '@/shared/ui/button-group';
+import { ColorCircle } from '@/shared/ui/color-circle';
 import { Field, FieldLabel } from '@/shared/ui/field';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectMultipleValue, SelectTrigger } from '@/shared/ui/select';
 import type { ProductColorType } from '../models/types';
@@ -52,10 +53,7 @@ export function ProductColorsSelect({ colors }: { colors: ProductColorType[] }) 
               .toSorted(a => (query.colors.includes(a.id) ? -1 : 1))
               .map(color => (
                 <SelectItem key={color.id} value={color.id}>
-                  <div key={color.id} className="flex items-center gap-1">
-                    <span className="inline-block size-4 rounded-full" style={{ backgroundColor: color.code }} />
-                    <span className="uppercase">{color.name}</span>
-                  </div>
+                  <ColorCircle {...color} />
                 </SelectItem>
               ))}
           </SelectGroup>

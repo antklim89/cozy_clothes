@@ -8,6 +8,7 @@ import { CartQtyInput } from '@/features/update-cart/ui';
 import { cn, getPrice } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
+import { ColorCircle } from '@/shared/ui/color-circle';
 import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/shared/ui/item';
 import type { CartItemType } from '../model';
 
@@ -32,18 +33,11 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
           </ItemTitle>
         </Link>
         <div className="flex flex-wrap gap-2">
-          <Badge variant="outline" className="w-24 p-4 text-md uppercase">
-            {product.category.name}
-          </Badge>
-          <Badge variant="outline" className="w-24 p-4 text-md uppercase">
-            {product.country.name}
-          </Badge>
-          <Badge variant="outline" className="w-24 p-4 text-md uppercase">
-            {product.size.name}
-          </Badge>
-          <Badge variant="outline" className="min-w-24 p-4 text-md uppercase">
-            <span className="size-4 rounded-full" style={{ backgroundColor: product.color.code }} />
-            {product.color.name}
+          <Badge>{product.category.name}</Badge>
+          <Badge>{product.country.name}</Badge>
+          <Badge>{product.size.name}</Badge>
+          <Badge>
+            <ColorCircle {...product.color} />
           </Badge>
         </div>
         <div>

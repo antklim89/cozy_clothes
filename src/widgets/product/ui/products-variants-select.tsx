@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { ProductVariantType } from '@/entities/products/model';
 import { cn } from '@/shared/lib/utils';
 import { buttonVariants } from '@/shared/ui/button';
+import { ColorCircle } from '@/shared/ui/color-circle';
 
 interface Props extends ComponentProps<'div'> {
   variants: ProductVariantType[];
@@ -43,8 +44,7 @@ function ColorVariant({ variants, selectedVariant }: Props) {
               href={`/products/${variant.id}`}
               scroll={false}
             >
-              <span className="mr-2 size-4 rounded-full" style={{ backgroundColor: variant.color.code }} />
-              {variant.color.name}
+              <ColorCircle {...variant.color} />
             </Link>
           );
         })}

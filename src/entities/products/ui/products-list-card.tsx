@@ -6,6 +6,7 @@ import { hasSession } from '@/entities/user/services';
 import { FavoritesToggleButton } from '@/features/favorites-toggle/ui';
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { ColorCircle } from '@/shared/ui/color-circle';
 import { Price } from '@/shared/ui/price';
 import { RatingTotal } from '@/shared/ui/rating';
 
@@ -64,20 +65,9 @@ export async function ProductsListCard({ product }: Props) {
         </p>
 
         <div className="flex gap-6">
-          <Badge
-            render={<Link href={`/products?sizes=${product.size.id}`} />}
-            variant="outline"
-            className="w-24 p-4 text-md uppercase"
-          >
-            {product.size.name}
-          </Badge>
-          <Badge
-            render={<Link href={`/products?colors=${product.color.id}`} />}
-            variant="outline"
-            className="min-w-24 p-4 text-md uppercase"
-          >
-            <span className="size-4 rounded-full" style={{ backgroundColor: product.color.code }} />
-            {product.color.name}
+          <Badge render={<Link href={`/products?sizes=${product.size.id}`} />}>{product.size.name}</Badge>
+          <Badge render={<Link href={`/products?colors=${product.color.id}`} />}>
+            <ColorCircle {...product.color} />
           </Badge>
         </div>
         <Price className="items-end" discount={product.discount} price={product.price} />
