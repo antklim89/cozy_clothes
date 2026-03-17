@@ -8,11 +8,13 @@ import { type CollectionSlug, getPayload } from 'payload';
 
 import type { ProductBase } from '@/shared/model/types/payload-types.generated';
 
-const USERS_NUMBER = 500;
+await clear();
+
+const USERS_NUMBER = 90;
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const PRODUCT_BASES_LENGTH = 5;
+const PRODUCT_BASES_LENGTH = 10;
 const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
 const COLORS = [
   { name: 'Crimson Red', code: '#DC143C' },
@@ -87,6 +89,7 @@ function createRichText(textArr: string[]): ProductBase['description'] {
 }
 
 async function clear() {
+  await fs.rm(path.resolve('database.db')).catch(() => null);
   await fs.rm(path.resolve('media'), { force: true, recursive: true });
   await fs.mkdir(path.resolve('media'));
 }
@@ -237,6 +240,7 @@ async function createFeedbacks() {
 
   for (const product of products.docs) {
     for (const user of users.docs) {
+      if (Math.random() > 0.6) continue;
       await payload.create({
         collection: 'feedback',
         data: {
@@ -347,7 +351,7 @@ async function createTestimonials() {
 
 async function createContacts() {
   for (let index = 0; index < CONTACTS_NUMBER; index++) {
-    await payload.create({
+    await payload.db.create({
       collection: 'contacts',
       data: {
         email: faker.internet.email(),
@@ -360,8 +364,6 @@ async function createContacts() {
 
 async function main() {
   try {
-    await clear();
-
     await createUsers();
 
     await createAbout();
