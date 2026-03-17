@@ -4,7 +4,7 @@ import { cn } from '@/shared/lib/utils';
 import { buttonVariants } from '@/shared/ui/button';
 import { links } from '../model/links';
 
-export function Links({ className }: { className?: string }) {
+export function HeaderLinks({ className }: { className?: string }) {
   return (
     <nav>
       <ul className={cn('flex items-center', className)}>
