@@ -2,21 +2,11 @@ import { type ChangeEvent, useId } from 'react';
 import type { ControllerFieldState, ControllerRenderProps } from 'react-hook-form';
 import { UploadIcon } from 'lucide-react';
 import Image from 'next/image';
-import { toast } from 'sonner';
 
-import { IMAGE_HEIGHT, IMAGE_WIDTH, MAX_IMAGE_SIZE } from '@/entities/feedbacks/config';
-import { imageTransform } from '@/shared/lib/image-transform';
 import { buttonVariants } from '@/shared/ui/button';
 import { Field, FieldError, FieldLabel } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 import type { CreateFeedbackInputType } from '../model/types';
-
-const transformImageOptions = {
-  maxWidth: IMAGE_WIDTH,
-  maxHeight: IMAGE_HEIGHT,
-  maxImageSize: MAX_IMAGE_SIZE,
-  quality: 0.8,
-};
 
 export function FeedbackUploadImagesField({
   field,
@@ -27,20 +17,11 @@ export function FeedbackUploadImagesField({
 }) {
   const id = useId();
 
-  async function handleFileUpload(e: ChangeEvent<HTMLInputElement>) {
+  function handleFileUpload(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files === null || e.target.files.length === 0) return;
 
-    const transformedImages = await Promise.all(
-      Array.from(e.target.files, async file => {
-        const { error, result } = await imageTransform({ file, ...transformImageOptions });
-        if (error) return void toast.error(`Failed to upload image ${file.name}`);
-        return result;
-      }),
-    );
-
-    const filteredImages = transformedImages.filter(i => i != null);
     const oldImages = field.value || [];
-    field.onChange([...filteredImages, ...oldImages].slice(undefined, 5));
+    field.onChange([...e.target.files, ...oldImages].slice(undefined, 5));
     e.target.value = '';
   }
 
