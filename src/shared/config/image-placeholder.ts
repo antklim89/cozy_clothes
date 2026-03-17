@@ -1,0 +1,8 @@
+export const PLACEHOLDER_WIDTH = 781;
+export const PLACEHOLDER_HEIGHT = 781;
+export const PLACEHOLDER_SRC = '/placeholder.png';
+export const PLACEHOLDER_BLUR_DATA =
+  'data:image/webp;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPk4vpvDAACgQFIuAF96wAAAABJRU5ErkJggg==';
+
+export const PLACEHOLDER_MAX_WIDTH = 1440;
+export const PLACEHOLDER_MAX_HEIGHT = 1024;
