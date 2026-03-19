@@ -19,12 +19,12 @@ export function ProductCatalogSheet({
       <SheetTrigger className={cn(buttonVariants({ variant, size }), className)} {...props}>
         Filter
       </SheetTrigger>
-      <SheetContent side="left" className="data-[side=left]:w-[90vw]">
-        <SheetHeader className="mb-8">
+      <SheetContent side="left">
+        <SheetHeader>
           <SheetTitle>Filter products</SheetTitle>
           <SheetDescription>Filtering products by name, price, category, etc.</SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-6 px-4">{children}</div>
+        <div className="gap-6 overflow-y-auto px-4 py-8">{children}</div>
       </SheetContent>
     </Sheet>
   );
