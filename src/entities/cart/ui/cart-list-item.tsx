@@ -56,7 +56,7 @@ export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
       </ItemContent>
       <ItemActions className="ml-auto self-end">
         <CartQtyInput productId={product.id} />
-        <Button variant="destructive" size="icon" className="px-8" onClick={handleRemoveFromCart}>
+        <Button variant="destructive" size="icon-lg" onClick={handleRemoveFromCart}>
           <TrashIcon />
         </Button>
       </ItemActions>
