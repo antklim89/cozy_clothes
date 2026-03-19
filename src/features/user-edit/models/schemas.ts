@@ -6,5 +6,5 @@ export const UpdateUserSchema = z.object({
   firstName: z.optional(z.string().check(z.maxLength(1000))),
   lastName: z.optional(z.string().check(z.maxLength(1000))),
   address: z.optional(z.string().check(z.maxLength(1000))),
-  phone: z.optional(z.string().check(z.maxLength(1000), phoneCheck)),
+  phone: z.optional(z.union([z.string().check(z.maxLength(1000), phoneCheck), z.string().check(z.length(0))])),
 });
