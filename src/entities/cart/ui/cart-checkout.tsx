@@ -1,15 +1,19 @@
 import Link from 'next/link';
 
-import { buttonVariants } from '@/shared/ui/button';
+import { Button, buttonVariants } from '@/shared/ui/button';
 import { Item, ItemContent } from '@/shared/ui/item';
 
-export function CartCheckout() {
+export function CartCheckout({ isAuth }: { isAuth: boolean }) {
   return (
     <Item variant="outline">
       <ItemContent>
-        <Link className={buttonVariants({ size: 'lg' })} href="#">
-          Checkout
-        </Link>
+        {isAuth ? (
+          <Link className={buttonVariants({ size: 'lg' })} href="/checkout">
+            Checkout
+          </Link>
+        ) : (
+          <Button size="lg">Login to Checkout</Button>
+        )}
       </ItemContent>
     </Item>
   );

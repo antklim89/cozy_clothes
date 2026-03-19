@@ -1,11 +1,12 @@
 'use client';
+import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { cartQueryOptions } from '@/entities/cart/api';
-import { CartCheckout, CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
+import { CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-export function Cart() {
+export function Cart({ checkout }: { checkout: ReactNode }) {
   const cartQuery = useQuery(cartQueryOptions());
 
   if (cartQuery.isError) return <ErrorComponent error={cartQuery.error} />;
@@ -13,7 +14,7 @@ export function Cart() {
   if (!cartQuery.data || cartQuery.data.length === 0) return <CartListEmpty />;
 
   return (
-    <CartList checkout={<CartCheckout />} total={<CartTotal cartItems={cartQuery.data} />}>
+    <CartList checkout={checkout} total={<CartTotal cartItems={cartQuery.data} />}>
       {cartQuery.data.map(cartItem => (
         <CartListItem cartItem={cartItem} key={cartItem.product.id} />
       ))}
