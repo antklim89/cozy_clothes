@@ -9,11 +9,12 @@ export async function updateProductFeedbacksHook({ req, doc }: { doc: Feedback; 
     where: {
       product: { equals: typeof doc.product === 'number' ? doc.product : doc.product.id },
     },
+    req,
   });
   const feedbacks = totalFeedbacks.docs;
-  const averageFeedback = feedbacks?.reduce((acc, i) => acc + i.rating, 0) / feedbacks.length;
+  const averageFeedback = feedbacks.reduce((acc, i) => acc + i.rating, 0) / feedbacks.length;
 
-  req.payload.update({
+  await req.payload.update({
     collection: 'products',
     where: {
       id: { equals: typeof doc.product === 'number' ? doc.product : doc.product.id },
@@ -22,5 +23,6 @@ export async function updateProductFeedbacksHook({ req, doc }: { doc: Feedback; 
       totalFeedbacks: feedbacks.length,
       averageFeedback,
     },
+    req,
   });
 }
