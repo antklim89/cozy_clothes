@@ -5,7 +5,9 @@ export const Users = {
   admin: {
     useAsTitle: 'email',
   },
-  auth: true,
+  auth: {
+    tokenExpiration: 86400,
+  },
   fields: [
     {
       label: 'First Name',
