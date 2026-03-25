@@ -1,9 +1,11 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
 
+import { revalidateSeoCache } from '../services/cache';
+
 export const Seo: GlobalConfig = {
   slug: 'Seo',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateSeoCache())],
+    afterChange: [revalidateSeoCache],
   },
 
   fields: [

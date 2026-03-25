@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload';
 
+import { revalidateProductCategoriesCache } from '../services/cache';
+
 export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateProductCategoriesCache())],
-    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductCategoriesCache())],
+    afterChange: [revalidateProductCategoriesCache],
+    afterDelete: [revalidateProductCategoriesCache],
   },
   admin: {
     useAsTitle: 'name',

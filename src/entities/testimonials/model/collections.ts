@@ -1,12 +1,13 @@
 import type { CollectionConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import { revalidateTestimonialsCache } from '../services/cache';
 
 export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateTestimonialsCache())],
-    afterDelete: [() => import('../services/cache').then(m => m.revalidateTestimonialsCache())],
+    afterChange: [revalidateTestimonialsCache],
+    afterDelete: [revalidateTestimonialsCache],
   },
   admin: {
     useAsTitle: 'name',

@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload';
 
+import { revalidateProductColorsCache } from '../services/cache';
+
 export const ProductColors: CollectionConfig = {
   slug: 'product-colors',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateProductColorsCache())],
-    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductColorsCache())],
+    afterChange: [revalidateProductColorsCache],
+    afterDelete: [revalidateProductColorsCache],
   },
   admin: {
     useAsTitle: 'name',

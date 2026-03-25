@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload';
 
+import { revalidateContactsCache } from '../services/cache';
+
 export const Contacts: CollectionConfig = {
   slug: 'contacts',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateContactsCache())],
-    afterDelete: [() => import('../services/cache').then(m => m.revalidateContactsCache())],
+    afterChange: [revalidateContactsCache],
+    afterDelete: [revalidateContactsCache],
   },
 
   fields: [

@@ -1,11 +1,12 @@
 import type { CollectionConfig, GlobalConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import { revalidateHeroCache } from '../services/cache';
 
 export const Hero: GlobalConfig = {
   slug: 'Hero',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateHeroCache())],
+    afterChange: [revalidateHeroCache],
   },
 
   fields: [

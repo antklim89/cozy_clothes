@@ -1,18 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
 import { MediaCollection } from '@/shared/model/collections/media-collection';
+import { updateProductFeedbacksHook } from '../services/hooks/update-product-feedbacks-hook';
 
 export const Feedback: CollectionConfig = {
   slug: 'feedback',
   indexes: [{ fields: ['product', 'user'], unique: true }],
 
   hooks: {
-    afterChange: [
-      args => import('../services/update-product-feedbacks-hook').then(m => m.updateProductFeedbacksHook(args)),
-    ],
-    afterDelete: [
-      args => import('../services/update-product-feedbacks-hook').then(m => m.updateProductFeedbacksHook(args)),
-    ],
+    afterChange: [updateProductFeedbacksHook],
+    afterDelete: [updateProductFeedbacksHook],
   },
   fields: [
     {

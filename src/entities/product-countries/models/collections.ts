@@ -1,10 +1,12 @@
 import type { CollectionConfig } from 'payload';
 
+import { revalidateProductCountriesCache } from '../services/cache';
+
 export const ProductCountries: CollectionConfig = {
   slug: 'product-countries',
   hooks: {
-    afterChange: [() => import('../services/cache').then(m => m.revalidateProductCountriesCache())],
-    afterDelete: [() => import('../services/cache').then(m => m.revalidateProductCountriesCache())],
+    afterChange: [revalidateProductCountriesCache],
+    afterDelete: [revalidateProductCountriesCache],
   },
   admin: {
     useAsTitle: 'name',
