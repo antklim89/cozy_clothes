@@ -1,4 +1,5 @@
 /** biome-ignore-all lint/complexity/noExcessiveCognitiveComplexity: ok */
+/** biome-ignore-all lint/suspicious/noConsole: ok */
 /** biome-ignore-all lint/performance/noAwaitInLoops: ok */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -14,7 +15,7 @@ const USERS_NUMBER = 90;
 const CONTACTS_NUMBER = 6;
 const CATEGORIES_NUMBER = 10;
 const COUNTRIES_NUMBER = 10;
-const PRODUCT_BASES_LENGTH = 10;
+const PRODUCT_BASES_LENGTH = 20;
 const SIZES = ['xxs', 'xs', 'm', 'l', 'xl', 'xxl'] as const;
 const COLORS = [
   { name: 'Crimson Red', code: '#DC143C' },
@@ -98,15 +99,15 @@ async function getImages<T extends CollectionSlug>(collection: T, imagesPath: st
   const imagesDir = path.resolve('seed/placeholders', imagesPath);
   const imagesNames = await fs.readdir(imagesDir);
 
-  const images = await Promise.all(
-    imagesNames.map(imageName => {
-      return payload.create({
-        collection,
-        data: {} as never,
-        filePath: path.resolve(imagesDir, imageName),
-      });
-    }),
-  );
+  const images: { id: number }[] = [];
+  for (const imageName of imagesNames) {
+    const image = await payload.create({
+      collection,
+      data: {} as never,
+      filePath: path.resolve(imagesDir, imageName),
+    });
+    images.push(image);
+  }
   return images;
 }
 
@@ -240,12 +241,12 @@ async function createFeedbacks() {
 
   for (const product of products.docs) {
     for (const user of users.docs) {
-      if (Math.random() > 0.6) continue;
+      if (Math.random() > 0.8) continue;
       await payload.create({
         collection: 'feedback',
         data: {
           product: product.id,
-          rating: faker.number.int({ min: 1, max: 5 }),
+          rating: Math.random() > 0.8 ? faker.number.int({ min: 1, max: 3 }) : faker.number.int({ min: 4, max: 5 }),
           user: user.id,
           review: Math.random() > 0.4 ? faker.lorem.text() : undefined,
           positiveReview: Math.random() > 0.4 ? faker.lorem.text() : undefined,
@@ -362,28 +363,37 @@ async function createContacts() {
   }
 }
 
-async function main() {
-  try {
-    await createUsers();
+console.log('START');
+try {
+  await createUsers();
+  console.log('🚀 ~ createUsers');
 
-    await createAbout();
-    await createHero();
-    await createSeo();
-    await createContacts();
-    await createTestimonials();
+  await createAbout();
+  console.log('🚀 ~ createAbout');
+  await createHero();
+  console.log('🚀 ~ createHero');
+  await createSeo();
+  console.log('🚀 ~ createSeo');
+  await createContacts();
+  console.log('🚀 ~ createContacts');
+  await createTestimonials();
+  console.log('🚀 ~ createTestimonials');
 
-    await createCategories();
-    await createCountries();
-    await createSizes();
-    await createColors();
-    await createProductBases();
-    await createProducts();
+  await createCategories();
+  console.log('🚀 ~ createCategories');
+  await createCountries();
+  console.log('🚀 ~ createCountries');
+  await createSizes();
+  console.log('🚀 ~ createSizes');
+  await createColors();
+  console.log('🚀 ~ createColors');
+  await createProductBases();
+  console.log('🚀 ~ createProductBases');
+  await createProducts();
+  console.log('🚀 ~ createProducts');
 
-    await createFeedbacks();
-  } catch (error) {
-    // biome-ignore lint/suspicious/noConsole: ok
-    console.dir(error, { depth: 50, compact: false });
-  }
+  await createFeedbacks();
+  console.log('🚀 ~ createFeedbacks');
+} catch (error) {
+  console.dir(error, { depth: 50, compact: false });
 }
-
-await main();
