@@ -72,6 +72,7 @@ export interface Config {
     'seo-media': SeoMedia;
     cart: Cart;
     contacts: Contact;
+    orders: Order;
     'about-media': AboutMedia;
     feedback: Feedback;
     'feedback-media': FeedbackMedia;
@@ -105,6 +106,7 @@ export interface Config {
     'seo-media': SeoMediaSelect<false> | SeoMediaSelect<true>;
     cart: CartSelect<false> | CartSelect<true>;
     contacts: ContactsSelect<false> | ContactsSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     'about-media': AboutMediaSelect<false> | AboutMediaSelect<true>;
     feedback: FeedbackSelect<false> | FeedbackSelect<true>;
     'feedback-media': FeedbackMediaSelect<false> | FeedbackMediaSelect<true>;
@@ -428,6 +430,26 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: number;
+  firstName: string;
+  lastName: string;
+  address: string;
+  phone: string;
+  comments?: string | null;
+  user: number | User;
+  cart: {
+    productId: number | Product;
+    qty: number;
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "about-media".
  */
 export interface AboutMedia {
@@ -569,6 +591,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contacts';
         value: number | Contact;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: number | Order;
       } | null)
     | ({
         relationTo: 'about-media';
@@ -738,6 +764,27 @@ export interface ContactsSelect<T extends boolean = true> {
   title?: T;
   email?: T;
   phone?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  address?: T;
+  phone?: T;
+  comments?: T;
+  user?: T;
+  cart?:
+    | T
+    | {
+        productId?: T;
+        qty?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -8,7 +8,7 @@ export function CartCheckout({ isAuth }: { isAuth: boolean }) {
     <Item variant="outline">
       <ItemContent>
         {isAuth ? (
-          <Link className={buttonVariants({ size: 'lg' })} href="/checkout">
+          <Link className={buttonVariants({ size: 'lg' })} href="/order">
             Checkout
           </Link>
         ) : (

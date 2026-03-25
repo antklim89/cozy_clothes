@@ -6,7 +6,7 @@ import { cartQueryOptions } from '@/entities/cart/api';
 import { CartList, CartListEmpty, CartListFallback, CartListItem, CartTotal } from '@/entities/cart/ui';
 import { ErrorComponent } from '@/shared/ui/error-component';
 
-export function Cart({ checkout }: { checkout: ReactNode }) {
+export function Cart({ orderSlot }: { orderSlot: ReactNode }) {
   const cartQuery = useQuery(cartQueryOptions());
 
   if (cartQuery.isError) return <ErrorComponent error={cartQuery.error} />;
@@ -14,7 +14,7 @@ export function Cart({ checkout }: { checkout: ReactNode }) {
   if (!cartQuery.data || cartQuery.data.length === 0) return <CartListEmpty />;
 
   return (
-    <CartList checkout={checkout} total={<CartTotal cartItems={cartQuery.data} />}>
+    <CartList orderSlot={orderSlot} total={<CartTotal cartItems={cartQuery.data} />}>
       {cartQuery.data.map(cartItem => (
         <CartListItem cartItem={cartItem} key={cartItem.product.id} />
       ))}

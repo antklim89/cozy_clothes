@@ -5,13 +5,13 @@ import { ItemGroup } from '@/shared/ui/item';
 
 export function CartList({
   total,
-  checkout,
+  orderSlot,
   className,
   children,
   ...props
 }: {
   total: ReactNode;
-  checkout: ReactNode;
+  orderSlot: ReactNode;
 } & ComponentProps<'section'>) {
   return (
     <section className={cn('container my-8', className)} {...props}>
@@ -19,7 +19,7 @@ export function CartList({
         <ItemGroup>{children}</ItemGroup>
         <div className="flex flex-[0_1_640px] flex-col gap-2">
           {total}
-          {checkout}
+          {orderSlot}
         </div>
       </div>
     </section>

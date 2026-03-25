@@ -11,6 +11,7 @@ import { Cart } from '@/entities/cart/model/collections';
 import { Contacts } from '@/entities/contacts/model/collections';
 import { Feedback, FeedbackMedia } from '@/entities/feedbacks/model/collections';
 import { Hero, HeroMedia } from '@/entities/hero/model/collections';
+import { Orders } from '@/entities/order/model/collections';
 import { ProductCategories } from '@/entities/product-categories/model/collections';
 import { ProductColors } from '@/entities/product-colors/models/collections';
 import { ProductCountries } from '@/entities/product-countries/models/collections';
@@ -40,6 +41,7 @@ export default buildConfig({
     SeoMedia,
     Cart,
     Contacts,
+    Orders,
     AboutMedia,
     Feedback,
     FeedbackMedia,
@@ -66,6 +68,7 @@ export default buildConfig({
     client: {
       url: 'file:./database.db',
     },
+    transactionOptions: {},
   }),
   sharp,
   graphQL: {

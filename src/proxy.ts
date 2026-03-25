@@ -9,5 +9,5 @@ export default async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/(user.*)', '/favorites'],
+  matcher: ['/(user.*)', '/favorites', '/order'],
 };
