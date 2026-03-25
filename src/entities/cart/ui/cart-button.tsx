@@ -25,12 +25,12 @@ export function CartButton({ className, ...props }: ComponentProps<'a'>) {
   }
 
   return (
-    <Link {...props} href="/cart" className={cn('flex items-center', className)}>
+    <Link {...props} href="/cart" className={cn('relative flex items-center', className)}>
       <Button variant="ghost" size="icon">
         <ShoppingCartIcon />
       </Button>
       {cartQuery.data != null && cartQuery.data.length > 0 && (
-        <Badge variant="destructive" className="text-white shadow">
+        <Badge variant="default" className="absolute top-0.5 left-4 bg-secondary/90 p-2 text-[0.5rem] shadow">
           {cartQuery.data.length}
         </Badge>
       )}
