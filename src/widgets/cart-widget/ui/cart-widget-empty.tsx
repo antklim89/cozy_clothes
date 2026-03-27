@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/shared/ui/button';
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/shared/ui/empty';
 
-export function CartListEmpty() {
+export function CartWidgetEmpty() {
   return (
     <Empty>
       <EmptyHeader>

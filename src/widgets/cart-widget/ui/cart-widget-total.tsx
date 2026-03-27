@@ -1,10 +1,10 @@
 'use client';
 
+import type { CartItemType } from '@/entities/cart/model';
 import { calculatePrice, getPrice } from '@/shared/lib/utils';
 import { Item, ItemContent } from '@/shared/ui/item';
-import type { CartItemType } from '../model';
 
-export function CartTotal({ cartItems }: { cartItems: CartItemType[] }) {
+export function CartWidgetTotal({ cartItems }: { cartItems: CartItemType[] }) {
   const totalPrice = cartItems.reduce((total, { qty, product }) => {
     return total + calculatePrice({ qty, price: product.price, discount: product.discount });
   }, 0);

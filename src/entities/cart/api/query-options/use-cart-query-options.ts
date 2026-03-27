@@ -14,8 +14,8 @@ export function cartQueryOptions() {
 
       if (isAuthenticated) {
         const cartResult = await getAndSyncCartAction({ localCart });
-        if (cartResult.result) {
-          setCartToLocalStorage(cartResult.result?.map(item => ({ productId: item.product.id, qty: item.qty })));
+        if (!cartResult.error) {
+          setCartToLocalStorage(cartResult.result.map(item => ({ productId: item.product.id, qty: item.qty })));
         }
         return cartResult.result;
       }

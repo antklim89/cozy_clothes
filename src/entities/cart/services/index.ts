@@ -1,1 +1,1 @@
-export { getAndSyncCart } from './dal';
+export { getCart, syncCart } from './dal';

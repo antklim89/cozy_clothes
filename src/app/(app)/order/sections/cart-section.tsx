@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
 
-import { getAndSyncCart } from '@/entities/cart/services';
+import { getCart } from '@/entities/cart/services';
 import { ErrorComponent } from '@/shared/ui/error-component';
 import { OrderWidgetCartList } from '@/widgets/order-widget/ui';
 
 export async function CartSection() {
-  const { result: cart, error } = await getAndSyncCart();
+  const { result: cart, error } = await getCart();
   if (error) return <ErrorComponent error={error} />;
   if (cart.length === 0) redirect('/cart');
 

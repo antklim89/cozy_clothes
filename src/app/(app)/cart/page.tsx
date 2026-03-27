@@ -1,19 +1,18 @@
 import { Suspense } from 'react';
 
-import { CartCheckout } from '@/entities/cart/ui';
-import { getMe } from '@/entities/user/services';
-import { Cart } from '@/widgets/cart/ui';
+import { CartWidget } from '@/widgets/cart-widget/ui';
+import { CartListSection } from './sections/cart-list-section';
+import { CartOrderSection } from './sections/cart-order-section';
+import { CartTotalSection } from './sections/cart-total-section';
 
 function Page() {
-  const userPromise = getMe();
-
   return (
-    <Cart
+    <CartWidget
+      cartTotalSlot={<CartTotalSection />}
+      cartListSlot={<CartListSection />}
       orderSlot={
         <Suspense>
-          {userPromise.then(user => (
-            <CartCheckout isAuth={user != null} />
-          ))}
+          <CartOrderSection />
         </Suspense>
       }
     />

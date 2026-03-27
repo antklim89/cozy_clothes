@@ -3,6 +3,7 @@ import { TrashIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import type { CartItemType } from '@/entities/cart/model';
 import { useRemoveCartMutation } from '@/features/update-cart/api';
 import { CartQtyInput } from '@/features/update-cart/ui';
 import { cn, getPrice } from '@/shared/lib/utils';
@@ -10,9 +11,8 @@ import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { ColorCircle } from '@/shared/ui/color-circle';
 import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/shared/ui/item';
-import type { CartItemType } from '../model';
 
-export function CartListItem({ cartItem }: { cartItem: CartItemType }) {
+export function CartWidgetListItem({ cartItem }: { cartItem: CartItemType }) {
   const { mutateAsync: removeFromCart } = useRemoveCartMutation();
 
   const { qty, product } = cartItem;

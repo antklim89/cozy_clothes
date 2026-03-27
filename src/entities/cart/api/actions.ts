@@ -1,6 +1,8 @@
 'use server';
 
-import { getAndSyncCart, getLocalCart } from '../services/dal';
+import { getAndSyncCart, getCart, getLocalCart, syncCart } from '../services/dal';
 
+export const getCartAction = getCart;
+export const syncCartAction = syncCart;
 export const getAndSyncCartAction = getAndSyncCart;
 export const getLocalCartAction = getLocalCart;
