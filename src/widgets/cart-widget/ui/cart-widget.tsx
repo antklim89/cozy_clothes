@@ -29,7 +29,7 @@ export function CartWidget({
         <ItemGroup className="flex-1">
           {cartTotalSlot}
 
-          {cartQuery.isPending ? null : orderSlot}
+          {!cartQuery.isFetchedAfterMount || cartQuery.isPending ? null : orderSlot}
         </ItemGroup>
       </ItemContent>
     </Item>
