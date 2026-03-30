@@ -3,6 +3,7 @@ import { type ReactNode, useState } from 'react';
 import { LogInIcon, UserIcon, UserPlusIcon } from 'lucide-react';
 
 import type { UserType } from '@/entities/user/model';
+import { cn } from '@/shared/lib/utils';
 import { buttonVariants } from '@/shared/ui/button';
 import {
   DropdownMenu,
@@ -14,7 +15,6 @@ import {
 } from '@/shared/ui/dropdown-menu';
 import { Separator } from '@/shared/ui/separator';
 import { AuthDialog } from './auth-dialog';
-import { AuthMenuAvatar } from './auth-menu-avatar';
 
 export function AuthMenu({ privateItems, user }: { privateItems: ReactNode; user: UserType | null }) {
   const [type, setType] = useState<'login' | 'register' | null>(null);
@@ -24,9 +24,19 @@ export function AuthMenu({ privateItems, user }: { privateItems: ReactNode; user
       <AuthDialog type={type === 'login' ? 'login' : null} setType={setType} />
       <AuthDialog type={type === 'register' ? 'register' : null} setType={setType} />
 
-      <DropdownMenuTrigger aria-label="User Menu" className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
-        {user ? <AuthMenuAvatar user={user} /> : <UserIcon />}
-      </DropdownMenuTrigger>
+      {user ? (
+        <DropdownMenuTrigger
+          aria-label="User Menu"
+          className={cn(buttonVariants({ variant: 'ghost' }), 'rounded-full bg-secondary uppercase')}
+        >
+          {user.email.substring(0, 1)}
+        </DropdownMenuTrigger>
+      ) : (
+        <DropdownMenuTrigger aria-label="User Menu" className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }))}>
+          <UserIcon />
+        </DropdownMenuTrigger>
+      )}
+
       <DropdownMenuContent align="end" className="min-w-56" side="bottom" sideOffset={4}>
         {user != null ? (
           <DropdownMenuGroup>
