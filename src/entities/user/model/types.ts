@@ -8,8 +8,6 @@ export type RegisterType = z.infer<typeof RegisterSchema>;
 export interface UserType {
   id: number;
   email: string;
-  firstName?: string;
-  lastName?: string;
 }
 
 export interface UserProfileType {
