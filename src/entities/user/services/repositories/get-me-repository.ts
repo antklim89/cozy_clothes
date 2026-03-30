@@ -1,5 +1,5 @@
 import 'server-only';
-import { cookies, headers } from 'next/headers';
+import { headers } from 'next/headers';
 
 import { getPayload } from '@/shared/lib/payload';
 import { Users } from '../../model/collections';
@@ -11,7 +11,6 @@ export async function getMeRepository(): Promise<UserType | null> {
     const result = await payload.auth({ headers: await headers() });
 
     if (result.user == null || result.user.collection !== Users.slug) {
-      (await cookies()).delete('payload-token');
       return null;
     }
 
