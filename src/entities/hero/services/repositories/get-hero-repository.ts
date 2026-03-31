@@ -8,7 +8,7 @@ export async function getHeroRepository() {
   try {
     const payload = await getPayload();
     const result = await payload.findGlobal({
-      slug: 'Hero',
+      slug: 'hero',
       depth: 1,
     });
 

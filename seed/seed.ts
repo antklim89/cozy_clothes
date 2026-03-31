@@ -137,7 +137,7 @@ async function createAbout() {
   if (image == null) throw new Error('No about image.');
 
   await payload.updateGlobal({
-    slug: 'About',
+    slug: 'about',
     data: {
       text: createRichText([faker.lorem.paragraph(), faker.lorem.paragraph(), faker.lorem.paragraph()]),
     },
@@ -147,7 +147,7 @@ async function createAbout() {
 async function createSeo() {
   const images = await getImages('seo-media', 'seo');
   await payload.updateGlobal({
-    slug: 'Seo',
+    slug: 'seo',
     data: {
       creator: faker.person.fullName(),
       title: 'Cozy Clothes',
@@ -163,7 +163,7 @@ async function createHero() {
   if (image == null) throw new Error('No hero image.');
 
   await payload.updateGlobal({
-    slug: 'Hero',
+    slug: 'hero',
     data: {
       image,
       text: createRichText([faker.lorem.text()]),

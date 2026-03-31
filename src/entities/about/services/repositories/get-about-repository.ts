@@ -7,7 +7,7 @@ export async function getAboutRepository() {
   try {
     const payload = await getPayload();
     const result = await payload.findGlobal({
-      slug: 'About',
+      slug: 'about',
       depth: 1,
     });
 

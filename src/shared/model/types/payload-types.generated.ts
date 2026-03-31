@@ -94,11 +94,21 @@ export interface Config {
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
+    'feedback-media': {
+      feedbacks: 'feedback';
+    };
     products: {
       favorites: 'product-favorites';
     };
     'product-bases': {
       productVariants: 'products';
+    };
+    'product-media': {
+      products: 'products';
+      productsPreview: 'products';
+    };
+    'testimonials-media': {
+      testimonials: 'testimonials';
     };
   };
   collectionsSelect: {
@@ -132,14 +142,14 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
-    About: About;
-    Hero: Hero;
-    Seo: Seo;
+    about: About;
+    hero: Hero;
+    seo: Seo;
   };
   globalsSelect: {
-    About: AboutSelect<false> | AboutSelect<true>;
-    Hero: HeroSelect<false> | HeroSelect<true>;
-    Seo: SeoSelect<false> | SeoSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
+    seo: SeoSelect<false> | SeoSelect<true>;
   };
   locale: null;
   user:
@@ -311,6 +321,16 @@ export interface ProductColor {
 export interface ProductMedia {
   id: number;
   blurDataUrl: string;
+  products?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  productsPreview?: {
+    docs?: (number | Product)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   url: string;
@@ -490,6 +510,11 @@ export interface Feedback {
 export interface FeedbackMedia {
   id: number;
   blurDataUrl: string;
+  feedbacks?: {
+    docs?: (number | Feedback)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   url: string;
@@ -540,6 +565,11 @@ export interface Testimonial {
 export interface TestimonialsMedia {
   id: number;
   blurDataUrl: string;
+  testimonials?: {
+    docs?: (number | Testimonial)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
   url: string;
@@ -827,6 +857,7 @@ export interface FeedbackSelect<T extends boolean = true> {
  */
 export interface FeedbackMediaSelect<T extends boolean = true> {
   blurDataUrl?: T;
+  feedbacks?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -891,6 +922,8 @@ export interface ProductFavoritesSelect<T extends boolean = true> {
  */
 export interface ProductMediaSelect<T extends boolean = true> {
   blurDataUrl?: T;
+  products?: T;
+  productsPreview?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -976,6 +1009,7 @@ export interface TestimonialsSelect<T extends boolean = true> {
  */
 export interface TestimonialsMediaSelect<T extends boolean = true> {
   blurDataUrl?: T;
+  testimonials?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1056,7 +1090,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "About".
+ * via the `definition` "about".
  */
 export interface About {
   id: number;
@@ -1080,7 +1114,7 @@ export interface About {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero".
+ * via the `definition` "hero".
  */
 export interface Hero {
   id: number;
@@ -1105,7 +1139,7 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Seo".
+ * via the `definition` "seo".
  */
 export interface Seo {
   id: number;
@@ -1119,7 +1153,7 @@ export interface Seo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "About_select".
+ * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
   text?: T;
@@ -1129,7 +1163,7 @@ export interface AboutSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Hero_select".
+ * via the `definition` "hero_select".
  */
 export interface HeroSelect<T extends boolean = true> {
   text?: T;
@@ -1140,7 +1174,7 @@ export interface HeroSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Seo_select".
+ * via the `definition` "seo_select".
  */
 export interface SeoSelect<T extends boolean = true> {
   title?: T;

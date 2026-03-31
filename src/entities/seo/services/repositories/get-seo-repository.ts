@@ -8,7 +8,7 @@ export async function getSeoRepository() {
   try {
     const payload = await getPayload();
     const payloadResult = await payload.findGlobal({
-      slug: 'Seo',
+      slug: 'seo',
     });
 
     const dto = seoDto(payloadResult);

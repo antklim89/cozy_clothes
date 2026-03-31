@@ -3,7 +3,7 @@ import type { CollectionConfig, GlobalConfig } from 'payload';
 import { revalidateSeoCache } from '../services/cache';
 
 export const Seo: GlobalConfig = {
-  slug: 'Seo',
+  slug: 'seo',
   hooks: {
     afterChange: [revalidateSeoCache],
   },

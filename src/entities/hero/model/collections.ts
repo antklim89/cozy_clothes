@@ -4,7 +4,7 @@ import { MediaCollection } from '@/shared/model/collections/media-collection';
 import { revalidateHeroCache } from '../services/cache';
 
 export const Hero: GlobalConfig = {
-  slug: 'Hero',
+  slug: 'hero',
   hooks: {
     afterChange: [revalidateHeroCache],
   },
