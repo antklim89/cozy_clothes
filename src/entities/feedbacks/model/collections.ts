@@ -80,4 +80,13 @@ export const FeedbackMedia = {
     ...MediaCollection.upload,
     staticDir: 'media/feedbacks',
   },
+  fields: [
+    ...MediaCollection.fields,
+    {
+      name: 'feedbacks',
+      type: 'join',
+      collection: 'feedback',
+      on: 'images',
+    },
+  ],
 } as const satisfies CollectionConfig;

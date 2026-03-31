@@ -57,4 +57,13 @@ export const TestimonialsMedia: CollectionConfig = {
       width: 120,
     },
   },
+  fields: [
+    ...MediaCollection.fields,
+    {
+      name: 'testimonials',
+      type: 'join',
+      collection: 'testimonials',
+      on: 'image',
+    },
+  ],
 };

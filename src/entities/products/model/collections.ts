@@ -207,4 +207,19 @@ export const ProductMedia = {
     ...MediaCollection.upload,
     staticDir: 'media/products',
   },
+  fields: [
+    ...MediaCollection.fields,
+    {
+      name: 'products',
+      type: 'join',
+      collection: 'products',
+      on: 'images',
+    },
+    {
+      name: 'productsPreview',
+      type: 'join',
+      collection: 'products',
+      on: 'imagePreview',
+    },
+  ],
 } as const satisfies CollectionConfig;
