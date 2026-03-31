@@ -6,6 +6,13 @@ export const Orders: CollectionConfig = {
   slug: 'orders',
   fields: [
     {
+      name: 'status',
+      type: 'select',
+      options: ['waiting_for_payment', 'gathering', 'in_the_way', 'delivered', 'canceled'],
+      required: true,
+      defaultValue: 'waiting_for_payment',
+    },
+    {
       name: 'firstName',
       type: 'text',
       admin: { readOnly: true },

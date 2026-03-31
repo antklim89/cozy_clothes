@@ -454,6 +454,7 @@ export interface Contact {
  */
 export interface Order {
   id: number;
+  status: 'waiting_for_payment' | 'gathering' | 'in_the_way' | 'delivered' | 'canceled';
   firstName: string;
   lastName: string;
   address: string;
@@ -802,6 +803,7 @@ export interface ContactsSelect<T extends boolean = true> {
  * via the `definition` "orders_select".
  */
 export interface OrdersSelect<T extends boolean = true> {
+  status?: T;
   firstName?: T;
   lastName?: T;
   address?: T;
