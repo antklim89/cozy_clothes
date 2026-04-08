@@ -19,7 +19,7 @@ export async function hasSessionRepository(): Promise<boolean> {
 
     const data = JSON.parse(json) as { collection: string; exp: number };
 
-    return data.collection !== usersCollectionName && data.exp < Date.now();
+    return data.collection === usersCollectionName && data.exp < Date.now();
   } catch {
     return false;
   }
