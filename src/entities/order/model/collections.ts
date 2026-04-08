@@ -63,6 +63,46 @@ export const Orders: CollectionConfig = {
           required: true,
         },
         {
+          name: 'title',
+          type: 'text',
+          minLength: 5,
+          maxLength: 1000,
+          required: true,
+        },
+        {
+          label: 'Price',
+          name: 'price',
+          type: 'number',
+          min: 0,
+          required: true,
+        },
+        {
+          name: 'size',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'color',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'imageUrl',
+          label: 'Image',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'category',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'country',
+          type: 'text',
+          required: true,
+        },
+        {
           name: 'qty',
           type: 'number',
           min: 1,

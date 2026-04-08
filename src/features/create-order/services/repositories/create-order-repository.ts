@@ -1,6 +1,7 @@
 import { ValidationError } from 'payload';
 import 'server-only';
 
+import { cartDto } from '@/entities/cart/model';
 import type { UserType } from '@/entities/user/model';
 import { getPayload } from '@/shared/lib/payload';
 import type { PromiseResult } from '@/shared/lib/result';
@@ -27,6 +28,7 @@ export async function createOrderRepository({
       collection: 'cart',
       pagination: false,
       limit: undefined,
+      depth: 3,
       where: {
         user: { equals: user.id },
       },
@@ -36,13 +38,24 @@ export async function createOrderRepository({
     await payload.create({
       collection: 'orders',
       data: {
+        status: 'waiting_for_payment',
         address: input.address,
         firstName: input.firstName,
         lastName: input.lastName,
         phone: input.phone,
         comments: input.comments,
         user: user.id,
-        cart: cart.docs.map(cartItem => ({ productId: cartItem.product, qty: cartItem.qty })),
+        cart: cart.docs.map(cartDto).map(cartItem => ({
+          productId: cartItem.product.id,
+          qty: cartItem.qty,
+          category: cartItem.product.category.name,
+          country: cartItem.product.country.name,
+          color: cartItem.product.color.name,
+          size: cartItem.product.size.name,
+          imageUrl: cartItem.product.imagePreview.url,
+          price: cartItem.product.price,
+          title: cartItem.product.title,
+        })),
       },
       req: { transactionID },
     });

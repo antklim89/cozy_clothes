@@ -463,6 +463,13 @@ export interface Order {
   user: number | User;
   cart: {
     productId: number | Product;
+    title: string;
+    price: number;
+    size: string;
+    color: string;
+    imageUrl: string;
+    category: string;
+    country: string;
     qty: number;
     id?: string | null;
   }[];
@@ -814,6 +821,13 @@ export interface OrdersSelect<T extends boolean = true> {
     | T
     | {
         productId?: T;
+        title?: T;
+        price?: T;
+        size?: T;
+        color?: T;
+        imageUrl?: T;
+        category?: T;
+        country?: T;
         qty?: T;
         id?: T;
       };

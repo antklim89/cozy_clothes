@@ -16,6 +16,7 @@ function Layout({ children }: LayoutProps<'/user'>) {
           <TabsTrigger value={'/user/settings' satisfies Route}>Settings</TabsTrigger>
           <TabsTrigger value={'/user/favorites' satisfies Route}>Favorites</TabsTrigger>
           <TabsTrigger value={'/user/feedbacks' satisfies Route}>Feedbacks</TabsTrigger>
+          <TabsTrigger value={'/user/orders' satisfies Route}>Orders</TabsTrigger>
         </TabsList>
         <div className="my-8">{children}</div>
       </Tabs>
