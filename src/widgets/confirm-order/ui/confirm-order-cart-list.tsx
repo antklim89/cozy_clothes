@@ -6,7 +6,7 @@ import { Badge } from '@/shared/ui/badge';
 import { ColorCircle } from '@/shared/ui/color-circle';
 import { Item, ItemContent, ItemGroup, ItemHeader, ItemTitle } from '@/shared/ui/item';
 
-export function OrderWidgetCartList({ cart }: { cart: CartItemType[] }) {
+export function ConfirmOrderCartList({ cart }: { cart: CartItemType[] }) {
   const totalPrice = cart.reduce((acc, cartItem) => acc + cartItem.product.price * cartItem.qty, 0);
 
   return (

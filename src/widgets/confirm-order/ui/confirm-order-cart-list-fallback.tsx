@@ -1,7 +1,7 @@
 import { Item, ItemContent, ItemGroup, ItemHeader } from '@/shared/ui/item';
 import { Skeleton } from '@/shared/ui/skeleton';
 
-export function OrderWidgetCartListFallback() {
+export function ConfirmOrderCartListFallback() {
   return (
     <ItemGroup>
       {Array.from({ length: 4 }, (_, idx) => (

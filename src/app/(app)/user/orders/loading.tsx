@@ -1,11 +1,11 @@
 import { OrdersListFallback } from '@/entities/order/ui';
-import { OrdersWidget } from '@/widgets/orders-widget/ui';
+import { CreatedOrders } from '@/widgets/created-orders/ui';
 
 function Loading() {
   return (
-    <OrdersWidget>
+    <CreatedOrders>
       <OrdersListFallback />
-    </OrdersWidget>
+    </CreatedOrders>
   );
 }
 

@@ -3,7 +3,7 @@ import { Order, OrdersEmpty } from '@/entities/order/ui';
 import type { PaginatedData } from '@/shared/model/types/types';
 import { Pagination } from '@/shared/ui/pagination';
 
-export function OrdersWidgetList({ orders }: { orders: PaginatedData<OrderType> }) {
+export function CreatedOrdersList({ orders }: { orders: PaginatedData<OrderType> }) {
   return (
     <>
       {orders.docs.length > 0 && (
