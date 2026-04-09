@@ -1,9 +1,10 @@
-import { Item, ItemContent, ItemGroup, ItemHeader } from '@/shared/ui/item';
+import { Item, ItemContent, ItemHeader } from '@/shared/ui/item';
 import { Skeleton } from '@/shared/ui/skeleton';
+import { CartList } from './cart-list';
 
-export function ConfirmOrderCartListFallback() {
+export function CartListFallback() {
   return (
-    <ItemGroup>
+    <CartList>
       {Array.from({ length: 4 }, (_, idx) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <ok>
         <Item key={idx} variant="outline">
@@ -18,6 +19,6 @@ export function ConfirmOrderCartListFallback() {
           </ItemContent>
         </Item>
       ))}
-    </ItemGroup>
+    </CartList>
   );
 }

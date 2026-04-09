@@ -1,7 +1,8 @@
 import { Suspense } from 'react';
 
+import { CartListFallback } from '@/entities/cart/ui';
 import { Spinner } from '@/shared/ui/spinner';
-import { ConfirmOrder, ConfirmOrderCartListFallback } from '@/widgets/confirm-order/ui';
+import { ConfirmOrder } from '@/widgets/confirm-order/ui';
 import { CartSection } from './sections/cart-section';
 import { UserInfoSection } from './sections/user-info-section';
 
@@ -14,7 +15,7 @@ export default function Page() {
         </Suspense>
       }
       cartSlot={
-        <Suspense fallback={<ConfirmOrderCartListFallback />}>
+        <Suspense fallback={<CartListFallback />}>
           <CartSection />
         </Suspense>
       }

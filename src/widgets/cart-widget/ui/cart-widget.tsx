@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { cartQueryOptions } from '@/entities/cart/api';
+import { CartListEmpty } from '@/entities/cart/ui';
 import { Item, ItemContent, ItemGroup, ItemHeader, ItemTitle } from '@/shared/ui/item';
-import { CartWidgetEmpty } from './cart-widget-empty';
 
 export function CartWidget({
   orderSlot,
@@ -16,7 +16,7 @@ export function CartWidget({
   cartTotalSlot: ReactNode;
 }) {
   const cartQuery = useQuery(cartQueryOptions());
-  if ((!cartQuery.data || cartQuery.data.length === 0) && !cartQuery.isPending) return <CartWidgetEmpty />;
+  if ((!cartQuery.data || cartQuery.data.length === 0) && !cartQuery.isPending) return <CartListEmpty />;
 
   return (
     <Item className="container my-4">
