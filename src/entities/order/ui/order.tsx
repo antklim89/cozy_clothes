@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import { CartList, CartListItem } from '@/entities/cart/ui';
 import { cn } from '@/shared/lib/utils';
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
@@ -17,11 +16,11 @@ export function Order({ order }: { order: OrderType }) {
       </CardHeader>
       <CardContent>
         <ItemGroup>
-          {order.cart.map(cartItem => (
-            <Link href={`/products/${cartItem.product.id}`} key={cartItem.product.id}>
-              {cartItem.product.title}
-            </Link>
-          ))}
+          <CartList>
+            {order.cart.map(cartItem => (
+              <CartListItem key={cartItem.product.id} cartItem={cartItem} />
+            ))}
+          </CartList>
         </ItemGroup>
       </CardContent>
     </Card>
