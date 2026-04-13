@@ -1,5 +1,3 @@
-import type { Product } from '@/shared/model/types/payload-types.generated';
-
 export interface OrderType {
   id: number;
   status: 'waiting_for_payment' | 'gathering' | 'in_the_way' | 'delivered' | 'canceled';
@@ -9,15 +7,23 @@ export interface OrderType {
   phone: string;
   comments?: string | null;
   cart: {
-    product: Product;
+    product: {
+      id: number;
+      baseTitle: string;
+      title: string;
+      imageUrl: string;
+      price: number;
+      discount: number;
+      size: {
+        name: string;
+      };
+      color: {
+        name: string;
+        code: string;
+      };
+    };
     qty: number;
-    title: string;
-    price: number;
-    size: string;
-    color: string;
-    imageUrl: string;
-    category: string;
-    country: string;
+    id?: number | null;
   }[];
   updatedAt: string;
   createdAt: string;

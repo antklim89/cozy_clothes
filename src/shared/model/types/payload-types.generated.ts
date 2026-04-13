@@ -462,16 +462,26 @@ export interface Order {
   comments?: string | null;
   user: number | User;
   cart: {
-    productId: number | Product;
-    title: string;
-    price: number;
-    size: string;
-    color: string;
-    imageUrl: string;
-    category: string;
-    country: string;
+    product: {
+      id: number;
+      baseTitle: string;
+      title: string;
+      imageUrl: string;
+      price: number;
+      discount: number;
+      size: {
+        name: string;
+        [k: string]: unknown;
+      };
+      color: {
+        name: string;
+        code: string;
+        [k: string]: unknown;
+      };
+      [k: string]: unknown;
+    };
     qty: number;
-    id?: string | null;
+    [k: string]: unknown;
   }[];
   updatedAt: string;
   createdAt: string;
@@ -817,20 +827,7 @@ export interface OrdersSelect<T extends boolean = true> {
   phone?: T;
   comments?: T;
   user?: T;
-  cart?:
-    | T
-    | {
-        productId?: T;
-        title?: T;
-        price?: T;
-        size?: T;
-        color?: T;
-        imageUrl?: T;
-        category?: T;
-        country?: T;
-        qty?: T;
-        id?: T;
-      };
+  cart?: T;
   updatedAt?: T;
   createdAt?: T;
 }

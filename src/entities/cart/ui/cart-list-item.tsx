@@ -9,7 +9,7 @@ import type { CartItemType } from '../model';
 
 export function CartListItem({ cartItem, actionsSlot }: { cartItem: CartItemType; actionsSlot?: ReactNode }) {
   return (
-    <Item key={cartItem.id} variant="outline">
+    <Item key={cartItem.product.id} variant="outline">
       <ItemHeader>
         <Link href={`/products/${cartItem.product.id}`}>
           <ItemTitle>

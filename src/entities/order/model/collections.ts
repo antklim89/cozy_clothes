@@ -52,63 +52,50 @@ export const Orders: CollectionConfig = {
     {
       label: 'Cart',
       name: 'cart',
-      type: 'array',
-      minRows: 1,
+      type: 'json',
+      jsonSchema: {
+        fileMatch: [],
+        uri: 'https://example.com',
+        schema: {
+          type: 'array',
+          items: {
+            type: 'object',
+            required: ['product', 'qty'],
+            properties: {
+              product: {
+                type: 'object',
+                required: ['id', 'baseTitle', 'title', 'imageUrl', 'price', 'discount', 'size', 'color'],
+                properties: {
+                  id: { type: 'number' },
+                  baseTitle: { type: 'string' },
+                  title: { type: 'string' },
+                  imageUrl: { type: 'string' },
+                  price: { type: 'number' },
+                  discount: { type: 'number' },
+                  size: {
+                    type: 'object',
+                    required: ['name'],
+                    properties: { name: { type: 'string' } },
+                  },
+                  color: {
+                    type: 'object',
+                    required: ['name', 'code'],
+                    properties: {
+                      name: { type: 'string' },
+                      code: { type: 'string' },
+                    },
+                  },
+                },
+              },
+              qty: {
+                type: 'number',
+                minimum: 0,
+              },
+            },
+          },
+        },
+      },
       required: true,
-      fields: [
-        {
-          name: 'productId',
-          type: 'relationship',
-          relationTo: 'products',
-          required: true,
-        },
-        {
-          name: 'title',
-          type: 'text',
-          minLength: 5,
-          maxLength: 1000,
-          required: true,
-        },
-        {
-          label: 'Price',
-          name: 'price',
-          type: 'number',
-          min: 0,
-          required: true,
-        },
-        {
-          name: 'size',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'color',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'imageUrl',
-          label: 'Image',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'category',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'country',
-          type: 'text',
-          required: true,
-        },
-        {
-          name: 'qty',
-          type: 'number',
-          min: 1,
-          required: true,
-        },
-      ],
     },
   ],
 };
