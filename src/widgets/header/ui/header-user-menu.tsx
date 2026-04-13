@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
-import { HeartIcon, LogOut, SettingsIcon, StarIcon, UserIcon } from 'lucide-react';
+import { Separator } from '@base-ui/react';
+import { HeartIcon, LogOut, SettingsIcon, StarIcon, TruckIcon, UserIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import { getMe } from '@/entities/user/services';
@@ -44,6 +45,13 @@ export function HeaderUserMenu() {
                 <StarIcon />
                 <span>Feedbacks</span>
               </DropdownMenuItem>
+
+              <DropdownMenuItem render={<Link href="/user/orders" />}>
+                <TruckIcon />
+                <span>Orders</span>
+              </DropdownMenuItem>
+
+              <Separator />
 
               <DropdownMenuItem render={<LogoutButton className="w-full" />} nativeButton>
                 <LogOut />
