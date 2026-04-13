@@ -17,9 +17,5 @@ export function FeedbackDeleteButton({ productId }: { productId: number }) {
     });
   }
 
-  return (
-    <Button variant="destructive" onClick={handleDelete}>
-      {isPending ? <Spinner /> : <Trash />} Delete
-    </Button>
-  );
+  return <Button onClick={handleDelete}>{isPending ? <Spinner /> : <Trash />} Delete</Button>;
 }
